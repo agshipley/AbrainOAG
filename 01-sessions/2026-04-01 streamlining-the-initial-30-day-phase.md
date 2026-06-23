@@ -17,7 +17,7 @@ tags: []
 
 **Conversation Overview**
 
-This conversation focused on difficulty balancing for a browser-based game called CivilWarLand (stored at ~/projects/civilwarland/index.html, deployed via Vercel from the GitHub repo agshipley/CW_Actual). The person's goal was to tune the first 30-day phase of the game so that a specific playtester named Liz — described as having relevant experience — could progress through it with relative ease and reach the world-building/expansion phase that begins after day 30. The design principle guiding the changes was that decline should remain the default state (referred to as "the Saunders principle"), but the rate of decline should be manageable for an attentive casual player rather than a survival gauntlet.
+This conversation focused on difficulty balancing for a browser-based game called [[civilwarland]] (stored at ~/projects/[[civilwarland]]/index.html, deployed via Vercel from the GitHub repo agshipley/CW_Actual). The person's goal was to tune the first 30-day phase of the game so that a specific playtester named Liz — described as having relevant experience — could progress through it with relative ease and reach the world-building/expansion phase that begins after day 30. The design principle guiding the changes was that decline should remain the default state (referred to as "the Saunders principle"), but the rate of decline should be manageable for an attentive casual player rather than a survival gauntlet.
 
 Claude diagnosed the core difficulty problem as compounding decay with no adequate counter-pressure: steep fixed daily stat decay, negatively biased random drift formulas, and starting economics where the park lost money from day one. Six specific changes were identified and implemented via Claude Code: raising starting values (budget to 50,000, morale to 60, attendance to 70), reducing gangThreat and morale fixed decay rates, rebalancing random drift formulas from negative-biased to neutral, lowering operating costs from 800 to 600, softening penalties on three specific story events (Day 17 church fire, Day 20 Foley Baptism, Day 26 Halloween), and updating sidebar HTML to reflect new starting values. Claude verified all six changes landed correctly by reviewing the updated index.html before the push.
 
@@ -42,7 +42,7 @@ I need to look at the current game code to understand the existing difficulty me
 This block is not supported on your current device yet.
 ```
 
-No uploaded files. The game is at ~/projects/civilwarland/index.html locally and on GitHub at agshipley/CW_Actual. Let me check if there's anything in the project files or if I need to fetch from GitHub.
+No uploaded files. The game is at ~/projects/[[civilwarland]]/index.html locally and on GitHub at agshipley/CW_Actual. Let me check if there's anything in the project files or if I need to fetch from GitHub.
 ```
 This block is not supported on your current device yet.
 ```
@@ -91,7 +91,7 @@ correct on your final point
 
 The user wants me to adjust the difficulty balance but I need the actual code to do it. They confirmed my approach is right but I still need the file. Let me ask them to upload it.Good — so we're aligned on the design intent. The first 30 days should teach the player the systems and tell the story, not punish them out of reaching the expansion.
 
-I just need the index.html to get into the actual numbers. Can you drag it in from ~/projects/civilwarland/index.html? Once I can see the decay rates, action values, and event penalties, I'll map out exactly which knobs to turn and by how much.
+I just need the index.html to get into the actual numbers. Can you drag it in from ~/projects/[[civilwarland]]/index.html? Once I can see the decay rates, action values, and event penalties, I'll map out exactly which knobs to turn and by how much.
 
 **human**
 

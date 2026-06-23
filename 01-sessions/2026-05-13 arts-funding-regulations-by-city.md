@@ -17,11 +17,11 @@ tags: []
 
 **Conversation Overview**
 
-Andrew Shipley is building "first-agent," a lead generation tool for Tre Borden of Tre Borden /Co, an LA creative studio that curates art for corporate and public spaces. The prior session had produced a California arts contribution regulations glossary as a research deliverable (45 program entries across 26 LA and Orange County jurisdictions), and this session focused on redesigning the Excel workbook's presentation and then pivoting to a proper database-backed web application. Key collaborators mentioned are Tre Borden and Dori, who are the primary end users of the tool alongside peers in the LA creative-studio and public-art-consulting world.
+Andrew Shipley is building "[[first-agent]]," a lead generation tool for [[Tre Borden]] of [[Tre Borden]] /Co, an LA creative studio that curates art for corporate and public spaces. The prior session had produced a California arts contribution regulations glossary as a research deliverable (45 program entries across 26 LA and Orange County jurisdictions), and this session focused on redesigning the Excel workbook's presentation and then pivoting to a proper database-backed web application. Key collaborators mentioned are [[Tre Borden]] and Dori, who are the primary end users of the tool alongside peers in the LA creative-studio and public-art-consulting world.
 
-The session opened with Andrew requesting a "big swing" dashboard redesign of the existing Excel workbook, wanting something immediately intuitive and impressive enough to show to lay users. Claude executed multiple iterative redesign passes — a brand-aligned Tre Borden /Co palette (cream, charcoal, dusty rose), a cover page with editorial voice, KPI strips, regulatory framework chips, and navigation tiles — burning significant tokens on PDF rendering iterations, hyperlink styling fixes, and color palette adjustments. Andrew's frustration escalated through the session as the results consistently underdelivered against the stated goal, culminating in explicit criticism that the workbook looked like a high school book report and that approximately $60 in tokens had been spent without producing a satisfying result. Claude's honest self-assessment — that it should have flagged Excel's fundamental limitations as a "wow" medium at the outset rather than attempting to prove otherwise — came too late.
+The session opened with Andrew requesting a "big swing" dashboard redesign of the existing Excel workbook, wanting something immediately intuitive and impressive enough to show to lay users. Claude executed multiple iterative redesign passes — a brand-aligned [[Tre Borden]] /Co palette (cream, charcoal, dusty rose), a cover page with editorial voice, KPI strips, regulatory framework chips, and navigation tiles — burning significant tokens on PDF rendering iterations, hyperlink styling fixes, and color palette adjustments. Andrew's frustration escalated through the session as the results consistently underdelivered against the stated goal, culminating in explicit criticism that the workbook looked like a high school book report and that approximately $60 in tokens had been spent without producing a satisfying result. Claude's honest self-assessment — that it should have flagged Excel's fundamental limitations as a "wow" medium at the outset rather than attempting to prove otherwise — came too late.
 
-Following Andrew's clear restatement of the actual requirement ("a glossary of applicable regulations, searchable, intuitive"), Claude built a simplified two-sheet Excel workbook (Glossary as a filterable Excel Table with 45 entries, plus a Reference sheet) and then, when Andrew raised the question of using Supabase and Railway, pivoted to recommending SQLite on Railway as the right architecture: same database engine as Supabase, no extra service, aligned with the first-agent roadmap's existing plan to migrate leads data to SQLite. Claude drafted a complete brief for Claude Code covering schema, seed script, Flask routes (`GET /regulations`, `GET /regulations/<id>`, `GET /api/regulations`, `GET /api/regulations/<id>`), and a plain HTML + minimal JS UI. Andrew handed the brief and a 45-record `regulations_seed.json` export to Claude Code; CC hit a 50,000-character message limit mid-seed, inserting only 33 of 45 records and leaving a `# TODO` stub. Claude produced a `records_34_45.py` file containing the remaining 12 records as paste-ready Python dicts for Andrew to drop into CC's seed script.
+Following Andrew's clear restatement of the actual requirement ("a glossary of applicable regulations, searchable, intuitive"), Claude built a simplified two-sheet Excel workbook (Glossary as a filterable Excel Table with 45 entries, plus a Reference sheet) and then, when Andrew raised the question of using Supabase and Railway, pivoted to recommending SQLite on Railway as the right architecture: same database engine as Supabase, no extra service, aligned with the [[first-agent]] roadmap's existing plan to migrate leads data to SQLite. Claude drafted a complete brief for Claude Code covering schema, seed script, Flask routes (`GET /regulations`, `GET /regulations/<id>`, `GET /api/regulations`, `GET /api/regulations/<id>`), and a plain HTML + minimal JS UI. Andrew handed the brief and a 45-record `regulations_seed.json` export to Claude Code; CC hit a 50,000-character message limit mid-seed, inserting only 33 of 45 records and leaving a `# TODO` stub. Claude produced a `records_34_45.py` file containing the remaining 12 records as paste-ready Python dicts for Andrew to drop into CC's seed script.
 
 Andrew's stated preferences throughout: complete working files over fragments, honesty over optimism (explicitly — Claude should have flagged Excel's limitations immediately rather than attempting to deliver "wow" through iteration), brief accountability for errors without extended repetition of feedback already given, no token-burning exploratory rounds without explicit sign-off on the concept first. The session also established a clear workflow preference: Claude for insight and production, Claude Code for implementation, with clean handoff artifacts (seed JSON with schema metadata, paste-ready dicts) rather than explanatory prose.
 
@@ -1261,7 +1261,7 @@ The first attempt at the Word doc burned tokens on a fragile monolithic JavaScri
 
 The glossary docx uses simple page numbers and headers. If you want a clickable table of contents, that's a Word menu function — Insert → Table of Contents → Automatic Table 1 — and it'll generate from the heading hierarchy that's already there.
 
-The Word doc and Excel are independent — they don't share content programmatically, so if you update one you'd need to update the other. If you'd want one to drive the other in a future iteration, that's a worthwhile build (and a real Python exercise that maps well to your first-agent project — same kind of data-to-deliverable pipeline you're building there).
+The Word doc and Excel are independent — they don't share content programmatically, so if you update one you'd need to update the other. If you'd want one to drive the other in a future iteration, that's a worthwhile build (and a real Python exercise that maps well to your [[first-agent]] project — same kind of data-to-deliverable pipeline you're building there).
 
 Outstanding follow-up items are captured in both the Word doc's closing section and the Excel's Open Items sheet. The highest-priority items remain: extracting the exact Warner Center per-sqft rate, confirming Downtown Art in Public Places post-CRA status, inventorying CRA/LA Art Covenants, and surveying Inglewood's SoFi/Intuit Dome corridor CBAs.
 
@@ -1738,7 +1738,7 @@ before we proceed, do a deep dive on UX and UI best practices for similar projec
 
 **assistant**
 
-The user wants to step back and establish solid UX/UI principles before diving into development, which is the right call—I should research first rather than jump straight into building. I need to understand the core context: Tre Borden is a creative studio that curates and commissions art for corporate spaces, and they need a research tool to help them and similar firms understand their audience and market better.
+The user wants to step back and establish solid UX/UI principles before diving into development, which is the right call—I should research first rather than jump straight into building. I need to understand the core context: [[Tre Borden]] is a creative studio that curates and commissions art for corporate spaces, and they need a research tool to help them and similar firms understand their audience and market better.
 
 The primary use case is straightforward—when they're considering a project in a specific location, they need to quickly understand what opportunities and requirements exist there. This is fundamentally a regulatory and compliance research workbook designed for creative professionals and business development teams who may not be deeply technical but still need clear, actionable insights from complex data.
 
@@ -1768,7 +1768,7 @@ This block is not supported on your current device yet.
 
 Beyond structure, the mechanics matter just as much. Every sheet needs a path back home, important data stays visible while scrolling, and I should hide anything that might distract or confuse. The presentation itself tells a story through sequencing and careful use of white space and color—nothing decorative, only meaningful. For state-by-state surveys, the pattern is clear: each entry needs a citation, summary, and recency indicator, with comparison charts as the primary way users explore differences across jurisdictions. Modern implementations lean toward interactive tools like slicers and filters that let users ask "show me just this state" without friction.
 
-For Tre Borden's specific context, I'm thinking about their actual users—researchers and business development people doing lead qualification. They're not looking at financial metrics or trends over time. Instead, they're asking "what programs exist in this location?" or "which jurisdictions in this region have this type of offering?" The workbook is a reference tool with multiple intelligent lenses into the same underlying data. The landing page needs to orient someone in seconds and route them to the right view in ten. I'm picturing a title block with the survey scope and last update, a quick summary of what's covered, and three navigation tiles that match their primary mental models—location-first lookup, regional program search, and a broader regulatory overview.
+For [[Tre Borden]]'s specific context, I'm thinking about their actual users—researchers and business development people doing lead qualification. They're not looking at financial metrics or trends over time. Instead, they're asking "what programs exist in this location?" or "which jurisdictions in this region have this type of offering?" The workbook is a reference tool with multiple intelligent lenses into the same underlying data. The landing page needs to orient someone in seconds and route them to the right view in ten. I'm picturing a title block with the survey scope and last update, a quick summary of what's covered, and three navigation tiles that match their primary mental models—location-first lookup, regional program search, and a broader regulatory overview.
 
 Below that, I'd include key summary cards showing jurisdiction counts by county, program distribution by regulatory type, and confidence levels. A small reference section on the six-type framework and confidence taxonomy rounds it out so users don't have to hunt for definitions.
 
@@ -1922,7 +1922,7 @@ Since the new architecture is fundamentally different from the existing flat sin
 
 I'll create `build_xlsx_v2.py` as a self-contained, modular script with helper functions for each sheet, keeping the existing build_xlsx.py untouched so it continues working until v2 is validated. The script will import the data structures from v1, set up all the styling and constants upfront, then have dedicated functions for building each of the six sheets before wiring everything together in main().
 
-Now I'm thinking through the content design for the Start Here sheet, starting with the title and subtitle layout. LA & Orange County Pilot — Reference Workbook for Tre Borden. The layout includes a title section, version info, summary stat cards showing 26 jurisdictions surveyed, 45 program entries, 13 mandatory percent-for-art policies, and 6 confidence levels, followed by navigation tiles linking to jurisdiction details, glossary, and full program data. Below that are three bar charts displaying jurisdictions by region, programs by regulation type, and programs by confidence level, with a footer for contact information.
+Now I'm thinking through the content design for the Start Here sheet, starting with the title and subtitle layout. LA & Orange County Pilot — Reference Workbook for [[Tre Borden]]. The layout includes a title section, version info, summary stat cards showing 26 jurisdictions surveyed, 45 program entries, 13 mandatory percent-for-art policies, and 6 confidence levels, followed by navigation tiles linking to jurisdiction details, glossary, and full program data. Below that are three bar charts displaying jurisdictions by region, programs by regulation type, and programs by confidence level, with a footer for contact information.
 
 Now I'm assessing what's actually doable with openpyxl — I can handle text styling, conditional formatting, hyperlinks, and charts using the built-in BarChart class. The stat cards and tiles are just styled cell groups, nothing too complex. Let me start writing the code and count the jurisdictions from the data to populate those summary numbers accurately. Looking at the actual count in the data, I'm seeing 11 distinct jurisdictions so far—the City of LA, unincorporated LA County, and then the nine core LA cities like Santa Monica, Beverly Hills, and the others. Let me continue tallying to see if this matches the 26 jurisdictions mentioned earlier. I need to add a "Region" key to categorize each row, but I'm realizing the LA County core count is higher than I initially thought since Long Beach and Inglewood each have multiple entries. Let me recount those carefully to get the region assignments right. Let me verify the total by adding these up: 6 + 11 + 2 + 11 + 7 + 8 equals 45, which matches what we had before. I need to make sure I'm assigning each program to the correct region going forward.
 
@@ -2235,9 +2235,9 @@ Row 28: A footer with source attribution, version number, and a research draft d
 
 The layout spans about 28 rows total, with the most critical content—title, metrics, and main navigation—visible in the first 19 rows without scrolling. For the accent color, I'm considering between coral for warmth and action, teal for modern polish, or gold for premium feel.
 
-Actually, I'm second-guessing the color direction. The user's brand—Tre Borden/Co—uses cream, black, and pink with DM Sans, but this workbook is currently navy and blue. Should I align with their established palette instead of introducing new colors?
+Actually, I'm second-guessing the color direction. The user's brand—[[Tre Borden]]/Co—uses cream, black, and pink with DM Sans, but this workbook is currently navy and blue. Should I align with their established palette instead of introducing new colors?
 
-On reflection, navy feels safer for an internal research tool, but since the user will likely share this with clients, matching Tre Borden's palette would be more cohesive. Though pink feels too bold for a regulatory reference document, so I'll stick with navy as the primary structural color and keep the text gray consistent, maybe adding a subtle warm accent instead.
+On reflection, navy feels safer for an internal research tool, but since the user will likely share this with clients, matching [[Tre Borden]]'s palette would be more cohesive. Though pink feels too bold for a regulatory reference document, so I'll stick with navy as the primary structural color and keep the text gray consistent, maybe adding a subtle warm accent instead.
 
 I'm settling on a restrained five-color palette: navy for structure, gray for text, a warm tan-gold for accent details like tile borders and buttons, white background, and light gray dividers. Now I need to address the layout itself—the cells feel cramped, so I'll expand column widths for better breathing room, add empty rows between sections, and increase padding inside cards. For iconography, I can leverage Unicode symbols like arrows, checkmarks, and other characters since Excel doesn't have native icons.
 
@@ -2339,23 +2339,23 @@ The real gap though is answering why this matters to a lay user opening it for t
 
 7. **Consistent geometric grid.** Use a 12-column or similar grid for alignment. Everything aligns to the grid. Creates visual harmony.
 
-Now I'm thinking about Tre Borden's actual brand — cream background, black and pink palette, DM Sans typeface. I should match that aesthetic: cream or off-white background, dark charcoal or black as primary, a muted warm pink as accent, and the right typeface to tie it together.
+Now I'm thinking about [[Tre Borden]]'s actual brand — cream background, black and pink palette, DM Sans typeface. I should match that aesthetic: cream or off-white background, dark charcoal or black as primary, a muted warm pink as accent, and the right typeface to tie it together.
 
-The challenge is that DM Sans won't render reliably in Excel unless the recipient has it installed, so I need a fallback strategy. But here's the thing — if I nail Tre Borden's brand identity, this becomes a huge quality signal, especially if it's being shared with him or his clients. That's worth solving the font problem for. I should consider system fonts that feel premium and come standard with Office, like Calibri or Helvetica, or explore whether a serif option like Georgia might add that polished feel.
+The challenge is that DM Sans won't render reliably in Excel unless the recipient has it installed, so I need a fallback strategy. But here's the thing — if I nail [[Tre Borden]]'s brand identity, this becomes a huge quality signal, especially if it's being shared with him or his clients. That's worth solving the font problem for. I should consider system fonts that feel premium and come standard with Office, like Calibri or Helvetica, or explore whether a serif option like Georgia might add that polished feel.
 
 Actually, I'm overthinking this. A single typeface used with intention — varied weights, careful spacing — will feel more cohesive than juggling multiple fonts. I'll stick with Arial but treat it as a design choice, using bold and light weights strategically to create visual hierarchy without complexity.
 
 Now I'm imagining what would actually impress when someone opens this workbook — the first impression matters. The executive summary explains what the workbook covers—percent-for-art ordinances, community benefits agreements, and other regulatory mechanisms across 26 jurisdictions—and positions it as a tool for scoping project obligations or comparing city structures. Below that I'm laying out key performance indicator cards with large accent-colored numbers, minimal labels, and subtle dividers, followed by prominent navigation tiles that serve as the primary actions, with secondary navigation in the footer. I'm still thinking through decorative elements to elevate the design—like a custom hand-drawn accent—to make this feel more polished.
 
-Now I'm considering whether to adopt Tre Borden's brand palette directly: cream background, black text, and a muted pink accent with DM Sans typography. It would create a dramatic shift from standard Excel aesthetics and signal that this was designed specifically for them, though I'm uncertain if embedding their personal brand into the workbook is actually what they want.
+Now I'm considering whether to adopt [[Tre Borden]]'s brand palette directly: cream background, black text, and a muted pink accent with DM Sans typography. It would create a dramatic shift from standard Excel aesthetics and signal that this was designed specifically for them, though I'm uncertain if embedding their personal brand into the workbook is actually what they want.
 
-I'm going to commit to the brand-aligned approach since the deliverable is for Tre Borden and Andrew is building it for them—if they prefer a different direction, they can tell me. Now I need to actually execute rather than keep proposing: I'll confirm my understanding of the goal, acknowledge that a standard approach would be competent but uninspired, and then lay out the upgrade path. an briefly
+I'm going to commit to the brand-aligned approach since the deliverable is for [[Tre Borden]] and Andrew is building it for them—if they prefer a different direction, they can tell me. Now I need to actually execute rather than keep proposing: I'll confirm my understanding of the goal, acknowledge that a standard approach would be competent but uninspired, and then lay out the upgrade path. an briefly
 4. Execute
 
 Let me write this and then start building. I'll keep the response tight — the user wants execution.
 
 Key upgrades I'll commit to:
-1. Tre Borden brand-aligned color palette (cream/charcoal/pink)
+1. [[Tre Borden]] brand-aligned color palette (cream/charcoal/pink)
 2. Sophisticated typography (size + weight contrast, no all-bold)
 3. Executive lead paragraph that frames why this matters
 4. Refined KPI strip with descriptors, not just numbers
@@ -2373,7 +2373,7 @@ Before I dive in, let me verify what openpyxl can handle — custom cell colors 
 
 For visual polish, I'll use borders and cell shading for decorative elements rather than shapes, and I'll separate the title and subtitle into different rows with italic styling for the subtitle.
 
-Now I'm ready to start building with the Tre Borden cream palette, charcoal text, and muted pink accents.
+Now I'm ready to start building with the [[Tre Borden]] cream palette, charcoal text, and muted pink accents.
 
 I'm mapping out the structure: a hero block with title, tagline, executive lead, and version stamp, followed by an accent rule, then a KPI strip with four metrics, three large navigation tiles with accent borders, a regulatory types chip strip, secondary text links, and a footer with caveats.
 
@@ -2402,7 +2402,7 @@ Actually, I'm going to cut it entirely. Keep the page cleaner and tighter. My fi
 
 I'll add the chip strip later if the initial build feels flat. Now I'm moving forward with construction.
 
-The filename stays as is. For the color palette, I'm settling on a refined dusty rose (#C77B7D) for the Tre Borden brand pink—warm and sophisticated without being too bright. For the cream background, I'm choosing something between pale and richer tones to complement it.
+The filename stays as is. For the color palette, I'm settling on a refined dusty rose (#C77B7D) for the [[Tre Borden]] brand pink—warm and sophisticated without being too bright. For the cream background, I'm choosing something between pale and richer tones to complement it.
 
 On text, pure black feels too harsh against cream, so I'll use a softer charcoal instead. Secondary labels will be a warm gray.
 
@@ -2416,7 +2416,7 @@ What was missing from it: it leaned safe — same navy/blue palette, no brand al
 
 Three real upgrades I'm committing to:
 
-1. **Match Tre Borden /Co's brand.** Cream background (#FAF6EE), charcoal text instead of navy (#1A1A1A), refined dusty rose accent (#C77B7D). This shifts the whole feel from "corporate template" to "considered deliverable for Tre Borden specifically."
+1. **Match [[Tre Borden]] /Co's brand.** Cream background (#FAF6EE), charcoal text instead of navy (#1A1A1A), refined dusty rose accent (#C77B7D). This shifts the whole feel from "corporate template" to "considered deliverable for [[Tre Borden]] specifically."
 2. **Hero with editorial voice.** Title + tagline + an actual executive lead paragraph that frames *why* this exists. Right now there's no positioning. A lay user opening this should know in one read what this is and what's interesting about it.
 3. **A small visual element that earns its space.** Not the three default Excel charts. A polished inline "regulatory framework at a glance" strip — six chips showing the six reg types with counts. Subtle, informative, custom-feeling.
 
@@ -2452,7 +2452,7 @@ This block is not supported on your current device yet.
 This block is not supported on your current device yet.
 ```
 
- The cream background is working beautifully and feels much warmer than the original navy choice, the bold title creates strong hierarchy, and the rose-colored section labels have a nice editorial restraint. The TRE BORDEN /CO mark sits elegantly in the top-left, and the large KPI numbers are reading well, though I'm noticing some elements aren't landing quite right yet.
+ The cream background is working beautifully and feels much warmer than the original navy choice, the bold title creates strong hierarchy, and the rose-colored section labels have a nice editorial restraint. The [[Tre Borden]] /CO mark sits elegantly in the top-left, and the large KPI numbers are reading well, though I'm noticing some elements aren't landing quite right yet.
 
 There are several critical issues I need to address: the page is rendering too wide and cutting off content on the right side — the title, fourth KPI card, third navigation tile, and footer text are all truncated, which is a major problem. The cream background isn't extending to fill the full viewport, leaving white margins visible around it. The link styling has defaulted to a dark blue-purple instead of my intended charcoal, and the subtitle is also getting cut off mid-word before wrapping.
 
@@ -2484,7 +2484,7 @@ Now I'm noticing the PDF rendering is showing pure black instead of my charcoal 
 
 Fixing the width and hyperlinks...OK I can see actual issues now. The rendering shows:
 
-**Working:** the cream/rose palette feels distinctly Tre Borden, hierarchy reads correctly (title dominates, sections subordinate, navigation prominent), the editorial voice is there.
+**Working:** the cream/rose palette feels distinctly [[Tre Borden]], hierarchy reads correctly (title dominates, sections subordinate, navigation prominent), the editorial voice is there.
 
 **Broken:**
 1. **Page is cut off right** — title truncated, 4th KPI and 3rd nav tile gone. Content is wider than print page width.
@@ -2498,7 +2498,7 @@ This block is not supported on your current device yet.
 
 **assistant**
 
-The user wants something that truly impresses—not just professional, but memorable. My previous approach was safe but didn't push hard enough. I need to lean into the Tre Borden brand alignment I started exploring and make bolder design choices that create that "wow" moment for someone seeing it for the first time. is to step back and honestly assess whether this direction will actually deliver impact. The current design—polished typography, a structured layout with KPIs and regulatory framework—will definitely be a step up from the original, but I'm questioning whether it truly stands out. Excel has inherent constraints, and even a well-executed cover sheet won't rival a purpose-built product interface. What actually impresses in Excel deliverables is either Bloomberg-terminal-level data density executed flawlessly, or the kind of typographic and color discipline you see in elite consulting models—and I'm wondering if I should be pushing harder in one of those directions instead.
+The user wants something that truly impresses—not just professional, but memorable. My previous approach was safe but didn't push hard enough. I need to lean into the [[Tre Borden]] brand alignment I started exploring and make bolder design choices that create that "wow" moment for someone seeing it for the first time. is to step back and honestly assess whether this direction will actually deliver impact. The current design—polished typography, a structured layout with KPIs and regulatory framework—will definitely be a step up from the original, but I'm questioning whether it truly stands out. Excel has inherent constraints, and even a well-executed cover sheet won't rival a purpose-built product interface. What actually impresses in Excel deliverables is either Bloomberg-terminal-level data density executed flawlessly, or the kind of typographic and color discipline you see in elite consulting models—and I'm wondering if I should be pushing harder in one of those directions instead.
 
 Looking at what makes those standout examples work, they share a few critical traits: a cohesive design system, intentional typography hierarchy, a restrained color palette used with real discipline, a clear editorial perspective, and confident use of whitespace. My current direction covers most of that, but I'm missing that one unexpected element—something that genuinely surprises or delights—and I'm not confident I'm nailing the execution details tightly enough. I'm considering whether the wow moment should come from a custom visualization that's actually insightful, or something more interactive and unexpected.
 
@@ -2825,7 +2825,7 @@ Delivered. Here's what's in it and how I'd grade my own work against the goal.
 
 **The redesign as built:**
 
-The whole workbook now uses one visual system. Cream background (#FAF6EE), charcoal text (#1A1A1A / #2B2B2B), dusty rose accent (#C77B7D), Arial throughout in deliberate size and weight hierarchies. The TRE BORDEN /CO mark and version stamp sit in the top corners. Section labels are small uppercase rose. Bodies are charcoal. Italic gray for descriptors. Every hyperlink renders in its intended color — no more blue-underlined Excel defaults.
+The whole workbook now uses one visual system. Cream background (#FAF6EE), charcoal text (#1A1A1A / #2B2B2B), dusty rose accent (#C77B7D), Arial throughout in deliberate size and weight hierarchies. The [[Tre Borden]] /CO mark and version stamp sit in the top corners. Section labels are small uppercase rose. Bodies are charcoal. Italic gray for descriptors. Every hyperlink renders in its intended color — no more blue-underlined Excel defaults.
 
 Start Here is a seven-zone cover page. Hero block with brand mark, title, tagline, version. Rose accent rule. Editorial lead paragraph that frames *why this exists* (not just *what it is*). Four-card KPI strip. A "Regulatory Framework" strip with six clean chips showing the type framework with program counts — a small visual element that earns its space without being decorative. Three primary navigation tiles with rose top-borders and confident size. Secondary nav as restrained text links. Footer with credit and a verify-before-use caveat that sets honest expectations. Page-fit setup so it renders right in PDF and print.
 
@@ -2875,7 +2875,7 @@ dori and tre open it. then their friends open it. check the fucking project memo
 
 You're right. I have the memory and I should have used it instead of making you re-explain.
 
-The workbook is the LA/SoCal pilot output of **first-agent** — Tre's lead generation tool. Tre and Dori open it to find leads: developers and architecture firms with active projects in jurisdictions that have percent-for-art or related contribution requirements. Their friends — peers in the LA creative-studio / public-art-consulting world — open it to see what Tre's team is producing and potentially to use the same intelligence.
+The workbook is the LA/SoCal pilot output of **[[first-agent]]** — Tre's lead generation tool. Tre and Dori open it to find leads: developers and architecture firms with active projects in jurisdictions that have percent-for-art or related contribution requirements. Their friends — peers in the LA creative-studio / public-art-consulting world — open it to see what Tre's team is producing and potentially to use the same intelligence.
 
 That reframes the entire landing page. A lead-gen reference doesn't need a hero paragraph about regulatory lattices. It needs to answer *"where should I be hunting right now?"* in five seconds.
 
@@ -3066,7 +3066,7 @@ Supabase works. Three real options, ranked by effort vs. payoff:
 
 **1. Supabase + Retool/Glide/Softr frontend.** Push the 45 rows into a Postgres table on Supabase. Point a no-code frontend at it. You get search, filters, detail views, sharing via URL, multi-user access. Tre and Dori log in, search by jurisdiction or keyword, click through to detail. Best ratio of effort to "wow." A few hours of setup, no code from you beyond schema design.
 
-**2. Supabase + custom Next.js frontend.** Same database, but you build the UI. More control over look and feel — you can make it actually beautiful. More effort, more learning, but it's a real web product Tre can put on a domain. Aligned with where first-agent is already heading.
+**2. Supabase + custom Next.js frontend.** Same database, but you build the UI. More control over look and feel — you can make it actually beautiful. More effort, more learning, but it's a real web product Tre can put on a domain. Aligned with where [[first-agent]] is already heading.
 
 **3. Supabase only, accessed via the dashboard.** Just the database, no frontend. Tre and Dori use Supabase's built-in table editor to browse and filter. Functional but the UI is for developers, not for them. Not the right path.
 
@@ -3084,7 +3084,7 @@ If you're hosting on Railway anyway and don't need auth yet, Supabase is overkil
 
 Simpler options that fit where you actually are:
 
-**1. Postgres on Railway.** Railway has a one-click Postgres add-on. Same database engine as Supabase, no extra service to manage, sits next to your existing first-agent app. When you need auth later, add it then — Supabase, Clerk, or roll your own.
+**1. Postgres on Railway.** Railway has a one-click Postgres add-on. Same database engine as Supabase, no extra service to manage, sits next to your existing [[first-agent]] app. When you need auth later, add it then — Supabase, Clerk, or roll your own.
 
 **2. SQLite file on the Railway volume.** You already have a persistent volume at `/data` for `leads.xlsx`. Drop a `regulations.db` next to it. SQLite is genuinely fine for 45 rows or 45,000. Zero infrastructure. Phase 2 of your roadmap already calls for migrating leads from xlsx to SQLite — this aligns with that.
 
@@ -3112,7 +3112,7 @@ Yes. Hand it to Claude Code with a clear brief.
 
 Here's what to give it:
 
-**Task:** Add a regulations module to the first-agent Flask app. SQLite database on the existing Railway volume. Single-page UI for browsing, filtering, and searching the glossary.
+**Task:** Add a regulations module to the [[first-agent]] Flask app. SQLite database on the existing Railway volume. Single-page UI for browsing, filtering, and searching the glossary.
 
 **Schema** (one table, `regulations`): id, region, jurisdiction, county, program_name, reg_type, code_citation, adopted_effective, mandatory, trigger_scope, threshold, on_site_rate, in_lieu_rate, fee_cap, compliance_options, exemptions, administrator_fund, layered_with, source_url, date_verified, currency_risk_flags, confidence, notes. Plus created_at, updated_at.
 
@@ -3223,7 +3223,7 @@ that's not me, that's from CC. what do you think I'm trying to do?
 
 Hand the seed to Claude Code so it can build the regulations module. CC is asking what to do with the JSON because the brief didn't come with it.
 
-Paste the brief I wrote earlier — the one starting "Add a regulations module to the first-agent Flask app." That tells CC the task: schema, seed script, routes, UI, scope. The JSON is the data; the brief is the instructions.
+Paste the brief I wrote earlier — the one starting "Add a regulations module to the [[first-agent]] Flask app." That tells CC the task: schema, seed script, routes, UI, scope. The JSON is the data; the brief is the instructions.
 
 If you want, I can tighten that brief into a single message ready to paste.
 

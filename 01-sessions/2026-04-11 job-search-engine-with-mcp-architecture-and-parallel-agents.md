@@ -17,11 +17,11 @@ tags: []
 
 **Conversation Overview**
 
-This conversation involved Andrew Shipley, a lawyer-turned-operations executive and non-engineer who uses Claude Code for implementation, working on a personal AI job search engine called Orpheus. Andrew has an extensive background spanning corporate law, startup operations, and AI safety-adjacent work, with three peer-reviewed academic publications and graduate degrees from Yale, Oxford, and Wellington. The conversation was primarily a context-recovery and state-preservation session following a compacted prior conversation that had accumulated extensive project history.
+This conversation involved Andrew Shipley, a lawyer-turned-operations executive and non-engineer who uses Claude Code for implementation, working on a personal AI job search engine called [[Orpheus]]. Andrew has an extensive background spanning corporate law, startup operations, and AI safety-adjacent work, with three peer-reviewed academic publications and graduate degrees from Yale, Oxford, and Wellington. The conversation was primarily a context-recovery and state-preservation session following a compacted prior conversation that had accumulated extensive project history.
 
 The core problem addressed was catastrophic context loss across Claude conversations within the same project. The prior multi-hour build session had produced a three-identity ranking architecture (operator/legal/research identities scored independently with MAX-wins logic, commit 3424f48), a six-phase build plan, portfolio positioning across five GitHub repositories, and numerous architectural decisions — none of which were reliably accessible in a new conversation. Andrew expressed significant frustration that conversations within the same project could not preserve context, describing it as a "mind-breaking flaw."
 
-Claude read from a saved transcript file at `/mnt/transcripts/2026-04-21-23-57-03-orpheus-full-state-anchor.txt` to reconstruct full project state, then produced a comprehensive canonical markdown file (`ORPHEUS_STATE.md`) covering: user background, project details (live Railway deployment, SQLite on volume at `/data`, Node.js/TypeScript stack), current architecture (three-identity ranker with org-adjacency tier boosts, content generators accepting identity parameter, `archimedes.config.yaml` as single source of truth with `ORPHEUS_PROFILE_YAML` deprecated), the complete six-phase build plan with rationale and build order, portfolio of five repos (NLSAFE in Rust for AI safety build infrastructure, first-agent production Flask system with 275 tests, mrkt for M&A research, charlie as TBD, Orpheus itself), a proposed `github_signal` config block for per-identity company-affinity boosts, seven infrastructure reality-check questions required before any feature, known standing risks (no auth on public URL, no rate limiting, single-node SQLite, no volume backups), and working pattern rules. The resolution to the context-loss problem was a dual approach: commit `ORPHEUS_STATE.md` to the repo root with a CLAUDE.md reference (so Claude Code reads it every session), and add it to the claude.ai project knowledge sidebar (so chat conversations load it automatically). Pending items include live verification of Phases 2 and 2.5, reading the charlie and mrkt repos, updating misleading GitHub descriptions, and pinning the correct repos on the profile.
+Claude read from a saved transcript file at `/mnt/transcripts/2026-04-21-23-57-03-orpheus-full-state-anchor.txt` to reconstruct full project state, then produced a comprehensive canonical markdown file (`ORPHEUS_STATE.md`) covering: user background, project details (live Railway deployment, SQLite on volume at `/data`, Node.js/TypeScript stack), current architecture (three-identity ranker with org-adjacency tier boosts, content generators accepting identity parameter, `archimedes.config.yaml` as single source of truth with `ORPHEUS_PROFILE_YAML` deprecated), the complete six-phase build plan with rationale and build order, portfolio of five repos ([[NLSAFE]] in Rust for AI safety build infrastructure, [[first-agent]] production Flask system with 275 tests, [[mrkt]] for M&A research, [[charlie]] as TBD, [[Orpheus]] itself), a proposed `github_signal` config block for per-identity company-affinity boosts, seven infrastructure reality-check questions required before any feature, known standing risks (no auth on public URL, no rate limiting, single-node SQLite, no volume backups), and working pattern rules. The resolution to the context-loss problem was a dual approach: commit `ORPHEUS_STATE.md` to the repo root with a CLAUDE.md reference (so Claude Code reads it every session), and add it to the claude.ai project knowledge sidebar (so chat conversations load it automatically). Pending items include live verification of Phases 2 and 2.5, reading the [[charlie]] and [[mrkt]] repos, updating misleading GitHub descriptions, and pinning the correct repos on the profile.
 
 ## Transcript
 
@@ -846,7 +846,7 @@ This block is not supported on your current device yet.
 
 Here's what changed and why:
 
-**`archimedes.config.yaml`** (new, gitignored) — Your full profile: Yale Law, Oxford/Rhodes, the NativeLink → Audience Haus → AGS Law trajectory, all 13 target titles, salary floor at $150k, LA-area locations, industry preferences, and the full voice spec (tone, avoid phrases, signature phrases). This file never touches GitHub.
+**`archimedes.config.yaml`** (new, gitignored) — Your full profile: Yale Law, Oxford/Rhodes, the NativeLink → [[Audience Haus]] → [[AGS Law PLLC|AGS Law]] trajectory, all 13 target titles, salary floor at $150k, LA-area locations, industry preferences, and the full voice spec (tone, avoid phrases, signature phrases). This file never touches GitHub.
 
 **`src/types.ts`** — Extended `UserProfileSchema` with `targetTitles`, `voice` (tone + avoidPhrases + signaturePhrases), `positioningGuidance`, `projects`, `location`, `linkedin`, `github`, and `website`. These fields are optional, so backward-compatible.
 
@@ -1045,9 +1045,9 @@ This block is not supported on your current device yet.
 
 This is gold — your actual resume has significantly more detail than what the wiki LLM produced. Key things I'm seeing that weren't in the previous profile:
 
-- **EeroQ Corporation** — Chief of Staff and Special Counsel at a quantum hardware company, with $10M+ in financing, IP licensing with Princeton and Michigan State, SBIR grants
-- **Quantified wins at Trace Machina** — 10x ARR to >$1M, reduced legal spend 7x ($22k→$3k), reduced burn >30%, SOC II certification
-- **AGS Law** — advised 100+ startups, $250M+ in strategic transactions, fund formation
+- **[[EeroQ]] Corporation** — Chief of Staff and Special Counsel at a quantum hardware company, with $10M+ in financing, IP licensing with Princeton and Michigan State, SBIR grants
+- **Quantified wins at [[Trace Machina]]** — 10x ARR to >$1M, reduced legal spend 7x ($22k→$3k), reduced burn >30%, SOC II certification
+- **[[AGS Law PLLC|AGS Law]]** — advised 100+ startups, $250M+ in strategic transactions, fund formation
 - **Fulbright Scholar** at University of Wellington (in addition to Rhodes)
 - **University of Oregon** — BA in Psychology and Political Science, 4.04 GPA, Phi Beta Kappa
 - **Board work** — St. Luke Foundation for Haiti
@@ -1366,7 +1366,7 @@ storage:
 
 ---
 
-That's one paste into Claude Code and you're done. The big additions from your actual resume: EeroQ with the full Chief of Staff narrative and quantified wins, the real Trace Machina numbers (10x ARR, 7x legal cost reduction, SOC II), AGS Law at scale (100+ clients, $250M+ in transactions), Fulbright and UO/Phi Beta Kappa, and the board and nonprofit work. The positioning guidance now specifically references EeroQ as your strongest CoS proof point.
+That's one paste into Claude Code and you're done. The big additions from your actual resume: [[EeroQ]] with the full Chief of Staff narrative and quantified wins, the real [[Trace Machina]] numbers (10x ARR, 7x legal cost reduction, SOC II), [[AGS Law PLLC|AGS Law]] at scale (100+ clients, $250M+ in transactions), Fulbright and UO/Phi Beta Kappa, and the board and nonprofit work. The positioning guidance now specifically references [[EeroQ]] as your strongest CoS proof point.
 
 **human**
 
@@ -1412,11 +1412,11 @@ Tell me what happens when you run the install and the search command. The errors
 
 **human**
 
-we're also calling it orpheus just FYI
+we're also calling it [[Orpheus]] just FYI
 
 **assistant**
 
-Got it — Archimedes is now Orpheus. When you're in Claude Code, you can rename the project:
+Got it — Archimedes is now [[Orpheus]]. When you're in Claude Code, you can rename the project:
 
 ```
 Rename the project from Archimedes to Orpheus everywhere — README, package.json name field, CLI command descriptions, config file comments, metric prefixes, trace ID prefixes, and any other references. The CLI command should stay as-is for now (we can rename the binary later). Don't touch the architecture or code logic, just the branding.
@@ -1493,7 +1493,7 @@ Railway deployment:
 
 This is a real build — probably 2-3 hours in Claude Code. Let me give you the prompt sequence to get it done.
 
-**Open Claude Code in your Orpheus repo and paste this as prompt 1:**
+**Open Claude Code in your [[Orpheus]] repo and paste this as prompt 1:**
 
 ```
 I need to add a full-stack web UI to Orpheus. Here's the plan:
@@ -1607,7 +1607,7 @@ railway login
 
 This opens your browser to authenticate.
 
-**Step 3 — Create the project (from inside your Orpheus repo):**
+**Step 3 — Create the project (from inside your [[Orpheus]] repo):**
 ```bash
 railway init
 ```
@@ -1763,8 +1763,8 @@ this is stupid. I'll just do it in the railway app. what do I do?
 
 Much easier. Go to [railway.app/dashboard](https://railway.app/dashboard):
 
-1. Find the **orpheus** project and click into it
-2. Click **New Service** → **GitHub Repo** → select your Orpheus repo
+1. Find the **[[Orpheus]]** project and click into it
+2. Click **New Service** → **GitHub Repo** → select your [[Orpheus]] repo
 3. Before it deploys, click into the service → **Variables** tab → **Add Variable**:
    - Key: `ANTHROPIC_API_KEY`
    - Value: your API key
@@ -1822,7 +1822,7 @@ Paste the build logs once it kicks off. And what's the URL Railway gave you?
 
 **human**
 
-npm run build  npm warn config production Use `--omit=dev` instead.   > orpheus@0.1.0 build > tsc   src/agents/linkedin_agent.ts(68,7): error TS2322: Type 'unknown' is not assignable to type 'string | number | boolean'.  src/agents/linkedin_agent.ts(69,7): error TS2322: Type '{}' is not assignable to type 'string | number | boolean'.  src/conductor/conductor.ts(17,1): error TS6133: 'nanoid' is declared but its value is never read. src/mcp/server.ts(180,9): error TS2353: Object literal may only specify known properties, and 'name' does not exist in type 'AnySchema'. src/mcp/server.ts(185,9): error TS2353: Object literal may only specify known properties, and 'name' does not exist in type 'AnySchema'.  src/observability/tracer.ts(17,21): error TS6196: 'SpanEvent' is declared but never used.  src/observability/tracer.ts(224,28): error TS2345: Argument of type '((span: Span) => void) | ((span: Span) => void) | ((metric: Metric) => void) | ((cost: CostEntry) => void)' is not assignable to parameter of type '(...args: ArgumentMap<TracerEvents>[Extract<E, keyof TracerEvents>]) => void'.   Type '(span: Span) => void' is not assignable to type '(...args: ArgumentMap<TracerEvents>[Extract<E, keyof TracerEvents>]) => void'.     Types of parameters 'span' and 'args' are incompatible.       Type 'ArgumentMap<TracerEvents>[Extract<E, keyof TracerEvents>]' is not assignable to type '[span: Span]'.         Type '[span: Span] | [span: Span] | [metric: Metric] | [cost: CostEntry]' is not assignable to type '[span: Span]'.           Type '[metric: Metric]' is not assignable to type '[span: Span]'.             Type 'Metric' is missing the following properties from type 'Span': traceId, spanId, startTime, status, and 3 more.               Type 'TracerEvents[Extract<E, keyof TracerEvents>] extends (...args: any[]) => void ? Parameters<TracerEvents[Extract<E, keyof TracerEvents>]> : TracerEvents[Extract<...>] extends any[] ? TracerEvents[Extract<...>] : any[]' is not assignable to type '[span: Span]'.                 Type 'Parameters<TracerEvents[Extract<E, keyof TracerEvents>]> | (TracerEvents[Extract<E, keyof TracerEvents>] extends any[] ? TracerEvents[Extract<...>] : any[])' is not assignable to type '[span: Span]'.                   Type 'Parameters<TracerEvents[Extract<E, keyof TracerEvents>]>' is not assignable to type '[span: Span]'.                     Type '[span: Span] | [span: Span] | [metric: Metric] | [cost: CostEntry]' is not assignable to type '[span: Span]'.                       Type '[metric: Metric]' is not assignable to type '[span: Span]'.                         Type 'Metric' is missing the following properties from type 'Span': traceId, spanId, startTime, status, and 3 more.
+npm run build  npm warn config production Use `--omit=dev` instead.   > [[Orpheus]]@0.1.0 build > tsc   src/agents/linkedin_agent.ts(68,7): error TS2322: Type 'unknown' is not assignable to type 'string | number | boolean'.  src/agents/linkedin_agent.ts(69,7): error TS2322: Type '{}' is not assignable to type 'string | number | boolean'.  src/conductor/conductor.ts(17,1): error TS6133: 'nanoid' is declared but its value is never read. src/mcp/server.ts(180,9): error TS2353: Object literal may only specify known properties, and 'name' does not exist in type 'AnySchema'. src/mcp/server.ts(185,9): error TS2353: Object literal may only specify known properties, and 'name' does not exist in type 'AnySchema'.  src/observability/tracer.ts(17,21): error TS6196: 'SpanEvent' is declared but never used.  src/observability/tracer.ts(224,28): error TS2345: Argument of type '((span: Span) => void) | ((span: Span) => void) | ((metric: Metric) => void) | ((cost: CostEntry) => void)' is not assignable to parameter of type '(...args: ArgumentMap<TracerEvents>[Extract<E, keyof TracerEvents>]) => void'.   Type '(span: Span) => void' is not assignable to type '(...args: ArgumentMap<TracerEvents>[Extract<E, keyof TracerEvents>]) => void'.     Types of parameters 'span' and 'args' are incompatible.       Type 'ArgumentMap<TracerEvents>[Extract<E, keyof TracerEvents>]' is not assignable to type '[span: Span]'.         Type '[span: Span] | [span: Span] | [metric: Metric] | [cost: CostEntry]' is not assignable to type '[span: Span]'.           Type '[metric: Metric]' is not assignable to type '[span: Span]'.             Type 'Metric' is missing the following properties from type 'Span': traceId, spanId, startTime, status, and 3 more.               Type 'TracerEvents[Extract<E, keyof TracerEvents>] extends (...args: any[]) => void ? Parameters<TracerEvents[Extract<E, keyof TracerEvents>]> : TracerEvents[Extract<...>] extends any[] ? TracerEvents[Extract<...>] : any[]' is not assignable to type '[span: Span]'.                 Type 'Parameters<TracerEvents[Extract<E, keyof TracerEvents>]> | (TracerEvents[Extract<E, keyof TracerEvents>] extends any[] ? TracerEvents[Extract<...>] : any[])' is not assignable to type '[span: Span]'.                   Type 'Parameters<TracerEvents[Extract<E, keyof TracerEvents>]>' is not assignable to type '[span: Span]'.                     Type '[span: Span] | [span: Span] | [metric: Metric] | [cost: CostEntry]' is not assignable to type '[span: Span]'.                       Type '[metric: Metric]' is not assignable to type '[span: Span]'.                         Type 'Metric' is missing the following properties from type 'Span': traceId, spanId, startTime, status, and 3 more.
 
 **assistant**
 
@@ -1930,11 +1930,11 @@ Dockerfile:14
 -------------------
 12 |
 13 |     # Install client dependencies
-14 | >>> COPY job-search-engine/client/package.json job-search-engine/client/package-lock.json ./client/
+14 | >>> COPY [[Orpheus|job-search-engine]]/client/package.json [[Orpheus|job-search-engine]]/client/package-lock.json ./client/
 15 |     RUN cd client && npm ci
 16 |
 -------------------
-ERROR: failed to build: failed to solve: failed to compute cache key: failed to calculate checksum of ref elyuleyi3vx94ed7u1agegqan::gwy8xltxm8q1c5r5d7y5nl4gc: "/job-search-engine/client/package.json": not found
+ERROR: failed to build: failed to solve: failed to compute cache key: failed to calculate checksum of ref elyuleyi3vx94ed7u1agegqan::gwy8xltxm8q1c5r5d7y5nl4gc: "/[[Orpheus|job-search-engine]]/client/package.json": not found
 
 **assistant**
 
@@ -1962,11 +1962,11 @@ Dockerfile:14
 -------------------
 12 |
 13 |     # Install client dependencies
-14 | >>> COPY job-search-engine/client/package.json job-search-engine/client/package-lock.json ./client/
+14 | >>> COPY [[Orpheus|job-search-engine]]/client/package.json [[Orpheus|job-search-engine]]/client/package-lock.json ./client/
 15 |     RUN cd client && npm ci
 16 |
 -------------------
-ERROR: failed to build: failed to solve: failed to compute cache key: failed to calculate checksum of ref elyuleyi3vx94ed7u1agegqan::gwy8xltxm8q1c5r5d7y5nl4gc: "/job-search-engine/client/package.json": not found
+ERROR: failed to build: failed to solve: failed to compute cache key: failed to calculate checksum of ref elyuleyi3vx94ed7u1agegqan::gwy8xltxm8q1c5r5d7y5nl4gc: "/[[Orpheus|job-search-engine]]/client/package.json": not found
 
 **assistant**
 
@@ -2020,7 +2020,7 @@ Fix the Dockerfile. All COPY paths are wrong — they include "job-search-engine
 
 **human**
 
-ERROR: failed to build: failed to solve: failed to compute cache key: failed to calculate checksum of ref elyuleyi3vx94ed7u1agegqan::gwy8xltxm8q1c5r5d7y5nl4gc: "/job-search-engine/client/package.json": not found
+ERROR: failed to build: failed to solve: failed to compute cache key: failed to calculate checksum of ref elyuleyi3vx94ed7u1agegqan::gwy8xltxm8q1c5r5d7y5nl4gc: "/[[Orpheus|job-search-engine]]/client/package.json": not found
 
 **assistant**
 
@@ -2071,7 +2071,7 @@ Keep the existing functionality, just restyle everything. Push when done.
 
 **human**
 
-https://orpheus-production-6b88.up.railway.app/search
+https://[[Orpheus]]-production-6b88.up.railway.app/search
 
 **assistant**
 
@@ -2080,7 +2080,7 @@ The user wants me to see their deployed app. Let me fetch the URL to see what it
 This block is not supported on your current device yet.
 ```
 
-The page returned very minimal content - just "Orpheus". It's a React SPA so the content is rendered client-side. Let me try to fetch the raw HTML to see the actual structure and styles.It's a React SPA so I can't see the rendered UI from a fetch. Let me look at the frontend code directly to understand what we're restyling.
+The page returned very minimal content - just "[[Orpheus]]". It's a React SPA so the content is rendered client-side. Let me try to fetch the raw HTML to see the actual structure and styles.It's a React SPA so I can't see the rendered UI from a fetch. Let me look at the frontend code directly to understand what we're restyling.
 ```
 This block is not supported on your current device yet.
 ```
@@ -2204,7 +2204,7 @@ And one about the API key issue / security awareness.
 This block is not supported on your current device yet.
 ```
 
-Let me also add something about the Orpheus project state so future sessions have context.
+Let me also add something about the [[Orpheus]] project state so future sessions have context.
 ```
 This block is not supported on your current device yet.
 ```
@@ -2226,7 +2226,7 @@ oh we're not done. I haven't even run this thing yet once on railway
 
 Right. Let's get it working.
 
-The build succeeded — site is live at orpheus-production-6b88.up.railway.app/search. Open it in your browser and run a search: "chief of staff AI startup remote"
+The build succeeded — site is live at [[Orpheus]]-production-6b88.up.railway.app/search. Open it in your browser and run a search: "chief of staff AI startup remote"
 
 Three things will happen, and I want to know which:
 
@@ -2574,22 +2574,22 @@ Three things to check in the Railway logs (clear the `[conductor]` filter first,
 
 Paste the last ~50 lines of Railway deploy logs from around when you ran the search. Don't filter — I want to see everything.
 
-Also, open browser DevTools (right-click → Inspect → Network tab) on the Orpheus search page, run the search again, and look at the `/api/search` request. Tell me the status code and the response body. That'll tell us in 5 seconds whether the request is even reaching the server.
+Also, open browser DevTools (right-click → Inspect → Network tab) on the [[Orpheus]] search page, run the search again, and look at the `/api/search` request. Tell me the status code and the response body. That'll tell us in 5 seconds whether the request is even reaching the server.
 
 **human**
 
 History
-Orpheus/7f7001e5
+[[Orpheus]]/7f7001e5
 Active
 Apr 11, 2026, 4:23 PM PDT
-orpheus-production-6b88.up.railway.app
+[[Orpheus]]-production-6b88.up.railway.app
 DetailsBuild LogsDeploy Logs
 HTTP LogsNetwork Flow Logs
 Filter and search logs
 You reached the start of the range
 Apr 11, 2026, 4:23 PM
 Starting Container
-[server] Orpheus API listening on http://localhost:8080  (production)
+[server] [[Orpheus]] API listening on http://localhost:8080  (production)
 
 **assistant**
 
@@ -2813,7 +2813,7 @@ Yes — Claude has extensions that fix both of those gaps directly.
 
 2. **Claude Code** — you already use this. It is the GitHub integration for actually changing code. Different job than reviewing.
 
-**What I'd connect for Orpheus specifically:**
+**What I'd connect for [[Orpheus]] specifically:**
 
 - **Claude for Chrome** — so I can see the live deployment, DevTools, Railway logs, anything in your browser without you copying text back and forth
 - **GitHub MCP** — so I can read your actual repo state instead of guessing what Claude Code may or may not have built
@@ -2848,7 +2848,7 @@ Here's the real state of what's available right now:
 
 **Honorable mention — Exa:** A web search MCP that includes a `get_code_context` tool. Better than my default web search for finding specific API endpoints, library docs, and working code examples. Would have helped me find the real Getro and Pallet API endpoints this morning instead of guessing at slugs.
 
-Here's what I'd actually install right now for Orpheus specifically:
+Here's what I'd actually install right now for [[Orpheus]] specifically:
 
 1. **Claude for Chrome** — solves the "can't see your deployment" problem permanently
 2. **Jam MCP** — for when something breaks and you need to hand me a full recording instead of copying log fragments back and forth
@@ -2871,7 +2871,7 @@ Completely fair — that's the right instinct. Claude for Chrome in "see everyth
 - You'd have to remember what's in the tab before granting access (credentials visible in DevTools, etc.)
 - For a job search tool with your personal profile in it, the threat model is different from generic debugging
 
-**Lower-exposure alternatives that solve the actual Orpheus problem:**
+**Lower-exposure alternatives that solve the actual [[Orpheus]] problem:**
 
 1. **Screenshots.** Drag a screenshot into chat. I can see images. For the "ugly black and purple UI" diagnosis, a screenshot would have given me more than any fetch ever could.
 
@@ -2993,9 +2993,9 @@ we'll save that for another day. give me a brief natural language review of Phas
 
 **Phase 2 — Job Detail View.** When you click a job in the search results, it opens a detail view showing the full listing with three buttons: Tailor Resume, Write Cover Letter, Draft Outreach Email. Each button calls the backend, runs your profile through the generator, and displays multiple variants with confidence scores and copy buttons. This is the phase that finally exposes the content generation work — the resume tailoring, the voice-aware cover letters, the positioning-guided emails — that's been sitting unused in the backend since we built it. It's the most differentiated part of the product and the first thing a hiring manager reviewing your GitHub would actually play with.
 
-**Phase 3 — Observatory Dashboard.** A separate page that exposes the Pylon observability layer visually. Waterfall traces showing each search broken down by stage (parse, fan-out, per-agent, merge, rank) with timing. Metrics like search latency percentiles, agent success rates, token usage, cumulative cost. Decision logs explaining why the ranker scored job X above job Y or which strategy the cover letter generator chose. Monospace font to signal "this is the engineering surface." This is the phase that turns Orpheus from "yet another job board wrapper" into "demonstrably sophisticated MCP + agent orchestration with production observability." It's the portfolio piece.
+**Phase 3 — Observatory Dashboard.** A separate page that exposes the Pylon observability layer visually. Waterfall traces showing each search broken down by stage (parse, fan-out, per-agent, merge, rank) with timing. Metrics like search latency percentiles, agent success rates, token usage, cumulative cost. Decision logs explaining why the ranker scored job X above job Y or which strategy the cover letter generator chose. Monospace font to signal "this is the engineering surface." This is the phase that turns [[Orpheus]] from "yet another job board wrapper" into "demonstrably sophisticated MCP + agent orchestration with production observability." It's the portfolio piece.
 
-**Phase 4 — Application Tracker.** Kanban board with columns for Saved, Applied, Interview Scheduled, Offer, Rejected, Withdrawn. Drag jobs between columns, each card shows the key info and links back to whatever materials you generated. This is the phase that makes Orpheus useful as your actual job search tool, not just a demo. It closes the loop from "found a job" to "applied" to "heard back."
+**Phase 4 — Application Tracker.** Kanban board with columns for Saved, Applied, Interview Scheduled, Offer, Rejected, Withdrawn. Drag jobs between columns, each card shows the key info and links back to whatever materials you generated. This is the phase that makes [[Orpheus]] useful as your actual job search tool, not just a demo. It closes the loop from "found a job" to "applied" to "heard back."
 
 **Phase 5 — UI Redesign.** Strip the black-and-purple. Near-black background, muted blue accent used sparingly, white primary text, Inter font, clean card surfaces, 8px radii, generous spacing. Linear or Vercel aesthetic. Monospace only in the Observatory. This is the phase that makes the whole thing look like it deserves to be on your GitHub. Functionally nothing changes, but visually it goes from "student project" to "production app."
 
@@ -3128,20 +3128,20 @@ Bridge between the two: hosts/gbrain.ts is the bridge. Tells GStack's coding ski
 
 Before you invest time, worth being honest about what you'd actually be copying:
 
-**For Orpheus specifically, you don't need to duplicate either project.** GStack is a meta-layer above Claude Code — you're already using Claude Code directly. GBrain is a memory layer that makes sense when you have thousands of meetings/emails/notes flowing through an agent daily. You have one project.
+**For [[Orpheus]] specifically, you don't need to duplicate either project.** GStack is a meta-layer above Claude Code — you're already using Claude Code directly. GBrain is a memory layer that makes sense when you have thousands of meetings/emails/notes flowing through an agent daily. You have one project.
 
-**Where this gets interesting for you:** The positioning lesson. Tan didn't build "a developer tool" — he built "my personal operating system, open-sourced." That framing is why it got 78k stars in weeks. For Orpheus, the equivalent move is to stop positioning it as "an AI job search engine" and start positioning it as "my actual job search, as code." That's a stronger portfolio argument.
+**Where this gets interesting for you:** The positioning lesson. Tan didn't build "a developer tool" — he built "my personal operating system, open-sourced." That framing is why it got 78k stars in weeks. For [[Orpheus]], the equivalent move is to stop positioning it as "an AI job search engine" and start positioning it as "my actual job search, as code." That's a stronger portfolio argument.
 
 **The installable-skill pattern is useful.** Adding `/tailor` (resume tailoring), `/coldpitch` (outreach email), `/trace` (view last search observability) as slash commands in your own CLAUDE.md would be genuinely useful and a small, well-scoped next feature.
 
-**GBrain's "signal detection → enrich → auto-link" pattern is directly applicable to Orpheus.** Every job you view could enrich a company page. Every application you send could update a person page (the hiring manager). Over weeks, you'd have a self-built CRM of every company you've considered. This is a real product direction.
+**GBrain's "signal detection → enrich → auto-link" pattern is directly applicable to [[Orpheus]].** Every job you view could enrich a company page. Every application you send could update a person page (the hiring manager). Over weeks, you'd have a self-built CRM of every company you've considered. This is a real product direction.
 
 Before I pull more — what's the actual goal here? A few options:
 
-1. **Study Tan's positioning so you can reframe Orpheus's README and GitHub presence**
+1. **Study Tan's positioning so you can reframe [[Orpheus]]'s README and GitHub presence**
 2. **Port specific GStack slash-command patterns into your project's CLAUDE.md**
-3. **Add a GBrain-style memory layer to Orpheus so it learns from every job viewed and application sent**
-4. **Fork/install GStack+GBrain to use on your own machine alongside Orpheus development**
+3. **Add a GBrain-style memory layer to [[Orpheus]] so it learns from every job viewed and application sent**
+4. **Fork/install GStack+GBrain to use on your own machine alongside [[Orpheus]] development**
 5. **Write a deep-dive analysis doc for your own reference**
 
 Each of these is a different amount of work and a different kind of output. Which one?
@@ -3152,17 +3152,17 @@ As a phase 6, I'd like to add a gbrain-style memory layer
 
 **assistant**
 
-Good call. This is actually the right next feature — it turns Orpheus from a search-and-generate tool into a system that gets smarter every time you use it. And it's a portfolio story on its own: "here's how I built a self-enriching knowledge graph on top of an agentic search pipeline."
+Good call. This is actually the right next feature — it turns [[Orpheus]] from a search-and-generate tool into a system that gets smarter every time you use it. And it's a portfolio story on its own: "here's how I built a self-enriching knowledge graph on top of an agentic search pipeline."
 
 Before I write the Claude Code prompt, a few design decisions worth pinning down. GBrain made specific choices that aren't obvious:
 
-**1. Entity model.** GBrain tracks Pages (the knowledge units), People, Companies, and typed relationships (`attended`, `works_at`, `invested_in`, `founded`, `advises`). For Orpheus, the natural entities are: Companies (dream list, applied-to, rejected-from), People (hiring managers, founders, recruiters), Roles (jobs you've viewed, applied to, interviewed for), and Interactions (email sent, interview completed, LinkedIn message). Typed relations: `hiring_at`, `founded`, `interviewed_me`, `rejected_me`, `referred_me`, `works_at`.
+**1. Entity model.** GBrain tracks Pages (the knowledge units), People, Companies, and typed relationships (`attended`, `works_at`, `invested_in`, `founded`, `advises`). For [[Orpheus]], the natural entities are: Companies (dream list, applied-to, rejected-from), People (hiring managers, founders, recruiters), Roles (jobs you've viewed, applied to, interviewed for), and Interactions (email sent, interview completed, LinkedIn message). Typed relations: `hiring_at`, `founded`, `interviewed_me`, `rejected_me`, `referred_me`, `works_at`.
 
-**2. The "auto-wire on write" principle.** GBrain extracts entity references and creates typed links on every write with zero LLM calls — just regex and pattern matching against known entities. This is what makes it fast and cheap. Orpheus should follow the same rule: entity extraction from job descriptions and emails should be structural (regex + entity table lookup), not LLM-based.
+**2. The "auto-wire on write" principle.** GBrain extracts entity references and creates typed links on every write with zero LLM calls — just regex and pattern matching against known entities. This is what makes it fast and cheap. [[Orpheus]] should follow the same rule: entity extraction from job descriptions and emails should be structural (regex + entity table lookup), not LLM-based.
 
 **3. Storage.** GBrain uses PGLite or Supabase with hybrid search (vector + keyword). You already have SQLite. Stick with SQLite for now, add sqlite-vec for embeddings. You can migrate to Postgres later if the corpus gets big. No Supabase for a single-user system.
 
-**4. Signal sources.** GBrain ingests meetings, emails, tweets, voice calls. For Orpheus, the natural signals are: every search result viewed, every content generation (what you asked to tailor, for what role), every application status change, and later, pasted text (job descriptions from outside Orpheus, LinkedIn messages, interview notes).
+**4. Signal sources.** GBrain ingests meetings, emails, tweets, voice calls. For [[Orpheus]], the natural signals are: every search result viewed, every content generation (what you asked to tailor, for what role), every application status change, and later, pasted text (job descriptions from outside [[Orpheus]], LinkedIn messages, interview notes).
 
 **5. Write path.** Every signal gets captured in parallel with the main workflow (so it never blocks the UI). Entity enrichment auto-escalates: a person mentioned once gets a stub page; mentioned five times across different contexts, the stub gets promoted to a full page with links back to every mention.
 
@@ -3572,7 +3572,7 @@ The reason CC raised this is that at some point earlier, you committed `archimed
 
 This only works if you're comfortable with your profile being in a private GitHub repo (which you are, since it's already there). Your email, phone, and work history are in the repo. They're not in the public-facing frontend. Railway pulls from the repo. One source, one workflow.
 
-If at some point you want to open-source Orpheus, you'd move the profile to a gitignored file with `profile.example.yaml` committed as a template, and *then* Railway would need the env var. But that's a future concern, not today's problem.
+If at some point you want to open-source [[Orpheus]], you'd move the profile to a gitignored file with `profile.example.yaml` committed as a template, and *then* Railway would need the env var. But that's a future concern, not today's problem.
 
 Paste this into Claude Code:
 
@@ -3605,7 +3605,7 @@ Totally agreed. Committed file as source of truth from here forward. No more man
 
 Once CC ships the loadConfig change, delete the `ORPHEUS_PROFILE_YAML` variable in Railway. From that point on your workflow is: edit `archimedes.config.yaml` → `git push` → Railway redeploys → done. Same loop as any code change.
 
-One thing worth flagging since you mentioned CI/CD: the private-repo-with-profile approach works because your GitHub repo is private. If you ever want to flip Orpheus public for portfolio purposes, that's when the env-var-or-secrets-manager conversation returns — but that's a deliberate future decision, not a recurring maintenance tax. Until then, file in repo, push to deploy.
+One thing worth flagging since you mentioned CI/CD: the private-repo-with-profile approach works because your GitHub repo is private. If you ever want to flip [[Orpheus]] public for portfolio purposes, that's when the env-var-or-secrets-manager conversation returns — but that's a deliberate future decision, not a recurring maintenance tax. Until then, file in repo, push to deploy.
 
 Where do you want to go next — wait for CC to finish the source cleanup and the Phase 2 fixes, or anything else you want to think through while it runs?
 
@@ -3686,7 +3686,7 @@ A Chief of Staff role at a 5-person pre-seed biotech is completely different fro
 
 **Tier 3 — Narrative fit** (does this role make sense as the next move in your career story)
 
-This is the hardest part for a system to model but the most valuable if you can get it right. A role that's a lateral move from your EeroQ CoS tenure is less interesting than one that's an obvious promotion. A role where the pitch is "use your legal background" might be a step backward unless it's the right kind of legal-adjacent. Things I'd want:
+This is the hardest part for a system to model but the most valuable if you can get it right. A role that's a lateral move from your [[EeroQ]] CoS tenure is less interesting than one that's an obvious promotion. A role where the pitch is "use your legal background" might be a step backward unless it's the right kind of legal-adjacent. Things I'd want:
 
 - What you want your next role to *be about*, separate from the title. Building a new thing? Scaling a proven thing? Fixing a broken thing?
 - What you explicitly don't want to be doing two years from now. (This is often clearer than what you do want.)
@@ -3715,15 +3715,15 @@ Good — that's useful framing. "Reflective of my expertise" is the key phrase. 
 
 **On role substance — what does the work actually look like?**
 
-Your resume shows four distinct operator modes across your career: (1) executive counterpart / CoS to a CEO (EeroQ), (2) sole director building the operating spine of a company (Trace Machina), (3) external advisor running deals and governance for multiple clients at once (AGS Law), (4) narrative-and-positioning work with GTM operators (Audience Haus). Which of these modes do you most want your next role to center on? Or is the ideal something that combines two — say, a CoS role that's meaningfully involved in deals and fundraising, or an ops role that includes external-facing strategic partnerships?
+Your resume shows four distinct operator modes across your career: (1) executive counterpart / CoS to a CEO ([[EeroQ]]), (2) sole director building the operating spine of a company ([[Trace Machina]]), (3) external advisor running deals and governance for multiple clients at once ([[AGS Law PLLC|AGS Law]]), (4) narrative-and-positioning work with GTM operators ([[Audience Haus]]). Which of these modes do you most want your next role to center on? Or is the ideal something that combines two — say, a CoS role that's meaningfully involved in deals and fundraising, or an ops role that includes external-facing strategic partnerships?
 
 **On sector — where do you actually want to spend your days?**
 
-Your config lists 11 industries as interesting. In practice, no one role sits in 11 industries. If you had to pick the top three where you'd feel most at home intellectually — where reading Monday morning's industry news feels like genuine recreation rather than homework — what are they? I'd guess AI infrastructure sits at the top given the Trace Machina and EeroQ context, but I want to hear it from you. Sector fit matters less for a pure CoS role than for a BizOps or CorpDev role, but it still matters.
+Your config lists 11 industries as interesting. In practice, no one role sits in 11 industries. If you had to pick the top three where you'd feel most at home intellectually — where reading Monday morning's industry news feels like genuine recreation rather than homework — what are they? I'd guess AI infrastructure sits at the top given the [[Trace Machina]] and [[EeroQ]] context, but I want to hear it from you. Sector fit matters less for a pure CoS role than for a BizOps or CorpDev role, but it still matters.
 
 **On scale — what stage?**
 
-You said startups work well so far and you're open to SMEs/funds/public. For startups specifically, there's a huge difference between seed (5-15 people, ambiguity is the primary challenge), Series A/B (15-100, systems and process are the primary challenge), and growth stage (100+, coordination and cross-functional alignment are the challenge). You've operated at seed (Trace Machina, EeroQ). Do you want to do that again, or level up to a company that already has PMF and is scaling operations? The second is where CoS roles get the most leverage and the best comp, but the first is where the work is most fun if you like building from nothing.
+You said startups work well so far and you're open to SMEs/funds/public. For startups specifically, there's a huge difference between seed (5-15 people, ambiguity is the primary challenge), Series A/B (15-100, systems and process are the primary challenge), and growth stage (100+, coordination and cross-functional alignment are the challenge). You've operated at seed ([[Trace Machina]], [[EeroQ]]). Do you want to do that again, or level up to a company that already has PMF and is scaling operations? The second is where CoS roles get the most leverage and the best comp, but the first is where the work is most fun if you like building from nothing.
 
 **On the investing-adjacent track**
 
@@ -3767,19 +3767,19 @@ Let me try to do this work *for* you first based on what I know, and you correct
 **Roles where you'd likely not be a credible candidate:**
 
 *Technical / engineering leadership*
-- VP Engineering, CTO, Engineering Manager, Director of Engineering. You have AI infrastructure literacy and are building Orpheus, but you don't have a shipping-code background to lead engineers at scale. A hiring manager for a VPE role would filter you out in 10 seconds.
+- VP Engineering, CTO, Engineering Manager, Director of Engineering. You have AI infrastructure literacy and are building [[Orpheus]], but you don't have a shipping-code background to lead engineers at scale. A hiring manager for a VPE role would filter you out in 10 seconds.
 - Product Manager at a tech company, at least in the "write PRDs, own the roadmap, prioritize the backlog" mold. PM is a specific craft and the market is flooded with people who've done it for 8 years at Google/Stripe/Meta. You'd lose that comparison.
 
 *Senior functional leadership roles where you lack the specific functional depth*
-- VP Sales, VP Marketing, CRO, CMO. You've supported GTM (Audience Haus, Trace Machina GTM) but you haven't carried a number, built a pipeline from scratch at scale, or managed a team of AEs. These roles demand deep functional pattern-matching.
-- VP Finance, CFO. You've managed budgets and P&L at Trace Machina but you're not a career finance person. Treasury, audit, FP&A at scale — not your background.
+- VP Sales, VP Marketing, CRO, CMO. You've supported GTM ([[Audience Haus]], [[Trace Machina]] GTM) but you haven't carried a number, built a pipeline from scratch at scale, or managed a team of AEs. These roles demand deep functional pattern-matching.
+- VP Finance, CFO. You've managed budgets and P&L at [[Trace Machina]] but you're not a career finance person. Treasury, audit, FP&A at scale — not your background.
 - VP People, CHRO. You've built HR systems but you're not an HR professional.
 
 *Law firm partner track*
 - Your resume explicitly shows you moved off this path. A role that's essentially "come back to BigLaw" is unlikely to be a fit emotionally even if you're technically qualified.
 
 *Pure investment roles at traditional funds*
-- Hedge fund analyst, PE associate, investment banking VP. These are competitive with people who've been on that track since undergrad. You could credibly move into a venture role (the AGS Law + startup operator background maps there) or a family office role, but you're not going to out-recruit a Wharton PE analyst for a PE associate slot.
+- Hedge fund analyst, PE associate, investment banking VP. These are competitive with people who've been on that track since undergrad. You could credibly move into a venture role (the [[AGS Law PLLC|AGS Law]] + startup operator background maps there) or a family office role, but you're not going to out-recruit a Wharton PE analyst for a PE associate slot.
 
 *Domain-specialized roles*
 - Roles requiring deep sector expertise you don't have: biotech commercial strategy, fintech compliance at a regulated institution, ad-tech product, healthcare regulatory. You have adjacent knowledge but not primary.
@@ -3793,7 +3793,7 @@ Let me try to do this work *for* you first based on what I know, and you correct
 - Chief of Staff to a Managing Partner or GP (venture, PE, family office — the Rhodes/Yale signaling plus operator experience is actually the canonical profile here)
 - Director / Head / VP of Operations at a company where operations means business operations, not infrastructure engineering
 - Head of Strategic Initiatives / Head of Special Projects
-- Corporate Development (M&A origination and execution, investment diligence, strategic partnerships — your AGS Law deal experience is the proof point)
+- Corporate Development (M&A origination and execution, investment diligence, strategic partnerships — your [[AGS Law PLLC|AGS Law]] deal experience is the proof point)
 - Business Affairs (especially media/entertainment or any content company — your legal + commercial judgment is the exact profile)
 - Business Operations / Strategy & Operations
 - General Counsel at an early-stage company where GC = strategic operator with legal chops, not a pure legal role
@@ -3802,7 +3802,7 @@ Let me try to do this work *for* you first based on what I know, and you correct
 
 **Roles in the gray zone — you could be credible but it depends on the specific company:**
 
-- Product roles at an AI infrastructure / dev tools company where the product is sold to technical buyers and the role requires translating legal/commercial/technical considerations (your Trace Machina grant work is directly adjacent)
+- Product roles at an AI infrastructure / dev tools company where the product is sold to technical buyers and the role requires translating legal/commercial/technical considerations (your [[Trace Machina]] grant work is directly adjacent)
 - Policy / Government Affairs at an AI company (your Rhodes + policy psychology background + AI safety grant writing is a strong signature)
 - Venture Platform roles (running portfolio support, LP relations, community — this is often a CoS role in disguise)
 - Chief of Staff at a non-tech company where the CEO specifically wants someone with a law background (GC-adjacent CoS)
@@ -3878,7 +3878,7 @@ For the ranking intelligence layer, this matters because it expands the set of r
 
 **What it implies for ranking design, which is why I think you sent it.**
 
-The paper's core methodological move is testing a real-world behavioral prediction rather than asking people what they'd do. That's an implicit argument for how Orpheus should work: don't ask me to describe what I want, observe what I actually click, apply to, save, and reject, and let the behavioral signal update the ranking. GBrain does exactly this at the memory layer. The ranking layer should do it too. Every time you view a job, save a job, generate materials for a job, or reject a job, the system updates a preference model. Over weeks it learns your actual preference function, which will be more accurate than anything you could articulate in a config file.
+The paper's core methodological move is testing a real-world behavioral prediction rather than asking people what they'd do. That's an implicit argument for how [[Orpheus]] should work: don't ask me to describe what I want, observe what I actually click, apply to, save, and reject, and let the behavioral signal update the ranking. GBrain does exactly this at the memory layer. The ranking layer should do it too. Every time you view a job, save a job, generate materials for a job, or reject a job, the system updates a preference model. Over weeks it learns your actual preference function, which will be more accurate than anything you could articulate in a config file.
 
 This is also a much stronger portfolio argument. "I built a job search engine with a behavioral learning loop informed by my own published research on social identity and behavioral signals" is a real story. It connects your past research identity to the thing you're building now. That connection is the kind of narrative coherence hiring managers at research-adjacent AI orgs notice.
 
@@ -3900,11 +3900,11 @@ Good — this fills in the picture and confirms something important. The 2006 Da
 
 That's a different story than "undergrad psychology major who published once." It's a researcher who chose not to take the academic track but has genuine original field research across three continents before age 23.
 
-A few things this changes for Orpheus:
+A few things this changes for [[Orpheus]]:
 
-**It expands the credibility ring around AI safety and alignment research organizations.** The Safeguarded AI grant work at Trace Machina already positioned you as literate in this space. But the actual background — Shuar field work, Ghana inter-group cooperation research, Fulbright on national and ethnic identities, Rhodes on experimental psychology — is directly adjacent to the academic lineage of AI alignment. Alignment draws heavily from behavioral economics, moral psychology, cooperative game theory, and cultural evolution. Orgs like FAR Labs, Redwood Research, METR, Anthropic's policy team, ARC, AI Objectives Institute, and Open Philanthropy's AI program would read this background as signal, not noise. Same for Rand's AI policy work, CSET, and similar policy shops.
+**It expands the credibility ring around AI safety and alignment research organizations.** The Safeguarded AI grant work at [[Trace Machina]] already positioned you as literate in this space. But the actual background — Shuar field work, Ghana inter-group cooperation research, Fulbright on national and ethnic identities, Rhodes on experimental psychology — is directly adjacent to the academic lineage of AI alignment. Alignment draws heavily from behavioral economics, moral psychology, cooperative game theory, and cultural evolution. Orgs like FAR Labs, Redwood Research, METR, Anthropic's policy team, ARC, AI Objectives Institute, and Open Philanthropy's AI program would read this background as signal, not noise. Same for Rand's AI policy work, CSET, and similar policy shops.
 
-**It strengthens the case for research-operations roles specifically.** A Head of Research Operations or Director of Research Programs at one of the above orgs is a role where you're not competing on "how many years did you run a research program" but on "do you understand what researchers actually need and can you run a grant pipeline, governance, and external-facing strategy." Your Trace Machina + EeroQ + AGS Law + actual publication combo is the exact profile. I'd argue you're more competitive for this kind of role than for a generic Series B CoS job, because the generic CoS market is flooded and the research-operations market at frontier AI orgs is thin and has unusual signal requirements.
+**It strengthens the case for research-operations roles specifically.** A Head of Research Operations or Director of Research Programs at one of the above orgs is a role where you're not competing on "how many years did you run a research program" but on "do you understand what researchers actually need and can you run a grant pipeline, governance, and external-facing strategy." Your [[Trace Machina]] + [[EeroQ]] + [[AGS Law PLLC|AGS Law]] + actual publication combo is the exact profile. I'd argue you're more competitive for this kind of role than for a generic Series B CoS job, because the generic CoS market is flooded and the research-operations market at frontier AI orgs is thin and has unusual signal requirements.
 
 **It opens a Chief of Staff to Research Leadership track.** CoS to the head of a research lab, CoS to a Chief Scientist, CoS to a research-focused founder. The published research plus the operating experience is the combination that makes these roles click. Very few CoS candidates have actually published peer-reviewed behavioral research.
 
@@ -3939,7 +3939,7 @@ Now the picture is sharper. Two peer-reviewed publications, twelve years apart, 
 
 Third author on a methodologically serious PLOS ONE paper with John T. Jost at NYU. Jost is one of the most cited political psychologists alive — system justification theory is his. Being third author on a paper that directly challenges moral foundations theory (Haidt/Graham) and integrates it with motivated social cognition is a substantive intellectual contribution, not a courtesy credit. The paper is doing real work: it's taking the dominant pop-psych account of political difference in American public discourse and arguing it's downstream of deeper psychological drives rather than being foundational.
 
-Two empirical studies, path modeling in MPlus, 474 participants across two samples, confidence intervals from bootstrapped resampling. This is trained quantitative social science work. The fact that you did this while simultaneously practicing corporate law at Gunderson Dettmer and then AGS Law is worth noting — the competing interests disclosure shows "AS is an employee of AGS Law" at time of publication. You were holding both tracks open.
+Two empirical studies, path modeling in MPlus, 474 participants across two samples, confidence intervals from bootstrapped resampling. This is trained quantitative social science work. The fact that you did this while simultaneously practicing corporate law at Gunderson Dettmer and then [[AGS Law PLLC|AGS Law]] is worth noting — the competing interests disclosure shows "AS is an employee of [[AGS Law PLLC|AGS Law]]" at time of publication. You were holding both tracks open.
 
 **What this changes about the profile positioning**
 
@@ -3955,7 +3955,7 @@ This moves the following role types from "possible fit" to "unusually strong fit
 - **Applied behavioral research at mission-driven orgs.** GiveWell, Open Philanthropy, Charity Navigator, Upstart, Propel, anything at the intersection of behavioral economics and public benefit. The 2008 donation paper maps directly.
 - **Academic-adjacent chief of staff roles.** CoS to a research director, CoS to a chief scientist, CoS to a university president or dean. The research credibility matters here in a way it doesn't for a typical startup CoS role.
 
-**What this implies for the Orpheus intelligence layer**
+**What this implies for the [[Orpheus]] intelligence layer**
 
 This is the point where the config-driven approach starts to break down. The target_titles list is a list of job titles. "Head of Research Operations at Anthropic" might match. "Research Programs Lead at METR" might match. But "Program Officer, AI Safety" at Open Philanthropy? "Senior Fellow, Technical AI Policy" at CSET? "Research Manager" at Redwood? These don't match "Chief of Staff" or "Director of Operations" but they might be the best roles on the market for this profile.
 
@@ -4058,7 +4058,7 @@ Two things before I write this into a Claude Code prompt:
 
 **One:** Are there any orgs in the hardcoded list above you'd want to exclude or add? This is the kind of choice you should make, not me. Open Phil vs. GiveWell, Redwood vs. Apollo, CSET vs. GovAI — these have different cultures and different fits for you specifically.
 
-**Two:** Do you want this implemented now, as a parallel fix to the source integration work, or do you want to finish stabilizing the three working sources (WaaS, Jobicy, HN) before layering on new ranking logic? The technically correct answer is probably finish the sources first because bad data will make the ranker look bad regardless of how smart it is. But the intellectually correct answer is that this ranking change is what turns Orpheus from "yet another job board" into "a search built on my actual identity as a researcher-operator," and that's the portfolio argument.
+**Two:** Do you want this implemented now, as a parallel fix to the source integration work, or do you want to finish stabilizing the three working sources (WaaS, Jobicy, HN) before layering on new ranking logic? The technically correct answer is probably finish the sources first because bad data will make the ranker look bad regardless of how smart it is. But the intellectually correct answer is that this ranking change is what turns [[Orpheus]] from "yet another job board" into "a search built on my actual identity as a researcher-operator," and that's the portfolio argument.
 
 I lean toward: finish the sources, get all three returning real data, then ship the intelligence layer as a clean Phase 2.5 before moving on to Phase 3. What do you want?
 
@@ -4185,7 +4185,7 @@ Three publications, three different academic domains, one consistent intellectua
 
 For portfolio and positioning purposes, this is the story worth telling: not "JD/MBA-adjacent operator" or "former lawyer turned operator," but "trained social and political psychologist who chose the operating path over the academic one and now works at the intersection of research-driven organizations, founders, and consequential decisions." That framing explains the career much better than "he ran operations at an AI infrastructure company" alone.
 
-**What this means for the Orpheus ranker, concretely**
+**What this means for the [[Orpheus]] ranker, concretely**
 
 The org-adjacency list we were building up needs three tiers now, not one:
 
@@ -4193,7 +4193,7 @@ The org-adjacency list we were building up needs three tiers now, not one:
 - **Tier 2 — AI policy, governance, and applied research.** Open Philanthropy, RAND AI, CSET, GovAI, AI Policy Institute, CAIDP.
 - **Tier 3 — Broader tech policy, democracy, and civic tech research.** Oxford Internet Institute, Stanford HAI, Stanford Cyber Policy Center, Berkman Klein, Data & Society, AI Now, Knight First Amendment, Reuters Institute, Pew, Shorenstein, Mozilla Foundation, Omidyar Network, Knight Foundation, Ford Foundation (tech programs), Code for America (leadership), Protect Democracy, The GovLab.
 
-All three tiers should boost score, with tier weighting possibly differing — maybe Tier 1 gets +60, Tier 2 gets +50, Tier 3 gets +40. The reason Tier 1 is the strongest signal isn't that those orgs are "better," it's that the fit is tightest given your Trace Machina/AI infrastructure experience plus the Jost paper.
+All three tiers should boost score, with tier weighting possibly differing — maybe Tier 1 gets +60, Tier 2 gets +50, Tier 3 gets +40. The reason Tier 1 is the strongest signal isn't that those orgs are "better," it's that the fit is tightest given your [[Trace Machina]]/AI infrastructure experience plus the Jost paper.
 
 **Additional ranker signals this paper unlocks**
 
@@ -4205,7 +4205,7 @@ All three tiers should boost score, with tier weighting possibly differing — m
 
 One: do you want the publications on the resume you generate for most roles, or only for research-adjacent ones? They are real signal for AI safety / policy / research-ops roles, but they could feel overdetermined or off-topic for a traditional startup CoS role. The clean answer is the content generator should conditionally include publications based on the role type — research-adjacent yes, pure operator no. This is exactly the kind of personalization a well-designed resume tailor should do.
 
-Two: are there other publications we haven't surfaced yet? Three is a lot for someone who isn't an academic. I'd rather know the full set now than keep discovering them in the conversation. Is there anything from the Wellington Fulbright period, the Ecuador/Shuar or Ghana work, anything from Oxford beyond the Dutton paper, or anything during the AGS/EeroQ period?
+Two: are there other publications we haven't surfaced yet? Three is a lot for someone who isn't an academic. I'd rather know the full set now than keep discovering them in the conversation. Is there anything from the Wellington Fulbright period, the Ecuador/Shuar or Ghana work, anything from Oxford beyond the Dutton paper, or anything during the AGS/[[EeroQ]] period?
 
 And the meta-question: having walked through three papers, is there a clearer picture in your own head of what you want the next role to be? Because this progression — 2008 social identity, 2010 political engagement, 2020 moral cognition — reads like someone who was never going to be fully satisfied by pure transactional law. If you're honest about where the intellectual center of gravity has been, it's been in political and social psychology the whole time. The next role that best matches that isn't a generic CoS role. It's a senior operator role at an organization whose product is research, policy, or institutional design around beliefs, technology, and collective behavior.
 
@@ -4223,13 +4223,13 @@ Concretely, here's how I'd think about it:
 
 **You have three professional identities, not one:**
 
-1. **Operator.** EeroQ CoS, Trace Machina Director of Ops, advisor. The post-2015 reality.
-2. **Lawyer.** Yale Law, Gunderson, AGS Law. Active credential, seven-plus years of practice, ongoing through present.
+1. **Operator.** [[EeroQ]] CoS, [[Trace Machina]] Director of Ops, advisor. The post-2015 reality.
+2. **Lawyer.** Yale Law, Gunderson, [[AGS Law PLLC|AGS Law]]. Active credential, seven-plus years of practice, ongoing through present.
 3. **Researcher.** Oregon → Ghana → Ecuador → Wellington → Oxford → NYU Jost lab. 2005 through 2020, three peer-reviewed publications across three domains.
 
 Each identity connects you to a different class of role. None of them are secondary. The mistake would be treating operator as the "main" profile and the other two as supporting context. That's probably the story your current resume tells, and it's leaving value on the table for roles where legal or research background is the primary credential.
 
-**What this means for Orpheus architecturally:**
+**What this means for [[Orpheus]] architecturally:**
 
 The ranker shouldn't have a single scoring function. It should score every job against each of the three identity profiles separately, then combine:
 
@@ -4245,8 +4245,8 @@ What the Observatory shows next to each result: **which identity profile fired**
 
 Same principle. The resume tailor and cover letter generator should know which identity profile the target role matches, and lead with the right narrative:
 
-- Operator-profile roles: lead with EeroQ CoS, Trace Machina, quantified ops wins. Publications and legal detail as supporting credentials.
-- Legal-profile roles: lead with AGS Law, Gunderson, deal volume ($250M+), corporate transactions. Operator experience as proof you can execute, not just advise.
+- Operator-profile roles: lead with [[EeroQ]] CoS, [[Trace Machina]], quantified ops wins. Publications and legal detail as supporting credentials.
+- Legal-profile roles: lead with [[AGS Law PLLC|AGS Law]], Gunderson, deal volume ($250M+), corporate transactions. Operator experience as proof you can execute, not just advise.
 - Research-profile roles: lead with Rhodes, Fulbright, the three publications, the Jost and Dutton affiliations. Operator experience as proof you've shipped in the world, not just theorized.
 
 Same underlying facts, different narrative order. Your resume already has all of this — the tailor's job is to know which emphasis to apply.
@@ -4255,7 +4255,7 @@ Same underlying facts, different narrative order. Your resume already has all of
 
 I'd restructure `profile` to have an `identities` section with three named profiles, each with its own `target_titles`, `positioning_guidance`, and `emphasis_guidance`. Then the ranker scores each job against all three, and the content generators receive the active identity as a parameter.
 
-This is a real config refactor but it's the one that turns Orpheus from a one-dimensional job filter into a system that respects the actual shape of your career. It's also a cleaner portfolio story — "I built a ranking engine that evaluates each job against multiple candidate identity profiles and explains which one matched" is genuinely novel.
+This is a real config refactor but it's the one that turns [[Orpheus]] from a one-dimensional job filter into a system that respects the actual shape of your career. It's also a cleaner portfolio story — "I built a ranking engine that evaluates each job against multiple candidate identity profiles and explains which one matched" is genuinely novel.
 
 **Pragmatic sequence:**
 
@@ -4322,7 +4322,7 @@ Then confirm: with WaaS deprecated, a search for "chief of staff" on the live UR
 
 The more valuable conversation is the three-identity ranking architecture we just sketched. The current ranker is operator-only. Adding WaaS wouldn't have fixed that — it would have just fed more engineering-adjacent jobs into an operator-only ranker. What would actually change your signal-to-noise is teaching the system that you have three legitimate identities and scoring each job against all of them.
 
-I can write the Claude Code prompt for the identity refactor now while CC closes out the WaaS work. That refactor is the thing that turns Orpheus from "a job search with parallel agents" into "a job search that actually understands a non-trivial candidate profile." Ready to do that?
+I can write the Claude Code prompt for the identity refactor now while CC closes out the WaaS work. That refactor is the thing that turns [[Orpheus]] from "a job search with parallel agents" into "a job search that actually understands a non-trivial candidate profile." Ready to do that?
 
 **human**
 
@@ -4648,9 +4648,9 @@ Yes — this is exactly the right move at exactly the right time, and it's a str
 
 **One: it solves a real problem, not a theoretical one.** The identity refactor we just shipped is a sophisticated guess about how to rank your jobs. It encodes my inference about what you want, based on three publications and a resume. But inference is brittle. A feedback loop replaces inference with observation. Instead of me guessing that "Program Officer at Anthropic" should outrank "Chief of Staff at a Series B ad-tech company," the system learns it from you thumbs-upping the first and thumbs-downing the second twenty times.
 
-**Two: it's the feature your own research predicts will work.** The 2008 paper you just showed me argued for measuring behavior rather than asking people to describe their preferences. That's the exact methodological move here. Asking you to write a config file is self-report. Watching what you save, open, apply to, and reject is behavioral measurement. If you build this into Orpheus it becomes a coherent intellectual artifact: the founder's own published research on behavioral measurement of preferences, implemented as the core loop of the system.
+**Two: it's the feature your own research predicts will work.** The 2008 paper you just showed me argued for measuring behavior rather than asking people to describe their preferences. That's the exact methodological move here. Asking you to write a config file is self-report. Watching what you save, open, apply to, and reject is behavioral measurement. If you build this into [[Orpheus]] it becomes a coherent intellectual artifact: the founder's own published research on behavioral measurement of preferences, implemented as the core loop of the system.
 
-**Three: it's the portfolio feature.** Every job search tool has filters. Very few have a learning loop. A hiring manager clicking through your GitHub sees "AI-powered job search engine" and moves on. A hiring manager clicking through and seeing "tuning page with behavioral preference learning, scored against a three-identity model, with decision explainability" stops. This is the moment Orpheus becomes something they'd remember.
+**Three: it's the portfolio feature.** Every job search tool has filters. Very few have a learning loop. A hiring manager clicking through your GitHub sees "AI-powered job search engine" and moves on. A hiring manager clicking through and seeing "tuning page with behavioral preference learning, scored against a three-identity model, with decision explainability" stops. This is the moment [[Orpheus]] becomes something they'd remember.
 
 **Two design calls I'd push on before building:**
 
@@ -5024,7 +5024,7 @@ Two, the first LLM preference summary you see is going to be more interesting th
 
 **human**
 
-sounds good. Just in terms of design, again does it make sense to create a separate page on orpheus that is specifically for training? In this case the model returns a lot of hits quickly but also iterates quickly, keeps the cost down (I don't want to pay a dollar each training run)
+sounds good. Just in terms of design, again does it make sense to create a separate page on [[Orpheus]] that is specifically for training? In this case the model returns a lot of hits quickly but also iterates quickly, keeps the cost down (I don't want to pay a dollar each training run)
 
 **assistant**
 
@@ -5108,7 +5108,7 @@ Run the three test searches directly at `orpheus-production-6b88.up.railway.app/
 
 On each, click a top result and check: does the Match Analysis panel render, does it show the winning identity reasons, and does the identity override dropdown appear in the detail panel header?
 
-Then click "Tailor Resume" on one operator-winning match and one research-winning match, and compare the generated resumes. This is the real test. If the operator version leads with EeroQ and quantified ops wins, and the research version leads with publications, Rhodes, Fulbright, and Oxford — the architecture works. If both versions look the same, the identity parameter isn't propagating through to the generator prompts.
+Then click "Tailor Resume" on one operator-winning match and one research-winning match, and compare the generated resumes. This is the real test. If the operator version leads with [[EeroQ]] and quantified ops wins, and the research version leads with publications, Rhodes, Fulbright, and Oxford — the architecture works. If both versions look the same, the identity parameter isn't propagating through to the generator prompts.
 
 **On the API key issue CC mentioned:** I read that as CC just hedging about local testing, not as a production problem. Your Railway env var is set (we did that yesterday). Content generation should work on Railway with zero additional configuration on your end. If it doesn't, that's the bug worth debugging — the live content generation path.
 
@@ -5191,7 +5191,7 @@ Yes, you need a Railway volume. Here's why and how.
 
 **Steps, in the Railway dashboard:**
 
-1. Open your Orpheus service → **Settings** → **Volumes** → **+ New Volume**
+1. Open your [[Orpheus]] service → **Settings** → **Volumes** → **+ New Volume**
 2. Mount path: `/data`
 3. Size: 1 GB is plenty for a job search database. You can resize later if needed.
 4. Save — Railway will restart the service once to attach it
@@ -5253,7 +5253,7 @@ Where `/data` is the mount path you specified when creating the volume, and `orp
 
 Steps:
 
-1. Railway dashboard → Orpheus service → **Variables** tab → **+ New Variable**
+1. Railway dashboard → [[Orpheus]] service → **Variables** tab → **+ New Variable**
 2. Name: `DATABASE_PATH`
 3. Value: `/data/orpheus.db`
 4. Save
@@ -5278,7 +5278,7 @@ That's my job and I didn't do it. You are not supposed to be the person who reme
 
 Here's what I should be doing going forward, and what you should expect from me:
 
-**Before any new feature ships, run a deployment reality check.** For any piece of state the system needs to persist across requests or deploys, I should name where that state lives, whether it survives a restart, and whether it survives a deploy. Database files, uploaded files, caches, session data, trace logs, cron state, embedding stores. If it's not in the request/response cycle, it needs a persistence story. For Orpheus specifically that means SQLite (now solved with the volume), any file uploads for resumes we might add later, and any background job state if we add cron.
+**Before any new feature ships, run a deployment reality check.** For any piece of state the system needs to persist across requests or deploys, I should name where that state lives, whether it survives a restart, and whether it survives a deploy. Database files, uploaded files, caches, session data, trace logs, cron state, embedding stores. If it's not in the request/response cycle, it needs a persistence story. For [[Orpheus]] specifically that means SQLite (now solved with the volume), any file uploads for resumes we might add later, and any background job state if we add cron.
 
 **Flag infrastructure concerns at the architecture stage, not the deploy stage.** When I propose a new phase or feature, the prompt should include the infrastructure implications — not just the code. Phase 2.7's feedback loop, for example, has a new SQLite table. I should have said "this needs the volume" in the phase prompt itself. I didn't, because the volume didn't exist when I wrote it. Now that it does, the same question applies to every future phase: does this add persisted state, does it need the volume, does it add an env var, does it need a cron job, does it need an outbound API whitelist.
 
@@ -5286,13 +5286,13 @@ Here's what I should be doing going forward, and what you should expect from me:
 
 - **Persistence.** Where does state live, does it survive restarts and deploys, is it backed up, how would you recover if the database got corrupted.
 - **Secrets and credentials.** API keys in env vars vs. hardcoded vs. in config files. What's safe to commit, what isn't. Rotation policy.
-- **Rate limits and costs.** LLM spend per request, per day, per user. What happens when Orpheus gets posted somewhere public and 500 strangers run searches. Cost ceilings. Throttling.
+- **Rate limits and costs.** LLM spend per request, per day, per user. What happens when [[Orpheus]] gets posted somewhere public and 500 strangers run searches. Cost ceilings. Throttling.
 - **Data exposure.** What gets logged. What's in the Observatory traces. Whether PII ends up in logs that Railway or other third parties can see.
 - **External API reliability.** What happens when Anthropic rate-limits you. What happens when a job source changes its HTML. Graceful degradation vs. silent failure.
-- **Auth and access.** Right now Orpheus has no auth — anyone with the URL can search, generate materials, and rack up your LLM bill. That's fine for a solo portfolio piece today, but worth knowing it's a known risk.
+- **Auth and access.** Right now [[Orpheus]] has no auth — anyone with the URL can search, generate materials, and rack up your LLM bill. That's fine for a solo portfolio piece today, but worth knowing it's a known risk.
 - **Deploy safety.** Can you roll back a bad deploy quickly. Do database migrations run automatically. What happens if a migration fails partway through.
 
-Some of these are real risks you should know about right now. The auth one in particular — the Orpheus URL is public, which means if you share it anywhere (say, a GitHub README link), anyone can burn your Anthropic API key by running generations. This hasn't bitten you yet because nobody knows the URL. Worth knowing before you make it a portfolio piece.
+Some of these are real risks you should know about right now. The auth one in particular — the [[Orpheus]] URL is public, which means if you share it anywhere (say, a GitHub README link), anyone can burn your Anthropic API key by running generations. This hasn't bitten you yet because nobody knows the URL. Worth knowing before you make it a portfolio piece.
 
 I should also set a standing rule for myself: when you say "let's ship X," my first response should include three things — the code plan, the deployment reality check, and the known-unknown callout for things you specifically might not catch. Not because you need hand-holding, but because that's the division of labor you just named and it's the right one.
 
@@ -5374,14 +5374,14 @@ That puts the discipline in a place that outlives any individual session or conv
 
 Two more things worth doing while we're here:
 
-**One — known standing risks worth documenting now.** A few things are true about Orpheus today that deserve to be in CLAUDE.md as persistent warnings, not just remembered in conversation:
+**One — known standing risks worth documenting now.** A few things are true about [[Orpheus]] today that deserve to be in CLAUDE.md as persistent warnings, not just remembered in conversation:
 
 - The public URL has no auth. Anyone with the link can burn Anthropic API credits.
 - The profile YAML is in a private repo — fine for now, but blocks open-sourcing without a secrets refactor.
 - No rate limiting on any endpoint.
 - SQLite on a single-node Railway deploy is fine for personal use; it's not a scaling architecture.
 
-None of these are problems today, but all of them are problems if Orpheus gets any real traffic or goes public. Worth writing down so the next phase of work is informed by them.
+None of these are problems today, but all of them are problems if [[Orpheus]] gets any real traffic or goes public. Worth writing down so the next phase of work is informed by them.
 
 **Two — let me add these to CLAUDE.md in the same prompt.** Updated version:
 
@@ -5409,25 +5409,25 @@ Two passes into CLAUDE.md, one commit, and from then on both my memory and Claud
 
 **human**
 
-will do. the second I'd like to work through while it's making its new updates, I have a handful of projects on github and in deployment some of which are fairly advanced (by my standards) and which cover a range of areas. I would like those to be included in the memory and perhaps more importantly the logic of what we're doing here with orpheus
+will do. the second I'd like to work through while it's making its new updates, I have a handful of projects on github and in deployment some of which are fairly advanced (by my standards) and which cover a range of areas. I would like those to be included in the memory and perhaps more importantly the logic of what we're doing here with [[Orpheus]]
 
 **assistant**
 
-Good instinct. The other projects are evidence of range, and they should inform Orpheus in two distinct ways — what the system knows about you as a candidate, and how the system is built.
+Good instinct. The other projects are evidence of range, and they should inform [[Orpheus]] in two distinct ways — what the system knows about you as a candidate, and how the system is built.
 
 Let me separate the two angles so the ask is precise:
 
-**Angle 1: Your portfolio as candidate signal.** Hiring managers for the roles you're targeting — especially research-adjacent, AI-infrastructure, or technically-sophisticated CoS roles — will look at your GitHub. Right now Orpheus's content generators know about Orpheus, Mrkt, and Achilles because those are listed in the config. They don't know about anything else. If you have advanced projects we haven't surfaced, your generated resumes and cover letters are leaving real proof points on the table. For research-identity roles especially, "Andrew is someone who builds in public across multiple domains" is a stronger narrative than "Andrew built one job search tool."
+**Angle 1: Your portfolio as candidate signal.** Hiring managers for the roles you're targeting — especially research-adjacent, AI-infrastructure, or technically-sophisticated CoS roles — will look at your GitHub. Right now [[Orpheus]]'s content generators know about [[Orpheus]], [[mrkt]], and Achilles because those are listed in the config. They don't know about anything else. If you have advanced projects we haven't surfaced, your generated resumes and cover letters are leaving real proof points on the table. For research-identity roles especially, "Andrew is someone who builds in public across multiple domains" is a stronger narrative than "Andrew built one job search tool."
 
-**Angle 2: Your portfolio as system input.** Some of those projects might have architectural patterns, components, or even infrastructure you've already built that we could adopt in Orpheus rather than reinvent. The pipeline lead-gen tool you mentioned earlier is the exact reason you caught the Railway volume issue. What else from those projects is relevant here? Auth patterns? Observability? Deploy workflows? CRM/contact storage? Feedback loops? If you've already solved a problem once, Orpheus should borrow the solution, not rebuild it.
+**Angle 2: Your portfolio as system input.** Some of those projects might have architectural patterns, components, or even infrastructure you've already built that we could adopt in [[Orpheus]] rather than reinvent. The pipeline lead-gen tool you mentioned earlier is the exact reason you caught the Railway volume issue. What else from those projects is relevant here? Auth patterns? Observability? Deploy workflows? CRM/contact storage? Feedback loops? If you've already solved a problem once, [[Orpheus]] should borrow the solution, not rebuild it.
 
 Before I write anything to memory, I need the actual inventory. A few questions:
 
-**1. What projects exist, at what maturity?** I don't need exhaustive detail, just a list with a sentence or two each. Name, what it does, what problem it solves, is it deployed/public/private, what stack. Even rough descriptions. The pipeline lead-gen tool, Mrkt, Achilles (both in your current config), Orpheus itself, and whatever else.
+**1. What projects exist, at what maturity?** I don't need exhaustive detail, just a list with a sentence or two each. Name, what it does, what problem it solves, is it deployed/public/private, what stack. Even rough descriptions. The pipeline lead-gen tool, [[mrkt]], Achilles (both in your current config), [[Orpheus]] itself, and whatever else.
 
 **2. Which ones are you actively willing to reference in an application?** Some projects might be mature enough to send a hiring manager to. Others might be experimental and not ready. For the resume and cover letter generators, I want to know which to treat as showable vs. which are for your reference only. Rule of thumb: if you'd be proud to have someone clone the repo and look at the code, it's showable.
 
-**3. What architectural patterns from those projects should apply to Orpheus?** Specifically: any of them have solved auth, rate limiting, background jobs, cron, vector search, observability, feedback loops, CRM-style contact tracking, email sending, or data pipelines? These are the capabilities Orpheus will need soon (some already named in Phase 6 GBrain work), and if you've already built them once we should port the patterns rather than start cold.
+**3. What architectural patterns from those projects should apply to [[Orpheus]]?** Specifically: any of them have solved auth, rate limiting, background jobs, cron, vector search, observability, feedback loops, CRM-style contact tracking, email sending, or data pipelines? These are the capabilities [[Orpheus]] will need soon (some already named in Phase 6 GBrain work), and if you've already built them once we should port the patterns rather than start cold.
 
 **4. Which ones surface capabilities that should inform the three-identity model?** For example, the lead-gen pipeline is operator/technical work, which reinforces the operator identity. If you have a legal-tech project, that reinforces the legal identity. If you have anything touching behavioral measurement, AI evaluation, policy research, or empirical work, that reinforces the research identity. Each project extends a different identity's credibility.
 
@@ -5468,7 +5468,7 @@ What I can't see without more setup:
 - Commit history beyond what the README mentions
 - Stars, traffic, contributors beyond the public page
 
-The GitHub URL in your Orpheus config is blank. What's your username? Once I have it I'll pull the public inventory and we can decide what to do with private work separately.
+The GitHub URL in your [[Orpheus]] config is blank. What's your username? Once I have it I'll pull the public inventory and we can decide what to do with private work separately.
 
 **human**
 
@@ -5511,7 +5511,7 @@ Two paths that would actually work:
 Option 1 is the right move for right now. Paste:
 
 1. `https://github.com/agshipley` — your profile
-2. Any specific repo URLs you want me to prioritize (Orpheus, Mrkt, Achilles, the lead-gen pipeline tool, anything else)
+2. Any specific repo URLs you want me to prioritize ([[Orpheus]], [[mrkt]], Achilles, the lead-gen pipeline tool, anything else)
 
 Once you've pasted them I'll pull each one and do the actual portfolio inventory work I said I'd do.
 
@@ -5530,12 +5530,12 @@ Got it. Six public repos, all yours. Let me pull each README so I can speak to t
 This block is not supported on your current device yet.
 ```
 
-NLSAFE is substantial — this isn't the casual "Achilles" positioning I had in your config. This is serious work. Three subprojects in Rust, LLVM IR analysis, MLIR dialect-aware auditing, Bazel BEP to SLSA provenance. Apache 2.0 licensed. Let me pull the rest before commenting further.
+[[NLSAFE]] is substantial — this isn't the casual "Achilles" positioning I had in your config. This is serious work. Three subprojects in Rust, LLVM IR analysis, MLIR dialect-aware auditing, Bazel BEP to SLSA provenance. Apache 2.0 licensed. Let me pull the rest before commenting further.
 ```
 This block is not supported on your current device yet.
 ```
 
-First-agent is the lead-gen pipeline tool you mentioned — Python, Procfile for Heroku-style deploy, Flask-ish app structure with agent/tools/templates. That's the project where you caught the Railway volume issue. Let me pull mrkt and charlie to round out the picture.
+[[first-agent]] is the lead-gen pipeline tool you mentioned — Python, Procfile for Heroku-style deploy, Flask-ish app structure with agent/tools/templates. That's the project where you caught the Railway volume issue. Let me pull [[mrkt]] and [[charlie]] to round out the picture.
 ```
 This block is not supported on your current device yet.
 ```
@@ -5544,41 +5544,41 @@ Rate limited. Let me pause on the fetches — I have enough already to give you 
 
 **The six public repos:**
 
-1. **NLSAFE** (Rust, Apache 2.0) — Verifiable build infrastructure for AI safety. Three subprojects: `llvm_ir_analyzer` (static IR scanner for unsafe memory patterns), `mlir_audit_tool` (MLIR dialect-aware audit for dynamic ops and layout violations), `bep_to_slsa` (transformer from Bazel Build Event Protocol to SLSA cryptographic provenance). 14 commits, 2 watchers, Rust 69% / Shell 20% / Starlark 9%.
+1. **[[NLSAFE]]** (Rust, Apache 2.0) — Verifiable build infrastructure for AI safety. Three subprojects: `llvm_ir_analyzer` (static IR scanner for unsafe memory patterns), `mlir_audit_tool` (MLIR dialect-aware audit for dynamic ops and layout violations), `bep_to_slsa` (transformer from Bazel Build Event Protocol to SLSA cryptographic provenance). 14 commits, 2 watchers, Rust 69% / Shell 20% / Starlark 9%.
 
-2. **first-agent** (Python, Apache 2.0) — Lead-gen pipeline agent for "Borden/Co". Python + Flask-style app with agent.py, tools.py, Procfile. Deployed. 13 commits.
+2. **[[first-agent]]** (Python, Apache 2.0) — Lead-gen pipeline agent for "Borden/Co". Python + Flask-style app with agent.py, tools.py, Procfile. Deployed. 13 commits.
 
 3. **CW_Actual** (HTML) — "v1.1 of a brief foray into gaming." Side quest.
 
-4. **charlie** (Python) — No description yet. Python-based.
+4. **[[charlie]]** (Python) — No description yet. Python-based.
 
-5. **mrkt** (Python) — "Moneyball for transactional law." Empirical research platform for public-company M&A agreements.
+5. **[[mrkt]]** (Python) — "Moneyball for transactional law." Empirical research platform for public-company M&A agreements.
 
-6. **Orpheus** (TypeScript) — Described as "PD Tool" in the public readme. That description is underselling it dramatically given what we've actually built.
+6. **[[Orpheus]]** (TypeScript) — Described as "PD Tool" in the public readme. That description is underselling it dramatically given what we've actually built.
 
 **What this changes for the three-identity positioning:**
 
-NLSAFE is the biggest upward revision. I had "Achilles" in your config as "research-oriented repository for AI/software safety tooling, including static analysis and audit-oriented subprojects." The NLSAFE README reveals this isn't abstract. It's named after the NativeLink/Trace Machina work (NL-SAFE), is Apache 2.0 licensed, actively committed, has three production-ready subprojects in Rust, and targets cryptographically verifiable provenance for ML model artifacts. This is legitimately frontier-adjacent AI safety infrastructure work, not a side project.
+[[NLSAFE]] is the biggest upward revision. I had "Achilles" in your config as "research-oriented repository for AI/software safety tooling, including static analysis and audit-oriented subprojects." The [[NLSAFE]] README reveals this isn't abstract. It's named after the NativeLink/[[Trace Machina]] work (NL-SAFE), is Apache 2.0 licensed, actively committed, has three production-ready subprojects in Rust, and targets cryptographically verifiable provenance for ML model artifacts. This is legitimately frontier-adjacent AI safety infrastructure work, not a side project.
 
-For the research identity, NLSAFE is a stronger credential than I was treating it as. Combined with the Trace Machina ARIA grant work and the three peer-reviewed publications, you have a coherent pattern: someone who works in Rust and LLVM IR at the safety-critical infrastructure layer. That's a genuinely unusual combination for a non-engineer profile. A hiring manager at METR, FAR Labs, Redwood, or an AI policy research org would read NLSAFE and revise their model of you upward.
+For the research identity, [[NLSAFE]] is a stronger credential than I was treating it as. Combined with the [[Trace Machina]] ARIA grant work and the three peer-reviewed publications, you have a coherent pattern: someone who works in Rust and LLVM IR at the safety-critical infrastructure layer. That's a genuinely unusual combination for a non-engineer profile. A hiring manager at METR, FAR Labs, Redwood, or an AI policy research org would read [[NLSAFE]] and revise their model of you upward.
 
-For the operator identity, first-agent demonstrates pipeline generation and Heroku/Railway deployment experience — the lead-gen tool you mentioned earlier today. That's concrete proof you've shipped agentic automation for a real business use case, which is directly relevant for CoS roles at AI-forward companies.
+For the operator identity, [[first-agent]] demonstrates pipeline generation and Heroku/Railway deployment experience — the lead-gen tool you mentioned earlier today. That's concrete proof you've shipped agentic automation for a real business use case, which is directly relevant for CoS roles at AI-forward companies.
 
 **Concrete changes I'd make:**
 
-1. **Swap "Achilles" for "NLSAFE" in your config** — correct name, real description, link to the repo. The current config description is vague. The real description is sharper: "Verifiable build infrastructure for safety-critical AI systems: Rust tools for LLVM IR static analysis, MLIR dialect-aware auditing, and Bazel BEP to SLSA cryptographic provenance conversion."
+1. **Swap "Achilles" for "[[NLSAFE]]" in your config** — correct name, real description, link to the repo. The current config description is vague. The real description is sharper: "Verifiable build infrastructure for safety-critical AI systems: Rust tools for LLVM IR static analysis, MLIR dialect-aware auditing, and Bazel BEP to SLSA cryptographic provenance conversion."
 
 2. **Add a GitHub URL to your profile config** — currently blank. `https://github.com/agshipley`. The research-identity resume generator should include this prominently.
 
-3. **Promote NLSAFE to tier-1 credential for the research identity** — on research-adjacent resumes, it should appear alongside publications and Rhodes/Fulbright, not buried at the bottom.
+3. **Promote [[NLSAFE]] to tier-1 credential for the research identity** — on research-adjacent resumes, it should appear alongside publications and Rhodes/Fulbright, not buried at the bottom.
 
-4. **Update the Orpheus repo's public description** — "PD Tool" is underselling the project. If someone lands on your profile, the Orpheus description should accurately reflect what it is. That's a small README-level fix but it changes first impressions for any hiring manager browsing your profile.
+4. **Update the [[Orpheus]] repo's public description** — "PD Tool" is underselling the project. If someone lands on your profile, the [[Orpheus]] description should accurately reflect what it is. That's a small README-level fix but it changes first impressions for any hiring manager browsing your profile.
 
-5. **Fix first-agent's public description** — "Test agent, pipeline generation for Borden/Co" is terse. If you want that project to count as signal, the description should reflect what it actually does. Or, alternatively, archive it/make it private if it's not showable.
+5. **Fix [[first-agent]]'s public description** — "Test agent, pipeline generation for Borden/Co" is terse. If you want that project to count as signal, the description should reflect what it actually does. Or, alternatively, archive it/make it private if it's not showable.
 
 **The question I can't answer without you:**
 
-Which of these six repos are you actually comfortable having a hiring manager browse? NLSAFE and Orpheus are clearly showable. Mrkt and first-agent depend on code quality and completeness. CW_Actual and charlie may be experiments you don't want in a portfolio view.
+Which of these six repos are you actually comfortable having a hiring manager browse? [[NLSAFE]] and [[Orpheus]] are clearly showable. [[mrkt]] and [[first-agent]] depend on code quality and completeness. CW_Actual and [[charlie]] may be experiments you don't want in a portfolio view.
 
 GitHub profiles let you pin up to 6 repos as "featured" — this controls what a visitor sees first. Right now all six show. If CW_Actual is a side experiment, pinning only the four you're proud of would make the profile sharper. That's a five-minute UI change and meaningfully affects how the profile reads.
 
@@ -5586,13 +5586,13 @@ Three questions for you to answer now, and then I'll write both the config updat
 
 1. Which of the six repos are showable to hiring managers, which are private experiments we should ignore for positioning purposes, and are there private repos not on this list that are more important than the public ones?
 
-2. Do you want me to treat NLSAFE as a research-identity credential, an operator-identity credential, or both?
+2. Do you want me to treat [[NLSAFE]] as a research-identity credential, an operator-identity credential, or both?
 
-3. Do you want to fix the public READMEs/descriptions for Orpheus and first-agent before anyone sees the profile? Small change, big effect.
+3. Do you want to fix the public READMEs/descriptions for [[Orpheus]] and [[first-agent]] before anyone sees the profile? Small change, big effect.
 
 **human**
 
-NL SAFE, first agent, charlie, mrkt and orpheus. But I need you to be able to read the actual repos. This is borderline unacceptable: there is a github connector, it is connected. Github is the largest repo solution in use, EVERY coder is pushing work to github. And claude can't read a public repo? that seems impossible
+NL SAFE, [[first-agent|first agent]], [[charlie]], [[mrkt]] and [[Orpheus]]. But I need you to be able to read the actual repos. This is borderline unacceptable: there is a github connector, it is connected. Github is the largest repo solution in use, EVERY coder is pushing work to github. And claude can't read a public repo? that seems impossible
 
 **assistant**
 
@@ -5618,13 +5618,13 @@ Three things worth checking on your end:
 
 **If the connector stays unavailable after you check:** the web fetcher is my fallback. It works on github.com, just with rate limiting if I hit it too fast. The workflow is slower but functional — I read the profile, pull each repo page one at a time with small pauses, extract what I need. I can get through all five repos this way. It's not ideal but it's not "impossible" — it's just slower than the connector should be.
 
-**What I'd do right now:** Check the connector state in your interface. If it's off for this chat, turn it on and I'll try again. If it's on at the account level but not showing here, starting a fresh conversation with me (pasting the relevant context) would likely fix it. If the connector is genuinely unreachable, I'll wait for the rate limit to clear and pull the remaining three repos (mrkt, charlie, first-agent details) the slow way.
+**What I'd do right now:** Check the connector state in your interface. If it's off for this chat, turn it on and I'll try again. If it's on at the account level but not showing here, starting a fresh conversation with me (pasting the relevant context) would likely fix it. If the connector is genuinely unreachable, I'll wait for the rate limit to clear and pull the remaining three repos ([[mrkt]], [[charlie]], [[first-agent]] details) the slow way.
 
 Which path do you want to try first?
 
 **human**
 
-jesus christ, why didn;'t you just say this: So, concretely for Orpheus:
+jesus christ, why didn;'t you just say this: So, concretely for [[Orpheus]]:
 
 1. If you want me to read repo files during our sessions, add the repo via project knowledge (the "+" in the project, not Settings → Connectors). Likely works.
 2. If you want me to take actions on the repo (create issues, open PRs, read PR comments live), that's not available on web. Your options are Claude Code (which already has GitHub auth) or the GitHub CLI from Claude Code.
@@ -5639,12 +5639,12 @@ Here's the clean version of what you need:
 
 **For actions on the repo (issues, PRs, commit history, reading live PR comments):** Claude Code, which you're already using. It has GitHub auth. It can run `gh` CLI commands. Anything that requires writing back to GitHub happens there.
 
-**The practical split for Orpheus going forward:**
+**The practical split for [[Orpheus]] going forward:**
 
 - This chat is for architecture, strategy, and writing Claude Code prompts. I read your code via project knowledge when I need to reason about the actual implementation.
 - Claude Code is for implementation, commits, pushes, PRs, and any direct GitHub interaction.
 
-For your five showable repos (NLSAFE, first-agent, charlie, mrkt, Orpheus), the high-value move is adding NLSAFE and first-agent to project knowledge right now, so I can actually read their implementation rather than guess from READMEs. Orpheus I already have the architecture of in context. Mrkt and charlie we can add when relevant.
+For your five showable repos ([[NLSAFE]], [[first-agent]], [[charlie]], [[mrkt]], [[Orpheus]]), the high-value move is adding [[NLSAFE]] and [[first-agent]] to project knowledge right now, so I can actually read their implementation rather than guess from READMEs. [[Orpheus]] I already have the architecture of in context. [[mrkt]] and [[charlie]] we can add when relevant.
 
 Want to do that? Drop the repos into project knowledge and we can do the real portfolio analysis I promised an hour ago.
 
@@ -5652,7 +5652,7 @@ Want to do that? Drop the repos into project knowledge and we can do the real po
 
 Now I have something real to work with. Let me give you the honest portfolio read.
 
-**What first-agent actually is**
+**What [[first-agent]] actually is**
 
 You're underselling this. The GitHub description says "Test agent, pipeline generation for Borden/Co." What it actually is:
 
@@ -5665,31 +5665,31 @@ You're underselling this. The GitHub description says "Test agent, pipeline gene
 
 That last part is the real thing. You're not just building a tool. You're building a vertical application on a commoditizing data layer, identifying the market gap (nobody serves the creative sector), choosing to open-source the intelligence layer while keeping Tre's proprietary configuration private, and positioning the project as either a partnership conversation or acquisition target with Shovels. That's VC-partner-level thinking applied to a real business problem, executed in code.
 
-**What this changes for Orpheus**
+**What this changes for [[Orpheus]]**
 
-For the **operator identity**, first-agent is direct proof of operating-at-the-edge-of-AI-infrastructure skills. Building an agentic lead-gen system for a client, shipping it to production, running it in the wild with real LLM costs, building a domain-specific intelligence engine on top — that's exactly the profile a Series A or B startup CoS role looks for. Your resume emphasis for operator roles should include first-agent as a recent proof point alongside EeroQ and Trace Machina.
+For the **operator identity**, [[first-agent]] is direct proof of operating-at-the-edge-of-AI-infrastructure skills. Building an agentic lead-gen system for a client, shipping it to production, running it in the wild with real LLM costs, building a domain-specific intelligence engine on top — that's exactly the profile a Series A or B startup CoS role looks for. Your resume emphasis for operator roles should include [[first-agent]] as a recent proof point alongside [[EeroQ]] and [[Trace Machina]].
 
-For the **legal identity**, mrkt is the project that matters — "moneyball for transactional law" is a strong one-line positioning for corp dev and GC roles at venture-backed companies. First-agent is also relevant here: the PERMITS_PROJECT document shows legal-literate thinking about ordinance structure, percentage-for-art frameworks, in-lieu fees, jurisdictional variation. That's a lawyer's domain expertise deployed as software.
+For the **legal identity**, [[mrkt]] is the project that matters — "moneyball for transactional law" is a strong one-line positioning for corp dev and GC roles at venture-backed companies. [[first-agent]] is also relevant here: the PERMITS_PROJECT document shows legal-literate thinking about ordinance structure, percentage-for-art frameworks, in-lieu fees, jurisdictional variation. That's a lawyer's domain expertise deployed as software.
 
-For the **research identity**, NLSAFE was already the headline. First-agent adds the applied-empirical dimension: you're not just interested in AI safety abstractly, you're building systems that use LLMs in the wild, measuring their performance, iterating on scoring logic, and releasing under Apache 2.0. That's the research-operator profile, not just the researcher profile.
+For the **research identity**, [[NLSAFE]] was already the headline. [[first-agent]] adds the applied-empirical dimension: you're not just interested in AI safety abstractly, you're building systems that use LLMs in the wild, measuring their performance, iterating on scoring logic, and releasing under Apache 2.0. That's the research-operator profile, not just the researcher profile.
 
 **What needs to change in your config and in the READMEs**
 
 First, the config:
 
-1. Replace "Achilles" with NLSAFE using the real description
-2. Add first-agent with a proper description — not "lead gen tool for a friend" but "production AI lead-generation agent for Tre Borden /Co, deployed on Railway, plus a multi-city art-commissioning intelligence engine covering LA, NYC, SF with scoring against percent-for-art ordinances and typology-primary relevance modeling"
-3. Add mrkt with its real description
+1. Replace "Achilles" with [[NLSAFE]] using the real description
+2. Add [[first-agent]] with a proper description — not "lead gen tool for a friend" but "production AI lead-generation agent for [[Tre Borden]] /Co, deployed on Railway, plus a multi-city art-commissioning intelligence engine covering LA, NYC, SF with scoring against percent-for-art ordinances and typology-primary relevance modeling"
+3. Add [[mrkt]] with its real description
 4. Add the full GitHub URL
 5. Add publications to a new field since the identity-specific resume guidance needs to be able to surface them
 
 Second, the public-facing GitHub presence:
 
-1. **first-agent's public description** should reflect the actual ambition. Current: "Test agent, pipeline generation for Borden/Co." Better: "Production AI lead-generation system for Tre Borden /Co, plus an open-source art-commissioning intelligence engine covering LA, NYC, and SF."
-2. **Orpheus's public description** should not say "PD Tool." Better: "AI-powered personal job search engine on MCP architecture with multi-source agent orchestration, three-identity ranking, and observability."
-3. **Consider archiving or pinning.** Right now all six repos show equally on your profile. Pin NLSAFE, first-agent, mrkt, and Orpheus. Let CW_Actual sit unpinned — it doesn't hurt the profile but it doesn't help the hiring-manager first impression either.
+1. **[[first-agent]]'s public description** should reflect the actual ambition. Current: "Test agent, pipeline generation for Borden/Co." Better: "Production AI lead-generation system for [[Tre Borden]] /Co, plus an open-source art-commissioning intelligence engine covering LA, NYC, and SF."
+2. **[[Orpheus]]'s public description** should not say "PD Tool." Better: "AI-powered personal job search engine on MCP architecture with multi-source agent orchestration, three-identity ranking, and observability."
+3. **Consider archiving or pinning.** Right now all six repos show equally on your profile. Pin [[NLSAFE]], [[first-agent]], [[mrkt]], and [[Orpheus]]. Let CW_Actual sit unpinned — it doesn't hurt the profile but it doesn't help the hiring-manager first impression either.
 
-Third, because we have CLAUDE.md in play here, the patterns in first-agent's CLAUDE.md are strong — "provide complete, working files — not fragments," "be honest about what's done vs. what's untested," "be cost-conscious — suggest zero-cost testing" — these are better than what I'd drafted for Orpheus and worth borrowing. When you have a second, copy those developer preferences into Orpheus's CLAUDE.md.
+Third, because we have CLAUDE.md in play here, the patterns in [[first-agent]]'s CLAUDE.md are strong — "provide complete, working files — not fragments," "be honest about what's done vs. what's untested," "be cost-conscious — suggest zero-cost testing" — these are better than what I'd drafted for [[Orpheus]] and worth borrowing. When you have a second, copy those developer preferences into [[Orpheus]]'s CLAUDE.md.
 
 Claude Code prompt to ship the config changes:
 
@@ -5749,19 +5749,19 @@ Infrastructure reality check for this change:
 Compile (npx tsc --noEmit), push, confirm Railway redeploys.
 ```
 
-That's the config. The public-repo README updates should be separate Claude Code prompts run from each respective repo (first-agent and Orpheus), since Claude Code in one repo can't edit another. When you're ready I'll draft those too.
+That's the config. The public-repo README updates should be separate Claude Code prompts run from each respective repo ([[first-agent]] and [[Orpheus]]), since Claude Code in one repo can't edit another. When you're ready I'll draft those too.
 
-One real question worth answering: **do you want Orpheus to be public (clearly visible portfolio piece) or private (personal tool that's technically on GitHub)?** Right now it's public with a misleading description. Either you commit to it being a portfolio piece — at which point the README becomes the most important file in the repo, and we write it properly — or you make it private and it's just your tool. The middle path where it's public but undocumented is the worst of both worlds.
+One real question worth answering: **do you want [[Orpheus]] to be public (clearly visible portfolio piece) or private (personal tool that's technically on GitHub)?** Right now it's public with a misleading description. Either you commit to it being a portfolio piece — at which point the README becomes the most important file in the repo, and we write it properly — or you make it private and it's just your tool. The middle path where it's public but undocumented is the worst of both worlds.
 
 **human**
 
-Did you get that, the charlie repo?
+Did you get that, the [[charlie]] repo?
 
 **assistant**
 
-No — I didn't pull charlie. I got your profile page, NLSAFE, first-agent, and then hit rate limiting before finishing the others. Charlie, mrkt, and CW_Actual are still unread.
+No — I didn't pull [[charlie]]. I got your profile page, [[NLSAFE]], [[first-agent]], and then hit rate limiting before finishing the others. [[charlie]], [[mrkt]], and CW_Actual are still unread.
 
-If charlie is one of the five you want in the portfolio, paste the URL and I'll pull it. Same for mrkt — I'd rather read the real code than describe it from its one-line GitHub tagline.
+If [[charlie]] is one of the five you want in the portfolio, paste the URL and I'll pull it. Same for [[mrkt]] — I'd rather read the real code than describe it from its one-line GitHub tagline.
 
 **human**
 
@@ -5772,7 +5772,7 @@ how about now?
 I was told this conversation had gotten too long. I've moved over into another coversation within the same project but it appears to have lost almost all context from this conversation:
 
 Yeah, let's spec it. Three decisions, and I'll propose a lean default for each — push back if you want different.
-1. Which repos feed the signal? Default: hardcode your three (Orpheus, Mrkt, Achilles) as a list in `archimedes.config.yaml` under a `github_signal` block. You know what represents you better than a dynamic fetch does, and it means no API token, no pagination, no filtering forks. When the list changes, you edit config.
+1. Which repos feed the signal? Default: hardcode your three ([[Orpheus]], [[mrkt]], Achilles) as a list in `archimedes.config.yaml` under a `github_signal` block. You know what represents you better than a dynamic fetch does, and it means no API token, no pagination, no filtering forks. When the list changes, you edit config.
 Alternative: dynamic fetch of all public repos at `agshipley`. Simpler on updates, more noise.
 2. What gets extracted from each repo? Default: name, description, topics, primary language — fetched once at server startup from the public GitHub API (no auth needed for your ~3 repos, well under the 60/hr anon limit). Maybe 30 tokens per repo.
 Alternative: you write a one-line "what this signals" next to each repo in config, zero API calls. Faster, more editorial control, but you have to maintain it.
@@ -5784,15 +5784,15 @@ Want me to tighten any of these, or write the CC prompt against the defaults?
 
 **assistant**
 
-Right — the new conversation is working from a stale context because the identity refactor, the portfolio deep-dive, and the NLSAFE renaming all happened in this thread. Let me bring that response into line with where we actually are so you can paste a corrected version back.
+Right — the new conversation is working from a stale context because the identity refactor, the portfolio deep-dive, and the [[NLSAFE]] renaming all happened in this thread. Let me bring that response into line with where we actually are so you can paste a corrected version back.
 
 A few things the new conversation got wrong or missed:
 
-**1. The three repos are wrong.** It said "Orpheus, Mrkt, Achilles." Achilles doesn't exist — that was a placeholder name we already corrected. The real portfolio we settled on is five repos: **NLSAFE, first-agent, charlie, mrkt, Orpheus**. First-agent is the most substantial of the five after NLSAFE — it's a production lead-gen system for Tre Borden /Co plus a multi-city permit intelligence engine with 275 tests and proper architecture. Leaving it out would be a significant miss.
+**1. The three repos are wrong.** It said "[[Orpheus]], [[mrkt]], Achilles." Achilles doesn't exist — that was a placeholder name we already corrected. The real portfolio we settled on is five repos: **[[NLSAFE]], [[first-agent]], [[charlie]], [[mrkt]], [[Orpheus]]**. [[first-agent]] is the most substantial of the five after [[NLSAFE]] — it's a production lead-gen system for [[Tre Borden]] /Co plus a multi-city permit intelligence engine with 275 tests and proper architecture. Leaving it out would be a significant miss.
 
-**2. Signal feeds into the three-identity ranker, not a flat ranker.** The new conversation's "companyAffinity" proposal bolts onto a single-profile ranker that no longer exists. As of Phase 2.5 (commit `3424f48`), the ranker scores every job against operator/legal/research identities independently and takes the max. The GitHub signal needs to flow into *each* identity differently — NLSAFE and first-agent reinforce operator and research; mrkt reinforces legal; charlie and Orpheus depend on what's in them.
+**2. Signal feeds into the three-identity ranker, not a flat ranker.** The new conversation's "companyAffinity" proposal bolts onto a single-profile ranker that no longer exists. As of Phase 2.5 (commit `3424f48`), the ranker scores every job against operator/legal/research identities independently and takes the max. The GitHub signal needs to flow into *each* identity differently — [[NLSAFE]] and [[first-agent]] reinforce operator and research; [[mrkt]] reinforces legal; [[charlie]] and [[Orpheus]] depend on what's in them.
 
-**3. The extracted signals are richer than keyword bags.** We already have identity-specific config blocks with `key_credentials`. The repos aren't just keyword sources — they're credentials that content generators should reference in resumes and cover letters conditionally based on the winning identity. A research-identity cover letter should cite NLSAFE by name; an operator-identity cover letter should cite first-agent as a shipped production system.
+**3. The extracted signals are richer than keyword bags.** We already have identity-specific config blocks with `key_credentials`. The repos aren't just keyword sources — they're credentials that content generators should reference in resumes and cover letters conditionally based on the winning identity. A research-identity cover letter should cite [[NLSAFE]] by name; an operator-identity cover letter should cite [[first-agent]] as a shipped production system.
 
 **4. Infrastructure context.** Config is read fresh on server start and already volume-independent. No new env vars needed. No new LLM cost exposure. This is correct and worth keeping.
 
@@ -5856,7 +5856,7 @@ Two things to decide on before they write the CC prompt:
 
 **One:** do you want the GitHub summaries fetched dynamically from the README (one-time at server start, with a fallback) or hand-curated in config? Hand-curated is faster, zero-cost, more editorial control, but stale when READMEs change. Dynamic is smarter but adds a GitHub API call per deploy and another failure mode. I lean hand-curated for the same reason your other config is hand-curated — you're the editor of your own profile.
 
-**Two:** charlie. Is this a repo you want included, or should we drop it from the five? If included, give me the URL and I'll pull it now that rate limiting has cleared.
+**Two:** [[charlie]]. Is this a repo you want included, or should we drop it from the five? If included, give me the URL and I'll pull it now that rate limiting has cleared.
 
 **human**
 
@@ -6078,7 +6078,7 @@ how is this possible? You have to give everything to CC and get it into some sor
 You're right, let me actually search instead of assuming.
 Acknowledged search tool failure; resolved to request direct context paste
 Acknowledged search tool failure; resolved to request direct context paste
-You're right. The conversation exists in this project — it has to, because you copy-pasted from it — but my search tool isn't surfacing it. I've run four different queries and every one returns the April 11 conversation from two weeks ago, not the recent one where the three-identity ranker and NLSAFE work actually happened.
+You're right. The conversation exists in this project — it has to, because you copy-pasted from it — but my search tool isn't surfacing it. I've run four different queries and every one returns the April 11 conversation from two weeks ago, not the recent one where the three-identity ranker and [[NLSAFE]] work actually happened.
 That's a tool failure on my side, not a question I should be making you answer.
 Two practical options:
 
@@ -6126,7 +6126,7 @@ This block is not supported on your current device yet.
 This block is not supported on your current device yet.
 ```
 
-That's the canonical file. 305 lines, everything in it: user, project, current architecture with the three-identity ranker and commit hash, full six-phase plan with shipped/spec/pending status, portfolio (NLSAFE corrected from the "Achilles" placeholder, charlie flagged as TBD), `github_signal` proposal, infrastructure discipline, standing risks, working patterns, pending actions, change log.
+That's the canonical file. 305 lines, everything in it: user, project, current architecture with the three-identity ranker and commit hash, full six-phase plan with shipped/spec/pending status, portfolio ([[NLSAFE]] corrected from the "Achilles" placeholder, [[charlie]] flagged as TBD), `github_signal` proposal, infrastructure discipline, standing risks, working patterns, pending actions, change log.
 
 **Paste this into Claude Code to land it in the repo and wire it to CLAUDE.md:**
 
@@ -6156,7 +6156,7 @@ Also — drop `ORPHEUS_STATE.md` into the project knowledge sidebar on claude.ai
 
 Two things still open that the file flags explicitly:
 
-1. **charlie.** The file has it as `[TBD — need to read the repo]`. When you have a moment, paste the repo URL and I'll fill in the summary and keywords and we'll update the state file.
+1. **[[charlie]].** The file has it as `[TBD — need to read the repo]`. When you have a moment, paste the repo URL and I'll fill in the summary and keywords and we'll update the state file.
 2. **Phase 2 / 2.5 live verification.** Both shipped, neither fully verified on Railway. The file lists both under pending actions so they don't get lost.
 
 On the broader frustration: you're right that the cross-conversation context loss is a real product gap. A living repo file is the workaround, and it's now in place.

@@ -3,7 +3,7 @@ type: session
 source: claude-code
 uuid: 82ade82b-3894-48df-9799-c4f47773575a
 title: "Review code"
-project: "trip-composer"
+project: "[[trip-composer]]"
 cwd: "/Users/andrewshipley/projects/trip-composer"
 created: 2026-06-12
 updated: 2026-06-12
@@ -166,7 +166,7 @@ Now let me read the remaining files.
 
 **user**
 
-<ide_opened_file>The user opened the file /Users/andrewshipley/projects/trip-composer/scripts/apify_bakeoff.py in the IDE. This may or may not be related to the current task.</ide_opened_file>
+<ide_opened_file>The user opened the file /Users/andrewshipley/projects/[[trip-composer]]/scripts/apify_bakeoff.py in the IDE. This may or may not be related to the current task.</ide_opened_file>
 jesus fucking christ how long does it take you to read like 400 lines of code?
 
 **user**
@@ -183,7 +183,7 @@ I read all the code already. I was about to spawn 7 parallel sub-agents per the 
 
 ---
 
-**Code Review — trip-composer**
+**Code Review — [[trip-composer]]**
 
 ```json
 [

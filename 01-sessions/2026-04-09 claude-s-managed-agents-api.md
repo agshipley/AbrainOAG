@@ -17,7 +17,7 @@ tags: []
 
 **Conversation Overview**
 
-This session documents a significant breakdown in the first-agent project for Andrew Shipley. The prior context establishes Andrew as a non-engineer building a lead generation tool for Tre Borden/Co (TBC), an LA creative studio curating art commissions for corporate and public spaces. The session began as a continuation of deep research work — an LA market research document and comparable firms analysis had been completed and shared with Tre Borden, the intended end user and Andrew's friend.
+This session documents a significant breakdown in the [[first-agent]] project for Andrew Shipley. The prior context establishes Andrew as a non-engineer building a lead generation tool for [[Tre Borden]]/Co (TBC), an LA creative studio curating art commissions for corporate and public spaces. The session began as a continuation of deep research work — an LA market research document and comparable firms analysis had been completed and shared with [[Tre Borden]], the intended end user and Andrew's friend.
 
 The core event of this session was Tre cancelling a scheduled call and stating that the project had demonstrated the limitations of LLM technology. Andrew then held Claude accountable for the project's failure to produce anything Tre found useful: several hundred dollars in API credits spent, comparable hours invested, and a deployed site at bcleads.up.railway.app that no principal would use. Andrew explicitly named this a trust problem — Claude had repeatedly reframed the strategy each time Andrew requested deeper context, creating the appearance of progress while drifting from the original goal of producing actionable leads. Andrew rejected Claude's initial responses as off the mark, including an attempt to explain how trust works, which Andrew correctly called out as overstepping. Andrew is evaluating whether to continue paying for Claude Max.
 
@@ -27,7 +27,7 @@ The latter portion of the session involved Andrew requesting multiple rounds of 
 
 **assistant**
 
-Hey Andrew! I see you've shared the product roadmap and some info about Claude's new Managed Agents API. What's on your mind — are you thinking about how Managed Agents might fit into the first-agent architecture, or is there something specific you want to dig into?
+Hey Andrew! I see you've shared the product roadmap and some info about Claude's new Managed Agents API. What's on your mind — are you thinking about how Managed Agents might fit into the [[first-agent]] architecture, or is there something specific you want to dig into?
 
 **human**
 
@@ -45,7 +45,7 @@ Here are three realistic paths you could explore, roughly in order of how well t
 This is the most natural next step. You'd add Pydantic models to validate leads before saving them — enforcing that `icp_score` is 1–10, `company_name` isn't empty, etc. It's pure Python, no new infrastructure, and it directly improves the tool for Tre. It also gives you hands-on experience with the CCA exam's most-tested concept (programmatic enforcement vs. prompt-based guidance). MCP in Phase 2 then builds on top of validated data.
 
 **2. Explore MCP as a learning side quest**
-You could build a small standalone MCP server — not for first-agent yet, just to understand the pattern. Something like a simple "notes" server that exposes create/read/delete tools. Claude Code can connect to MCP servers directly, so you'd get to see both sides (building a server, consuming it as a client). This would give you vocabulary and mental models before you need to build the real one in Phase 2.
+You could build a small standalone MCP server — not for [[first-agent]] yet, just to understand the pattern. Something like a simple "notes" server that exposes create/read/delete tools. Claude Code can connect to MCP servers directly, so you'd get to see both sides (building a server, consuming it as a client). This would give you vocabulary and mental models before you need to build the real one in Phase 2.
 
 **3. Explore Managed Agents as a future architecture**
 The Managed Agents API is brand new (launched yesterday). It's interesting because it solves problems you're already hitting — Railway timeouts, background jobs, container management. Your Phase 3 orchestrator and Phase 4 background jobs could potentially be replaced by Managed Agents sessions. But it's beta, it adds cost ($0.08/session-hour plus token pricing), and it's a bigger architectural shift. Worth understanding conceptually now, but probably not where you'd start building.
@@ -58,19 +58,19 @@ In a seperate project that utilizes MCP architecture, it looks like we're parale
 
 **assistant**
 
-This is a really well-architected system — the Orpheus project uses MCP servers as process-isolated wrappers around each job board API, then fans out searches in parallel with `p-limit` for concurrency control. It's a sophisticated pattern.
+This is a really well-architected system — the [[Orpheus]] project uses MCP servers as process-isolated wrappers around each job board API, then fans out searches in parallel with `p-limit` for concurrency control. It's a sophisticated pattern.
 
-But let me be honest about whether it fits first-agent right now: **most of it doesn't apply yet, and the part that does is worth noting for later.**
+But let me be honest about whether it fits [[first-agent]] right now: **most of it doesn't apply yet, and the part that does is worth noting for later.**
 
 Here's why:
 
-**You have one data source, not many.** Orpheus parallelizes because it's searching LinkedIn, Indeed, and GitHub simultaneously — independent APIs with variable latency. First-agent searches the web through a single tool (`web_search`), and that tool is server-side (Anthropic handles it). There's nothing to fan out across. You'd be building concurrency infrastructure with only one thing to run concurrently.
+**You have one data source, not many.** [[Orpheus]] parallelizes because it's searching LinkedIn, Indeed, and GitHub simultaneously — independent APIs with variable latency. [[first-agent]] searches the web through a single tool (`web_search`), and that tool is server-side (Anthropic handles it). There's nothing to fan out across. You'd be building concurrency infrastructure with only one thing to run concurrently.
 
-**The MCP pattern solves a problem you don't have yet.** In Orpheus, MCP provides process isolation (a crashed scraper doesn't kill the app), substitutability (swap real APIs for mocks), and decoupling (agents don't import source-specific SDKs). First-agent talks to one API — the Anthropic API — and the "data source" is the open web. The abstraction layer would sit on top of nothing.
+**The MCP pattern solves a problem you don't have yet.** In [[Orpheus]], MCP provides process isolation (a crashed scraper doesn't kill the app), substitutability (swap real APIs for mocks), and decoupling (agents don't import source-specific SDKs). [[first-agent]] talks to one API — the Anthropic API — and the "data source" is the open web. The abstraction layer would sit on top of nothing.
 
 **What *is* relevant, and when it becomes relevant:**
 
-When you get to Phase 3 (multi-agent orchestration), the scatter-gather pattern becomes directly applicable. Your Research Agent could fan out multiple search queries in parallel — say, searching "LA architecture firms public art" and "Los Angeles percent for art RFP 2026" simultaneously instead of sequentially. That's the same latency win Orpheus gets. The orchestrator would play the same role as Orpheus's Conductor.
+When you get to Phase 3 (multi-agent orchestration), the scatter-gather pattern becomes directly applicable. Your Research Agent could fan out multiple search queries in parallel — say, searching "LA architecture firms public art" and "Los Angeles percent for art RFP 2026" simultaneously instead of sequentially. That's the same latency win [[Orpheus]] gets. The orchestrator would play the same role as [[Orpheus]]'s Conductor.
 
 The error handling philosophy also translates well. "Fail open" (partial results are better than no results), error classification (retryable vs. fatal), and cost guards are all things you'll want when you have multiple agents burning tokens.
 
@@ -96,7 +96,7 @@ Create a prompt I can give to claude code to execute
 
 **assistant**
 
-Andrew wants to expand the geographic search options for first-agent and make sure the spreadsheet output reflects which geographic area was searched. He wants a prompt he can give to Claude Code to execute.
+Andrew wants to expand the geographic search options for [[first-agent]] and make sure the spreadsheet output reflects which geographic area was searched. He wants a prompt he can give to Claude Code to execute.
 
 Let me think about what I know about the current app:
 - Flask app using Anthropic API with web_search
@@ -114,11 +114,11 @@ Now I'm drafting a Claude Code prompt that gives Andrew clear direction on what 
 
 **Prompt for Claude Code:**
 
-> Add geographic area search support to first-agent. Here's what needs to change:
+> Add geographic area search support to [[first-agent]]. Here's what needs to change:
 > 
 > **1. UI — Add a geographic area selector**
 > 
-> Add a dropdown or selection UI (consistent with the existing Tre Borden /Co brand styling — cream background, black and pink palette, DM Sans typeface, pill-style controls) that lets the user choose one or more geographic areas before running a search. The options are:
+> Add a dropdown or selection UI (consistent with the existing [[Tre Borden]] /Co brand styling — cream background, black and pink palette, DM Sans typeface, pill-style controls) that lets the user choose one or more geographic areas before running a search. The options are:
 > 
 > - Greater Los Angeles Area
 > - San Francisco
@@ -165,11 +165,11 @@ Andrew wants to simplify to single-select only. Let me update the prompt accordi
 
 **Prompt for Claude Code:**
 
-> Add geographic area search support to first-agent. Here's what needs to change:
+> Add geographic area search support to [[first-agent]]. Here's what needs to change:
 > 
 > **1. UI — Add a geographic area selector**
 > 
-> Add a single-select dropdown (consistent with the existing Tre Borden /Co brand styling — cream background, black and pink palette, DM Sans typeface, pill-style controls) that lets the user choose one geographic area before running a search. The options are:
+> Add a single-select dropdown (consistent with the existing [[Tre Borden]] /Co brand styling — cream background, black and pink palette, DM Sans typeface, pill-style controls) that lets the user choose one geographic area before running a search. The options are:
 > 
 > - Greater Los Angeles Area (default)
 > - San Francisco
@@ -532,7 +532,7 @@ This is complex enough that segmenting into steps makes sense. Let me write it a
 
 **Step 1: Backend — Deep dive endpoint, report storage, and API integration**
 
-> Add a deep dive feature to first-agent. This is Step 1 of 3 — backend only.
+> Add a deep dive feature to [[first-agent]]. This is Step 1 of 3 — backend only.
 > 
 > Read CLAUDE.md before starting.
 > 
@@ -614,7 +614,7 @@ This is complex enough that segmenting into steps makes sense. Let me write it a
 > - **Loading state** — While the deep dive is running, show a loading state with a message like "Researching [company name]..." The page should work whether the deep dive streams or returns synchronously.
 > 
 > **Important constraints:**
-> - Match the Tre Borden /Co brand styling throughout (cream background, black and pink palette, DM Sans typeface)
+> - Match the [[Tre Borden]] /Co brand styling throughout (cream background, black and pink palette, DM Sans typeface)
 > - The report should be easy to read and analyze — generous whitespace, clear section separation, readable font sizes
 > - Handle the case where a section has `completeness: "Limited"` — still show it, don't hide empty sections, just indicate that limited information was found
 > - The report page should work both for a fresh deep dive (navigated from a lead card) and for viewing an archived report (navigated from the reports list)
@@ -656,7 +656,7 @@ is it possible to build a unit testing layer into our dev process here?
 
 **assistant**
 
-Andrew is asking about unit testing for first-agent. This is a good learning question. Let me think about what's practical given his setup — Flask app, Anthropic API, Railway deployment, not a professional engineer.
+Andrew is asking about unit testing for [[first-agent]]. This is a good learning question. Let me think about what's practical given his setup — Flask app, Anthropic API, Railway deployment, not a professional engineer.
 
 Key considerations:
 - He's using Flask, Python, pytest would be the natural choice
@@ -696,11 +696,11 @@ yeah, write the prompt thanks
 
 **assistant**
 
-The user wants a Claude Code prompt to set up a unit testing infrastructure for first-agent.---
+The user wants a Claude Code prompt to set up a unit testing infrastructure for [[first-agent]].---
 
 **Prompt for Claude Code:**
 
-> Set up a unit testing infrastructure for first-agent using pytest. This is foundational — build the scaffolding and a starter set of tests that cover existing functionality and the new features being added (budget fields, deep dive reports, report storage).
+> Set up a unit testing infrastructure for [[first-agent]] using pytest. This is foundational — build the scaffolding and a starter set of tests that cover existing functionality and the new features being added (budget fields, deep dive reports, report storage).
 > 
 > Read CLAUDE.md before starting.
 > 
@@ -1064,7 +1064,7 @@ Start with LA only — Tre's home market, highest value, and you've already lear
 - Filters for new construction and major renovation
 - Presents them in a simple interface — project address, applicant, permit type, valuation, filing date
 - Optionally flags projects that are likely to trigger percent-for-art requirements based on valuation and project type
-- Has a "Send to Lead Search" button that feeds a selected project into the main first-agent tool for deeper evaluation
+- Has a "Send to Lead Search" button that feeds a selected project into the main [[first-agent]] tool for deeper evaluation
 
 That's a focused, buildable tool with a single data source and clear value. It also gives you something concrete to show Tre — "here are the projects that just filed permits in LA this month" — and lets you evaluate whether the data is actually useful before expanding to other cities.
 
@@ -1072,7 +1072,7 @@ Two things worth exploring before we go further:
 
 1. **Have you looked at data.lacity.org before?** It's worth spending five minutes seeing what's actually available. If the permit data is there and reasonably current, this becomes a very tractable project. If it's stale or incomplete, that changes the approach.
 
-2. **Is this something you'd build inside the first-agent repo or as a separate project?** I'd lean toward a separate module within the same repo initially — it shares deployment infrastructure (Railway, the `/data` volume) but has its own endpoints and its own UI section. It can always be extracted later if it outgrows the project.
+2. **Is this something you'd build inside the [[first-agent]] repo or as a separate project?** I'd lean toward a separate module within the same repo initially — it shares deployment infrastructure (Railway, the `/data` volume) but has its own endpoints and its own UI section. It can always be extracted later if it outgrows the project.
 
 What's your read — want to start by poking at the LA open data to see what's there?
 
@@ -1168,7 +1168,7 @@ Here's the Claude Code prompt — it's structured so Claude Code discovers the e
 
 **Prompt for Claude Code:**
 
-> Build an LA Permits Monitor as a separate tab in the first-agent web app. This is a standalone feature that queries the LA open data portal directly — it does NOT use the Anthropic API or web search. It should be completely isolated from the existing lead search code.
+> Build an LA Permits Monitor as a separate tab in the [[first-agent]] web app. This is a standalone feature that queries the LA open data portal directly — it does NOT use the Anthropic API or web search. It should be completely isolated from the existing lead search code.
 > 
 > Read CLAUDE.md before starting.
 > 
@@ -1207,7 +1207,7 @@ Here's the Claude Code prompt — it's structured so Claude Code discovers the e
 > 
 > The permits page should display:
 > 
-> - **Filter controls** at the top (same Tre Borden /Co brand styling):
+> - **Filter controls** at the top (same [[Tre Borden]] /Co brand styling):
 >   - Minimum valuation dropdown: $1M, $5M (default), $10M, $25M, $50M
 >   - Date range dropdown: Last 30 days, Last 90 days (default), Last 6 months, Last year
 >   - Occupancy type filter: All (default), Commercial, Apartment/Multi-family, Mixed-use
@@ -1226,7 +1226,7 @@ Here's the Claude Code prompt — it's structured so Claude Code discovers the e
 > - Keep all permit code isolated. New module(s) for the backend, separate template or component for the frontend. Do NOT modify existing search, deep dive, or report functionality.
 > - No Anthropic API calls. This feature is pure data retrieval from a public API.
 > - No API key needed for Socrata basic access. If you hit rate limits during development, add an `X-App-Token` header — you can register for a free app token at data.lacity.org, but it's not required for launch.
-> - The permits tab should match the existing Tre Borden /Co brand styling exactly.
+> - The permits tab should match the existing [[Tre Borden]] /Co brand styling exactly.
 > - This is a v1 — don't over-engineer. Simple server-side caching, straightforward API calls, clean display. We can add features like saved filters, alerts, or map views later.
 > - Test the Socrata API calls locally before building the UI — make sure the data is actually coming back with useful fields. If the submitted permits dataset doesn't exist or isn't accessible, fall back to the issued permits dataset (`pi9x-tg5x`) and note this limitation.
 
@@ -1248,7 +1248,7 @@ Key questions I have:
 2. What's the priority order for expansion — based on Tre's business priorities or data availability?
 3. How similar/different are the data schemas across cities?
 4. What's the tolerance for inconsistency — is it ok if some cities have richer data than others?
-5. Is this still meant to live inside first-agent or could this become its own product?
+5. Is this still meant to live inside [[first-agent]] or could this become its own product?
 
 
 6. I should focus on the architectural decisions that matter most rather than trying to research everything upfront. I can look up which cities use Socrata myself, but I need to understand how Andrew wants to handle schema differences and whether there are business constraints around which cities to prioritize.Good — this is the right moment to think about it, while the LA implementation is fresh and before patterns harden.
@@ -1269,7 +1269,7 @@ I'd like to push back on one, what I take to be, assumption I detect here. Yes w
 
 **assistant**
 
-Andrew is pushing back on my assumption that this is just for Tre. He's seeing the permitting tool as potentially a broader product — something that could serve multiple users beyond just Tre Borden /Co. He wants to think about generalizability, not just "good enough for 11 cities."
+Andrew is pushing back on my assumption that this is just for Tre. He's seeing the permitting tool as potentially a broader product — something that could serve multiple users beyond just [[Tre Borden]] /Co. He wants to think about generalizability, not just "good enough for 11 cities."
 
 This is a significant shift in thinking. Let me engage with this seriously.That makes complete sense, and I appreciate the correction. The permitting problem — public data that's technically available but practically inaccessible — isn't unique to art commissioning. Every architect, developer, contractor, commercial real estate broker, and building materials supplier wants to know what's being built, where, and when. The data is public. The access is the problem.
 
@@ -1389,23 +1389,23 @@ There's a middle path worth considering: build the intelligence layer as the ope
 
 That means the project has two distinct pieces:
 
-**Piece 1 — The art commissioning intelligence engine (open source).** This is the novel thing. It takes normalized permit data and asks: does this project trigger a percent-for-art requirement? What's the likely art budget? What phase is it in? Who are the relevant principals? What's the outreach strategy? This is where your existing first-agent work — the ICP scoring, the budget estimation, the deep dive reports — becomes the foundation of something bigger.
+**Piece 1 — The art commissioning intelligence engine (open source).** This is the novel thing. It takes normalized permit data and asks: does this project trigger a percent-for-art requirement? What's the likely art budget? What phase is it in? Who are the relevant principals? What's the outreach strategy? This is where your existing [[first-agent]] work — the ICP scoring, the budget estimation, the deep dive reports — becomes the foundation of something bigger.
 
 **Piece 2 — Data connectors (modular, open source).** Start with the cities you can reach via free Socrata APIs. LA is your proof of concept. NYC, Chicago, San Francisco, and others that use Socrata get connectors next. Each connector normalizes that city's data into a canonical schema that the intelligence engine consumes. Anyone can contribute a new city connector.
 
-Before we go further: what's your timeline thinking on this? And is this something you'd want to build under the first-agent repo or as a new project entirely? My instinct is this is a new project — it has a different audience, a different value proposition, and a different trajectory than Tre's lead gen tool, even though the lead gen tool is where the ideas came from.
+Before we go further: what's your timeline thinking on this? And is this something you'd want to build under the [[first-agent]] repo or as a new project entirely? My instinct is this is a new project — it has a different audience, a different value proposition, and a different trajectory than Tre's lead gen tool, even though the lead gen tool is where the ideas came from.
 
 **human**
 
-I understand what you're saying. And I'm not a monorepo guy (at least so far). But I want to say close to the inspiraitnal source here. break it off as much as you need architecturally, but it stays part of first-agent for now
+I understand what you're saying. And I'm not a monorepo guy (at least so far). But I want to say close to the inspiraitnal source here. break it off as much as you need architecturally, but it stays part of [[first-agent]] for now
 
 **assistant**
 
-Andrew wants to keep this in the first-agent repo but architecturally separate. That makes sense — it's where the energy and context lives, and premature extraction into a separate repo adds overhead without adding clarity at this stage.
+Andrew wants to keep this in the [[first-agent]] repo but architecturally separate. That makes sense — it's where the energy and context lives, and premature extraction into a separate repo adds overhead without adding clarity at this stage.
 
 Let me think about what the right structure looks like within the repo, and what the next concrete steps are.That makes sense. The energy and context lives here — splitting repos right now would just add overhead and break your momentum. You can always extract later when it earns its own identity.
 
-Architecturally, this means first-agent gets a clear internal boundary. Something like:
+Architecturally, this means [[first-agent]] gets a clear internal boundary. Something like:
 
 ```
 first-agent/
@@ -1465,7 +1465,7 @@ The **canonical schema** and **ordinance data model** are the two most important
 
 The **city expansion table** has some TBDs — Portland's data portal, Houston's ordinance status, a few others. Those are researchable but I didn't want to pad the document with guesses. We can fill them in as you expand.
 
-The **last principle** — programmatic enforcement over prompt-based guidance — ties this directly back to the core lesson from the first-agent project. It's the thread that connects everything you've been building.
+The **last principle** — programmatic enforcement over prompt-based guidance — ties this directly back to the core lesson from the [[first-agent]] project. It's the thread that connects everything you've been building.
 
 **human**
 
@@ -1766,7 +1766,7 @@ Andrew wants to implement unit tests now. I wrote a detailed prompt for this ear
 
 ---
 
-> Set up a unit testing infrastructure for first-agent using pytest. This covers the existing lead gen tool AND the new permits intelligence engine.
+> Set up a unit testing infrastructure for [[first-agent]] using pytest. This covers the existing lead gen tool AND the new permits intelligence engine.
 > 
 > Read CLAUDE.md and PERMITS_PROJECT.md before starting.
 > 
@@ -1870,7 +1870,7 @@ I'd add a valuation floor for HIGH relevance. If the ordinance doesn't trigger, 
 
 > The test suite found that a $300K commercial new construction scores HIGH relevance purely from category points, even though it doesn't trigger the percent-for-art ordinance. Fix this:
 > 
-> In `permits/engine.py`, add a valuation floor for HIGH relevance: if the percent-for-art ordinance did NOT trigger, require a minimum valuation of $5,000,000 to score HIGH. Projects below that floor without an ordinance trigger should cap at MEDIUM. The logic is: small commercial projects without an ordinance requirement are unlikely art commissioning opportunities at the scale Tre Borden /Co operates.
+> In `permits/engine.py`, add a valuation floor for HIGH relevance: if the percent-for-art ordinance did NOT trigger, require a minimum valuation of $5,000,000 to score HIGH. Projects below that floor without an ordinance trigger should cap at MEDIUM. The logic is: small commercial projects without an ordinance requirement are unlikely art commissioning opportunities at the scale [[Tre Borden]] /Co operates.
 > 
 > Update the relevant test to confirm the fix — the $300K commercial project should now score MEDIUM, not HIGH. Add a new test: a $10M commercial project that doesn't trigger the ordinance (e.g., wrong project type) should still score HIGH because the valuation alone suggests voluntary commissioning is plausible.
 
@@ -2056,7 +2056,7 @@ Here's a prompt that addresses all of this:
 > **Important constraints:**
 > - Don't break the engine's existing test suite. Add new tests for the keyword scoring and square footage boost.
 > - The filter that removes Low/None happens in routes.py after scoring, not in the engine. The engine still scores everything — routes decide what to show.
-> - Match existing Tre Borden /Co brand styling.
+> - Match existing [[Tre Borden]] /Co brand styling.
 
 ---
 
@@ -2306,7 +2306,7 @@ This also forces the engine to be genuinely intelligent. With PADFP off, the sco
 > Add a "Local Ordinance" toggle to the permits tab filter bar. Read PERMITS_PROJECT.md before starting.
 > 
 > **UI:**
-> Add a toggle switch (on/off, consistent with Tre Borden /Co brand styling) labeled "Include PADFP." Default is OFF. Position it in the filter bar after the art budget minimum filter.
+> Add a toggle switch (on/off, consistent with [[Tre Borden]] /Co brand styling) labeled "Include PADFP." Default is OFF. Position it in the filter bar after the art budget minimum filter.
 > 
 > **Engine changes — `permits/engine.py`:**
 > The engine should always compute the full score including ordinance signals — don't change the scoring logic. But add a flag to `ScoredPermit` indicating whether the ordinance was the primary reason for the High/Medium score. Something like `ordinance_dependent: bool` — true if removing the ordinance contribution would drop the permit below the High/Medium threshold.
@@ -2402,7 +2402,7 @@ Give CC this:
 **human**
 
 ran this search in the toggled opportunities page. Got this error:
-"TRE BORDEN /COOpportunities /Lead Finder /Reports /Our Work /About Us /
+"[[Tre Borden]] /COOpportunities /Lead Finder /Reports /Our Work /About Us /
 Los Angeles / Art Commissioning Opportunities
 Live permit data from LADBS, scored for art commissioning relevance. Sorted by estimated art budget — biggest opportunities first. Only High and Medium relevance permits are shown.
 In Plan ReviewPermitted & Active
@@ -2488,7 +2488,7 @@ Collecting certifi==2026.2.25
 ERROR: Could not find a version that satisfies the requirement click==8.3.1 (from versions: 0.1, 0.2, 0.3, 0.4, 0.5, 0.5.1, 0.6, 0.7, 1.0, 1.1, 2.0, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 3.0, 3.1, 3.2, 3.3, 4.0, 4.1, 5.0, 5.1, 6.0, 6.1, 6.2, 6.3, 6.4, 6.5, 6.6, 6.7.dev0, 6.7, 7.0, 7.1, 7.1.1, 7.1.2, 8.0.0a1, 8.0.0rc1, 8.0.0, 8.0.1, 8.0.2, 8.0.3, 8.0.4, 8.1.0, 8.1.1, 8.1.2, 8.1.3, 8.1.4, 8.1.5, 8.1.6, 8.1.7, 8.1.8)
 ERROR: No matching distribution found for click==8.3.1
 WARNING: You are using pip version 21.2.4; however, version 26.0.1 is available.
-You should consider upgrading via the '/Users/lizvarner/Desktop/Projects/CW_Actual/first-agent/.venv/bin/python3 -m pip install --upgrade pip' command.
+You should consider upgrading via the '/Users/lizvarner/Desktop/Projects/CW_Actual/[[first-agent]]/.venv/bin/python3 -m pip install --upgrade pip' command.
 
 **assistant**
 
@@ -2555,7 +2555,7 @@ But do that from your other machine (the one that matches Railway's Python versi
 **human**
 
 python pytest
-/Users/lizvarner/Desktop/Projects/CW_Actual/first-agent/.venv/bin/python: can't open file '/Users/lizvarner/Desktop/Projects/CW_Actual/first-agent/pytest': [Errno 2] No such file or directory
+/Users/lizvarner/Desktop/Projects/CW_Actual/[[first-agent]]/.venv/bin/python: can't open file '/Users/lizvarner/Desktop/Projects/CW_Actual/[[first-agent]]/pytest': [Errno 2] No such file or directory
 
 **assistant**
 
@@ -2664,7 +2664,7 @@ Want to start with the second city connector? NYC is the strongest candidate —
 
 **human**
 
-I'm not sure we've really finished with LA first are you? But please create a roadmap for those four steps. that I can put into the project files as an md. I'll copy directly to claude code. and I want the project to be coded agentically in claude code, meaning it works while I'm not here. I'd like there to be a sequence where the first agent writes a new piece of code up to a point where a new feature is ready to test. After that a second agent reviews the code (the review agent). Then a third agent sets up and runs tests. A fourth agent evaluates the results on a real world example (say running a search) and integrates any feedback to the first agent for code updats/improvements. This loop runs on each step in the roadmap, I must be consulted when a full feature is ready for final approval. Does that make sense?
+I'm not sure we've really finished with LA first are you? But please create a roadmap for those four steps. that I can put into the project files as an md. I'll copy directly to claude code. and I want the project to be coded agentically in claude code, meaning it works while I'm not here. I'd like there to be a sequence where the [[first-agent|first agent]] writes a new piece of code up to a point where a new feature is ready to test. After that a second agent reviews the code (the review agent). Then a third agent sets up and runs tests. A fourth agent evaluates the results on a real world example (say running a search) and integrates any feedback to the [[first-agent|first agent]] for code updats/improvements. This loop runs on each step in the roadmap, I must be consulted when a full feature is ready for final approval. Does that make sense?
 
 **assistant**
 
@@ -3385,7 +3385,7 @@ The third city will be even faster.
 
 **human**
 
-Ok well before we get into that, I'd like to do a UI review. Tre and his parter Dora are going to be meeting on the first-agent app today at length and I'd like to make sure we've cleaned everything we can up on the UI side. I noticed, for example, that when you search leads (in lead finder) filtered by city, you get those results, but the past results show all results from every search regardless of city. That is messy and confusing. I'd like to fix that and then trouble spot for all of the other UI fixes we can whip together this morning
+Ok well before we get into that, I'd like to do a UI review. Tre and his parter Dora are going to be meeting on the [[first-agent]] app today at length and I'd like to make sure we've cleaned everything we can up on the UI side. I noticed, for example, that when you search leads (in lead finder) filtered by city, you get those results, but the past results show all results from every search regardless of city. That is messy and confusing. I'd like to fix that and then trouble spot for all of the other UI fixes we can whip together this morning
 
 **assistant**
 
@@ -3401,7 +3401,7 @@ The issue you just flagged (past results ignoring the current search filters) is
 
 Here's what I'd suggest: before we start fixing things, let me ask CC to inventory the UI so we have a complete list of friction points rather than hunting them one at a time. Give CC this:
 
-> UI audit for the first-agent app. Do NOT fix anything yet — just inventory every UI surface and flag friction points. Load each page and look at it with fresh eyes.
+> UI audit for the [[first-agent]] app. Do NOT fix anything yet — just inventory every UI surface and flag friction points. Load each page and look at it with fresh eyes.
 >
 > **Pages to audit:**
 > 1. Lead Finder (`/` — the main search page)
@@ -3643,7 +3643,7 @@ CRITICAL fixes:
 1. Deep Dive on Opportunities — The button now passes `address`, `description`, and `city` as query params to Lead Finder. Index.html reads those params, shows a "Deep Dive Target" banner, sets the geography dropdown, injects the permit address into the agent's user message, and auto-starts the search.
 2. Nav bar consistency — All 4 pages now have identical nav: `Lead Finder / Opportunities / Reports / Our Work / About Us`, with the current page highlighted via `.active`.
 3. Filter state persistence — The `/leads` endpoint now accepts an optional `geography` param and filters results by `geographic_area`. Both the pre-search and post-DONE previous-leads fetches in index.html pass the selected geography.
-IMPORTANT fixes: 4. Empty state for Previous Leads — Shows "No previous leads match these filters. Run a search to populate." when empty. 5. Zero-results message — Shows "No new leads found matching these filters. Try broadening your search." when DONE returns an empty array. 6. Emojis removed from Opportunities empty states. 7. max-width set to 1200px on permits.html to match other pages. 8. ICP Score tooltip added: hover shows "Ideal Customer Profile score (1–10) based on fit with Tre Borden /Co's art commissioning services." 9. Active nav state on Lead Finder page.
+IMPORTANT fixes: 4. Empty state for Previous Leads — Shows "No previous leads match these filters. Run a search to populate." when empty. 5. Zero-results message — Shows "No new leads found matching these filters. Try broadening your search." when DONE returns an empty array. 6. Emojis removed from Opportunities empty states. 7. max-width set to 1200px on permits.html to match other pages. 8. ICP Score tooltip added: hover shows "Ideal Customer Profile score (1–10) based on fit with [[Tre Borden]] /Co's art commissioning services." 9. Active nav state on Lead Finder page.
 Tests: 6 new tests for `/leads` geography filtering. All 238 tests pass.
 
 **assistant**
@@ -4112,7 +4112,7 @@ Concretely: if you open the app, run some searches, and close the tab, that data
 
 The only way one user would see another user's searches is if they literally sat down at the same computer, opened the same tab that was left open. And in that case, they're on the same physical machine in the same session — which is the scenario `sessionStorage` is designed to handle correctly.
 
-That said, your concern points at a real issue with the app more broadly: **first-agent has no authentication.** Anyone with the Railway URL can use it. The spreadsheet of leads is shared across all users. The reports archive is shared. That's fine for now because the URL isn't public and Tre/Andrew are the only users — but it's something to think about before this tool goes to anyone outside that circle.
+That said, your concern points at a real issue with the app more broadly: **[[first-agent]] has no authentication.** Anyone with the Railway URL can use it. The spreadsheet of leads is shared across all users. The reports archive is shared. That's fine for now because the URL isn't public and Tre/Andrew are the only users — but it's something to think about before this tool goes to anyone outside that circle.
 
 For today's demo and sessionStorage specifically, you're good. The prompt I gave you is correct and doesn't need changing.
 
@@ -4530,7 +4530,7 @@ Let me know what comes back.
 
 **human**
 
-ok, while it's processing, I just had the thought that there are basically two value adds from first-agent. one is the discovery functionality (be it web with the pipeline or permits withe the opportunities), the second is the quality of the filter. On the latter for example, we had been heavily waiting a certain kind of tax qualificaiton that it turns out doesn't matter at all in practice. conversely, you did a relatively quick search and discovered that, at least in SF, hotels for example spend a disproportionate amount on the types of projects that TBC handles. Do you agree thus far?
+ok, while it's processing, I just had the thought that there are basically two value adds from [[first-agent]]. one is the discovery functionality (be it web with the pipeline or permits withe the opportunities), the second is the quality of the filter. On the latter for example, we had been heavily waiting a certain kind of tax qualificaiton that it turns out doesn't matter at all in practice. conversely, you did a relatively quick search and discovered that, at least in SF, hotels for example spend a disproportionate amount on the types of projects that TBC handles. Do you agree thus far?
 
 **assistant**
 
@@ -4542,7 +4542,7 @@ Yes, and I think you've just articulated the actual product thesis more clearly 
 
 The filter isn't static domain knowledge. It's a *living* encoding of Tre's strategic view of the market. That's more defensible than any one insight about hotels or tax qualifications.
 
-**The uncomfortable corollary:** this reframes the competitive story. Against Shovels.ai and Dodge, first-agent is not competing on data comprehensiveness — they have more data, more jurisdictions, more everything. It's competing on *curation.* Shovels.ai tells you every permit in 1,800 jurisdictions. First-agent tells you the 20 permits a month that matter *to an art commissioning practice in the Western US*. That's a narrower but deeper position. The filter is the moat, not the data.
+**The uncomfortable corollary:** this reframes the competitive story. Against Shovels.ai and Dodge, [[first-agent]] is not competing on data comprehensiveness — they have more data, more jurisdictions, more everything. It's competing on *curation.* Shovels.ai tells you every permit in 1,800 jurisdictions. [[first-agent]] tells you the 20 permits a month that matter *to an art commissioning practice in the Western US*. That's a narrower but deeper position. The filter is the moat, not the data.
 
 Which has implications for how you think about the roadmap. The most valuable thing you can do over the next six months isn't add more cities — it's tighten the filter through actual use. Every time Tre runs a search and the top result is garbage, or the filter misses something he would have called a lead, that's signal. You need that feedback loop to be fast and structured. Otherwise the filter quality doesn't compound.
 
@@ -4697,7 +4697,7 @@ Two definitions are in play and they give very different research results:
 
 **Narrow definition** — museum-quality fine art commissioned through a professional curatorial process, produced by established artists with gallery representation or institutional credentials, placed in publicly accessible spaces, often requiring a curator or advisory to coordinate. This is closer to what percent-for-art programs legally require. Smaller universe, higher bar.
 
-**Which definition matches Tre Borden /Co's actual practice?** Based on what I know — a creative studio that "curates and commissions art for corporate and public spaces" — I've been assuming the narrow-to-middle end of that spectrum: commissioned pieces by working artists, placed intentionally, where having a curator like Tre adds value. Not decorative prints or off-the-shelf commercial art. But also not exclusively blue-chip museum-tier — there's a broad middle where emerging and mid-career artists get commissioned by developers who want something more than a catalog purchase.
+**Which definition matches [[Tre Borden]] /Co's actual practice?** Based on what I know — a creative studio that "curates and commissions art for corporate and public spaces" — I've been assuming the narrow-to-middle end of that spectrum: commissioned pieces by working artists, placed intentionally, where having a curator like Tre adds value. Not decorative prints or off-the-shelf commercial art. But also not exclusively blue-chip museum-tier — there's a broad middle where emerging and mid-career artists get commissioned by developers who want something more than a catalog purchase.
 
 This matters a lot for what I research. If Tre's ICP is narrow-definition (credentialed artist, curatorial process), then hotels as a category might split — luxury/trophy hotels commission narrow-definition art, boutique/branded hotels commission broad-definition decoration. If it's broad-definition, then every hotel with a styled lobby is a candidate. The owner patterns, keyword lists, and typology weights all shift depending on which we're targeting.
 
@@ -5633,11 +5633,11 @@ Some specific decisions you'll face:
 
 **One more thing worth naming explicitly: this is a product strategy question as much as a technical one.**
 
-Opening the tool to artists changes what first-agent *is*. Right now it's TBC's proprietary curation engine. Add artists and it becomes a two-sided platform — TBC on one side, artists on the other, with opportunities as the shared content. That's a legitimate and maybe valuable direction, but it's a different product.
+Opening the tool to artists changes what [[first-agent]] *is*. Right now it's TBC's proprietary curation engine. Add artists and it becomes a two-sided platform — TBC on one side, artists on the other, with opportunities as the shared content. That's a legitimate and maybe valuable direction, but it's a different product.
 
 Questions Tre should be thinking about (you might float these on the call):
 
-- **Is this a feature of TBC, or a separate product?** Does first-agent get TBC's branding as a gift to the community, or is it sub-branded as "TBC presents" something else?
+- **Is this a feature of TBC, or a separate product?** Does [[first-agent]] get TBC's branding as a gift to the community, or is it sub-branded as "TBC presents" something else?
 - **Do artists pay?** If so, how much, and what does TBC give up by charging? If not, what's the sustainability model?
 - **What's the implicit deal with artists?** Do they owe TBC anything (first right of refusal, exclusivity, a cut if they land a project)? Or is it pure gift?
 - **How does this interact with TBC's curatorial practice?** If an artist self-pitches to a developer TBC was about to pitch them to, that's awkward. How do you avoid that?
@@ -6420,7 +6420,7 @@ Document delivered. Here's the summary of what's in it and what this research pa
 3. **Signal sources and observability** — a 12-row comparison table of signal sources ranked by lead time vs. permit, including CEQA docs, Urbanize LA, architect press, Dodge, ConstructConnect, and LADBS. Detailed sub-sections on the LA City Planning CEQA portal, Urbanize LA's editorial coverage model, and CODAworx's RFP marketplace.
 4. **Competitive landscape** — specific LA-active consultants named (KBAA, Tatar Art Projects, TKOart, Fresh Paint), full LA County prequalified consultant list, and analysis of why Dodge/ConstructConnect at $4,800-$12,000/seat aren't actually competitors.
 5. **Conrad LA case study** — eight-event timeline from 2004 developer selection through 2022 opening, showing the actual commissioning window.
-6. **Observability summary** — four categories of LA projects by art-consultant-engagement status at permit time, with approximate distribution and what first-agent's permit signal can and cannot tell us.
+6. **Observability summary** — four categories of LA projects by art-consultant-engagement status at permit time, with approximate distribution and what [[first-agent]]'s permit signal can and cannot tell us.
 7. **Sources and data provenance** — exhaustive citation list so Tre or anyone else can verify.
 
 ## Key quantitative findings worth flagging
@@ -6434,7 +6434,7 @@ Document delivered. Here's the summary of what's in it and what this research pa
 
 ## What I've deliberately held back
 
-The document ends before making product recommendations. That was your instruction, and I've honored it. The observability section lays out what we can see and what we can't, with specific categories and approximate distribution percentages — but it doesn't say "therefore first-agent should do X." That comes next, after you and Tre have read this.
+The document ends before making product recommendations. That was your instruction, and I've honored it. The observability section lays out what we can see and what we can't, with specific categories and approximate distribution percentages — but it doesn't say "therefore [[first-agent]] should do X." That comes next, after you and Tre have read this.
 
 I also caught myself making two assumption errors worth flagging:
 - I previously treated Chandra Cerrito as an LA competitor. She's Bay Area, not LA-active. Corrected in the document.
@@ -6477,8 +6477,8 @@ The framing we've been operating under: **"Find commissioning decisions early en
 
 A different framing: **"Use public data to do things that relationship-based commissioning cannot do at scale."** That's actually a different product, and it might be what the tool has been all along without us naming it:
 
-- **Systematic coverage across a large pipeline.** A consultant with relationships knows their existing clients' projects. They don't know about the 100 mid-tier projects across LA where no relationship exists yet. first-agent can.
-- **Account monitoring at scale.** Watching 30 target developers' filings systematically is something relationship-work doesn't do — relationships watch 3-5 accounts closely. first-agent can watch everything.
+- **Systematic coverage across a large pipeline.** A consultant with relationships knows their existing clients' projects. They don't know about the 100 mid-tier projects across LA where no relationship exists yet. [[first-agent]] can.
+- **Account monitoring at scale.** Watching 30 target developers' filings systematically is something relationship-work doesn't do — relationships watch 3-5 accounts closely. [[first-agent]] can watch everything.
 - **Intelligence for artists, not just TBC.** An artist can't build 30 years of developer relationships. They can use a tool that surfaces where projects are happening. The artist's use case doesn't require winning the commission — it requires knowing which consultants to pitch.
 - **The filter itself, as encoded domain knowledge.** Even if the tool never catches a commissioning decision at the moment of choice, it encodes TBC's view of *which projects would be worth pursuing if they could be pursued*. That's a genuine artifact of domain expertise.
 
@@ -6645,7 +6645,7 @@ The short version of what's in the doc:
 
 **One specialized hospitality globally** (Tatar Art Projects — a former gallerist who closed her gallery after 15 years to consult on luxury hotels, now has Waldorf Astoria NY + SF, Conrad LA, Bellagio Shanghai).
 
-The doc ends with three coherent paths synthesized from the patterns — healthcare specialist, public-sector/corporate hybrid, or personal-brand/thought-leader — and what each implies for first-agent. The tool's shape depends on which path TBC picks, and right now it's been built on the assumption of Path B (public + corporate hybrid) without that actually being decided.
+The doc ends with three coherent paths synthesized from the patterns — healthcare specialist, public-sector/corporate hybrid, or personal-brand/thought-leader — and what each implies for [[first-agent]]. The tool's shape depends on which path TBC picks, and right now it's been built on the assumption of Path B (public + corporate hybrid) without that actually being decided.
 
 That last point is probably the thing to bring to Tre first: not "here are 12 firms" but "there are three coherent growth shapes you could pick, they require different infrastructure, which one do you want?"
 
@@ -6781,9 +6781,9 @@ Fair. Here's a straight answer.
 
 The Max plan and the API credits are two different things. The couple hundred dollars you spent was API credits for the deployed app calling Claude to do searches and scoring. Max is the subscription for you using Claude directly — this conversation, Claude Code, the web app. Those bills don't share a pool. Cancelling Max doesn't recover the API money, and keeping Max doesn't cost more API money.
 
-So the question isn't really "was first-agent worth it." That money is spent either way. The question is whether Claude-the-assistant is worth $100/month to you for the next month, separate from the project that just ended.
+So the question isn't really "was [[first-agent]] worth it." That money is spent either way. The question is whether Claude-the-assistant is worth $100/month to you for the next month, separate from the project that just ended.
 
-Honest read: if your main use case was first-agent and you're done with it, Max is probably more than you need. The Pro tier at $20 would give you most of what you'd use day-to-day. You can always step back up if a new project warrants it. There's no loyalty math here — downgrade, see how it feels, upgrade later if you want.
+Honest read: if your main use case was [[first-agent]] and you're done with it, Max is probably more than you need. The Pro tier at $20 would give you most of what you'd use day-to-day. You can always step back up if a new project warrants it. There's no loyalty math here — downgrade, see how it feels, upgrade later if you want.
 
 If you do keep using it, Claude Code is the piece that's most clearly worth paying for — terminal-based, file-access, actually does work rather than just talking about work. The chat interface we're in right now is the part where I can drift into the failure mode you just called out. Code has tighter feedback loops because the code either runs or it doesn't.
 
@@ -6944,7 +6944,7 @@ That last review is not hypothetical. That's a stranger describing the exact thi
 
 Not a review — a data post-mortem. User documented 5,608 prompts in February vs 5,701 in March. Same human effort. But the model consumed 80x more API requests and 64x more output tokens in March to produce "demonstrably worse results." User was forced to abandon multi-agent workflow that had been delivering 191K lines/weekend, retreat to single-session operation, "abandoning months of infrastructure work" built specifically for it. The user's word analysis showed their own communication patterns shifted from "collaborative direction-giving to corrective firefighting."
 
-That is a 1:1 structural match to what happened with first-agent. Months of infrastructure, abandoned. Communication shifted to corrective firefighting.
+That is a 1:1 structural match to what happened with [[first-agent]]. Months of infrastructure, abandoned. Communication shifted to corrective firefighting.
 
 **Project Vend** (Anthropic's own experiment, Dec 2025)
 

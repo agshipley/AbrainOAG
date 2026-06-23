@@ -3590,32 +3590,32 @@ We're building Andrew's personal gbrain vault. The spec is GBRAIN_PROJECT.md at 
 5. SEED GRAPH — one stub file per entity below. All: status: stub, confidence: med, source: "[[GBRAIN_PROJECT]] §7", created/updated 2026-06-22. Put the listed facts in the body with inline [from: [[GBRAIN_PROJECT]]] tags. Wikilink cross-references between seed entities. Invent nothing beyond what's listed.
 
    02-projects/
-   - Orpheus — open-source job-search engine; MCP architecture; Railway deploy; SQLite on a volume at /data; two-tier corpus (Adzuna + 80,000 Hours live). Built by Andrew.
-   - first-agent — production lead-gen + multi-city art-commissioning intelligence for [[Tre Borden]] (LA/NYC/SF); 275-test suite.
-   - charlie — multi-agent intelligence / decision-support for [[Liz Varner]]; source-traceable reasoning, discrepancy detection, confidence scoring.
-   - mrkt — empirical pipeline modeling M&A deal-term negotiability across 152 MAUD agreements; 99.7% extraction, 91–94% expert-label agreement; thesis maps to [[Spencer Williams]]'s predictive contracting.
-   - NLSAFE — Rust verifiable-build infrastructure for AI safety; Apache 2.0; 3 subprojects.
+   - [[Orpheus]] — open-source job-search engine; MCP architecture; Railway deploy; SQLite on a volume at /data; two-tier corpus (Adzuna + 80,000 Hours live). Built by Andrew.
+   - [[first-agent]] — production lead-gen + multi-city art-commissioning intelligence for [[Tre Borden]] (LA/NYC/SF); 275-test suite.
+   - [[charlie]] — multi-agent intelligence / decision-support for [[Liz Varner]]; source-traceable reasoning, discrepancy detection, confidence scoring.
+   - [[mrkt]] — empirical pipeline modeling M&A deal-term negotiability across 152 MAUD agreements; 99.7% extraction, 91–94% expert-label agreement; thesis maps to [[Spencer Williams]]'s [[Predictive contracting]].
+   - [[NLSAFE]] — Rust verifiable-build infrastructure for AI safety; Apache 2.0; 3 subprojects.
 
    03-people/
-   - Tre Borden — client_of Andrew; first-agent.
-   - Liz Varner — entertainment-strategy exec; client_of Andrew; charlie.
-   - Spencer Williams — Professor of Law, California Western; authored 2019 "Predictive Contracting"; open mrkt collaboration thread.
-   - John Jost — NYU; co-author, 2020 PLOS ONE paper.
+   - [[Tre Borden]] — client_of Andrew; [[first-agent]].
+   - [[Liz Varner]] — entertainment-strategy exec; client_of Andrew; [[charlie]].
+   - [[Spencer Williams]] — Professor of Law, California Western; authored 2019 "[[Predictive contracting]]"; open [[mrkt]] collaboration thread.
+   - [[John Jost]] — NYU; co-author, 2020 PLOS ONE paper.
 
    04-companies/
-   - Trace Machina — AI safety infra; backers Sequoia, Samsung Next, Wellington; Andrew sole ops/legal/finance lead.
-   - EeroQ — quantum computing; Andrew was Special Counsel → Chief of Staff.
-   - AGS Law PLLC — co-founded; outside GC to 100+ startups.
-   - Audience Haus — strategy/GTM agency; Andrew fractional Chief of Staff (current).
+   - [[Trace Machina]] — AI safety infra; backers Sequoia, Samsung Next, Wellington; Andrew sole ops/legal/finance lead.
+   - [[EeroQ]] — quantum computing; Andrew was Special Counsel → Chief of Staff.
+   - [[AGS Law PLLC]] — co-founded; outside GC to 100+ startups.
+   - [[Audience Haus]] — strategy/GTM agency; Andrew fractional Chief of Staff (current).
 
    05-concepts/
-   - Corpus governance — live / deferred-technical / deferred-scope classification of sources.
-   - Brain-first retrieval — query the local vault before any external call; write results back.
-   - Predictive contracting — the mrkt thesis; links [[mrkt]], [[Spencer Williams]].
-   - Tiered enrichment — stub → moderate → full escalation by mention/link count.
+   - [[Corpus governance]] — live / deferred-technical / deferred-scope classification of sources.
+   - [[Brain-first retrieval]] — query the local vault before any external call; write results back.
+   - [[Predictive contracting]] — the [[mrkt]] thesis; links [[mrkt]], [[Spencer Williams]].
+   - [[Tiered enrichment]] — stub → moderate → full escalation by mention/link count.
 
    07-decisions/ (date-prefixed filename)
-   - 2026-04-11 Orpheus relevance failure and corrective actions — status: moderate. Corrective calls: profile-driven source selection; no hardcoded ATS rosters; own your debugging; simplicity over scaffolding. Links [[Orpheus]].
+   - 2026-04-11 [[Orpheus]] relevance failure and corrective actions — status: moderate. Corrective calls: profile-driven source selection; no hardcoded ATS rosters; own your debugging; simplicity over scaffolding. Links [[Orpheus]].
 
    OWNERSHIP NOTE: no people-file exists for Andrew in this seed set. Write Andrew's ownership in prose, no [[Andrew]] wikilink, so nothing breaks. If a self-node is wanted, ask before creating it.
 
@@ -3860,9 +3860,9 @@ Project names visible (relevant to vault):
 
 | Project name | Vault stub |
 |---|---|
-| First-Agent | `02-projects/first-agent.md` |
-| Mrkt | `02-projects/mrkt.md` |
-| Charlie | `02-projects/charlie.md` |
+| [[first-agent]] | `02-projects/first-agent.md` |
+| [[mrkt]] | `02-projects/mrkt.md` |
+| [[charlie]] | `02-projects/charlie.md` |
 | Civil War Land In Bad Decline | (not in seed graph) |
 | gbrain setup | (this repo) |
 | RG Closing, Zamora Legal Situation, Newport Bar, etc. | (legal/client work) |
@@ -3873,7 +3873,7 @@ Project names visible (relevant to vault):
 
 The Claude export format does not embed project membership on conversation objects. The join is one-directional and inverted: project files hold docs, conversations are flat. **Three options for project linkage at import time:**
 
-1. **Name-match** — scan each `conversation.name` for known project keywords ("Charlie", "Mrkt", "first-agent", etc.) and emit wikilinks. Simple, works on existing vault stubs.
+1. **Name-match** — scan each `conversation.name` for known project keywords ("[[charlie]]", "[[mrkt]]", "[[first-agent]]", etc.) and emit wikilinks. Simple, works on existing vault stubs.
 2. **Summary-match** — same scan on `conversation.summary`, which is longer and more signal-rich.
 3. **Leave unlinked** — let the entity-extraction pass (`extract-entities.ts`) add wikilinks after import, same as it would for any other session file.
 
@@ -3914,7 +3914,7 @@ PER CONVERSATION → one file in 01-sessions/:
   ## Transcript
   For each message in chat_messages: a `**human**` / `**assistant**` label (map sender; any other value → sender verbatim) then message.text as-is. Skip messages with empty text. Separate turns with a blank line. Use message.text only — do NOT parse the content block array this pass.
 
-IDEMPOTENCY (critical — same discipline that bit Orpheus):
+IDEMPOTENCY (critical — same discipline that bit [[Orpheus]]):
 - Identity = conversation.uuid, recorded in frontmatter. Before writing, scan 01-sessions/ for an existing file whose frontmatter uuid matches; if found, OVERWRITE that file (and fix its name if the slug/date changed) instead of creating a duplicate. Re-running the full import must converge to 92 files, never 184.
 
 CLI:

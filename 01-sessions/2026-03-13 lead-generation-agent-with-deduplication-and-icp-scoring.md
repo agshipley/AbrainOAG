@@ -18,11 +18,11 @@ tags: []
 **human**
 
 Here it is:
-I'm building a lead generation agent for a creative studio called Tre Borden /Co using the Anthropic Python SDK. Tre Borden is a creative studio and production company based in LA that curates and commissions art for corporate spaces — their typical clients are real estate developers, architecture firms, and large companies announcing new offices or renovations.
+I'm building a lead generation agent for a creative studio called [[Tre Borden]] /Co using the Anthropic Python SDK. [[Tre Borden]] is a creative studio and production company based in LA that curates and commissions art for corporate spaces — their typical clients are real estate developers, architecture firms, and large companies announcing new offices or renovations.
 I have a working agent with two tools — web search and a spreadsheet writer. It finds corporate art program leads in LA and surrounding areas, evaluates them against a defined ICP, and writes them to leads.xlsx with these columns: Company Name, Type, Location, Why They're a Lead, Company Website, Source URL, Potential Contact, and Notes.
 It's working but has three things I want to add:
 1. Deduplication — each run appends without checking what's already in the spreadsheet
-2. ICP score — a 1-10 field rating how well each lead fits Tre Borden's ideal client profile
+2. ICP score — a 1-10 field rating how well each lead fits [[Tre Borden]]'s ideal client profile
 3. Public sector vertical — a second mode or sheet for public sector leads, which have a different client profile
 Longer term I want to add a simple web GUI and make it deployable so my friend can use it directly.
 Here is my current code:
@@ -163,7 +163,7 @@ From the conversation, here's what I know exists and works:
 - Columns: Company Name, Type, Location, Why They're a Lead, Company Website, Source URL, Potential Contact, Notes
 
 **agent.py** — agentic loop that:
-- Has a `SYSTEM_PROMPT` defining Tre Borden's ICP
+- Has a `SYSTEM_PROMPT` defining [[Tre Borden]]'s ICP
 - Defines two tools: `web_search_20250305` and `save_leads_to_spreadsheet`
 - Runs a `while True` loop, handles `end_turn` and `tool_use` stop reasons
 - Manually handles `save_leads_to_spreadsheet` calls, passes web search results back automatically
@@ -191,7 +191,7 @@ For right now, just paste the current contents of `tools.py` and `agent.py` and 
 
 **human**
 
-I've pasted both. We have a project, it's called first-agent. we have a .env with an anthropic API key. We have the spreadsheet it populates
+I've pasted both. We have a project, it's called [[first-agent]]. we have a .env with an anthropic API key. We have the spreadsheet it populates
 
 **assistant**
 
@@ -273,7 +273,7 @@ So `source venv/bin/activate` is just saying "run the activate script that lives
 
 **human**
 
-andrewshipley@Andrews-MacBook-Air first-agent % source venv/bin/activate
+andrewshipley@Andrews-MacBook-Air [[first-agent]] % source venv/bin/activate
 source: no such file or directory: venv/bin/activate
 
 **assistant**
@@ -288,7 +288,7 @@ And paste what it shows — we'll find the right folder name.
 
 **human**
 
-andrewshipley@Andrews-MacBook-Air first-agent % ls
+andrewshipley@Andrews-MacBook-Air [[first-agent]] % ls
 __pycache__     agent.py        hello.py        leads.xlsx      tools.py
 
 **assistant**
@@ -303,7 +303,7 @@ And paste the output — that'll tell us what Python environment you're running 
 
 **human**
 
-andrewshipley@Andrews-MacBook-Air first-agent % which python
+andrewshipley@Andrews-MacBook-Air [[first-agent]] % which python
 python not found
 
 **assistant**
@@ -341,9 +341,9 @@ The venv was probably created from there, so it should find it.
 
 **human**
 
-andrewshipley@Andrews-MacBook-Air ~ % cd first-agent
+andrewshipley@Andrews-MacBook-Air ~ % cd [[first-agent]]
 source venv/bin/activate
-cd: no such file or directory: first-agent
+cd: no such file or directory: [[first-agent]]
 source: no such file or directory: venv/bin/activate
 andrewshipley@Andrews-MacBook-Air ~ %
 
@@ -360,7 +360,7 @@ That'll show us the full path to your project folder.
 **human**
 
 andrewshipley@Andrews-MacBook-Air ~ % find ~ -name "agent.py" 2>/dev/null
-/Users/andrewshipley/projects/first-agent/agent.py
+/Users/andrewshipley/projects/[[first-agent]]/agent.py
 
 **assistant**
 
@@ -373,10 +373,10 @@ source venv/bin/activate
 
 **human**
 
-andrewshipley@Andrews-MacBook-Air ~ % cd /Users/andrewshipley/projects/first-agent
+andrewshipley@Andrews-MacBook-Air ~ % cd /Users/andrewshipley/projects/[[first-agent]]
 source venv/bin/activate
 source: no such file or directory: venv/bin/activate
-andrewshipley@Andrews-MacBook-Air first-agent %
+andrewshipley@Andrews-MacBook-Air [[first-agent]] %
 
 **assistant**
 
@@ -388,9 +388,9 @@ ls
 
 **human**
 
-andrewshipley@Andrews-MacBook-Air first-agent % ls
+andrewshipley@Andrews-MacBook-Air [[first-agent]] % ls
 __pycache__ agent.py hello.py leads.xlsx tools.py
-andrewshipley@Andrews-MacBook-Air first-agent %
+andrewshipley@Andrews-MacBook-Air [[first-agent]] %
 
 **assistant**
 
@@ -406,12 +406,12 @@ If it works, you're good — no venv needed.
 
 it is REALLY annoying to me that you can't figure out how to even get up and running. dead end after dead end
 
-andrewshipley@Andrews-MacBook-Air first-agent % python3 agent.py
+andrewshipley@Andrews-MacBook-Air [[first-agent]] % python3 agent.py
 Traceback (most recent call last):
-  File "/Users/andrewshipley/projects/first-agent/agent.py", line 1, in <module>
+  File "/Users/andrewshipley/projects/[[first-agent]]/agent.py", line 1, in <module>
     import anthropic
 ModuleNotFoundError: No module named 'anthropic'
-andrewshipley@Andrews-MacBook-Air first-agent %
+andrewshipley@Andrews-MacBook-Air [[first-agent]] %
 
 **assistant**
 

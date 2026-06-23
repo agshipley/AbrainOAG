@@ -17,25 +17,25 @@ tags: []
 
 **Conversation Overview**
 
-This conversation involved two people: the primary user (unnamed) who manages a GitHub repository and an AI-powered research and development intelligence system called Charlie, and Liz Varner, a TV/film producer who joined mid-conversation. The session began with a GitHub permissions question — adding Liz as a collaborator to the Charlie repo — and evolved into a substantive product architecture discussion about expanding Charlie's ecosystem with new tools for Liz's development work.
+This conversation involved two people: the primary user (unnamed) who manages a GitHub repository and an AI-powered research and development intelligence system called [[charlie]], and [[Liz Varner]], a TV/film producer who joined mid-conversation. The session began with a GitHub permissions question — adding Liz as a collaborator to the [[charlie]] repo — and evolved into a substantive product architecture discussion about expanding [[charlie]]'s ecosystem with new tools for Liz's development work.
 
-Charlie is an AI-powered daily intelligence brief system built by Andrew Shipley (the technical architect) that ingests industry signals, analyzes them, and produces a structured daily brief with tiered sections including "The Signal," "The Bullshit Flag," and "Your World." The system already includes a companion tool Liz built with her own Claude instance that allows her to engage with brief questions, flag items for a watchlist, dialogue about context, and push session findings back into Charlie's algorithm. A key architectural concern raised and discussed at length was filter bubble risk — the danger that feedback loops could narrow Charlie's editorial aperture over time. The conversation established a design principle: Liz's personal interests should never flow upstream into Charlie's ingestion or scoring agents; Charlie must remain editorially independent.
+[[charlie]] is an AI-powered daily intelligence brief system built by Andrew Shipley (the technical architect) that ingests industry signals, analyzes them, and produces a structured daily brief with tiered sections including "The Signal," "The Bullshit Flag," and "Your World." The system already includes a companion tool Liz built with her own Claude instance that allows her to engage with brief questions, flag items for a watchlist, dialogue about context, and push session findings back into [[charlie]]'s algorithm. A key architectural concern raised and discussed at length was filter bubble risk — the danger that feedback loops could narrow [[charlie]]'s editorial aperture over time. The conversation established a design principle: Liz's personal interests should never flow upstream into [[charlie]]'s ingestion or scoring agents; [[charlie]] must remain editorially independent.
 
-The primary output of the session was a full schema document for a new standalone IP Development Tracker — a separate application (not integrated into Charlie's web interface) that organizes Liz's IP interests, tracks buy-side activity from buyers including Sony Pictures Television, Netflix, Audiochuck, Amazon MGM Studios, and A24, and surfaces competitive activity by matching Charlie's tagged signals against her interests after the fact. The tracker includes a keyword search layer designed specifically for post-writer-meeting matchmaking, allowing Liz to query her IP entries by tone, theme, world type, audience signal, format fit, adaptation complexity, and freeform writer profile notes. Liz's active slate — Generational Love, Unwell, Fox & Hound, American Proof, and Somnia — was identified as pre-load seed data. A key late correction: Liz specified the tracker must be a standalone application with its own deployment, not a page within Charlie's existing web app, reinforcing the conceptual and architectural separation between the two systems.
+The primary output of the session was a full schema document for a new standalone IP Development Tracker — a separate application (not integrated into [[charlie]]'s web interface) that organizes Liz's IP interests, tracks buy-side activity from buyers including Sony Pictures Television, Netflix, Audiochuck, Amazon MGM Studios, and A24, and surfaces competitive activity by matching [[charlie]]'s tagged signals against her interests after the fact. The tracker includes a keyword search layer designed specifically for post-writer-meeting matchmaking, allowing Liz to query her IP entries by tone, theme, world type, audience signal, format fit, adaptation complexity, and freeform writer profile notes. Liz's active slate — Generational Love, Unwell, Fox & Hound, American Proof, and Somnia — was identified as pre-load seed data. A key late correction: Liz specified the tracker must be a standalone application with its own deployment, not a page within [[charlie]]'s existing web app, reinforcing the conceptual and architectural separation between the two systems.
 
 **Tool Knowledge**
 
-Claude used the `docx` skill to produce the schema document, generating it via a Node.js script using the `docx` npm library, then validating and copying to outputs. When Liz requested a change to Section 9.4 (the interface specification), Claude used an unpack/edit/repack workflow: unpacking the `.docx` to XML, using `str_replace` to modify the specific paragraph in `word/document.xml`, then repacking. This targeted edit approach worked cleanly for single-section changes without regenerating the full document. The output file was written to `/mnt/user-data/outputs/IP_Tracker_Schema_v1.docx`. Claude also used `web_fetch` to retrieve the live Charlie brief at `https://charlie-productions.up.railway.app/brief/2026-04-01` and `project_knowledge_search` to query existing Charlie architecture and Liz's professional context before drafting the schema.
+Claude used the `docx` skill to produce the schema document, generating it via a Node.js script using the `docx` npm library, then validating and copying to outputs. When Liz requested a change to Section 9.4 (the interface specification), Claude used an unpack/edit/repack workflow: unpacking the `.docx` to XML, using `str_replace` to modify the specific paragraph in `word/document.xml`, then repacking. This targeted edit approach worked cleanly for single-section changes without regenerating the full document. The output file was written to `/mnt/user-data/outputs/IP_Tracker_Schema_v1.docx`. Claude also used `web_fetch` to retrieve the live [[charlie]] brief at `https://charlie-productions.up.railway.app/brief/2026-04-01` and `project_knowledge_search` to query existing [[charlie]] architecture and Liz's professional context before drafting the schema.
 
 ## Transcript
 
 **human**
 
-I'd like to give liz administrative access to the github repo on charlie. she just created her first github account
+I'd like to give liz administrative access to the github repo on [[charlie]]. she just created her first github account
 
 **assistant**
 
-That's a great step — getting Liz set up with direct repo access will be useful as Charlie matures and especially as the book project progresses.
+That's a great step — getting Liz set up with direct repo access will be useful as [[charlie]] matures and especially as the book project progresses.
 
 Here's what you'll need to do:
 
@@ -43,7 +43,7 @@ Here's what you'll need to do:
 Have her confirm the exact username she chose when creating her account.
 
 **2. Add her as a collaborator**
-Go to your Charlie repo on GitHub, then navigate to **Settings → Collaborators** (under "Access" in the left sidebar). Click **"Add people"**, search for her username, and select her.
+Go to your [[charlie]] repo on GitHub, then navigate to **Settings → Collaborators** (under "Access" in the left sidebar). Click **"Add people"**, search for her username, and select her.
 
 **3. Set permission level**
 For full administrative access, set her role to **Admin**. This gives her the ability to manage settings, add/remove collaborators, and configure integrations — not just push code.
@@ -63,7 +63,7 @@ ok she's got her account and I added her as a collaborator. how do I permission 
 
 Since you want her to have full administrative access, here's the path:
 
-1. Go to the Charlie repo on GitHub
+1. Go to the [[charlie]] repo on GitHub
 2. Click **Settings** → **Collaborators** (under "Access")
 3. Find Liz in the collaborator list
 4. Next to her name, there's a role dropdown — it likely defaults to **Write**
@@ -103,11 +103,11 @@ Hi Liz! Welcome aboard. What can I help you with?
 
 **human**
 
-between my claude and this AI, we're building very helpful research tools. we've added to the brief a companion that allows me to engage with the questions/prompts it comes up with, flag items for the watchlist, dialogue with claude about the questions (discuss, unpack context, connect to my world), then report end of session findings (questions engaged, key conclusions, open questions), which are then pushed back to the charlie algorithm.
+between my claude and this AI, we're building very helpful research tools. we've added to the brief a companion that allows me to engage with the questions/prompts it comes up with, flag items for the watchlist, dialogue with claude about the questions (discuss, unpack context, connect to my world), then report end of session findings (questions engaged, key conclusions, open questions), which are then pushed back to the [[charlie]] algorithm.
 
 **assistant**
 
-That's a really smart feedback loop. Having a structured way to engage with The Brief's questions — rather than just reading them — turns it from a daily digest into an active research instrument. And pushing session findings back into Charlie means the system learns what matters to you over time, so the intelligence gets sharper with each cycle.
+That's a really smart feedback loop. Having a structured way to engage with The Brief's questions — rather than just reading them — turns it from a daily digest into an active research instrument. And pushing session findings back into [[charlie]] means the system learns what matters to you over time, so the intelligence gets sharper with each cycle.
 
 A few things worth noting as you build this out:
 
@@ -115,7 +115,7 @@ The "→" questions at the end of each tier in The Brief are specifically design
 
 The report structure you're describing — questions engaged, key conclusions, open questions — is also a great format for feeding the book project. Those session outputs are essentially your thinking-out-loud on the thesis in real time, which is primary source material for the book.
 
-One thing to be mindful of: when session findings push back into Charlie's algorithm, you'll want to make sure they're influencing signal prioritization without narrowing the aperture too much. The value of The Brief is that it surfaces things you wouldn't have been looking for. If the feedback loop over-indexes on your confirmed interests, it could create a filter bubble. Andrew and I built in entity diversity corrections for exactly this kind of thing — worth keeping that principle alive in this new layer too.
+One thing to be mindful of: when session findings push back into [[charlie]]'s algorithm, you'll want to make sure they're influencing signal prioritization without narrowing the aperture too much. The value of The Brief is that it surfaces things you wouldn't have been looking for. If the feedback loop over-indexes on your confirmed interests, it could create a filter bubble. Andrew and I built in entity diversity corrections for exactly this kind of thing — worth keeping that principle alive in this new layer too.
 
 How are you structuring the companion interface? Is it living inside the same web app as The Brief, or is it a separate workflow through your Claude?
 
@@ -127,11 +127,11 @@ i was worried about that very issue
 
 Good instinct. That's exactly the right thing to be worried about, and the fact that you're thinking about it now — before the feedback loop is fully baked — is the ideal time to address it.
 
-The tension is real: you want Charlie to get smarter about what matters to you, but you don't want it to stop surprising you. The Brief's value is partly in the unexpected connections — the signal you didn't know you needed. If every session pushes "I care about this" back into the system, you risk training it into a mirror instead of a telescope.
+The tension is real: you want [[charlie]] to get smarter about what matters to you, but you don't want it to stop surprising you. The Brief's value is partly in the unexpected connections — the signal you didn't know you needed. If every session pushes "I care about this" back into the system, you risk training it into a mirror instead of a telescope.
 
 A few ways to protect against that:
 
-You could weight the feedback asymmetrically — let flagged items and engaged questions inform relevance scoring, but cap how much they can suppress unrelated signals. So Charlie learns your priorities without muting everything else.
+You could weight the feedback asymmetrically — let flagged items and engaged questions inform relevance scoring, but cap how much they can suppress unrelated signals. So [[charlie]] learns your priorities without muting everything else.
 
 Another approach is to build in a "wildcard" requirement — every brief must include at least one signal that sits outside your recent engagement patterns. Forces the system to keep reaching.
 
@@ -141,7 +141,7 @@ What does the feedback mechanism look like right now — is it sending structure
 
 **human**
 
-https://charlie-productions.up.railway.app/brief/2026-04-01
+https://[[charlie]]-productions.up.railway.app/brief/2026-04-01
 
 **assistant**
 
@@ -152,9 +152,9 @@ This block is not supported on your current device yet.
 
 Great brief today. A few things jump out that are directly relevant to your world:
 
-**The Audiochuck/Shanfield signal (#5) is the centerpiece.** Charlie correctly weighted it at 8 and tagged it as a discovery bridge signal. The fact that it sits alongside the Netflix creator licensing analysis in "Your World" gives you a two-piece strategic frame: Netflix is systematically buying what Audiochuck is now formally structured to sell. That's not a pitch — that's a market thesis with your company positioned at the intersection.
+**The Audiochuck/Shanfield signal (#5) is the centerpiece.** [[charlie]] correctly weighted it at 8 and tagged it as a discovery bridge signal. The fact that it sits alongside the Netflix creator licensing analysis in "Your World" gives you a two-piece strategic frame: Netflix is systematically buying what Audiochuck is now formally structured to sell. That's not a pitch — that's a market thesis with your company positioned at the intersection.
 
-**The April Fools' flag is good editorial judgment.** The OpenAI/studio pullback story landing today makes it essentially unusable until it's confirmed, and Charlie correctly called that out rather than treating it as real signal. Worth revisiting tomorrow to see if it holds up.
+**The April Fools' flag is good editorial judgment.** The OpenAI/studio pullback story landing today makes it essentially unusable until it's confirmed, and [[charlie]] correctly called that out rather than treating it as real signal. Worth revisiting tomorrow to see if it holds up.
 
 **Signal #8 is the one to sit with.** YouTube at 13.1% vs Netflix at 9.0% in streaming share is the single most important data point for the demand migration thesis. That gap is the entire argument for why creator-native content has structural advantages — algorithmically surfaced free content is winning the attention war against curated subscription libraries. That's a paragraph in the book.
 
@@ -168,7 +168,7 @@ yes we built and used the tool for the first time today, so the effects should s
 
 **assistant**
 
-That's exciting — tomorrow's brief will be the first one with your fingerprints on the algorithm. It'll be interesting to see whether the session findings sharpen the signal prioritization or surface new connections Charlie wasn't making on its own.
+That's exciting — tomorrow's brief will be the first one with your fingerprints on the algorithm. It'll be interesting to see whether the session findings sharpen the signal prioritization or surface new connections [[charlie]] wasn't making on its own.
 
 Keep an eye on whether the feedback shifts the "Your World" section specifically. That's the tier most directly tied to your development work, so it's where the companion's input should show up first and most visibly. If the thesis-level signals in the top two tiers start shifting noticeably too, that's a sign the feedback loop is working at a deeper level than just relevance scoring.
 
@@ -196,21 +196,21 @@ Are you building this as another Claude-powered tool, or is this more of a struc
 
 **human**
 
-well i'm wondering if they should be integrated with charlie
+well i'm wondering if they should be integrated with [[charlie]]
 
 **assistant**
 
 That's the right question, and the answer is almost certainly yes — but with some architectural thought about how.
 
-The case for integration is strong. Charlie is already ingesting the deal flow, tracking the executives, and mapping the competitive landscape daily. Your IP interest tracker is essentially the lens through which all of that intelligence becomes personally actionable. Keeping them separate means you're manually cross-referencing your interests against Charlie's signals every day, which is exactly the kind of work the system should be doing for you.
+The case for integration is strong. [[charlie]] is already ingesting the deal flow, tracking the executives, and mapping the competitive landscape daily. Your IP interest tracker is essentially the lens through which all of that intelligence becomes personally actionable. Keeping them separate means you're manually cross-referencing your interests against [[charlie]]'s signals every day, which is exactly the kind of work the system should be doing for you.
 
-The most natural integration point is the "Your World" tier of The Brief. Right now, Charlie infers what matters to you based on the thesis framework and Andrew's programming. If your IP tracker feeds into that, Charlie can proactively surface when a piece of IP you're watching enters deal flow, when a buyer you're targeting makes a move in an adjacent space, or when competitive activity clusters around something on your list. Instead of you scanning the signal log and pattern-matching against your own interests, Charlie does it.
+The most natural integration point is the "Your World" tier of The Brief. Right now, [[charlie]] infers what matters to you based on the thesis framework and Andrew's programming. If your IP tracker feeds into that, [[charlie]] can proactively surface when a piece of IP you're watching enters deal flow, when a buyer you're targeting makes a move in an adjacent space, or when competitive activity clusters around something on your list. Instead of you scanning the signal log and pattern-matching against your own interests, [[charlie]] does it.
 
-The companion tool you just built is actually the bridge. Your session findings already push back into the algorithm — if your IP interests live in the same system, the companion becomes the place where you flag new interests, update your priorities, and get alerts when Charlie spots relevant movement. It's one feedback loop instead of three separate tools.
+The companion tool you just built is actually the bridge. Your session findings already push back into the algorithm — if your IP interests live in the same system, the companion becomes the place where you flag new interests, update your priorities, and get alerts when [[charlie]] spots relevant movement. It's one feedback loop instead of three separate tools.
 
-The thing to be careful about is the same filter bubble concern, amplified. If Charlie knows your specific IP interests, the temptation is for it to over-index on those and under-report signals that don't connect to your slate. You'd want the IP tracker to inform the "Your World" tier and the signal relevance scoring without constraining what makes it into "The Signal" or "The Bullshit Flag." Those need to stay editorially independent of your personal development interests.
+The thing to be careful about is the same filter bubble concern, amplified. If [[charlie]] knows your specific IP interests, the temptation is for it to over-index on those and under-report signals that don't connect to your slate. You'd want the IP tracker to inform the "Your World" tier and the signal relevance scoring without constraining what makes it into "The Signal" or "The Bullshit Flag." Those need to stay editorially independent of your personal development interests.
 
-Worth talking to Andrew about how to structure the data layer. The question is whether your IP interests live as a separate dataset that Charlie queries against, or whether they're embedded in the same feedback mechanism as the companion tool. That's an architecture decision that affects how tightly coupled the systems become.
+Worth talking to Andrew about how to structure the data layer. The question is whether your IP interests live as a separate dataset that [[charlie]] queries against, or whether they're embedded in the same feedback mechanism as the companion tool. That's an architecture decision that affects how tightly coupled the systems become.
 
 **human**
 
@@ -218,17 +218,17 @@ alternatively could the brief  pull development/track IP news and have that feed
 
 **assistant**
 
-That's actually a cleaner architecture. You're letting Charlie do what it's already good at — ingesting and filtering industry intelligence — and then piping the relevant subset into a tool that's purpose-built for your personal development workflow.
+That's actually a cleaner architecture. You're letting [[charlie]] do what it's already good at — ingesting and filtering industry intelligence — and then piping the relevant subset into a tool that's purpose-built for your personal development workflow.
 
-The difference matters. In the first model, your interests shape what Charlie looks for, which risks narrowing the aperture. In this model, Charlie casts the same wide net it always does, but a separate layer catches the pieces that are relevant to your slate and organizes them for you. Charlie stays editorially independent, and your tracker stays personally useful without contaminating the signal.
+The difference matters. In the first model, your interests shape what [[charlie]] looks for, which risks narrowing the aperture. In this model, [[charlie]] casts the same wide net it always does, but a separate layer catches the pieces that are relevant to your slate and organizes them for you. [[charlie]] stays editorially independent, and your tracker stays personally useful without contaminating the signal.
 
-Think of it as Charlie being the newsroom and your tracker being the beat reporter's notebook. The newsroom covers everything. The notebook is where you organize what matters to your specific stories.
+Think of it as [[charlie]] being the newsroom and your tracker being the beat reporter's notebook. The newsroom covers everything. The notebook is where you organize what matters to your specific stories.
 
-Practically, what this looks like is Charlie tagging signals that involve IP movement — rights acquisitions, adaptation announcements, executive hires at companies developing specific properties, buyer mandate shifts — and your tracker pulling those tagged signals into a structured view organized around your interests. You'd see something like: here's the IP I'm watching, here's what Charlie has surfaced about each one in the last week, here's competitive activity in adjacent spaces, here's which buyers are active in categories I care about.
+Practically, what this looks like is [[charlie]] tagging signals that involve IP movement — rights acquisitions, adaptation announcements, executive hires at companies developing specific properties, buyer mandate shifts — and your tracker pulling those tagged signals into a structured view organized around your interests. You'd see something like: here's the IP I'm watching, here's what [[charlie]] has surfaced about each one in the last week, here's competitive activity in adjacent spaces, here's which buyers are active in categories I care about.
 
-The companion tool then becomes the place where you interact with all of it. You engage with The Brief's questions, you update your IP interests, you flag competitive moves worth watching — and the session report feeds back into Charlie's relevance scoring without feeding back your specific IP list.
+The companion tool then becomes the place where you interact with all of it. You engage with The Brief's questions, you update your IP interests, you flag competitive moves worth watching — and the session report feeds back into [[charlie]]'s relevance scoring without feeding back your specific IP list.
 
-Three tools, one ecosystem, clean separation of concerns. Charlie for intelligence, the tracker for personal organization, the companion for engagement and feedback.
+Three tools, one ecosystem, clean separation of concerns. [[charlie]] for intelligence, the tracker for personal organization, the companion for engagement and feedback.
 
 Want to sketch out what the tracker's data structure should look like?
 
@@ -238,7 +238,7 @@ yes
 
 **assistant**
 
-Let me pull up the project docs to make sure we're building this against Charlie's existing data architecture.
+Let me pull up the project docs to make sure we're building this against [[charlie]]'s existing data architecture.
 ```
 This block is not supported on your current device yet.
 ```
@@ -248,9 +248,9 @@ This block is not supported on your current device yet.
 This block is not supported on your current device yet.
 ```
 
-Good — now I have a clear picture of Charlie's existing architecture and your professional context. Here's how the tracker's data structure should work.
+Good — now I have a clear picture of [[charlie]]'s existing architecture and your professional context. Here's how the tracker's data structure should work.
 
-The tracker needs to hold three distinct types of records that relate to each other, and it needs to receive tagged signals from Charlie without sending your interests back upstream.
+The tracker needs to hold three distinct types of records that relate to each other, and it needs to receive tagged signals from [[charlie]] without sending your interests back upstream.
 
 **Record Type 1: Your IP/World Interests**
 
@@ -258,19 +258,19 @@ Each entry captures a piece of IP or a world you're tracking. Not just title and
 
 **Record Type 2: Buy-Side Activity**
 
-This is the competitive intelligence layer. Charlie already tracks deal flow, buyer mandate shifts, and executive movement. The tracker would receive tagged signals from the daily brief and organize them by buyer. Over time you'd accumulate a profile for each buyer: what are they buying, what categories are they active in, who's running development there, what's their implied mandate based on recent acquisitions. This is where the Shanfield hire at Audiochuck would live, alongside patterns like Netflix systematically licensing creator audiences or Amazon extending theatrical windows.
+This is the competitive intelligence layer. [[charlie]] already tracks deal flow, buyer mandate shifts, and executive movement. The tracker would receive tagged signals from the daily brief and organize them by buyer. Over time you'd accumulate a profile for each buyer: what are they buying, what categories are they active in, who's running development there, what's their implied mandate based on recent acquisitions. This is where the Shanfield hire at Audiochuck would live, alongside patterns like Netflix systematically licensing creator audiences or Amazon extending theatrical windows.
 
 **Record Type 3: Competitive Activity**
 
-When someone else moves on IP that's adjacent to something on your interest list, that gets flagged here. Not because Charlie is looking for your interests — it's because Charlie is already surfacing deal announcements and adaptation news in the signal log. The tracker matches those signals against your interests after the fact. So if a book you've been watching gets optioned by somebody, or a company you're tracking hires a development exec in your category, it shows up here.
+When someone else moves on IP that's adjacent to something on your interest list, that gets flagged here. Not because [[charlie]] is looking for your interests — it's because [[charlie]] is already surfacing deal announcements and adaptation news in the signal log. The tracker matches those signals against your interests after the fact. So if a book you've been watching gets optioned by somebody, or a company you're tracking hires a development exec in your category, it shows up here.
 
 **How they connect:**
 
 The relationships between these three record types are the actual value. Your interest in a piece of IP sits alongside the buy-side data showing which buyers are active in that category, alongside the competitive data showing who else is moving in that space. That three-way view is what turns this from a list into a strategic tool.
 
-**The data flow from Charlie:**
+**The data flow from [[charlie]]:**
 
-Charlie's ingestion agent already tags signals by type — deal, hiring, restructuring, viewership, mandate shift. The tracker would subscribe to a subset of those tags (deal, hiring, mandate shift) and ingest them into the buy-side and competitive activity layers. Charlie doesn't need to know your interest list exists. It just keeps producing tagged signals, and the tracker sorts the relevant ones into your personal view.
+[[charlie]]'s ingestion agent already tags signals by type — deal, hiring, restructuring, viewership, mandate shift. The tracker would subscribe to a subset of those tags (deal, hiring, mandate shift) and ingest them into the buy-side and competitive activity layers. [[charlie]] doesn't need to know your interest list exists. It just keeps producing tagged signals, and the tracker sorts the relevant ones into your personal view.
 
 Want me to mock up the actual fields and schema, or do you want to think about these categories first and refine what belongs in each one?
 
@@ -347,7 +347,7 @@ This block is not supported on your current device yet.
 This block is not supported on your current device yet.
 ```
 
-Here's the full schema document. It covers the three record types (IP/World Interests, Buy-Side Activity, Competitive Activity), the keyword search layer with weighted matching, the data flow architecture showing the one-way pipe from Charlie, pre-loaded seed data from your active slate and key buyer relationships, and implementation notes for Andrew including the filter bubble firewall constraint.
+Here's the full schema document. It covers the three record types (IP/World Interests, Buy-Side Activity, Competitive Activity), the keyword search layer with weighted matching, the data flow architecture showing the one-way pipe from [[charlie]], pre-loaded seed data from your active slate and key buyer relationships, and implementation notes for Andrew including the filter bubble firewall constraint.
 
 The most important thing in there for your immediate use is Section 4 — the keyword search design. After a writer meeting, you'd query across tone, theme, world type, audience, format, and your freeform ideal-writer-profile notes, all ranked by match density. That's what makes this operationally useful in real time rather than just a filing system.
 
@@ -359,7 +359,7 @@ i don't want the tracker to live on the same page
 
 **assistant**
 
-Good instinct. Keeping the tracker separate from Charlie's web app reinforces the architectural separation — the tracker is *your* tool, not Charlie's. Mixing them in the same interface blurs the line between the editorially independent intelligence system and your personal development lens.
+Good instinct. Keeping the tracker separate from [[charlie]]'s web app reinforces the architectural separation — the tracker is *your* tool, not [[charlie]]'s. Mixing them in the same interface blurs the line between the editorially independent intelligence system and your personal development lens.
 
 Let me update the document.
 ```
@@ -391,4 +391,4 @@ This block is not supported on your current device yet.
 This block is not supported on your current device yet.
 ```
 
-Updated. Section 9.4 now specifies the tracker as a standalone application — separate URL, separate deployment, separate navigation from Charlie. It reads from Charlie's signal log via the one-way pipe, but it's its own product. That keeps the conceptual and architectural boundaries clean: Charlie is the newsroom, the tracker is your notebook, and they never share a front door.
+Updated. Section 9.4 now specifies the tracker as a standalone application — separate URL, separate deployment, separate navigation from [[charlie]]. It reads from [[charlie]]'s signal log via the one-way pipe, but it's its own product. That keeps the conceptual and architectural boundaries clean: [[charlie]] is the newsroom, the tracker is your notebook, and they never share a front door.

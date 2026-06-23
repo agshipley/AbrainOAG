@@ -17,7 +17,7 @@ tags: []
 
 **Conversation overview**
 
-Andrew is an independent transactional lawyer with bar-deal and financing experience, advising two clients (referred to as "the primaries") — career bartenders at a Santa Monica bar — on acquiring a coastal Southern California bar. The conversation spanned several interconnected workstreams: fixing broken hyperlinks in a v6 Word report on the bar acquisition, building and debugging a React screening tool called Wheelhouse, diagnosing Claude Code and VS Code environment issues, researching current market conditions for bar acquisitions in Southern California, and ultimately rebuilding the strategic memo from an execution plan into a 2–3 year positioning strategy after the primaries' timeline and capital partner situation were clarified.
+Andrew is an independent transactional lawyer with bar-deal and financing experience, advising two clients (referred to as "the primaries") — career bartenders at a Santa Monica bar — on acquiring a coastal Southern California bar. The conversation spanned several interconnected workstreams: fixing broken hyperlinks in a v6 Word report on the bar acquisition, building and debugging a React screening tool called [[Wheelhouse]], diagnosing Claude Code and VS Code environment issues, researching current market conditions for bar acquisitions in Southern California, and ultimately rebuilding the strategic memo from an execution plan into a 2–3 year positioning strategy after the primaries' timeline and capital partner situation were clarified.
 
 Key facts established during the conversation: the primaries are on a 2–3 year horizon, the likely capital partner is Paul Boettcher and Donal Tavey (owners of Busby's West, Ye Olde King's Head, and Junkyard Dog in Silver Lake — the last opened with Boettcher's daughter Adaline Hobbs in 2022), and the capital partner question that dominated the prior memo is largely resolved, though with meaningful caveats around concept and geography fit and a publicly reported profitability challenge at Busby's as of late 2024. Andrew identified the primaries consistently as "the primaries," not "friends," and corrected this explicitly.
 
@@ -25,7 +25,7 @@ Andrew has an extremely strong and repeatedly enforced standing instruction: nev
 
 A foil-check linter artifact (`foil_check.jsx`) was built to flag the banned construction in pasted text, but Andrew correctly identified it as off-brief — it checks text post-hoc and does not affect generation. A broader "fix yourself" brief was discussed honestly: there is no artifact that changes how Claude generates sentences in real time, and the rule lives in project instructions where it must simply be held to. The session ended with Andrew requesting a new thread and a comprehensive context summary.
 
-On the technical side, the Wheelhouse React screener (`bar_screener.jsx`) was built with two modes — Boardwalk Thesis (pre-seeded with the real shortlist and project parameters) and Custom Search — using a deterministic all-in capitalization engine, dual concept and economics scoring, diligence flags, broker questions, and optional AI-parse via the Anthropic API. A code review identified and fixed: a hardcoded operator cash value in the row display (fixed by passing `operatorCash` through the `fin` object), dead code in the `recommend` function, broker questions truncated to five of eight, mixed boolean/string types for `sellerFinancing` and `kitchen` (fixed with a `normalizeOpp` function applied at all entry points), no delete confirmation, and collision-prone IDs (fixed with `crypto.randomUUID()`). The AI-parse feature was clarified to work inside the Claude.ai artifact runtime where the API key is proxied, and the failure message was updated to say so plainly rather than suggesting a generic parse error. The repo at github.com/agshipley/Wheelhouse (public, username `agshipley`) has been built out into a Vite 6 + React 18 + Supabase app with a Railway deployment target; a duplicate `bar_screener (1).jsx` at the repo root needs deletion.
+On the technical side, the [[Wheelhouse]] React screener (`bar_screener.jsx`) was built with two modes — Boardwalk Thesis (pre-seeded with the real shortlist and project parameters) and Custom Search — using a deterministic all-in capitalization engine, dual concept and economics scoring, diligence flags, broker questions, and optional AI-parse via the Anthropic API. A code review identified and fixed: a hardcoded operator cash value in the row display (fixed by passing `operatorCash` through the `fin` object), dead code in the `recommend` function, broker questions truncated to five of eight, mixed boolean/string types for `sellerFinancing` and `kitchen` (fixed with a `normalizeOpp` function applied at all entry points), no delete confirmation, and collision-prone IDs (fixed with `crypto.randomUUID()`). The AI-parse feature was clarified to work inside the Claude.ai artifact runtime where the API key is proxied, and the failure message was updated to say so plainly rather than suggesting a generic parse error. The repo at github.com/agshipley/[[Wheelhouse]] (public, username `agshipley`) has been built out into a Vite 6 + React 18 + Supabase app with a Railway deployment target; a duplicate `bar_screener (1).jsx` at the repo root needs deletion.
 
 VS Code and Claude Code environment issues were diagnosed: the Claude Code extension was failing because the repo was opened as a virtual GitHub filesystem (`vscode-vfs://`) rather than a local clone, causing `realpathSync` to fail on `/agshipley` as a local path. The fix is to clone locally via `git clone https://github.com/agshipley/Wheelhouse.git` and open the local folder. A missing `.env.local` error was identified as a stale editor tab
 
@@ -1499,7 +1499,7 @@ I'm settling on a warm sand background (#F5F1E8) with ink text for readability d
 
 For the typography stack, I'm going with Fraunces for headers (distinctive and editorial), Archivo for the body and UI elements (a refined grotesk that avoids the overused choices), and IBM Plex Mono for numbers—that pairing feels both professional and refined without being generic.
 
-Now I'm working on the layout and naming. I want something that hints at the coastal bar theme without being too on-the-nose, so I'm considering names like "Wheelhouse" or "The Screener" with a subtle wordmark approach.
+Now I'm working on the layout and naming. I want something that hints at the coastal bar theme without being too on-the-nose, so I'm considering names like "[[Wheelhouse]]" or "The Screener" with a subtle wordmark approach.
 
 For the interface structure, I'm planning a mode toggle between "Boardwalk Thesis" and "Custom Search," a criteria panel on the left, and a main pipeline table showing ranked opportunities. Clicking a row opens a detail view with sources-and-uses, broker questions, diligence flags, and a decision log. I'll make it responsive since the artifact width can be tight—stacking vertically on narrow screens and side-by-side on wider ones.
 
@@ -1574,7 +1574,7 @@ This block is not supported on your current device yet.
 This block is not supported on your current device yet.
 ```
 
-Built. **Wheelhouse** — a bar acquisition screener with the two modes you asked for.
+Built. **[[Wheelhouse]]** — a bar acquisition screener with the two modes you asked for.
 
 **Boardwalk Thesis mode** comes pre-loaded with the eleven shortlist targets and the project's parameters ($150k operator cash, SBA on, seller carry preferred, 80–120 cap, Type 47, beach-led). Open it and the model reproduces the report: Ocean Beach lands as the reachable pursue, Costa Mesa surfaces as the economics-led alternative (with the SDE multiple shown and a "verify financials" flag because its net income is claimed), HB Main as capital-heavy, and Newport Coast Hwy and Peter's Landing get auto-flagged "Pass — rent kills it."
 
@@ -1878,7 +1878,7 @@ The fix is to work from a local clone, not the remote browse view:
 
 Once you're on a local clone, the `realpathSync` call has a real path to resolve and the webview should load.
 
-On the `.env.local`: that's just a stale editor tab pointing at a file that isn't in the repo — you can close it. It only matters if the Wheelhouse app actually references env vars (for instance, if you end up proxying the AI-parse call through your own key). If so, create `src/.env.local` in the local clone after cloning; it's unrelated to why Claude Code won't start.
+On the `.env.local`: that's just a stale editor tab pointing at a file that isn't in the repo — you can close it. It only matters if the [[Wheelhouse]] app actually references env vars (for instance, if you end up proxying the AI-parse call through your own key). If so, create `src/.env.local` in the local clone after cloning; it's unrelated to why Claude Code won't start.
 
 If after all that the panel still fails, the next thing to check is `claudeCode.cliPath` (a "CLI not found" situation), but I'd expect the virtual-workspace issue to be the whole story here given what the logs show.
 
@@ -1898,7 +1898,7 @@ For the terminal method, I'm walking through opening a terminal, navigating to a
 
 1. Open the Command Palette — Cmd+Shift+P.
 2. Type **Git: Clone** and select it.
-3. Paste the repo URL: `https://github.com/agshipley/Wheelhouse.git` — or pick **Clone from GitHub** and sign in when prompted (it'll list your repos; choose Wheelhouse).
+3. Paste the repo URL: `https://github.com/agshipley/Wheelhouse.git` — or pick **Clone from GitHub** and sign in when prompted (it'll list your repos; choose [[Wheelhouse]]).
 4. Choose a local folder to drop it in — something like your home folder or a `~/Development` directory. Avoid an iCloud-synced path if you can, just to keep file watching sane.
 5. When VS Code asks **"Would you like to open the cloned repository?"**, click **Open**.
 
@@ -1927,7 +1927,7 @@ Once it's open as a local folder, the `vscode-vfs://` virtual workspace is out o
 
 **human**
 
-you should take a look at where we're currently at: https://github.com/agshipley/Wheelhouse
+you should take a look at where we're currently at: https://github.com/agshipley/[[Wheelhouse]]
 
 **assistant**
 
@@ -1952,7 +1952,7 @@ The genuinely useful way for me to look at "where we're at" is for you to paste 
 
 **human**
 
-well, it's not private. search for it, it's agshipley/wheelhouse
+well, it's not private. search for it, it's agshipley/[[Wheelhouse]]
 
 **assistant**
 
@@ -1968,7 +1968,7 @@ This block is not supported on your current device yet.
 This block is not supported on your current device yet.
 ```
 
- Good — the blob page is displaying the file content correctly. I can see the package.json file now, which shows this is a Vite-based React project called "wheelhouse" with dependencies on Supabase, Lucide React icons, and React itself, along with the standard dev tooling.
+ Good — the blob page is displaying the file content correctly. I can see the package.json file now, which shows this is a Vite-based React project called "[[Wheelhouse]]" with dependencies on Supabase, Lucide React icons, and React itself, along with the standard dev tooling.
 
 What's notable is the absence of any backend framework like Express or the Anthropic SDK in the dependencies, which means if there's server-side AI parsing happening, it's likely running through Supabase Edge Functions or a separate Railway deployment. I can see there's a railway.toml file and an .env.example present, so those will be key to understanding the configuration.
 
@@ -1998,7 +1998,7 @@ The ANTHROPIC_API_KEY must be server-side only (either an edge function secret o
 
 To move forward efficiently, I need to see the actual file contents rather than guess from the package.json manifest alone—GitHub's rendering and robots.txt are blocking direct access, so the fastest path is having them paste the key files directly.I got `package.json` in full; the raw endpoints are robots-blocked and the blob pages bury file contents under a wall of nav chrome, so beyond the manifest and the file tree I'm now inferring rather than reading. Here's the honest read.
 
-**Confirmed (from package.json + tree):** Wheelhouse has gone from a single in-chat artifact to a real deployable app — Vite 6, React 18, `@supabase/supabase-js`, `lucide-react`, `@vitejs/plugin-react`. Scripts are the standard `dev` / `build` / `preview`. The tree adds `src/`, `supabase/`, `.env.example`, `railway.toml`, and `index.html`, with 18 commits. That's a genuine step up from where I left it.
+**Confirmed (from package.json + tree):** [[Wheelhouse]] has gone from a single in-chat artifact to a real deployable app — Vite 6, React 18, `@supabase/supabase-js`, `lucide-react`, `@vitejs/plugin-react`. Scripts are the standard `dev` / `build` / `preview`. The tree adds `src/`, `supabase/`, `.env.example`, `railway.toml`, and `index.html`, with 18 commits. That's a genuine step up from where I left it.
 
 **What the stack implies (inference, not yet read):**
 
@@ -2190,7 +2190,7 @@ give me a comprehensive summary of the context to begin a new thread. you're don
 
 **assistant**
 
-# Project Context Summary — Bar Acquisition / Wheelhouse
+# Project Context Summary — Bar Acquisition / [[Wheelhouse]]
 
 ## Who
 Andrew (GitHub: `agshipley`), an independent transactional lawyer with direct bar-deal and financing experience in New York. He engages as a sophisticated principal and expects peer-level work. He is advising a friend — a career bartender/manager with a hospitality-experienced spouse — on acquiring a bar in coastal Southern California.
@@ -2228,10 +2228,10 @@ Core analytical principles baked in: **all-in capitalization, never asking price
 - **TURCS** — $3.25M / $3.8–4.35M / RE+business thesis; live only with a real-estate-oriented partner. 16321 PCH Sunset Beach, Type 48, grandfathered entertainment. BizBuySell 2294980.
 - **Pass:** Newport Coast Hwy $195k (rent $38.5k/mo) and HB Peter's Landing $200k (rent $28k/mo) — lease dumps.
 
-## Deliverable 2: Wheelhouse (the tool)
+## Deliverable 2: [[Wheelhouse]] (the tool)
 Began as a React screener artifact (`bar_screener.jsx`) with two modes — **Boardwalk Thesis** (pre-loaded with the shortlist and project assumptions) and **Custom Search** — using a deterministic all-in capitalization engine, dual scoring (concept fit + economics, never blended), license/capacity/lease flags, diligence gates, broker questions, an optional AI-parse step, and `window.storage` persistence. A code review was done and bug fixes applied (operatorCash passed to the row display, type normalization on load/add, dead code removed, all 8 broker questions shown, delete confirmation, `crypto.randomUUID`).
 
-It has since been built into a real repo at **github.com/agshipley/Wheelhouse** (public): Vite 6 + React 18 + `@supabase/supabase-js` + lucide-react, with `src/`, `supabase/`, `.env.example`, `railway.toml`, `vite.config.js`, and a duplicate `bar_screener (1).jsx` to delete. Persistence moved from `window.storage` to Supabase; the AI-parse is presumably proxied server-side (Supabase Edge Function or Railway) so the Anthropic key stays off the client — I could only read `package.json` in full, so most of the repo state is inferred, not verified.
+It has since been built into a real repo at **github.com/agshipley/[[Wheelhouse]]** (public): Vite 6 + React 18 + `@supabase/supabase-js` + lucide-react, with `src/`, `supabase/`, `.env.example`, `railway.toml`, `vite.config.js`, and a duplicate `bar_screener (1).jsx` to delete. Persistence moved from `window.storage` to Supabase; the AI-parse is presumably proxied server-side (Supabase Edge Function or Railway) so the Anthropic key stays off the client — I could only read `package.json` in full, so most of the repo state is inferred, not verified.
 
 ## Open issues / where it ended
 1. Capital partner identity + check size — still the top unresolved item.
@@ -2484,21 +2484,21 @@ The real question is whether the parse-listing function does a genuine server-si
 
 Option 2 is solid and low-risk, but there are some nuances worth sharpening. The URL-constructible search params are indeed straightforward to implement, but BizBuySell and BizQuest are actually owned by the same company (CoStar) and may share URL schemes, while BizBen operates independently with its own structure. Also, the report has a typo listing BizBen twice instead of naming all three sites—that's worth catching since each one matters. More importantly, I should amplify the report's honest insight about positioning this as a screener rather than a discovery tool. That's actually the strongest angle here, and the real value proposition centers on the all-in capital modifier.
 
-The deeper product question is whether discovery should even be the tool's job. The sites themselves do live discovery better on their own databases, and fighting to replicate that without API access or scraping is a losing battle. The right posture is positioning Wheelhouse as the analysis layer while the sites handle discovery, with frictionless URL ingestion as the bridge between them. Option 2 operationalizes exactly that. To reduce the workflow friction the report mentions—the user having to browse, return, and paste—I could propose a "Search live" panel that builds deep links for all three sites simultaneously from the current criteria like location, max price, and capacity.
+The deeper product question is whether discovery should even be the tool's job. The sites themselves do live discovery better on their own databases, and fighting to replicate that without API access or scraping is a losing battle. The right posture is positioning [[Wheelhouse]] as the analysis layer while the sites handle discovery, with frictionless URL ingestion as the bridge between them. Option 2 operationalizes exactly that. To reduce the workflow friction the report mentions—the user having to browse, return, and paste—I could propose a "Search live" panel that builds deep links for all three sites simultaneously from the current criteria like location, max price, and capacity.
 
-The strongest friction-reducer would be accepting bulk URL imports: the user browses listings on BizBen, copies multiple links at once, and dumps them all into Wheelhouse at once rather than pasting one at a time. I could also make the paste path simpler by accepting multiple URLs in a single paste or even parsing blocks of listing text directly. A bookmarklet or extension could push URLs automatically, though that's future scope. The critical technical question is whether the parse step needs to fetch the live page each time.
+The strongest friction-reducer would be accepting bulk URL imports: the user browses listings on BizBen, copies multiple links at once, and dumps them all into [[Wheelhouse]] at once rather than pasting one at a time. I could also make the paste path simpler by accepting multiple URLs in a single paste or even parsing blocks of listing text directly. A bookmarklet or extension could push URLs automatically, though that's future scope. The critical technical question is whether the parse step needs to fetch the live page each time.
 
 If server fetches get blocked by sites, I should offer a fallback: let users paste the listing text directly (they copy the page body), which guarantees live data without any fetch issues. The ingestion flow should accept either a URL or pasted page text, and recommend text when a URL parse returns thin results. For staleness over time, "Check Links" with HEAD requests catches dead URLs, but a 200 response doesn't guarantee the listing is still active—some sites return a "listing no longer available" page with a 200 status code, so I need to detect those soft-404s.
 
 Now I'm weighing whether there's a middle ground between fully automated discovery and no discovery at all. The current approach of Claude searching is stale and unreliable. The proposed approach—deep-linking to live site search so users browse and paste back—is solid and low-risk. A hybrid option would keep search but reframe it honestly: Claude's web_search surfaces candidates explicitly labeled as potentially stale, with generated deep links to the live site search for each business so users can verify directly. But that still relies on a stale index for discovery and adds unnecessary complexity, especially since the report already tried prompt fixes.
 
-Option 4 is more promising: RSS or email alerts from the listing sites themselves. Users could set up saved searches on BizBen or BizBuySell directly—their alert emails pull from the live database—and forward those listings into Wheelhouse for analysis. This is genuinely live discovery with zero scraping, since the sites' own alert system does the heavy lifting. The user just pastes the listing from the alert email into AI Parse, or ideally Wheelhouse could parse forwarded alert emails directly.
+Option 4 is more promising: RSS or email alerts from the listing sites themselves. Users could set up saved searches on BizBen or BizBuySell directly—their alert emails pull from the live database—and forward those listings into [[Wheelhouse]] for analysis. This is genuinely live discovery with zero scraping, since the sites' own alert system does the heavy lifting. The user just pastes the listing from the alert email into AI Parse, or ideally [[Wheelhouse]] could parse forwarded alert emails directly.
 
 Option 5 (direct API or data partnerships) is out of scope—BizBuySell and BizQuest may have affiliate feeds, but that's commercially complex.
 
-So the real strategy is Option 2 as the core (deep-link to live search) plus Option 4 as the discovery engine (leveraging the sites' saved-search alerts), with Wheelhouse positioned as the screener. That's a coherent, honest product story.
+So the real strategy is Option 2 as the core (deep-link to live search) plus Option 4 as the discovery engine (leveraging the sites' saved-search alerts), with [[Wheelhouse]] positioned as the screener. That's a coherent, honest product story.
 
-The bigger strategic fix is reframing the positioning entirely—stop calling it "Find Listings" as if Wheelhouse discovers them. The accurate and actually stronger angle is positioning Wheelhouse as a screener.
+The bigger strategic fix is reframing the positioning entirely—stop calling it "Find Listings" as if [[Wheelhouse]] discovers them. The accurate and actually stronger angle is positioning [[Wheelhouse]] as a screener.
 
 Now I'm thinking through a technical detail: BizBen gates key financials behind registration, so even on the live site, asking price might be visible but cash flow and detailed financials require an NDA. With Option 2, users see only what's publicly available on the live site, and ingestion can't bypass those gates either—so the feature's limitations are inherent to the data sources themselves, not a product shortcoming.
 
@@ -2514,15 +2514,15 @@ That said, it's an implementation detail the user can validate themselves, and t
 
 The strongest move would be to do a quick verification that de-risks the recommended option so they don't have to, but I can't browse interactively and a web search on URL parameters might be thin. I'll hold off on searches unless they ask for implementation. I'll make the recommendation and offer to lock down the URL schemes next, keeping this turn focused on the thinking they asked for.
 
-Now I'm structuring the response: diagnose the problem and reframe it as a discovery issue rather than Wheelhouse's responsibility, explain why that reframe works, map out the actual live discovery channels (site search deep-links and saved-search alerts), make ingestion robust with fallbacks, identify the one technical factor that matters (whether parse fetches the live page), and lay out what I'd build in order with an offer to verify the URL schemes. I need to watch every sentence for clarity and avoid any contradictions. doesn't land on." — "mostly a framing decision" — fine. "circles but doesn't land on" — is that an antithesis? "circles but doesn't land" — it's a contrast with "but" joining two verbs about the same subject, describing what the report does. It's not the "not X, but Y" negation-foil pattern. It's acceptable... but the ban is broad and I keep getting burned. Let me avoid "but" pivots entirely where I can, to be safe. Rephrase: "Your diagnosis holds. The fix is mostly a framing decision the report gestures at and then buries." Good — no antithesis.
+Now I'm structuring the response: diagnose the problem and reframe it as a discovery issue rather than [[Wheelhouse]]'s responsibility, explain why that reframe works, map out the actual live discovery channels (site search deep-links and saved-search alerts), make ingestion robust with fallbacks, identify the one technical factor that matters (whether parse fetches the live page), and lay out what I'd build in order with an offer to verify the URL schemes. I need to watch every sentence for clarity and avoid any contradictions. doesn't land on." — "mostly a framing decision" — fine. "circles but doesn't land on" — is that an antithesis? "circles but doesn't land" — it's a contrast with "but" joining two verbs about the same subject, describing what the report does. It's not the "not X, but Y" negation-foil pattern. It's acceptable... but the ban is broad and I keep getting burned. Let me avoid "but" pivots entirely where I can, to be safe. Rephrase: "Your diagnosis holds. The fix is mostly a framing decision the report gestures at and then buries." Good — no antithesis.
 
 "The 'Find Listings' problem exists because the feature promised something the architecture can't deliver: live discovery from a stale index." — colon, fine. "promised something the architecture can't deliver" — no antithesis. "Right-size the promise and the problem dissolves." Good.
 
-For the section on where discovery actually lives, I'm laying out that the source sites themselves should handle live queries against their own databases, filtering to active listings and controlling their own data gates. Wheelhouse's real strength is the analysis layer — the capital scoring, dual metrics, and processing pipeline. Connecting those two pieces with seamless ingestion creates a coherent product.
+For the section on where discovery actually lives, I'm laying out that the source sites themselves should handle live queries against their own databases, filtering to active listings and controlling their own data gates. [[Wheelhouse]]'s real strength is the analysis layer — the capital scoring, dual metrics, and processing pipeline. Connecting those two pieces with seamless ingestion creates a coherent product.
 
 Now I'm endorsing Option 2 as the right direction and sketching how to build it: generating deep links from the Criteria panel into each site's live search, parameterized by location and max price...
 
-I'm also realizing there's a critical live-discovery channel the report overlooks: the saved-search email alerts that BizBuySell, BizQuest, and BizBen already offer. These emails pull from live databases, trigger when new listings post, and require no API or scraper. That's the closest thing to automated live discovery available without building custom infrastructure. The primary user sets up the searches once, and Wheelhouse just ingests what arrives — but I need to verify whether all three platforms actually support this feature.
+I'm also realizing there's a critical live-discovery channel the report overlooks: the saved-search email alerts that BizBuySell, BizQuest, and BizBen already offer. These emails pull from live databases, trigger when new listings post, and require no API or scraper. That's the closest thing to automated live discovery available without building custom infrastructure. The primary user sets up the searches once, and [[Wheelhouse]] just ingests what arrives — but I need to verify whether all three platforms actually support this feature.
 
 BizBuySell and BizQuest definitely have saved-search alerts, and I'm fairly confident BizBen does too through their ProBuyer feature, though I should hedge slightly given my knowledge cutoff. I'll phrase it as "the major listing sites offer saved-search email alerts" and note that confirming each one's current capabilities would be prudent. That keeps the point strong without overstating what I'm certain about.
 
@@ -2532,7 +2532,7 @@ accepting bulk URL pastes that parse in parallel lets users browse live results 
 
 Now I'm zeroing in on the technical crux: whether the parse-listing function fetches the actual live page or routes through a search index determines whether this whole approach produces reliable data. For the link checking, a 200 status code doesn't actually confirm a listing is live — these sites often serve a "no longer available" page with a 200 response, so HEAD requests will miss dead listings. I'd need to GET the full page and scan for soft-404 markers like "listing removed" or "no longer available" in the HTML to catch those cases. Also, I'm noticing the report mentions BizBen twice and BizBuySell, but I think the third one should be BizQuest — worth confirming since BizBuySell and BizQuest are both owned by CoStar and likely share URL patterns, whereas BizBen operates independently.
 
-For next steps, I'd prioritize: rename "Find Listings" to "Search live sites" and make it clear upfront that Wheelhouse validates listings you provide; build deep-link generators for BizBuySell, BizQuest, and BizBen from the search criteria; add bulk paste and proper text ingestion; wire up saved-search alerts from those three sites as the primary discovery mechanism; and harden the link checker to actually read page bodies for soft-404s.
+For next steps, I'd prioritize: rename "Find Listings" to "Search live sites" and make it clear upfront that [[Wheelhouse]] validates listings you provide; build deep-link generators for BizBuySell, BizQuest, and BizBen from the search criteria; add bulk paste and proper text ingestion; wire up saved-search alerts from those three sites as the primary discovery mechanism; and harden the link checker to actually read page bodies for soft-404s.
 
 The first three are straightforward, but step four—the saved-search alerts—is the real replacement for what "Find Listings" was supposed to do, and it costs nothing. I can verify the URL parameter schemes for those three sites and write the deep-link builder if that's helpful to lock in before you move forward. I'm checking my draft for contrast language—making sure I'm not leaning on "instead of," "rather than," or "not...but" constructions. The phrasing I've used so far holds up: the key moves are direct and positive, describing what the solution does rather than what it avoids.
 
@@ -2542,13 +2542,13 @@ I'm also tightening up the overall length and cutting the redundant note about t
 
 The URL parameter schemes are the real linchpin of the recommendation, and since the user framed this as strategic thinking help rather than a verification task, I'll keep my answer crisp and offer to nail down those URL schemes as the next concrete step if they want to move forward.Your diagnosis holds. The fix is mostly a framing decision the report gestures at and then buries under the Option 2 mechanics.
 
-The "Find Listings" problem exists because the feature promised something the architecture can't deliver: live discovery from a stale index. Right-size the promise and the problem dissolves. Discovery belongs on the source sites — they query their own live databases, surface active listings only, and gate whatever they gate. Wheelhouse's edge is the analysis layer: all-in capital, dual scoring, the pipeline, the diligence gates. Bolt those together with frictionless ingestion and you have a coherent product. The tool screens listings you bring it; the sites find them.
+The "Find Listings" problem exists because the feature promised something the architecture can't deliver: live discovery from a stale index. Right-size the promise and the problem dissolves. Discovery belongs on the source sites — they query their own live databases, surface active listings only, and gate whatever they gate. [[Wheelhouse]]'s edge is the analysis layer: all-in capital, dual scoring, the pipeline, the diligence gates. Bolt those together with frictionless ingestion and you have a coherent product. The tool screens listings you bring it; the sites find them.
 
 So Option 2 is the right core and I'd build it. Generating deep links into each site's live search from the Criteria panel — location, max price, category mapped from your capacity target — is the correct bridge.
 
 Two things the report misses that change the calculus:
 
-**The strongest live-discovery channel available is the sites' own saved-search email alerts.** BizBuySell, BizQuest, and BizBen all let you save a search and get emailed when new matches post (worth confirming BizBen's exact mechanism). Those emails come from the live database and fire when a listing goes up. That's as close to automated live discovery as exists without an API or a scraper, and it costs nothing. The primary sets up saved searches once; Wheelhouse ingests what arrives. This is the piece that replaces what "Find Listings" pretended to do, and it's free.
+**The strongest live-discovery channel available is the sites' own saved-search email alerts.** BizBuySell, BizQuest, and BizBen all let you save a search and get emailed when new matches post (worth confirming BizBen's exact mechanism). Those emails come from the live database and fire when a listing goes up. That's as close to automated live discovery as exists without an API or a scraper, and it costs nothing. The primary sets up saved searches once; [[Wheelhouse]] ingests what arrives. This is the piece that replaces what "Find Listings" pretended to do, and it's free.
 
 **Make pasted page text a first-class input alongside the URL.** When a URL parse comes back thin — because the site blocks the fetch or gates the price — the primary copies the listing body and pastes it. That text is live by definition and needs no fetch. The parse function already accepts text, so this is a small UI addition. Pair it with bulk paste (several URLs at once, parsed in parallel) so the flow becomes "browse the live results, copy the links worth screening, dump them in."
 
@@ -2558,7 +2558,7 @@ A smaller one: on Check Links, a 200 isn't proof of life. These sites frequently
 
 What I'd do, in order:
 
-1. Reposition — rename "Find Listings" to "Search live sites," and say plainly in the UI that Wheelhouse screens listings you bring it.
+1. Reposition — rename "Find Listings" to "Search live sites," and say plainly in the UI that [[Wheelhouse]] screens listings you bring it.
 2. Build the deep-link generator from Criteria for BizBuySell, BizQuest, and BizBen.
 3. Add bulk-paste plus first-class pasted-text ingestion.
 4. Point the primary at saved-search alerts on the three sites as the standing discovery feed.
@@ -2641,7 +2641,7 @@ I'm realizing the timeline completely reframes this—the primaries are looking 
 
 What's striking is that the capital partner question—which was flagged as the biggest blocker—might already be solved: the Busby's owner(s) who also operate Ye Olde King's Head and a Silver Lake location are likely the capital partner, and they're an experienced multi-unit operator. That fundamentally changes the governance, equity, and risk conversation. The memo should pivot toward strategic framing and relationship dynamics over a multi-year runway rather than tactical execution steps.
 
-The market monitoring tool shifts from active screening to passive tracking—building comps intuition and watching what sells over 2-3 years, which aligns with the Wheelhouse repositioning. I should also research who owns that Silver Lake bar, since identifying the capital partner's track record and network is directly material to the memo's core question. — these are bar owners, public-facing businesses, so researching them is fine.
+The market monitoring tool shifts from active screening to passive tracking—building comps intuition and watching what sells over 2-3 years, which aligns with the [[Wheelhouse]] repositioning. I should also research who owns that Silver Lake bar, since identifying the capital partner's track record and network is directly material to the memo's core question. — these are bar owners, public-facing businesses, so researching them is fine.
 
 I'll search for the common owner across Busby's and Ye Olde King's Head in Santa Monica, then track down the Silver Lake bar connection. But I should also step back and think through the memo revision more carefully, since that's what the user really needs.
 
@@ -2712,13 +2712,13 @@ The capital partner playbook completely inverts with someone like Boettcher. The
 
 The operating agreement and walk-away provisions become the core of the negotiation—protecting real ownership, operational authority, sweat-equity vesting, and a path to buyout or control. There's also an employment layer that's tricky: they're his bartenders. That's a huge upside—he's seen their work for years and can be the best reference possible. But it's also a risk because of the power imbalance; the conversation could affect their jobs, and mixing boss, partner, and maybe more concentrates too much of their life in one relationship. The memo needs to give them a safe way to raise concerns without jeopardizing employment and to negotiate as a unified team.
 
-There's also a concept-fit question: Boettcher's portfolio is a Westside sports bar, a British pub, a Silver Lake rock-vegan spot—none of these are beach boardwalk concepts.  His money and instincts may pull toward LA and the Westside where he already operates, not toward Orange County coastal. I should probe whether he's genuinely backing their concept and geography or if he's really looking to build something closer to his own wheelhouse.
+There's also a concept-fit question: Boettcher's portfolio is a Westside sports bar, a British pub, a Silver Lake rock-vegan spot—none of these are beach boardwalk concepts.  His money and instincts may pull toward LA and the Westside where he already operates, not toward Orange County coastal. I should probe whether he's genuinely backing their concept and geography or if he's really looking to build something closer to his own [[Wheelhouse]].
 
 On funding capacity, Busby's was publicly struggling with profitability in late 2024. That doesn't automatically disqualify him, but it means I need to confirm the check is real and understand whether he's funding from a position of strength or stretching himself. I'll need to phrase this carefully—it's due diligence, not gossip.
 
 Before approaching Boettcher, the two operators need to settle their own arrangement first: roles, equity split, decision-making authority, and what happens if one wants out.
 
-The shortlist of 11 targets should shift from "act now" to a calibration set. In a few years those listings will be gone, but they're valuable as a worked model of what coastal SoCal bars cost all-in and what kills deals—rent ratios, lease terms, licensing. I'm using Wheelhouse to track the market over time: what lists, what sells, days-on-market, the all-in math, building pattern recognition and logging off-market leads.
+The shortlist of 11 targets should shift from "act now" to a calibration set. In a few years those listings will be gone, but they're valuable as a worked model of what coastal SoCal bars cost all-in and what kills deals—rent ratios, lease terms, licensing. I'm using [[Wheelhouse]] to track the market over time: what lists, what sells, days-on-market, the all-in math, building pattern recognition and logging off-market leads.
 
 Off-market relationship sourcing is the real edge here. The partner brings 20 years of LA operations and a network of distributors, brokers, and landlords—that's the centerpiece, not buried in an appendix. I'm keeping the durable reference material: all-in methodology, build-vs-buy analysis, diligence gates. Those don't expire. On market timing, the lesson isn't about catching today's window but about the off-market and relationship edge mattering more than macro cycles—and the same cost pressures hitting the market are relevant to their situation.
 
@@ -2742,7 +2742,7 @@ This flips the risk calculus entirely. Instead of worrying about control and fun
 
 There's a separate dimension when your boss is the potential backer. It has real upside—his firsthand knowledge of their work is the strongest endorsement—but also real delicacy. A stalled conversation can poison the day job they still depend on. The memo needs to give them a safe way to open it that protects the employment relationship and flags the concentration risk of having one person be boss, business partner, and landlord all at once.
 
-Before approaching him, they need to probe two things: whether he'd back their original concept or push them toward his Westside wheelhouse, and whether the check is actually real and sized appropriately given his recent profitability pressures. But first, the two of them need to lock in their own arrangement—roles, equity split, decision rights, what happens if one walks—so they approach him as a unified team with clear internal structure. Then instead of "This Week" and a six-month timeline, they need a two to three year positioning roadmap that builds real operational credibility: moving from bartender toward floor and GM responsibility with actual P&L exposure, banking equity to shrink the partner check and dilution.
+Before approaching him, they need to probe two things: whether he'd back their original concept or push them toward his Westside [[Wheelhouse]], and whether the check is actually real and sized appropriately given his recent profitability pressures. But first, the two of them need to lock in their own arrangement—roles, equity split, decision rights, what happens if one walks—so they approach him as a unified team with clear internal structure. Then instead of "This Week" and a six-month timeline, they need a two to three year positioning roadmap that builds real operational credibility: moving from bartender toward floor and GM responsibility with actual P&L exposure, banking equity to shrink the partner check and dilution.
 
 The real edge here is the off-market track—relationship sourcing becomes the main event over that runway, especially since a twenty-year LA operator brings distributor, broker, and landlord relationships they can actually plug into. The shortlist of eleven targets shifts from a buy list to a calibration tool, a way to test the market and refine what they're looking for. ned constructions — checking whether the language avoids problematic framings. The comparisons hold up fine: passive versus active investor, control versus finding capital, the structural shift from appendix to core. The either-or questions about partnership versus employment and ownership versus a GM role are all legitimate tensions, not rhetorical traps. The parallel structures on handling things well versus poorly work cleanly.
 
@@ -2774,7 +2774,7 @@ How I'd rebuild it:
 
 The risk profile inverts with him. With passive money the worry was control and sourcing the check. With an experienced operator-boss, the live question becomes whether the primaries end up partners or promoted employees running his fourth unit on a thin equity stub. So governance and economics — operational authority, sweat-equity vesting with real protection, a buyout or control path, the scope of his vetoes — moves from appendix to core. That negotiation decides whether this is ownership or a GM job with an equity kicker.
 
-The employer dimension gets its own short section. Asking your boss to back your venture carries real upside and real delicacy at once: done well, his firsthand read on their work is the best reference going; done poorly, a stalled venture conversation can strain the day job they still rely on. The memo should give them a way to open it that protects the employment relationship, and should name the concentration risk of one person being boss, partner, and primary backer simultaneously. Two probes belong in that conversation: whether he's backing their boardwalk-in-OC concept or would steer toward his Westside/LA wheelhouse, and confirmation on the check given the Busby's profitability pressure.
+The employer dimension gets its own short section. Asking your boss to back your venture carries real upside and real delicacy at once: done well, his firsthand read on their work is the best reference going; done poorly, a stalled venture conversation can strain the day job they still rely on. The memo should give them a way to open it that protects the employment relationship, and should name the concentration risk of one person being boss, partner, and primary backer simultaneously. Two probes belong in that conversation: whether he's backing their boardwalk-in-OC concept or would steer toward his Westside/LA [[Wheelhouse]], and confirmation on the check given the Busby's profitability pressure.
 
 **Settle the two-of-them arrangement first.** Before approaching Boettcher, the primaries align with each other — roles, equity split between them, decision rights, what happens if one exits — and approach him as a unified operating team with its own house in order.
 
@@ -2840,7 +2840,7 @@ The target is a solid, unglamorous bar with an owner ready to step away—someth
 
 I caught myself using "take a clean exit over top dollar"—that's a preference comparison, which I should avoid. Better to say the owner values a clean, quiet exit rather than chasing maximum price. So the revised framing is: a profitable, unexciting bar with a tired owner who values a clean, quiet exit, structured at roughly $400–600k with 25% down and a five-year seller carry at 7–8%.
 
-Now for what Wheelhouse actually does: it's a tracking and pattern-building tool for the coastal San Diego market. I log every listing and off-market lead, run the full capital math on each deal, and watch how prices and time-on-market shift across Newport, Huntington Beach, Long Beach, Oceanside, and the broader coast. Two or three years of that data builds the intuition to price deals quickly and move when the right one surfaces. Right now it's a screener and market journal; in twelve months it becomes an active deal pipeline.
+Now for what [[Wheelhouse]] actually does: it's a tracking and pattern-building tool for the coastal San Diego market. I log every listing and off-market lead, run the full capital math on each deal, and watch how prices and time-on-market shift across Newport, Huntington Beach, Long Beach, Oceanside, and the broader coast. Two or three years of that data builds the intuition to price deals quickly and move when the right one surfaces. Right now it's a screener and market journal; in twelve months it becomes an active deal pipeline.
 
 The market backdrop is working in my favor as a disciplined buyer. California hospitality is squeezed hard—the 2026 minimum wage hitting $16.90, the $20 fast-food floor, plus insurance and food costs—which is pushing owners to sell and bringing seller financing into play. Financing itself has loosened from the peak, with prime around 6.75% and SBA acquisition money in the 9–9.5% range for solid borrowers, which improves my cost of capital and brings other buyers back to the table for quality deals. Over a two to three year window, the macro picture will shift—rates and distribution will move—so I'm building pattern recognition now while conditions favor the buyer.
 

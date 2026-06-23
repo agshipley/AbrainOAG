@@ -79,9 +79,9 @@ The LLM-driven read is the one that's genuinely hard to do without an LLM and wh
 
 **3. Does this belong in the portfolio?**
 
-Your tier-1 repos already tell a story: Orpheus (self-search), NLSAFE (AI safety infra), first-agent (production lead-gen), mrkt (transactional law moneyball), charlie. A repo-analysis tool fits *only* if it's framed as something coherent with the rest — e.g., "Mrkt for open-source projects" (empirical analysis of what's actually being built in a category) or as a sub-tool inside Mrkt/Orpheus.
+Your tier-1 repos already tell a story: [[Orpheus]] (self-search), [[NLSAFE]] (AI safety infra), [[first-agent]] (production lead-gen), [[mrkt]] (transactional law moneyball), [[charlie]]. A repo-analysis tool fits *only* if it's framed as something coherent with the rest — e.g., "[[mrkt]] for open-source projects" (empirical analysis of what's actually being built in a category) or as a sub-tool inside [[mrkt]]/[[Orpheus]].
 
-Standalone, it risks looking like a sixth thing in a portfolio that already shows range. Folded into Mrkt as "competitive intelligence on technical claims," it's stronger.
+Standalone, it risks looking like a sixth thing in a portfolio that already shows range. Folded into [[mrkt]] as "competitive intelligence on technical claims," it's stronger.
 
 ---
 
@@ -89,7 +89,7 @@ Standalone, it risks looking like a sixth thing in a portfolio that already show
 
 **Path A — Concrete use case first.** Tell me the specific decision or research question. I'll design the smallest tool that answers it. Probably a CLI or a script, not a web app. Ship in a session.
 
-**Path B — Stay exploratory.** I push back harder on whether this should exist as its own thing, or sketch how it folds into Mrkt as a competitive-intelligence module. No code yet.
+**Path B — Stay exploratory.** I push back harder on whether this should exist as its own thing, or sketch how it folds into [[mrkt]] as a competitive-intelligence module. No code yet.
 
 Which?
 
@@ -105,19 +105,19 @@ Let me think about this honestly before sketching.
 
 **Why this is harder than it sounds**
 
-The naive version — `git clone, cat every file, send to Claude` — fails for any non-trivial repo. Orpheus alone is well past any single-context window. So the real engineering problem is:
+The naive version — `git clone, cat every file, send to Claude` — fails for any non-trivial repo. [[Orpheus]] alone is well past any single-context window. So the real engineering problem is:
 
 1. **Selection** — which files matter? A repo has load-bearing files (the Conductor, the MCP server registration, the ranking algorithm) and noise (lockfiles, generated types, vendored deps, tests of trivial utilities). A useful tool ranks files by architectural significance and feeds Claude the top N.
 
 2. **Structure first, contents second** — the directory tree, the package.json/pyproject/Cargo.toml, the README, and the entry points tell you 60% of what you need before reading a single function body. Cheap to extract, high signal.
 
-3. **Question-driven reads** — "review this repo" is too vague to produce a useful output. "Is the MCP architecture in Orpheus actually doing what the README claims" or "where is the ranking algorithm and is `targetTitles` wired in" are tractable. The tool should accept a question, not just a URL.
+3. **Question-driven reads** — "review this repo" is too vague to produce a useful output. "Is the MCP architecture in [[Orpheus]] actually doing what the README claims" or "where is the ranking algorithm and is `targetTitles` wired in" are tractable. The tool should accept a question, not just a URL.
 
 4. **Output format** — a wall of prose is useless. Structured output (architecture summary, key files with line refs, concrete findings, open questions) is what you'd actually use.
 
 **What I'd build**
 
-A CLI tool. Python or Node, your call — Node keeps it consistent with Orpheus, Python has better tree-sitter bindings if you want AST parsing later. I'd start Node.
+A CLI tool. Python or Node, your call — Node keeps it consistent with [[Orpheus]], Python has better tree-sitter bindings if you want AST parsing later. I'd start Node.
 
 ```
 claude-repo-review <github-url-or-local-path> [--question "..."] [--depth shallow|deep]
@@ -132,7 +132,7 @@ Pipeline:
 5. **Query** — single Claude call with the assembled context and the user's question (or a default "produce an architectural review" prompt). Structured output: summary, architecture, key files, findings, questions.
 6. **Render** — markdown to stdout, optionally write to file.
 
-That's the v0. It's a few hundred lines, ships in a session, and it actually works on Orpheus or any other repo you point it at.
+That's the v0. It's a few hundred lines, ships in a session, and it actually works on [[Orpheus]] or any other repo you point it at.
 
 **The tier-1 portfolio version**
 
@@ -143,10 +143,10 @@ If this is going to be a tier-1 repo and not a script, two things matter beyond 
 
 **What I want to flag before we build**
 
-- **API cost exposure.** A deep review of a large repo is a 100k-token call. At Claude Opus pricing that's real money per run. If this becomes a public tool with no auth (like Orpheus), you'll want a rate limiter and a cost ceiling from day one. Same lesson as Orpheus.
+- **API cost exposure.** A deep review of a large repo is a 100k-token call. At Claude Opus pricing that's real money per run. If this becomes a public tool with no auth (like [[Orpheus]]), you'll want a rate limiter and a cost ceiling from day one. Same lesson as [[Orpheus]].
 - **Auth for private repos.** v0 should be public-only. Adding GitHub OAuth is a separate scope.
 - **Local vs. cloned.** Running against a local path you already have is cheaper, faster, and avoids the clone step entirely. I'd build local-path support first and add URL support second.
-- **The "question" parameter is the whole product.** Without it, you've built a generic summarizer. With it, you've built something that answers "is `targetTitles` wired into the ranker in Orpheus" in 30 seconds. Lead with the question.
+- **The "question" parameter is the whole product.** Without it, you've built a generic summarizer. With it, you've built something that answers "is `targetTitles` wired into the ranker in [[Orpheus]]" in 30 seconds. Lead with the question.
 
 ---
 
@@ -185,12 +185,12 @@ The GitHub MCP server gives any Claude surface raw access to repos. It does *not
 
 So the question splits in two:
 
-**Question A — short term: do you want me to actually look at your code in this conversation?** If yes, you connect the GitHub MCP server to Claude.ai (Settings → Connectors → add GitHub) and from then on I can read NLSAFE, first-agent, mrkt, charlie, Orpheus directly. No tool to build. This is a 5-minute setup. The reason I've only ever read your READMEs is that I literally can't see anything else without this connector.
+**Question A — short term: do you want me to actually look at your code in this conversation?** If yes, you connect the GitHub MCP server to Claude.ai (Settings → Connectors → add GitHub) and from then on I can read [[NLSAFE]], [[first-agent]], [[mrkt]], [[charlie]], [[Orpheus]] directly. No tool to build. This is a 5-minute setup. The reason I've only ever read your READMEs is that I literally can't see anything else without this connector.
 
 **Question B — longer term: is there a tool worth building on top?** This is where it gets interesting. Possibilities, ranked by how distinct they'd be from what already exists:
 
 - **Cross-repo strategic review.** "Look at all five tier-1 repos and tell me where the architectural patterns are inconsistent, where the documentation lies about what the code does, where the technical debt is concentrated." Not a thing any existing tool does. Genuinely useful for a portfolio.
-- **Claim verification for Mrkt.** When Mrkt evaluates a deal or a company, point it at their public repos and check whether their technical claims match reality. This is the M&A diligence angle and it folds cleanly into Mrkt's existing positioning.
+- **Claim verification for [[mrkt]].** When [[mrkt]] evaluates a deal or a company, point it at their public repos and check whether their technical claims match reality. This is the M&A diligence angle and it folds cleanly into [[mrkt]]'s existing positioning.
 - **Repo-as-portfolio summarizer.** Generate the "what these repos collectively demonstrate" narrative from the code itself. Less useful — you can write that yourself.
 
 The first and second are real. The first is the more direct answer to "I want to be able to look across my projects strategically."
@@ -199,8 +199,8 @@ The first and second are real. The first is the more direct answer to "I want to
 
 Two-step play:
 
-1. **This week, no build.** Add the GitHub MCP server to Claude.ai. The next time we talk about Orpheus or NLSAFE, I can actually read the code. This alone closes the gap you raised.
-2. **Later, if it earns its place.** Build a cross-repo analyzer as a small CLI (or as a Mrkt module) that does the strategic read across N repos. The GitHub MCP gives you the file access for free; what you'd build is the prompt scaffolding, the file ranking heuristic, and the structured-output contract.
+1. **This week, no build.** Add the GitHub MCP server to Claude.ai. The next time we talk about [[Orpheus]] or [[NLSAFE]], I can actually read the code. This alone closes the gap you raised.
+2. **Later, if it earns its place.** Build a cross-repo analyzer as a small CLI (or as a [[mrkt]] module) that does the strategic read across N repos. The GitHub MCP gives you the file access for free; what you'd build is the prompt scaffolding, the file ranking heuristic, and the structured-output contract.
 
 The mistake would be to skip step 1 and build step 2 — you'd reinvent the file-fetching layer GitHub already maintains, and you still wouldn't be able to use it inside this conversation.
 
@@ -233,7 +233,7 @@ In this Claude.ai web app, go to **Settings → Connectors**. You'll see a list 
 
 **What changes based on the answer**
 
-- **If GitHub is connected here:** great, we'll get me reading your repos in this conversation directly. I'd start by pulling the file tree of NLSAFE or first-agent and giving you a real architectural read — the thing you've been asking for.
+- **If GitHub is connected here:** great, we'll get me reading your repos in this conversation directly. I'd start by pulling the file tree of [[NLSAFE]] or [[first-agent]] and giving you a real architectural read — the thing you've been asking for.
 - **If it's only in Claude Code:** that's still the most useful place for it day-to-day, but it doesn't solve the cross-project strategic review problem you raised. For that, you either (a) connect GitHub at the Claude.ai account level so I can see code in conversations like this one, or (b) we build the small cross-repo CLI we discussed.
 - **If it's not connected anywhere:** Claude.ai web is the highest-leverage place to add it given what you actually want to do.
 

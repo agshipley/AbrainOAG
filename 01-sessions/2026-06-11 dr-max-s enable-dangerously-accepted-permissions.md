@@ -3,7 +3,7 @@ type: session
 source: claude-code
 uuid: 64cdaa3b-0944-4b74-8fd9-1f45bbcd47dd
 title: "Enable dangerously accepted permissions"
-project: "Dr Max's"
+project: "[[Dr Max's]]"
 cwd: "/Users/andrewshipley/projects/Dr Max's"
 created: 2026-06-11
 updated: 2026-06-11
@@ -3420,7 +3420,7 @@ What would you like to work on?
 
 **user**
 
-<ide_opened_file>The user opened the file /Users/andrewshipley/projects/Dr Max's/sku_seed_data.json in the IDE. This may or may not be related to the current task.</ide_opened_file>
+<ide_opened_file>The user opened the file /Users/andrewshipley/projects/[[Dr Max's]]/sku_seed_data.json in the IDE. This may or may not be related to the current task.</ide_opened_file>
 Read CLAUDE.md, SPEC.md, and BRAND_SYSTEM.md fully before writing any code. Then execute Phase 1 of the SPEC build plan only: scaffold Vite + React + TypeScript + Tailwind with the brand tokens, import the seed data, and render it as a plain list. Stop at the Phase 1 checkpoint and wait for my review.
 
 **assistant**
@@ -3840,7 +3840,7 @@ The conversation has progressed through:
 
 4. Errors and fixes:
 - **`npm create vite` failed** in non-empty directory → Manually created all project files instead
-- **Vercel deploy failed** with "Project names can be up to 100 characters long and must be lowercase" because folder name "Dr Max's" has apostrophe and uppercase → Fixed by adding `"name": "dr-maxs-sku-roadmap"` to vercel.json
+- **Vercel deploy failed** with "Project names can be up to 100 characters long and must be lowercase" because folder name "[[Dr Max's]]" has apostrophe and uppercase → Fixed by adding `"name": "dr-maxs-sku-roadmap"` to vercel.json
 - **Vercel login required** — no `~/.vercel/auth.json`, no `VERCEL_TOKEN` → Told user to run `npx vercel login`; user confirmed authentication as `agshipley`
 - **Phase 2 feedback: Tin SVG wrong** — too tall (jar-like), was viewBox 100x120 → Rewrote to viewBox="0 0 110 58" (~2:1), shallow body (28px), thin lid (10px)
 - **Phase 2 feedback: dashed label rects read as placeholders** → Removed all `strokeDasharray` from label areas across all 6 silhouettes; replaced with solid hairline + botanical sprig mark (stem + two leaves + small circle flower)
@@ -3950,7 +3950,7 @@ What landed in this deploy:
 
 **user**
 
-<ide_opened_file>The user opened the file /Users/andrewshipley/projects/Dr Max's/index.html in the IDE. This may or may not be related to the current task.</ide_opened_file>
+<ide_opened_file>The user opened the file /Users/andrewshipley/projects/[[Dr Max's]]/index.html in the IDE. This may or may not be related to the current task.</ide_opened_file>
 1. Backend — Vercel serverless functions.
 Create api/generate.ts. It accepts POST { idea: string, locked: { format?, ageBand?, scenario?, price?, waterBased? } }. It calls the Anthropic Messages API (model claude-sonnet-4-20250514, key from process.env.ANTHROPIC_API_KEY) with this system prompt:
 "You are the product strategist for Dr. Max's, a physician-formulated natural skincare brand (drmaxs.com). Brand: multi-use, whole-family, all-natural; free from parabens, sulfates, phthalates, petrolatum, plastics, preservatives, synthetic fragrance and dyes; hero botanicals are calendula, chamomile, yarrow, arnica, sea buckthorn, olive oil, beeswax, colloidal oatmeal, zinc oxide. Current line and price ladder: Nipple Balm $15, Baby Balm $18, Diaper Ointment $20, Salve-All $22 (hero). Voice: plain, clinical-warm; never 'miracle' or cure claims. The user proposes a product idea plus optional locked parameters. Locked parameters are non-negotiable — obey them exactly. For everything not locked, use your best judgment to produce a commercially sensible, brand-consistent spec. If the idea requires a water-based formula and waterBased is locked false, choose the closest anhydrous format and note the tradeoff in rationale. Respond with ONLY a JSON object, no markdown fences, no preamble: { name, tagline, format (one of: tin|tube|bottle|jar|soap-bar|stick|carton), ageBand (one of: 0-12m|0-3y|1-3y|adult|family), price (number), heroIngredients (string[]), uses (string[]), waterBased (boolean), scenario (all-branch|velocity|duration), rationale (2-3 sentences: why this spec, where it sits in the price ladder, what it trades off), renderPrompt (one paragraph of photorealistic product-photography prompt for this product: container, materials, label text verbatim, lighting 'soft diffused studio', backdrop 'warm cream seamless #FDF9F2', label type 'deep indigo #2B2651 serif') }."

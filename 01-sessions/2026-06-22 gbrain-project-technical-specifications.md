@@ -65,7 +65,7 @@ The benchmark: on a 240-page Opus-generated rich-prose corpus (BrainBench), it h
 
 ## The loop and the "dream cycle"
 
-The compounding mechanism runs: signal → search → respond → write → auto-link → sync. A signal detector runs on every message; a brain-first lookup happens before any external API call; auto-linking fires on every page write (no LLM calls); and cron-driven enrichment runs while you sleep — dedup people pages, fix citations, score salience, find contradictions, prep tomorrow's tasks. Reviewers describe three self-improvement mechanisms layered on this: tiered enrichment (entities mentioned more often get progressively richer pages), a fail-improve loop (logged LLM fallbacks generate better regex patterns over time, so cost drops on the same workload), and backlink-boosted ranking.
+The compounding mechanism runs: signal → search → respond → write → auto-link → sync. A signal detector runs on every message; a brain-first lookup happens before any external API call; auto-linking fires on every page write (no LLM calls); and cron-driven enrichment runs while you sleep — dedup people pages, fix citations, score salience, find contradictions, prep tomorrow's tasks. Reviewers describe three self-improvement mechanisms layered on this: [[Tiered enrichment]] (entities mentioned more often get progressively richer pages), a fail-improve loop (logged LLM fallbacks generate better regex patterns over time, so cost drops on the same workload), and backlink-boosted ranking.
 
 ## Schema packs
 
@@ -293,7 +293,7 @@ I think you need to familiarize yourself with where I'm at currently with my wor
 
 **assistant**
 
-I'm checking what memories I have about the user's workspace state, but I don't see any stored memories in my context yet, so I'm starting fresh to understand where they're at. I'm realizing I don't actually have any populated memories in my context right now, so I can't review what's stored. I do see some user-uploaded skills like "feature-factory" that mention Andrew and Orpheus, but those are separate from the memory system. The user is asking me to familiarize myself with their workspace, which suggests they want me to understand the context of what we're working on together. Looking at what I actually have access to, there's no populated userMemories block visible to me, so I can't genuinely recall details about their workspace setup. The honest move here is to acknowledge that gap rather than pretend I remember things I don't, then offer to search through their project history or use available tools to get up to speed on what they're working on. The honest approach is to acknowledge I don't have any populated memories about their workspace, but offer to search through past conversations in the project to reconstruct what they've been working on and where they currently stand. I should actually verify what's in my memory rather than just reasoning about it. Let me check the memory edits directly and search through recent conversations to see what context is actually available, rather than making assumptions from my loaded skills. 's the context I can actually point to. So I should acknowledge I don't have stored memories about their workspace, but I do have visibility into the skills that describe their actual project setup.
+I'm checking what memories I have about the user's workspace state, but I don't see any stored memories in my context yet, so I'm starting fresh to understand where they're at. I'm realizing I don't actually have any populated memories in my context right now, so I can't review what's stored. I do see some user-uploaded skills like "feature-factory" that mention Andrew and [[Orpheus]], but those are separate from the memory system. The user is asking me to familiarize myself with their workspace, which suggests they want me to understand the context of what we're working on together. Looking at what I actually have access to, there's no populated userMemories block visible to me, so I can't genuinely recall details about their workspace setup. The honest move here is to acknowledge that gap rather than pretend I remember things I don't, then offer to search through their project history or use available tools to get up to speed on what they're working on. The honest approach is to acknowledge I don't have any populated memories about their workspace, but offer to search through past conversations in the project to reconstruct what they've been working on and where they currently stand. I should actually verify what's in my memory rather than just reasoning about it. Let me check the memory edits directly and search through recent conversations to see what context is actually available, rather than making assumptions from my loaded skills. 's the context I can actually point to. So I should acknowledge I don't have stored memories about their workspace, but I do have visibility into the skills that describe their actual project setup.
 
 I think the honest approach is to check my tools first—search for any relevant conversation history and memory edits—then report back what I find without inventing details. And I need to be careful not to overstate what the skills tell me or fabricate specifics beyond what's actually there. is a straightforward one — I should check what's actually in memory rather than speculate. Let me call the memory tools to see what's been stored, then report back honestly on what I find without making assumptions about the user's identity or fabricating details. _chats will show this conversation and possibly others in the project. Let me run both searches to see what's actually stored.
 
@@ -309,7 +309,7 @@ Let me look at the recent conversations in this project.
 This block is not supported on your current device yet.
 ```
 
-I'm not finding any memory edits or recent conversations in the project context, and the userMemories block is empty. Let me search through conversations for mentions of "workspace" or "Orpheus" to be thorough.
+I'm not finding any memory edits or recent conversations in the project context, and the userMemories block is empty. Let me search through conversations for mentions of "workspace" or "[[Orpheus]]" to be thorough.
 ```
 This block is not supported on your current device yet.
 ```
@@ -330,7 +330,7 @@ But the user picked "full autonomous setup" in their earlier request, which dire
 
 The actual critical path is getting Andrew's full Claude.ai conversation history and Claude Code session logs into the Obsidian vault as structured markdown — that's the substance that needs to work first. The import pipeline from three sources (Claude.ai export, JSONL logs, and project memory) is what matters. The vault structure is already specified with numbered folders and a clear layout.
 
-COG-second-brain is the closest reference model — pure markdown and Obsidian with git, not the full database-backed approach. I'm pre-populating the seed graph with known entities like the projects (Orpheus, first-agent, charlie, mrkt, NLSAFE), key people, companies, and core concepts. The working rules are clear: Andrew owns product decisions and taste, I handle infrastructure unknowns, and implementation stays focused on what actually works.
+COG-second-brain is the closest reference model — pure markdown and Obsidian with git, not the full database-backed approach. I'm pre-populating the seed graph with known entities like the projects ([[Orpheus]], [[first-agent]], [[charlie]], [[mrkt]], [[NLSAFE]]), key people, companies, and core concepts. The working rules are clear: Andrew owns product decisions and taste, I handle infrastructure unknowns, and implementation stays focused on what actually works.
 
 One critical constraint I keep violating — the foil-construction rule. Andrew's linter flags the pattern of stating what something isn't before what it is (`not X, but Y`, `it's not X, it's Y`, and softer variants like `rather than` or `instead of`). I need to state the positive claim directly without the negation frame. Looking back at my outputs, I've been doing exactly this repeatedly.
 
@@ -350,7 +350,7 @@ I need to acknowledge the gap between what I've been suggesting (PGLite, embeddi
 
 The immediate sequence from the doc is clear: set up the vault structure with the folder taxonomy, verify both importers on a single record, run the full import, execute the extraction pass, then seed the graph. There are also blocking decisions in the doc I need to flag—sync engine choice, runtime environment, privacy scope, and how to handle the Source C memory dump—but the core question is whether we're actually committing to the Phase 1 import-first approach or if you want to pivot toward autonomous systems instead. That'll determine what we lock down next. I should own the miss cleanly: the project doc was in my context from the start, and it explicitly defers the autonomy question I just walked through, so I could have caught that mismatch. I'll cite the specific Phase 1 language, the import pipeline as the critical path, and the seed entities to show I've actually absorbed the doc, not just skimmed it. Then I'll reset the direction against what's actually planned and ask Andrew to lock the §10 decisions that gate the first build. The real priority is getting the import pipeline working—Andrew's full Claude.ai and Claude Code history needs to land in the vault as structured, linked markdown. That's the foundation everything else builds on. So the immediate sequence is setting up the vault skeleton with the folder structure and taxonomy files, then building and testing two importers on single records before running them at scale.
 
-Once the full import completes and the entity extraction pass runs, the graph gets seeded and linked—the outcome being that I can open Obsidian, search for something like "charlie," and see every session that touched it, connected to relevant people and projects. The COG fork is the Phase 1 reference model, not the main gbrain repo yet. We're staying pure markdown plus git plus Obsidian until Phase 1 and 2 prove the approach works.
+Once the full import completes and the entity extraction pass runs, the graph gets seeded and linked—the outcome being that I can open Obsidian, search for something like "[[charlie]]," and see every session that touched it, connected to relevant people and projects. The COG fork is the Phase 1 reference model, not the main gbrain repo yet. We're staying pure markdown plus git plus Obsidian until Phase 1 and 2 prove the approach works.
 
 Before I can start building the first importer, I need two decisions from you: whether to use bun or node for the scripts, and whether this project should hand the new vault an initial memory or context dump in the inbox folder.
 
@@ -373,7 +373,7 @@ I'm ready to draft the vault-skeleton and seed-graph Claude Code prompt now with
 
 The prompt itself looks solid: I'm asking for a skeleton draft plus a runtime choice between bun and node, which is really one primary decision. The Source C question I'm raising as context but not forcing as a blocker. The length is dense but warranted given the project reorientation, and it matches Andrew's direct style without padding.
 
-The numbered list of five steps plus two decisions is structured, but since §8 frames implementation as prompts and the phase plan is inherently sequential, a short ordered list is the clearest way to present it—Andrew's own doc uses numbered phases, so it fits. For the seed graph detail, I'm keeping it compressed to one line with entity counts and flagging that charlie needs to stay included, since Andrew's doc explicitly notes it's been dropped from summaries before and that's a known failure pattern worth signaling I caught.
+The numbered list of five steps plus two decisions is structured, but since §8 frames implementation as prompts and the phase plan is inherently sequential, a short ordered list is the clearest way to present it—Andrew's own doc uses numbered phases, so it fits. For the seed graph detail, I'm keeping it compressed to one line with entity counts and flagging that [[charlie]] needs to stay included, since Andrew's doc explicitly notes it's been dropped from summaries before and that's a known failure pattern worth signaling I caught.
 
 I'll attribute "whole game" to §9 and "no corpus no brain" to §0. Recommending Claude Code again would be redundant since Andrew clearly already uses it and the whole model assumes it—skip that. I'm avoiding reassurance language like "great" or "happy to," opening direct with "Read it," and closing crisp with "Go?"Read it. This is the governing doc, and it resets where we were heading.
 
@@ -384,10 +384,10 @@ Where you actually are: Phase 1, which §9 calls the whole game right now. §0 i
 Phase 1 sequence (§9), in order:
 
 1. **Vault skeleton** — the numbered `00-inbox` → `09-meta` tree (§3), the four `09-meta` taxonomy files, the one-line root `CLAUDE.md` pointer. No decisions needed; I can draft this Claude Code prompt now.
-2. **Seed graph** (§7) — write the known entities as stub files so the vault has a spine before sessions land: five projects, four people, four companies, the 2026-04-11 Orpheus decision, four starter concepts. charlie gets written explicitly (the doc flags it as having been dropped from summaries before).
+2. **Seed graph** (§7) — write the known entities as stub files so the vault has a spine before sessions land: five projects, four people, four companies, the 2026-04-11 [[Orpheus]] decision, four starter concepts. [[charlie]] gets written explicitly (the doc flags it as having been dropped from summaries before).
 3. **Source A importer** (`import-claude-export.ts`) — verified on one real record first, with the export JSON schema read from an actual record before any field names get hardcoded (§6 is explicit on this).
 4. **Source B importer** (`import-claude-code.ts`) — the Claude Code JSONL, the highest-signal corpus. The `~/.claude/projects/...` path and line schema get confirmed on your machine before parsing.
-5. **Full import** → `extract-entities.ts` → links wired. Target: open Obsidian, search "charlie," see every session that touched it linked to `[[Liz Varner]]` and the project note.
+5. **Full import** → `extract-entities.ts` → links wired. Target: open Obsidian, search "[[charlie]]," see every session that touched it linked to `[[Liz Varner]]` and the project note.
 
 Two §10 decisions gate the importers (the skeleton doesn't wait on them):
 
@@ -462,15 +462,15 @@ For delivery, I'm building a self-contained prompt block that Andrew can paste d
 
 For every entity file, I'm establishing a consistent frontmatter schema with YAML metadata, followed by a one-line definition and type-appropriate sections, with inline source tags for factual claims and wikilinks for named entities. The voice should be direct and positive—no foil constructions like "not X but Y" or "rather than," which is a hard constraint here.
 
-I'm setting up four files in the 09-meta directory to capture the taxonomy, edge vocabulary, and enrichment rules that govern how entities relate and evolve. Now I'm populating the seed graph with stub files for each entity, setting their status to stub with medium confidence, sourcing them from the project, and including the known facts as body content with inline source tags. I'm creating wikilinks between related entities like the three projects—Orpheus (an open-source job-search engine with MCP architecture deployed on Railway), first-agent (a production lead-gen and art-commissioning intelligence system for Tre Borden across multiple cities with an extensive test suite), and charlie (a multi-agent intelligence and decision-support system). Spencer Williams authored the 2019 "Predictive Contracting" paper and has an open collaboration thread on the mrkt project; John Jost from NYU co-authored a 2020 PLOS ONE paper. I'm also tracking Andrew's company roles: Trace Machina (sole ops/legal/finance lead, backed by Sequoia and Samsung Next), EeroQ (former Special Counsel and Chief of Staff in quantum computing), AGS Law PLLC (co-founded outside general counsel practice), and Audience Haus (current fractional Chief of Staff).
+I'm setting up four files in the 09-meta directory to capture the taxonomy, edge vocabulary, and enrichment rules that govern how entities relate and evolve. Now I'm populating the seed graph with stub files for each entity, setting their status to stub with medium confidence, sourcing them from the project, and including the known facts as body content with inline source tags. I'm creating wikilinks between related entities like the three projects—[[Orpheus]] (an open-source job-search engine with MCP architecture deployed on Railway), [[first-agent]] (a production lead-gen and art-commissioning intelligence system for [[Tre Borden]] across multiple cities with an extensive test suite), and [[charlie]] (a multi-agent intelligence and decision-support system). [[Spencer Williams]] authored the 2019 "[[Predictive contracting]]" paper and has an open collaboration thread on the [[mrkt]] project; [[John Jost]] from NYU co-authored a 2020 PLOS ONE paper. I'm also tracking Andrew's company roles: [[Trace Machina]] (sole ops/legal/finance lead, backed by Sequoia and Samsung Next), [[EeroQ]] (former Special Counsel and Chief of Staff in quantum computing), [[AGS Law PLLC]] (co-founded outside general counsel practice), and [[Audience Haus]] (current fractional Chief of Staff).
 
-I'm organizing my source retrieval strategy with a live/deferred-technical/deferred-scope classification, prioritizing local vault queries before external calls, and implementing tiered enrichment that escalates from stub to full based on mention frequency. I also documented a moderate-status incident from April 2026 where Orpheus had relevance failures—the corrective approach emphasizes profile-driven source selection and avoiding hardcoded rosters.
+I'm organizing my source retrieval strategy with a live/deferred-technical/deferred-scope classification, prioritizing local vault queries before external calls, and implementing [[Tiered enrichment]] that escalates from stub to full based on mention frequency. I also documented a moderate-status incident from April 2026 where [[Orpheus]] had relevance failures—the corrective approach emphasizes profile-driven source selection and avoiding hardcoded rosters.
 
 Now I need to verify the vault structure before declaring it complete: print the directory tree, count the markdown files created, validate all YAML frontmatter across entity files, and flag any broken wikilinks. I'll hold off on committing until showing the manifest for review. I'm checking my voice discipline across the seed one-liners and making sure I haven't slipped into negative directives or broken rules. The credential hygiene looks clean since no keys are in the skeleton itself. Now I'm drafting the intro prose to frame the whole approach concisely.
 
-I'll introduce the Phase 1 step-1 prompt that sets up the vault skeleton and metadata conventions, then paste the code block that creates the files and pauses for review before committing. After that, I want to add a quick note flagging the one micro-decision that'll come up: whether to create a self-node for Andrew or leave it out as I've done to match the existing conventions. I'm also double-checking whether GBRAIN_PROJECT.md actually lives in the repo itself or only in the Claude project context. I should add a precondition step telling Andrew to save GBRAIN_PROJECT.md into the repo root before running the prompt, so he doesn't hit the guard clause and get stopped. The prompt already checks if it's missing, but being explicit upfront improves the experience. I'm also reconsidering how to format source citations in the docs — the example shows a wikilink format with a date-based reference. I'm settling on the filename "2026-04-11 Orpheus relevance failure & corrective actions.md" since Obsidian handles special characters fine, though I'll use "and" instead of "&" to avoid potential shell or link issues. Now I'm checking the cross-links in the related documents, particularly verifying that "Predictive contracting.md" properly links to the relevant concepts.
+I'll introduce the Phase 1 step-1 prompt that sets up the vault skeleton and metadata conventions, then paste the code block that creates the files and pauses for review before committing. After that, I want to add a quick note flagging the one micro-decision that'll come up: whether to create a self-node for Andrew or leave it out as I've done to match the existing conventions. I'm also double-checking whether GBRAIN_PROJECT.md actually lives in the repo itself or only in the Claude project context. I should add a precondition step telling Andrew to save GBRAIN_PROJECT.md into the repo root before running the prompt, so he doesn't hit the guard clause and get stopped. The prompt already checks if it's missing, but being explicit upfront improves the experience. I'm also reconsidering how to format source citations in the docs — the example shows a wikilink format with a date-based reference. I'm settling on the filename "2026-04-11 [[Orpheus]] relevance failure & corrective actions.md" since Obsidian handles special characters fine, though I'll use "and" instead of "&" to avoid potential shell or link issues. Now I'm checking the cross-links in the related documents, particularly verifying that "[[Predictive contracting]].md" properly links to the relevant concepts.
 
-I've confirmed all the cross-references are valid — Spencer Williams, Tre Borden, Liz Varner, and Orpheus all exist as linked files with no broken references. I'm tallying up the total file count: 4 meta files, 5 projects, 4 people, 4 companies, 4 concepts, and 1 decision file, plus CLAUDE.md, which gives me 23 markdown files total.
+I've confirmed all the cross-references are valid — [[Spencer Williams]], [[Tre Borden]], [[Liz Varner]], and [[Orpheus]] all exist as linked files with no broken references. I'm tallying up the total file count: 4 meta files, 5 projects, 4 people, 4 companies, 4 concepts, and 1 decision file, plus CLAUDE.md, which gives me 23 markdown files total.
 
 Now I'm finalizing the response structure — keeping the intro brief, presenting the prompt as an inline code block for Andrew to copy into Claude Code, and adding a couple of lines about what to expect plus the note about the GBRAIN_PROJECT.md placement requirement upfront. I'll wrap the entire prompt in a single code fence and write the YAML schema as plain indented lines inside it, avoiding any nested backticks that would break the rendering. I'll ground these files in the project documentation and my summary, then write the final answer without any unnecessary framing.Bun it is.
 
@@ -594,24 +594,24 @@ Files (24 total .md):
 4	09-meta/edge-vocab.md	convention	—	—
 5	09-meta/enrichment-rules.md	convention	—	—
 6	09-meta/import-log.md	convention	—	—
-7	02-projects/Orpheus.md	project	stub	med
-8	02-projects/first-agent.md	project	stub	med
-9	02-projects/charlie.md	project	stub	med
-10	02-projects/mrkt.md	project	stub	med
-11	02-projects/NLSAFE.md	project	stub	med
-12	03-people/Tre Borden.md	person	stub	med
-13	03-people/Liz Varner.md	person	stub	med
-14	03-people/Spencer Williams.md	person	stub	med
-15	03-people/John Jost.md	person	stub	med
-16	04-companies/Trace Machina.md	company	stub	med
-17	04-companies/EeroQ.md	company	stub	med
-18	04-companies/AGS Law PLLC.md	company	stub	med
-19	04-companies/Audience Haus.md	company	stub	med
-20	05-concepts/Corpus governance.md	concept	stub	med
-21	05-concepts/Brain-first retrieval.md	concept	stub	med
-22	05-concepts/Predictive contracting.md	concept	stub	med
-23	05-concepts/Tiered enrichment.md	concept	stub	med
-24	07-decisions/2026-04-11 Orpheus relevance failure and corrective actions.md	decision	moderate	med
+7	02-projects/[[Orpheus]].md	project	stub	med
+8	02-projects/[[first-agent]].md	project	stub	med
+9	02-projects/[[charlie]].md	project	stub	med
+10	02-projects/[[mrkt]].md	project	stub	med
+11	02-projects/[[NLSAFE]].md	project	stub	med
+12	03-people/[[Tre Borden]].md	person	stub	med
+13	03-people/[[Liz Varner]].md	person	stub	med
+14	03-people/[[Spencer Williams]].md	person	stub	med
+15	03-people/[[John Jost]].md	person	stub	med
+16	04-companies/[[Trace Machina]].md	company	stub	med
+17	04-companies/[[EeroQ]].md	company	stub	med
+18	04-companies/[[AGS Law PLLC]].md	company	stub	med
+19	04-companies/[[Audience Haus]].md	company	stub	med
+20	05-concepts/[[Corpus governance]].md	concept	stub	med
+21	05-concepts/[[Brain-first retrieval]].md	concept	stub	med
+22	05-concepts/[[Predictive contracting]].md	concept	stub	med
+23	05-concepts/[[Tiered enrichment]].md	concept	stub	med
+24	07-decisions/2026-04-11 [[Orpheus]] relevance failure and corrective actions.md	decision	moderate	med
 Frontmatter validation: 18/18 entity files pass (type + status + confidence present). 4 meta convention files carry no frontmatter — correct, they are reference docs.
 Broken wikilinks: 0. Three flagged targets ([[session-file]] ×2, [[wikilink]] ×1`) are inside backtick code spans in meta docs — Obsidian treats these as code, not links.
 Count note: The prompt expected "22 convention+entity files plus root CLAUDE.md" = 23. We have 23 new files (22 + CLAUDE.md); GBRAIN_PROJECT.md was pre-existing, bringing the on-disk total to 24.
@@ -622,7 +622,7 @@ git add -A && git commit -m "Phase 1: vault skeleton, 09-meta conventions, seed 
 
 Andrew's brought back Claude Code's verification output showing the manifest, frontmatter validation, link checks, and reconciliation counts. He wants approval to commit, so I need to actually audit this against the spec and the prompt I wrote to make sure it's correct before signing off.
 
-Checking the directory structure: 11 directories as specified (inbox through meta plus scripts). For the 24 markdown files, I'm verifying the entity counts match what I requested — 5 projects including charlie with the always-include flag honored, 4 people, 4 companies, 4 concepts, 1 decision with moderate status as I specified, plus the meta files and core documentation. The entity file breakdown adds up correctly to 18 entities plus 6 supporting files.
+Checking the directory structure: 11 directories as specified (inbox through meta plus scripts). For the 24 markdown files, I'm verifying the entity counts match what I requested — 5 projects including [[charlie]] with the always-include flag honored, 4 people, 4 companies, 4 concepts, 1 decision with moderate status as I specified, plus the meta files and core documentation. The entity file breakdown adds up correctly to 18 entities plus 6 supporting files.
 
 Now I'm validating the frontmatter across all entity files — all 18 have proper YAML frontmatter with the required fields. The meta files in 09-meta don't carry frontmatter since they're reference documentation rather than entities themselves, which aligns with the schema treating them as conventions rather than typed entities.
 
@@ -640,7 +640,7 @@ The privacy scope question — whether to exclude certain conversations during i
 
 I need to keep this response tight and direct, cutting out reassurance and focusing on what's actually needed: approval, the commit, the extractor constraint flag, and starting the export.Verified against the spec and the prompt. Clean.
 
-11 directories, 18 entity files (5 projects including charlie, 4 people, 4 companies, 4 concepts, 1 decision), 4 meta docs, CLAUDE.md. Frontmatter passes on all 18. Counts reconcile: 23 new files + GBRAIN_PROJECT.md pre-existing = 24 on disk. The code-span call is right — Obsidian ignores `[[...]]` inside backticks, so those three are documentation and live broken links are zero.
+11 directories, 18 entity files (5 projects including [[charlie]], 4 people, 4 companies, 4 concepts, 1 decision), 4 meta docs, CLAUDE.md. Frontmatter passes on all 18. Counts reconcile: 23 new files + GBRAIN_PROJECT.md pre-existing = 24 on disk. The code-span call is right — Obsidian ignores `[[...]]` inside backticks, so those three are documentation and live broken links are zero.
 
 Commit it:
 

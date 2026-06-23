@@ -28,7 +28,7 @@ Let me read the file.
 
 **assistant**
 
-Here's my review of **Wheelhouse** (`bar_screener.jsx`):
+Here's my review of **[[Wheelhouse]]** (`bar_screener.jsx`):
 
 ---
 
@@ -166,13 +166,13 @@ Build verified clean: 179 kB JS, gzip 57 kB. Everything is committed and ready t
 
 **user**
 
-created a repo on github. can you push everything there to start, then I'll get going with railway: https://github.com/agshipley/Wheelhouse
+created a repo on github. can you push everything there to start, then I'll get going with railway: https://github.com/agshipley/[[Wheelhouse]]
 
 **assistant**
 
-Pushed. Everything is live at [github.com/agshipley/Wheelhouse](https://github.com/agshipley/Wheelhouse).
+Pushed. Everything is live at [github.com/agshipley/[[Wheelhouse]]](https://github.com/agshipley/[[Wheelhouse]]).
 
-In Railway: **New Project → Deploy from GitHub repo → agshipley/Wheelhouse**. It'll pick up `railway.toml` automatically and build on the first deploy.
+In Railway: **New Project → Deploy from GitHub repo → agshipley/[[Wheelhouse]]**. It'll pick up `railway.toml` automatically and build on the first deploy.
 
 **user**
 

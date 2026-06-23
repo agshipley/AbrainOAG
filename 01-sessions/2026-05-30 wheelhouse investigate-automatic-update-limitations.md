@@ -3,7 +3,7 @@ type: session
 source: claude-code
 uuid: 5ab9c118-3b55-4fa7-afc7-e280fc57c075
 title: "Investigate automatic update limitations"
-project: "Wheelhouse"
+project: "[[Wheelhouse]]"
 cwd: "/Users/andrewshipley/projects/Wheelhouse/Wheelhouse"
 created: 2026-05-30
 updated: 2026-05-30
@@ -19,7 +19,7 @@ tags: []
 
 **user**
 
-<ide_opened_file>The user opened the file /Users/andrewshipley/projects/Wheelhouse/Wheelhouse/bar_screener (1).jsx in the IDE. This may or may not be related to the current task.</ide_opened_file>
+<ide_opened_file>The user opened the file /Users/andrewshipley/projects/[[Wheelhouse]]/[[Wheelhouse]]/bar_screener (1).jsx in the IDE. This may or may not be related to the current task.</ide_opened_file>
 why can't they be updated without manual input?
 
 **assistant**
@@ -28,7 +28,7 @@ I don't have enough context to answer that — "they" could refer to a lot of th
 
 **user**
 
-<ide_opened_file>The user opened the file /Users/andrewshipley/projects/Wheelhouse/Wheelhouse/bar_screener (1).jsx in the IDE. This may or may not be related to the current task.</ide_opened_file>
+<ide_opened_file>The user opened the file /Users/andrewshipley/projects/[[Wheelhouse]]/[[Wheelhouse]]/bar_screener (1).jsx in the IDE. This may or may not be related to the current task.</ide_opened_file>
 did you lose context from the old chat?
 
 **assistant**
@@ -101,9 +101,9 @@ All changes are in. Here's what was added:
 
 **user**
 
-<ide_opened_file>The user opened the file /Users/andrewshipley/projects/Wheelhouse/Wheelhouse/bar_screener (1).jsx in the IDE. This may or may not be related to the current task.</ide_opened_file>
-great. small thing, we changed the url in railway, now giving this error: Blocked request. This host ("wheelhouse-bb.up.railway.app") is not allowed.
-To allow this host, add "wheelhouse-bb.up.railway.app" to `preview.allowedHosts` in vite.config.js.
+<ide_opened_file>The user opened the file /Users/andrewshipley/projects/[[Wheelhouse]]/[[Wheelhouse]]/bar_screener (1).jsx in the IDE. This may or may not be related to the current task.</ide_opened_file>
+great. small thing, we changed the url in railway, now giving this error: Blocked request. This host ("[[Wheelhouse]]-bb.up.railway.app") is not allowed.
+To allow this host, add "[[Wheelhouse]]-bb.up.railway.app" to `preview.allowedHosts` in vite.config.js.
 
 **assistant**
 
@@ -193,7 +193,7 @@ supabase functions deploy parse-listing --project-ref nemwjdrbzyhumvunhpno
 
 **user**
 
-what do you mean run it from my wheelhouse project directory?
+what do you mean run it from my [[Wheelhouse]] project directory?
 
 **assistant**
 
@@ -201,12 +201,12 @@ Open your terminal, make sure you're in `/Users/andrewshipley/projects/Wheelhous
 
 **user**
 
-<ide_opened_file>The user opened the file /Users/andrewshipley/projects/Wheelhouse/Wheelhouse/bar_screener (1).jsx in the IDE. This may or may not be related to the current task.</ide_opened_file>
-andrewshipley@MacBookAir Wheelhouse % supabase functions deploy parse-listing --project-ref nemwjdrbzyhumvunhpno
+<ide_opened_file>The user opened the file /Users/andrewshipley/projects/[[Wheelhouse]]/[[Wheelhouse]]/bar_screener (1).jsx in the IDE. This may or may not be related to the current task.</ide_opened_file>
+andrewshipley@MacBookAir [[Wheelhouse]] % supabase functions deploy parse-listing --project-ref nemwjdrbzyhumvunhpno
 
 Access token not provided. Supply an access token by running supabase login or setting the SUPABASE_ACCESS_TOKEN environment variable.
 Try rerunning the command with --debug to troubleshoot the error.
-andrewshipley@MacBookAir Wheelhouse %
+andrewshipley@MacBookAir [[Wheelhouse]] %
 
 **assistant**
 
@@ -248,8 +248,8 @@ Perfect. You can now remove `VITE_ANTHROPIC_API_KEY` from your Railway environme
 
 **user**
 
-still getting this error when I open the site: Blocked request. This host ("wheelhouse-bb.up.railway.app") is not allowed.
-To allow this host, add "wheelhouse-bb.up.railway.app" to `preview.allowedHosts` in vite.config.js.
+still getting this error when I open the site: Blocked request. This host ("[[Wheelhouse]]-bb.up.railway.app") is not allowed.
+To allow this host, add "[[Wheelhouse]]-bb.up.railway.app" to `preview.allowedHosts` in vite.config.js.
 
 **assistant**
 
@@ -3639,7 +3639,7 @@ If a hook isn't running:
 
 ## User Request
 
-Set dangerouslyAllowAll to true in project settings for /Users/andrewshipley/projects/Wheelhouse/Wheelhouse
+Set dangerouslyAllowAll to true in project settings for /Users/andrewshipley/projects/[[Wheelhouse]]/[[Wheelhouse]]
 
 **assistant**
 
@@ -3661,16 +3661,16 @@ The `bypassPermissions` setting takes effect immediately in this session — no 
 
 **user**
 
-can we make that permanent for the wheelhouse project?
+can we make that permanent for the [[Wheelhouse]] project?
 
 **assistant**
 
-It already is — `.claude/settings.json` is committed to the repo, so it applies to the Wheelhouse project for any Claude Code session in that directory, now and in the future.
+It already is — `.claude/settings.json` is committed to the repo, so it applies to the [[Wheelhouse]] project for any Claude Code session in that directory, now and in the future.
 
 **user**
 
-still getting "Blocked request. This host ("wheelhouse-bb.up.railway.app") is not allowed.
-To allow this host, add "wheelhouse-bb.up.railway.app" to `preview.allowedHosts` in vite.config.js."
+still getting "Blocked request. This host ("[[Wheelhouse]]-bb.up.railway.app") is not allowed.
+To allow this host, add "[[Wheelhouse]]-bb.up.railway.app" to `preview.allowedHosts` in vite.config.js."
 
 starting to get annoyed
 
@@ -3680,12 +3680,12 @@ Let me verify the change is actually in the deployed code.
 
 **assistant**
 
-The code is correct and pushed. The problem is Railway hasn't redeployed with the new code yet. You need to trigger a redeploy — go to your Railway dashboard, find the Wheelhouse service, and hit **Redeploy** (or it may show a pending deploy from the recent push that you need to trigger).
+The code is correct and pushed. The problem is Railway hasn't redeployed with the new code yet. You need to trigger a redeploy — go to your Railway dashboard, find the [[Wheelhouse]] service, and hit **Redeploy** (or it may show a pending deploy from the recent push that you need to trigger).
 
 **user**
 
-are you kidding me? I redeployed and STILL HAVE THE SAME ISSUE: Blocked request. This host ("wheelhouse-bb.up.railway.app") is not allowed.
-To allow this host, add "wheelhouse-bb.up.railway.app" to `preview.allowedHosts` in vite.config.js.
+are you kidding me? I redeployed and STILL HAVE THE SAME ISSUE: Blocked request. This host ("[[Wheelhouse]]-bb.up.railway.app") is not allowed.
+To allow this host, add "[[Wheelhouse]]-bb.up.railway.app" to `preview.allowedHosts` in vite.config.js.
 
 The error clearly states that the problem is with the url in our code
 
@@ -3769,7 +3769,7 @@ Likely causes, in descending order:
 4. **JavaScript-rendered app**: if the app requires client-side JS hydration, the fetch layer may not get useful content even when the site loads visually.
 5. **Temporary DNS/network restriction from the tool environment**: the execution environment may not resolve `*.up.railway.app` even though your machine does.
 
-The key point: this is a **ChatGPT tool access failure**, not evidence of a problem with Wheelhouse.
+The key point: this is a **ChatGPT tool access failure**, not evidence of a problem with [[Wheelhouse]].
 
 What I should have done better was distinguish:
 
@@ -3802,7 +3802,7 @@ A fetch tool that does not execute JavaScript will not see the rendered UI. So y
 
 But that does **not fully explain** what happened here. My tool did not merely fetch an empty Vite shell. It failed at the retrieval layer with a cache/fetch error. That points to the intermediate browsing infrastructure failing to retrieve the Railway URL at all, or failing to handle that host/page in its crawler pipeline. So the right diagnosis is:
 
-> Wheelhouse may be working perfectly. My tool cannot reliably fetch or render it. The SPA architecture would limit what I could inspect even if the fetch succeeded.
+> [[Wheelhouse]] may be working perfectly. My tool cannot reliably fetch or render it. The SPA architecture would limit what I could inspect even if the fetch succeeded.
 
 Also, small technical caveat: using `vite preview` in production is acceptable for a quick MVP/demo, but it is not usually the final production pattern. For a serious deployed app, you would normally either:
 
@@ -3855,7 +3855,7 @@ Important distinction:
 * That does **not** mean the Vercel deployment is broken.
 * The fact that both Railway and Vercel fail the same way strongly suggests the intermediate browser/fetch system is the bottleneck.
 
-For practical purposes, the Vercel deployment is probably the better public-demo target anyway. If Wheelhouse is a React/Vite SPA, Vercel is the more natural place for the front end, while Railway remains better for any backend/database/worker services.
+For practical purposes, the Vercel deployment is probably the better public-demo target anyway. If [[Wheelhouse]] is a React/Vite SPA, Vercel is the more natural place for the front end, while Railway remains better for any backend/database/worker services.
 
 One thing you can check in your own browser: open the Vercel URL, then hard-refresh and directly navigate to any non-root route if the app has one. If both work, the deployment is probably fine from a user standpoint."
 
@@ -4230,13 +4230,13 @@ give me a full report I can feed back into the claude chat portion of this proje
 
 **assistant**
 
-**Wheelhouse — State of the Project & Find Listings Problem Report**
+**[[Wheelhouse]] — State of the Project & Find Listings Problem Report**
 
 ---
 
 **What the tool is**
 
-Wheelhouse is a bar acquisition pipeline screener. You add listings, it models all-in capital requirements (purchase price, closing costs, license transfer, rebrand, inventory, working capital, SBA debt, seller carry), scores them on concept fit and economics, and gives you a ranked pipeline with diligence checklists. The core screening logic is solid and works correctly.
+[[Wheelhouse]] is a bar acquisition pipeline screener. You add listings, it models all-in capital requirements (purchase price, closing costs, license transfer, rebrand, inventory, working capital, SBA debt, seller carry), scores them on concept fit and economics, and gives you a ranked pipeline with diligence checklists. The core screening logic is solid and works correctly.
 
 **Stack:** React SPA (single file, `bar_screener.jsx`), Supabase Postgres for persistence, Supabase Edge Functions (Deno) for all AI calls, deployed on Vercel. Anthropic API key is server-side only in Supabase secrets.
 
@@ -4277,7 +4277,7 @@ This problem was present from the beginning of the feature and should have been 
 
 **Proposed Option 2: Replace Find Listings with direct search URL generation**
 
-The idea: instead of having Claude search, generate a pre-filtered search URL pointing to BizBen/BizBuySell/BizBen's own live search, open it in a new tab. User finds listings on the actual site (live database, correct data, active only), then pastes URLs back into Wheelhouse's AI Parse for screening.
+The idea: instead of having Claude search, generate a pre-filtered search URL pointing to BizBen/BizBuySell/BizBen's own live search, open it in a new tab. User finds listings on the actual site (live database, correct data, active only), then pastes URLs back into [[Wheelhouse]]'s AI Parse for screening.
 
 What this solves:
 - Staleness — BizBen's own search returns only active listings
@@ -4296,13 +4296,13 @@ What to verify before building: spot-check that BizBen, BizBuySell, and BizBen's
 
 **What the AI Parse URL flow already handles**
 
-The Add Opportunity modal already accepts a listing URL directly (as of recent changes). You paste a BizBuySell or BizBen URL, it calls the `parse-listing` edge function which runs a two-step web search + extraction, and pre-fills the form. This path is already tested and working. The workflow of "find on BizBen, paste URL into Wheelhouse" is already supported — it just doesn't have an obvious entry point from the UI.
+The Add Opportunity modal already accepts a listing URL directly (as of recent changes). You paste a BizBuySell or BizBen URL, it calls the `parse-listing` edge function which runs a two-step web search + extraction, and pre-fills the form. This path is already tested and working. The workflow of "find on BizBen, paste URL into [[Wheelhouse]]" is already supported — it just doesn't have an obvious entry point from the UI.
 
 ---
 
 **Honest assessment of Option 2**
 
-The implementation is low-risk and fast. The question is whether the workflow — find on BizBen, come back to Wheelhouse, paste URL — is acceptable to the user. That's a product decision, not a technical one. If the answer is no, the honest alternative is to not have a discovery feature at all and position the tool as a screener you bring listings to, not a tool that finds listings for you. That framing is accurate to what the tool actually does well.
+The implementation is low-risk and fast. The question is whether the workflow — find on BizBen, come back to [[Wheelhouse]], paste URL — is acceptable to the user. That's a product decision, not a technical one. If the answer is no, the honest alternative is to not have a discovery feature at all and position the tool as a screener you bring listings to, not a tool that finds listings for you. That framing is accurate to what the tool actually does well.
 
 There is no technical path to automated live listing discovery without either (a) a direct API or data agreement with the listing sites, or (b) a real-time scraper, both of which are out of scope for this project.
 

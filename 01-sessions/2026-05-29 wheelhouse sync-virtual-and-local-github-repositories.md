@@ -3,7 +3,7 @@ type: session
 source: claude-code
 uuid: c07c4f2b-8df6-4731-9479-a7f504ddca50
 title: "Sync virtual and local GitHub repositories"
-project: "Wheelhouse"
+project: "[[Wheelhouse]]"
 cwd: "/Users/andrewshipley/projects/Wheelhouse/Wheelhouse"
 created: 2026-05-29
 updated: 2026-05-29
@@ -36,7 +36,7 @@ Here's the full picture:
 **Repo sync: already good.** `main` is clean and up to date with `origin/main` at `https://github.com/agshipley/Wheelhouse.git`. Nothing to push or pull.
 
 **Project summary:**
-- Vite + React single-page app — "Wheelhouse Bar Acquisition Screener"
+- Vite + React single-page app — "[[Wheelhouse]] Bar Acquisition Screener"
 - Entry: `index.html` → `src/main.jsx` → `bar_screener.jsx`
 - Deployed via Railway (`railway.toml`), API key via `VITE_ANTHROPIC_API_KEY`
 - Direct Anthropic API calls for AI-powered listing parsing
@@ -59,9 +59,9 @@ So you're fully synced. Want to delete `bar_screener (1).jsx` to clean up, or is
 
 **user**
 
-<ide_opened_file>The user opened the file /Users/andrewshipley/projects/Wheelhouse/Wheelhouse/bar_screener (1).jsx in the IDE. This may or may not be related to the current task.</ide_opened_file>
-created a domain in railway but when I go to it I get this error: Blocked request. This host ("wheelhouse-production-f59a.up.railway.app") is not allowed.
-To allow this host, add "wheelhouse-production-f59a.up.railway.app" to `preview.allowedHosts` in vite.config.js.
+<ide_opened_file>The user opened the file /Users/andrewshipley/projects/[[Wheelhouse]]/[[Wheelhouse]]/bar_screener (1).jsx in the IDE. This may or may not be related to the current task.</ide_opened_file>
+created a domain in railway but when I go to it I get this error: Blocked request. This host ("[[Wheelhouse]]-production-f59a.up.railway.app") is not allowed.
+To allow this host, add "[[Wheelhouse]]-production-f59a.up.railway.app" to `preview.allowedHosts` in vite.config.js.
 
 **assistant**
 
@@ -184,7 +184,7 @@ Pushed — Railway will redeploy automatically. Here's what changed:
 
 **Layout fixed:** Switched from broken flex (rows were wrapping scores and numbers to separate lines) to CSS `grid` with fixed column widths — everything aligns now.
 
-**Navigation:** Dark sticky header with the Wheelhouse logo + the Boardwalk/Custom toggle on the right where it's obvious.
+**Navigation:** Dark sticky header with the [[Wheelhouse]] logo + the Boardwalk/Custom toggle on the right where it's obvious.
 
 **Search:** Text input above the table — filters by name or city as you type, shows a clear "X" to reset.
 
@@ -314,7 +314,7 @@ One thing to be aware of: this uses the Anthropic API key directly from the brow
 
 **user**
 
-ok, time to get serious about the design here. I want you to take a look at the "first-agent" repo on my github, specifically the lead finder architecture
+ok, time to get serious about the design here. I want you to take a look at the "[[first-agent]]" repo on my github, specifically the lead finder architecture
 
 **assistant**
 
@@ -322,7 +322,7 @@ That repo is already cloned locally. Let me dig into the lead finder architectur
 
 **assistant**
 
-Now I understand exactly what to port. The first-agent architecture has three things our current `findListings` is missing:
+Now I understand exactly what to port. The [[first-agent]] architecture has three things our current `findListings` is missing:
 
 1. **Custom tool with schema** (`save_leads_to_spreadsheet`) — instead of asking Claude to return JSON, you define a structured tool and Claude calls it for each result. No fragile JSON parsing.
 2. **System prompt with domain expertise** — field-by-field guidance, scoring rubric, deduplication exclusion list
@@ -332,7 +332,7 @@ Let me apply all three patterns now.
 
 **assistant**
 
-Now replace the entire `findListings` function with the first-agent pattern:
+Now replace the entire `findListings` function with the [[first-agent]] pattern:
 
 **assistant**
 
@@ -340,9 +340,9 @@ Now update `FindPanel` to show the live status:
 
 **assistant**
 
-Pushed. Here's exactly what changed and why it maps to first-agent:
+Pushed. Here's exactly what changed and why it maps to [[first-agent]]:
 
-| first-agent pattern | Wheelhouse equivalent |
+| [[first-agent]] pattern | [[Wheelhouse]] equivalent |
 |---|---|
 | `save_leads_to_spreadsheet` custom tool with typed schema | `add_listing` tool — Claude calls it once per listing, no JSON parsing |
 | `prompts.py` system prompt with field rubrics | System prompt with SDE definition, ABC license types, beach proximity scale |
@@ -350,7 +350,7 @@ Pushed. Here's exactly what changed and why it maps to first-agent:
 | Empty `tool_result` for `web_search` before next API call | Same — required by the API even though search runs server-side |
 | Streaming status to browser | `setFindStatus("Found 1: Ocean Beach...")` — listings appear in real time as Claude calls the tool |
 
-The one thing first-agent has that we don't yet is **SSE streaming from a proper backend** — the API key is still in the browser and the agent loop runs client-side. That would require adding a Python or Node backend. Worth doing if this goes to production, but the pattern is otherwise identical.
+The one thing [[first-agent]] has that we don't yet is **SSE streaming from a proper backend** — the API key is still in the browser and the agent loop runs client-side. That would require adding a Python or Node backend. Worth doing if this goes to production, but the pattern is otherwise identical.
 
 **user**
 
@@ -362,14 +362,14 @@ won't I need to set up a volume in railway for memory?
 
 The current app has no server-side state. It's a pure static frontend: `vite build` produces files, `vite preview` serves them, and all persistence happens in the **user's browser** via `localStorage`. Railway redeploys don't touch the user's browser, so the pipeline survives deploys fine.
 
-The place where first-agent **does** need a volume is because it writes `leads.xlsx` to the server filesystem — that file would vanish on every Railway redeploy without a mounted volume at the path where it writes.
+The place where [[first-agent]] **does** need a volume is because it writes `leads.xlsx` to the server filesystem — that file would vanish on every Railway redeploy without a mounted volume at the path where it writes.
 
-You'd only need a Railway volume (or database) if you add a backend to Wheelhouse. That would make sense when/if you want:
+You'd only need a Railway volume (or database) if you add a backend to [[Wheelhouse]]. That would make sense when/if you want:
 
 | Reason to add a backend | What it unlocks |
 |---|---|
 | Move the API key server-side | Key no longer exposed in browser JS bundle |
-| SSE streaming (like first-agent's `/run` route) | Live "Claude is now searching BizBuySell…" updates mid-request |
+| SSE streaming (like [[first-agent]]'s `/run` route) | Live "Claude is now searching BizBuySell…" updates mid-request |
 | Shared pipeline across browsers/devices | Right now two browsers = two separate pipelines |
 | Server-side persistence | Pipeline survives browser clearing localStorage |
 
@@ -529,7 +529,7 @@ Pushed. Two things left:
 
 **1. Run the SQL** (if you haven't yet) — paste that block into Supabase Dashboard → SQL Editor → New query → Run.
 
-**2. Add two env vars to Railway** — Dashboard → your Wheelhouse service → Variables:
+**2. Add two env vars to Railway** — Dashboard → your [[Wheelhouse]] service → Variables:
 
 ```
 VITE_SUPABASE_URL = https://nemwjdrbzyhumvunhpno.supabase.co
@@ -540,7 +540,7 @@ Railway will redeploy automatically once you save. After that, the pipeline is b
 
 **user**
 
-<ide_opened_file>The user opened the file /Users/andrewshipley/projects/Wheelhouse/Wheelhouse/dist/assets/index-BxmcFH64.js in the IDE. This may or may not be related to the current task.</ide_opened_file>
+<ide_opened_file>The user opened the file /Users/andrewshipley/projects/[[Wheelhouse]]/[[Wheelhouse]]/dist/assets/index-BxmcFH64.js in the IDE. This may or may not be related to the current task.</ide_opened_file>
 paste which block?
 
 **assistant**
@@ -653,7 +653,7 @@ Don't forget to add `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` to Railway'
 
 **user**
 
-yeah variables added and the SQL search ran in supabase. But uh oh, looks like that change to the headers has created an error. https://wheelhouse-production-f59a.up.railway.app/ is now blank
+yeah variables added and the SQL search ran in supabase. But uh oh, looks like that change to the headers has created an error. https://[[Wheelhouse]]-production-f59a.up.railway.app/ is now blank
 
 **assistant**
 
@@ -667,7 +667,7 @@ Pushed. Railway will redeploy — once it's up, the sortable headers will work. 
 
 **user**
 
-<ide_opened_file>The user opened the file /Users/andrewshipley/projects/Wheelhouse/Wheelhouse/dist/assets/index-BxmcFH64.js in the IDE. This may or may not be related to the current task.</ide_opened_file>
+<ide_opened_file>The user opened the file /Users/andrewshipley/projects/[[Wheelhouse]]/[[Wheelhouse]]/dist/assets/index-BxmcFH64.js in the IDE. This may or may not be related to the current task.</ide_opened_file>
 still not working. I'm confused because the supabase integration seemed to work
 
 **assistant**
@@ -716,7 +716,7 @@ In the meantime, let me also check whether Railway's auto-deploy is actually bro
 
 Railway's auto-deploy is clearly stuck — 3 commits in and it's still serving the same bundle. The blank page and the stale deploy are two separate problems. Let me tackle the deploy issue directly:
 
-**For Railway:** go to your Railway dashboard → Wheelhouse service → Deployments tab. Check if there are any failed builds, or just click **"Deploy"** to manually trigger a redeploy from the latest commit.
+**For Railway:** go to your Railway dashboard → [[Wheelhouse]] service → Deployments tab. Check if there are any failed builds, or just click **"Deploy"** to manually trigger a redeploy from the latest commit.
 
 While you do that, let me look at the actual crash in the bundle that's currently live to understand what broke it:
 
@@ -728,7 +728,7 @@ Two things to do in parallel:
 
 **1. Open DevTools on the Railway URL** → Console tab → paste the red error(s) here. That will tell us exactly what's crashing.
 
-**2. Manually trigger a Railway redeploy** — Railway's auto-deploy appears stuck. In the dashboard: your Wheelhouse service → **Deployments** tab → click **Redeploy** on the latest commit (`2c3fc17`). The fix commits haven't deployed despite 3 pushes.
+**2. Manually trigger a Railway redeploy** — Railway's auto-deploy appears stuck. In the dashboard: your [[Wheelhouse]] service → **Deployments** tab → click **Redeploy** on the latest commit (`2c3fc17`). The fix commits haven't deployed despite 3 pushes.
 
 The fix is already in the code — once Railway actually builds it, the `display` variable collision will be gone and the page should come back. But I also need that console error to confirm there isn't a second issue on top of it.
 
@@ -741,7 +741,7 @@ Starting Container
 The CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.
   ➜  Local:   http://localhost:8080/
 npm warn config production Use `--omit=dev` instead.
-> wheelhouse@1.0.0 preview
+> [[Wheelhouse]]@1.0.0 preview
 > vite preview --host --port 8080
 Stopping Container
 npm error path /app
@@ -752,7 +752,7 @@ npm error A complete log of this run can be found in: /root/.npm/_logs/2026-05-2
 Starting Container
   ➜  Network: http://10.171.81.70:8080/
 npm warn config production Use `--omit=dev` instead.
-> wheelhouse@1.0.0 preview
+> [[Wheelhouse]]@1.0.0 preview
 > vite preview --host --port 8080
 The CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.
   ➜  Local:   http://localhost:8080/
@@ -770,7 +770,7 @@ npm error signal SIGTERM
 npm error command sh -c vite preview --host --port 8080
 npm error A complete log of this run can be found in: /root/.npm/_logs/2026-05-29T20_03_41_462Z-debug-0.log
 npm warn config production Use `--omit=dev` instead.
-> wheelhouse@1.0.0 preview
+> [[Wheelhouse]]@1.0.0 preview
 > vite preview --host --port 8080
 The CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.
   ➜  Local:   http://localhost:8080/
@@ -795,12 +795,12 @@ Starting Container
   ➜  Network: http://10.220.77.74:8080/
 npm warn config production Use `--omit=dev` instead.
 The CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.
-> wheelhouse@1.0.0 preview
+> [[Wheelhouse]]@1.0.0 preview
   ➜  Local:   http://localhost:8080/
 > vite preview --host --port 8080
 Stopping Container
 npm warn config production Use `--omit=dev` instead.
-> wheelhouse@1.0.0 preview
+> [[Wheelhouse]]@1.0.0 preview
 > vite preview --host --port 8080
 The CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.
   ➜  Local:   http://localhost:8080/
@@ -827,7 +827,7 @@ npm error command sh -c vite preview --host --port 8080
 npm error A complete log of this run can be found in: /root/.npm/_logs/2026-05-29T21_42_48_086Z-debug-0.log
 Starting Container
 npm warn config production Use `--omit=dev` instead.
-> wheelhouse@1.0.0 preview
+> [[Wheelhouse]]@1.0.0 preview
 > vite preview --host --port 8080
 The CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.
   ➜  Local:   http://localhost:8080/
@@ -857,7 +857,7 @@ Two immediate fixes:
 
 **user**
 
-<ide_opened_file>The user opened the file /Users/andrewshipley/projects/Wheelhouse/Wheelhouse/src/main.jsx in the IDE. This may or may not be related to the current task.</ide_opened_file>
+<ide_opened_file>The user opened the file /Users/andrewshipley/projects/[[Wheelhouse]]/[[Wheelhouse]]/src/main.jsx in the IDE. This may or may not be related to the current task.</ide_opened_file>
 The CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.
 
 **assistant**
@@ -932,13 +932,13 @@ I just ran the first search for listings in Santa Monica. it began the search an
 
 **user**
 
-before we get too far into this, one issue we had with first-agent when we started searching is that we think the railway app would timeout when websites were pinged and took too long to respond. we had to set up a loop of some kind
+before we get too far into this, one issue we had with [[first-agent]] when we started searching is that we think the railway app would timeout when websites were pinged and took too long to respond. we had to set up a loop of some kind
 
 **assistant**
 
-Right — same problem, same root cause. In first-agent the Flask server held an HTTP connection open with SSE while Claude searched; without that, Railway closed the connection mid-search and the client lost the response.
+Right — same problem, same root cause. In [[first-agent]] the Flask server held an HTTP connection open with SSE while Claude searched; without that, Railway closed the connection mid-search and the client lost the response.
 
-Wheelhouse's current setup is slightly different — the agent loop runs in the **browser**, not on Railway, so Railway itself can't time out. But the blank page you're seeing is a React crash from an unhandled error inside the async `findListings` function, and the real architectural issue is the same: the API key is exposed in the browser bundle and there's no way to stream status back reliably.
+[[Wheelhouse]]'s current setup is slightly different — the agent loop runs in the **browser**, not on Railway, so Railway itself can't time out. But the blank page you're seeing is a React crash from an unhandled error inside the async `findListings` function, and the real architectural issue is the same: the API key is exposed in the browser bundle and there's no way to stream status back reliably.
 
 The proper fix is **Phase 2** we talked about earlier — move the agent loop to a **Supabase Edge Function**:
 
@@ -956,7 +956,7 @@ Browser
 ```
 
 This solves everything at once:
-- **No timeout** — SSE keeps the connection alive exactly like first-agent's loop
+- **No timeout** — SSE keeps the connection alive exactly like [[first-agent]]'s loop
 - **API key secured** — Anthropic key becomes a Supabase secret, out of the browser bundle
 - **No React crash** — errors happen server-side, browser just receives an error event
 - **Real-time updates** — listings stream in one at a time as Claude finds them

@@ -121,7 +121,7 @@ Replace `your-key-here` with the actual key from Step 1. Never share this file o
 
 ---
 
-### Step 7: Write Your First Agent
+### Step 7: Write Your [[first-agent|First Agent]]
 
 Create a file called `hello_agent.py` and paste this in:
 
@@ -437,7 +437,7 @@ Run those and tell me what you see (even if it's just a blank new line, that's f
 
 **human**
 
-we made the folders and we're in the first-agent folder: andrewshipley@MacBookAir first-agent %
+we made the folders and we're in the [[first-agent]] folder: andrewshipley@MacBookAir [[first-agent]] %
 
 **assistant**
 
@@ -496,7 +496,7 @@ Go ahead and run the activate command and tell me what your prompt looks like af
 
 **human**
 
-ok cool so essentially the venv command creates a sandbox within the projects/first-agent folder?
+ok cool so essentially the venv command creates a sandbox within the projects/[[first-agent]] folder?
 
 **assistant**
 
@@ -516,7 +516,7 @@ Go ahead and run the activate command now.
 
 **human**
 
-k, here's what I got: (.venv) andrewshipley@MacBookAir first-agent %
+k, here's what I got: (.venv) andrewshipley@MacBookAir [[first-agent]] %
 
 **assistant**
 
@@ -549,7 +549,7 @@ Go ahead and run `code .` and tell me what you see.
 
 **human**
 
-it opened a VS Code window, titled Welcome - First-Agent
+it opened a VS Code window, titled Welcome - [[first-agent]]
 
 **assistant**
 
@@ -880,7 +880,7 @@ Installing collected packages: typing-extensions, sniffio, python-dotenv, jiter,
 Successfully installed annotated-types-0.7.0 anthropic-0.84.0 anyio-4.12.1 certifi-2026.2.25 distro-1.9.0 docstring-parser-0.17.0 h11-0.16.0 httpcore-1.0.9 httpx-0.28.1 idna-3.11 jiter-0.13.0 pydantic-2.12.5 pydantic-core-2.41.5 python-dotenv-1.2.2 sniffio-1.3.1 typing-extensions-4.15.0 typing-inspection-0.4.2
 [notice] A new release of pip available: 22.3.1 -> 26.0.1
 [notice] To update, run: pip install --upgrade pip
-(.venv) andrewshipley@MacBookAir first-agent %
+(.venv) andrewshipley@MacBookAir [[first-agent]] %
 
 **assistant**
 
@@ -1159,7 +1159,7 @@ The simplest possible agent has three things:
 2. **A conversation loop** — so it can handle back and forth, not just one exchange
 3. **At least one tool** — something it can actually *do*, not just talk about
 
-Before we build that, one question: do you have a rough idea of what you'd want your first agent to actually do? Even something simple — it'll make the learning stickier if we build toward something real rather than a throwaway example.
+Before we build that, one question: do you have a rough idea of what you'd want your [[first-agent|first agent]] to actually do? Even something simple — it'll make the learning stickier if we build toward something real rather than a throwaway example.
 
 **human**
 
@@ -1272,7 +1272,7 @@ This block is not supported on your current device yet.
 
 Good, I have a clear picture now. This is a really well-defined use case for an agent. Here's what I see:
 
-Tre Borden /Co curates and commissions art for **corporate spaces** — offices, campuses, headquarters. Their clients are consistently real estate developers, architecture firms, and large companies moving into or renovating spaces. Sterling Bay, Lincoln Properties, HOK Architects, HBO, DPR Construction — that's the pattern.
+[[Tre Borden]] /Co curates and commissions art for **corporate spaces** — offices, campuses, headquarters. Their clients are consistently real estate developers, architecture firms, and large companies moving into or renovating spaces. Sterling Bay, Lincoln Properties, HOK Architects, HBO, DPR Construction — that's the pattern.
 
 So a "good lead" for them is pretty specific:
 - Real estate developers building or renovating commercial/corporate spaces
@@ -1326,7 +1326,7 @@ Here's the agent we're building in plain English:
 
 1. You tell it something like "find corporate art program leads in Chicago"
 2. It searches the web for relevant targets — developers, architecture firms, companies announcing new offices
-3. It evaluates each result — is this actually a relevant lead for Tre Borden?
+3. It evaluates each result — is this actually a relevant lead for [[Tre Borden]]?
 4. It extracts the key info — company name, contact, location, why they're a fit
 5. It writes the good ones to a spreadsheet
 
@@ -1344,7 +1344,7 @@ This matters now because it shapes what the agent is told to look for. Suggested
 - Potential contact name/title
 - Notes
 
-Does that feel right, or would Tre Borden want different information? This is worth getting right upfront — it's much easier to define the columns now than to rebuild the agent later.
+Does that feel right, or would [[Tre Borden]] want different information? This is worth getting right upfront — it's much easier to define the columns now than to rebuild the agent later.
 
 **human**
 
@@ -1369,9 +1369,9 @@ Here's the final column structure:
 
 Two quick questions before we start writing:
 
-1. **Search scope** — do you want the agent to ask you for a city/region each time it runs, or should we start with LA since that's Tre Borden's home market?
+1. **Search scope** — do you want the agent to ask you for a city/region each time it runs, or should we start with LA since that's [[Tre Borden]]'s home market?
 
-2. **Spreadsheet format** — we'll output a standard `.xlsx` file that opens in Excel or Google Sheets. Does that work, or does Tre Borden use something specific?
+2. **Spreadsheet format** — we'll output a standard `.xlsx` file that opens in Excel or Google Sheets. Does that work, or does [[Tre Borden]] use something specific?
 
 **human**
 
@@ -1390,7 +1390,7 @@ Perfect. Here's exactly what we're going to build:
 - Web search — uses Claude's built-in web search capability
 - Spreadsheet writer — takes the leads Claude finds and writes them to `leads.xlsx`
 
-**One system prompt** that tells Claude exactly what Tre Borden does, what a good lead looks like, and what to extract.
+**One system prompt** that tells Claude exactly what [[Tre Borden]] does, what a good lead looks like, and what to extract.
 
 ---
 
@@ -1414,7 +1414,7 @@ Here's the distinction:
 
 A **tool** is something Claude uses to interact with the outside world — searching the web, writing a file, calling an API. It's for when Claude needs to *do* something it can't do purely by thinking.
 
-**Evaluation** — deciding whether a search result is actually a good lead for Tre Borden — is something Claude can do purely by reasoning. It doesn't need to touch anything external. You give it the criteria in the system prompt, it applies them to what it finds, and it makes a judgment call.
+**Evaluation** — deciding whether a search result is actually a good lead for [[Tre Borden]] — is something Claude can do purely by reasoning. It doesn't need to touch anything external. You give it the criteria in the system prompt, it applies them to what it finds, and it makes a judgment call.
 
 So the flow actually looks like this:
 
@@ -1425,7 +1425,7 @@ So the flow actually looks like this:
 
 The evaluation step is baked into Claude's reasoning, not a separate tool. That's actually one of the things that makes LLM-based agents powerful — a lot of what would require explicit code in traditional software just happens naturally in the model's judgment.
 
-Where you *would* add an evaluation tool is if you wanted to check leads against an existing database — like "has Tre Borden already contacted this company?" That would require looking something up externally. But for now, Claude's reasoning is the evaluator.
+Where you *would* add an evaluation tool is if you wanted to check leads against an existing database — like "has [[Tre Borden]] already contacted this company?" That would require looking something up externally. But for now, Claude's reasoning is the evaluator.
 
 Makes sense?
 
@@ -1441,7 +1441,7 @@ Ready to write `tools.py`?
 
 **human**
 
-ok I upgraded. Also I'm doing this all in the first-agent venv still, hope that's right?
+ok I upgraded. Also I'm doing this all in the [[first-agent]] venv still, hope that's right?
 
 **assistant**
 
@@ -1759,27 +1759,27 @@ Tell me what you see.
 
 **human**
 
-Ok I think it essentially worked but we hit a token rate limit? (.venv) andrewshipley@MacBookAir first-agent % python agent.py
+Ok I think it essentially worked but we hit a token rate limit? (.venv) andrewshipley@MacBookAir [[first-agent]] % python agent.py
 Starting lead generation agent...
 --------------------------------------------------
 Using tool: save_leads_to_spreadsheet
 Successfully saved 7 leads to leads.xlsx
 Traceback (most recent call last):
-  File "/Users/andrewshipley/projects/first-agent/agent.py", line 141, in <module>
+  File "/Users/andrewshipley/projects/[[first-agent]]/agent.py", line 141, in <module>
     run_agent()
-  File "/Users/andrewshipley/projects/first-agent/agent.py", line 90, in run_agent
+  File "/Users/andrewshipley/projects/[[first-agent]]/agent.py", line 90, in run_agent
     response = client.messages.create(
                ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/andrewshipley/projects/first-agent/.venv/lib/python3.11/site-packages/anthropic/_utils/_utils.py", line 282, in wrapper
+  File "/Users/andrewshipley/projects/[[first-agent]]/.venv/lib/python3.11/site-packages/anthropic/_utils/_utils.py", line 282, in wrapper
     return func(*args, **kwargs)
            ^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/andrewshipley/projects/first-agent/.venv/lib/python3.11/site-packages/anthropic/resources/messages/messages.py", line 996, in create
+  File "/Users/andrewshipley/projects/[[first-agent]]/.venv/lib/python3.11/site-packages/anthropic/resources/messages/messages.py", line 996, in create
     return self._post(
            ^^^^^^^^^^^
-  File "/Users/andrewshipley/projects/first-agent/.venv/lib/python3.11/site-packages/anthropic/_base_client.py", line 1364, in post
+  File "/Users/andrewshipley/projects/[[first-agent]]/.venv/lib/python3.11/site-packages/anthropic/_base_client.py", line 1364, in post
     return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/andrewshipley/projects/first-agent/.venv/lib/python3.11/site-packages/anthropic/_base_client.py", line 1137, in request
+  File "/Users/andrewshipley/projects/[[first-agent]]/.venv/lib/python3.11/site-packages/anthropic/_base_client.py", line 1137, in request
     raise self._make_status_error_from_response(err.response) from None
 anthropic.RateLimitError: Error code: 429 - {'type': 'error', 'error': {'type': 'rate_limit_error', 'message': "This request would exceed your organization's rate limit of 30,000 input tokens per minute (org: 0fa34c3a-14d1-455e-9536-ab7ef381dbec, model: claude-sonnet-4-6). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://www.anthropic.com/contact-sales to discuss your options for a rate limit increase."}, 'request_id': 'req_011CYyzuizjuUkqeFAe8ggsA'}
 
@@ -1828,7 +1828,7 @@ None of those are urgent. But which direction interests you most?
 
 **human**
 
-Well, before we start expanding, let's do a little recap here. First of all, I see where the spreadsheet is, it's in the first-agent project folder. So I guess in theory I can access this without going through the program. If I were to want to run this again, let's say I shut everything down on my computer. What do I do, open VS code back up, go to the first-agent folder, then run python agent.py again in the terminal?
+Well, before we start expanding, let's do a little recap here. First of all, I see where the spreadsheet is, it's in the [[first-agent]] project folder. So I guess in theory I can access this without going through the program. If I were to want to run this again, let's say I shut everything down on my computer. What do I do, open VS code back up, go to the [[first-agent]] folder, then run python agent.py again in the terminal?
 
 **assistant**
 
@@ -1958,7 +1958,7 @@ The best way to pick this up is to start a new conversation and paste in somethi
 
 ---
 
-*"I'm building a lead generation agent for a creative studio called Tre Borden /Co using the Anthropic Python SDK. I have a working agent with two tools — web search and a spreadsheet writer. It finds corporate art program leads in LA and writes them to leads.xlsx. It's working but has a duplicate problem — each run appends without checking what's already there. I want to add deduplication. Here's my current code:"*
+*"I'm building a lead generation agent for a creative studio called [[Tre Borden]] /Co using the Anthropic Python SDK. I have a working agent with two tools — web search and a spreadsheet writer. It finds corporate art program leads in LA and writes them to leads.xlsx. It's working but has a duplicate problem — each run appends without checking what's already there. I want to add deduplication. Here's my current code:"*
 
 Then paste in both `tools.py` and `agent.py`.
 
@@ -2033,13 +2033,13 @@ Here it is:
 
 ---
 
-*I'm building a lead generation agent for a creative studio called Tre Borden /Co using the Anthropic Python SDK. Tre Borden is a creative studio and production company based in LA that curates and commissions art for corporate spaces — their typical clients are real estate developers, architecture firms, and large companies announcing new offices or renovations.*
+*I'm building a lead generation agent for a creative studio called [[Tre Borden]] /Co using the Anthropic Python SDK. [[Tre Borden]] is a creative studio and production company based in LA that curates and commissions art for corporate spaces — their typical clients are real estate developers, architecture firms, and large companies announcing new offices or renovations.*
 
 *I have a working agent with two tools — web search and a spreadsheet writer. It finds corporate art program leads in LA and surrounding areas, evaluates them against a defined ICP, and writes them to leads.xlsx with these columns: Company Name, Type, Location, Why They're a Lead, Company Website, Source URL, Potential Contact, and Notes.*
 
 *It's working but has three things I want to add:*
 1. *Deduplication — each run appends without checking what's already in the spreadsheet*
-2. *ICP score — a 1-10 field rating how well each lead fits Tre Borden's ideal client profile*
+2. *ICP score — a 1-10 field rating how well each lead fits [[Tre Borden]]'s ideal client profile*
 3. *Public sector vertical — a second mode or sheet for public sector leads, which have a different client profile*
 
 *Longer term I want to add a simple web GUI and make it deployable so my friend can use it directly.*
@@ -2056,7 +2056,7 @@ Save that somewhere handy. See you next time.
 
 **human**
 
-buddy, I tried that with another chat and it did NOT go well. created a whole new project, first-agent, and in the first conversation I started by pasting exactly that, with the actual tools.py and agent.py code. The conversation could NOT figure out what was going on
+buddy, I tried that with another chat and it did NOT go well. created a whole new project, [[first-agent]], and in the first conversation I started by pasting exactly that, with the actual tools.py and agent.py code. The conversation could NOT figure out what was going on
 
 **assistant**
 
@@ -2098,16 +2098,16 @@ And when this conversation does eventually get unwieldy, we'll write a better ha
 well, I asked the other conversation to produce a failure report on itself. Here it is for review here:
 
 Claude Performance Review
-Session: first-agent project onboarding  |  Date: March 13, 2026
+Session: [[first-agent]] project onboarding  |  Date: March 13, 2026
 Summary
-This document summarizes the failures Claude exhibited during a session helping a developer resume work on the first-agent project — a Python-based lead generation agent using the Anthropic SDK. The developer had a working codebase and simply needed help reactivating their virtual environment. Claude failed to accomplish this basic task over multiple attempts.
+This document summarizes the failures Claude exhibited during a session helping a developer resume work on the [[first-agent]] project — a Python-based lead generation agent using the Anthropic SDK. The developer had a working codebase and simply needed help reactivating their virtual environment. Claude failed to accomplish this basic task over multiple attempts.
 Failure Log
 1. Assumed venv folder name
 Claude immediately instructed the user to run "source venv/bin/activate" without first checking whether a folder named "venv" actually existed. It did not. Claude should have run "ls" first to inspect the directory.
 2. Did not read the environment before advising
 When the first command failed, Claude continued guessing rather than diagnosing. It suggested "which python" then "which python3" as sequential dead ends instead of gathering enough information upfront to give a single correct answer.
 3. Wrong working directory
-Claude told the user to cd into "first-agent" from the home directory without knowing the actual path. The project was at /Users/andrewshipley/projects/first-agent, not ~/first-agent. A simple find command at the start would have established this immediately.
+Claude told the user to cd into "[[first-agent]]" from the home directory without knowing the actual path. The project was at /Users/andrewshipley/projects/[[first-agent]], not ~/[[first-agent]]. A simple find command at the start would have established this immediately.
 4. Suggested reinstalling packages
 When "python3 agent.py" failed with a missing module error, Claude suggested reinstalling packages the user had already installed the previous day. This was unnecessary and frustrated the user. The correct diagnosis was that the venv was not activated — not that packages were missing.
 5. Never resolved the core problem
@@ -2136,7 +2136,7 @@ High
 What Good Looked Like
 The correct session should have been two exchanges:
 * Claude: "Let me find your venv" → runs find ~ -name 'activate'
-* Claude: "Run: source /Users/andrewshipley/projects/first-agent/venv/bin/activate"
+* Claude: "Run: source /Users/andrewshipley/projects/[[first-agent]]/venv/bin/activate"
 Instead, the session involved 8+ failed commands, a suggestion to reinstall packages, and an unresolved environment.
 
 **assistant**
@@ -2204,9 +2204,9 @@ When you're ready, come back here and tell me you're at a clean terminal with VS
 
 **human**
 
-andrewshipley@Andrews-MacBook-Air first-agent % deactivate
+andrewshipley@Andrews-MacBook-Air [[first-agent]] % deactivate
 zsh: command not found: deactivate
-andrewshipley@Andrews-MacBook-Air first-agent %
+andrewshipley@Andrews-MacBook-Air [[first-agent]] %
 
 **assistant**
 
@@ -2230,12 +2230,12 @@ Go ahead and try. Tell me each step as you do it and what you see.
 
 well, when I repoen vs code this is what's in the terminal, so looks like it did it automatically? Which I guess doesn't matter since we only have one project going but it doesn't teach me much:
 
-andrewshipley@Andrews-MacBook-Air first-agent % 
+andrewshipley@Andrews-MacBook-Air [[first-agent]] % 
  *  History restored 
 /Users/andrewshipley/.zshenv:.:2: no such file or directory: /var/folders/36/dv72jrn92j9d81jzdl2k3m4c0000gn/T//.cargo/env
-source /Users/andrewshipley/projects/first-agent/.venv/bin/activate
-andrewshipley@MacBookAir first-agent % source /Users/andrewshipley/projects/first-agent/.venv/bin/activate
-(.venv) andrewshipley@MacBookAir first-agent %
+source /Users/andrewshipley/projects/[[first-agent]]/.venv/bin/activate
+andrewshipley@MacBookAir [[first-agent]] % source /Users/andrewshipley/projects/[[first-agent]]/.venv/bin/activate
+(.venv) andrewshipley@MacBookAir [[first-agent]] %
 
 **assistant**
 
@@ -2259,9 +2259,9 @@ Try it.
 
 ok, this is what I did:
 
-(.venv) andrewshipley@MacBookAir first-agent % deactivate
-andrewshipley@MacBookAir first-agent % source .venv/bin/activate
-(.venv) andrewshipley@MacBookAir first-agent %
+(.venv) andrewshipley@MacBookAir [[first-agent]] % deactivate
+andrewshipley@MacBookAir [[first-agent]] % source .venv/bin/activate
+(.venv) andrewshipley@MacBookAir [[first-agent]] %
 
 **assistant**
 
@@ -2506,7 +2506,7 @@ So you have two options:
 
 **Option A: Manual cleanup** — open `leads.xlsx`, delete or merge the duplicate rows by hand, then run the agent again. Takes a few minutes but gives you a clean starting point.
 
-**Option B: Ignore it and move on** — the existing duplicates are a known artifact of the early test runs. Going forward the agent will behave better. When Tre Borden actually starts using this you'd probably start with a fresh spreadsheet anyway.
+**Option B: Ignore it and move on** — the existing duplicates are a known artifact of the early test runs. Going forward the agent will behave better. When [[Tre Borden]] actually starts using this you'd probably start with a fresh spreadsheet anyway.
 
 For a learning exercise I'd vote Option B. The goal right now is building the agent, not maintaining the data. What do you think?
 
@@ -2526,7 +2526,7 @@ it's still working. lets move on the the ICP score
 
 Good. Let's think about the scoring criteria before we touch any code.
 
-A 10 for Tre Borden is a company that is actively commissioning or about to commission art for a corporate space right now — concrete project, right geography, right scale.
+A 10 for [[Tre Borden]] is a company that is actively commissioning or about to commission art for a corporate space right now — concrete project, right geography, right scale.
 
 A 1 is a company that technically could be a client someday but there's no specific signal — just a large company that has offices in LA.
 
@@ -2546,7 +2546,7 @@ Perfect. That gives us a clear and meaningful scale. Let me reflect it back as a
 
 **7-9:** Active trigger plus evidence of design investment — past art commissions, reputation for creative workplaces, architecture firm with a design-forward portfolio. They're a likely client.
 
-**10:** Active trigger, strong design culture, and something even more specific — an open RFP, a direct connection to Tre Borden's past clients, or a project at exactly the right stage where art commissioning decisions get made.
+**10:** Active trigger, strong design culture, and something even more specific — an open RFP, a direct connection to [[Tre Borden]]'s past clients, or a project at exactly the right stage where art commissioning decisions get made.
 
 Does that feel right before we build it in?
 
@@ -3342,7 +3342,7 @@ The issue is that Claude is being asked to find good leads AND score them — wh
 
 A few things that would bring the scores down to a more meaningful distribution:
 
-The rubric needs a stronger anchor at the high end. Right now a 7-9 is "active trigger plus design culture" which probably describes most of what it's finding. A true 8 or 9 should require something more specific — a named project, a known budget, a relationship to Tre Borden's existing client network.
+The rubric needs a stronger anchor at the high end. Right now a 7-9 is "active trigger plus design culture" which probably describes most of what it's finding. A true 8 or 9 should require something more specific — a named project, a known budget, a relationship to [[Tre Borden]]'s existing client network.
 
 Also worth adding an explicit instruction like: *"Score critically. A well-distributed list of 12 leads should have a range of scores. If everything is scoring above 7 you are not being critical enough."*
 
@@ -3408,7 +3408,7 @@ So the right order is:
 1. Public sector vertical — and make a deliberate decision about how mode selection works
 2. Build the GUI around whatever that architecture looks like
 
-The exception would be if Tre Borden needs to use this urgently right now, in which case ship what you have and add the vertical later. But if you have a week or two, finish the core first.
+The exception would be if [[Tre Borden]] needs to use this urgently right now, in which case ship what you have and add the vertical later. But if you have a week or two, finish the core first.
 
 What's the timeline pressure?
 
@@ -3422,7 +3422,7 @@ That's a useful clarification. So we're not building a completely separate agent
 
 That actually makes the design decision simple. We add a `segment` field to the agent so when you run it you can specify "corporate" or "public sector", and it loads the right system prompt for that segment. The spreadsheet gets one new column — **Segment** — so you can filter and sort by vertical later.
 
-Before we touch any code, same question as before: what does a good public sector lead look like for Tre Borden?
+Before we touch any code, same question as before: what does a good public sector lead look like for [[Tre Borden]]?
 
 Looking at their work, I'd guess it's things like:
 - Municipal art programs and percent-for-art requirements
@@ -3446,7 +3446,7 @@ Two good questions.
 
 Go ahead and convert it. The only thing to be aware of is that when the agent adds new rows they'll appear below the table — you may need to extend the table range occasionally to include new rows, depending on how Excel handles it. Some versions do it automatically, some don't.
 
-Now — back to the public sector profile. What does a good lead look like for Tre Borden in that space? That's the conversation we need to have before we write a single line of code.
+Now — back to the public sector profile. What does a good lead look like for [[Tre Borden]] in that space? That's the conversation we need to have before we write a single line of code.
 
 **human**
 
@@ -3467,7 +3467,7 @@ want to be wary of projects that would be bid at under 100k
 
 **assistant**
 
-Got it, that's an important filter. Under $100k projects aren't worth Tre Borden's time to pursue.
+Got it, that's an important filter. Under $100k projects aren't worth [[Tre Borden]]'s time to pursue.
 
 So the public sector profile is:
 
@@ -3499,9 +3499,9 @@ Let me draft a rubric and you tell me if it feels right:
 
 **4-6:** Active project signal exists — construction or renovation announced, percent-for-art requirement likely applies, but no RFP found and budget unclear or unconfirmed
 
-**7-8:** Active RFP or call for artists identified, budget confirmed above $100k, project is in the right scale and scope for Tre Borden
+**7-8:** Active RFP or call for artists identified, budget confirmed above $100k, project is in the right scale and scope for [[Tre Borden]]
 
-**9-10:** Active RFP with budget confirmed significantly above $100k — say $250k or more — deadline is upcoming, and the project scope aligns closely with Tre Borden's portfolio (site-specific commissions, corporate/institutional spaces, established artists)
+**9-10:** Active RFP with budget confirmed significantly above $100k — say $250k or more — deadline is upcoming, and the project scope aligns closely with [[Tre Borden]]'s portfolio (site-specific commissions, corporate/institutional spaces, established artists)
 
 The key difference from corporate is that a confirmed RFP with a real budget number is worth much more here than any soft signal. Does that feel right?
 
@@ -3565,7 +3565,7 @@ Here's a draft based on everything we've discussed:
 
 ---
 
-*You are a business development researcher for Tre Borden /Co, a creative studio and production company based in Los Angeles that curates and commissions art for public and institutional spaces.*
+*You are a business development researcher for [[Tre Borden]] /Co, a creative studio and production company based in Los Angeles that curates and commissions art for public and institutional spaces.*
 
 *Their ideal public sector clients are:*
 - *Municipal and government agencies in the LA region with active construction, renovation, or facility projects*
@@ -4055,29 +4055,29 @@ Type `public_sector` and hit Enter. Let's see what it finds.
 
 **human**
 
-(.venv) andrewshipley@MacBookAir first-agent % python agent.py
+(.venv) andrewshipley@MacBookAir [[first-agent]] % python agent.py
 Which segment? (corporate / public_sector): public_sector
 Starting lead generation agent — segment: public_sector
 --------------------------------------------------
 Traceback (most recent call last):
-  File "/Users/andrewshipley/projects/first-agent/agent.py", line 198, in <module>
+  File "/Users/andrewshipley/projects/[[first-agent]]/agent.py", line 198, in <module>
     run_agent()
-  File "/Users/andrewshipley/projects/first-agent/agent.py", line 144, in run_agent
+  File "/Users/andrewshipley/projects/[[first-agent]]/agent.py", line 144, in run_agent
     response = client.messages.create(
                ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/andrewshipley/projects/first-agent/.venv/lib/python3.11/site-packages/anthropic/_utils/_utils.py", line 282, in wrapper
+  File "/Users/andrewshipley/projects/[[first-agent]]/.venv/lib/python3.11/site-packages/anthropic/_utils/_utils.py", line 282, in wrapper
     return func(*args, **kwargs)
            ^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/andrewshipley/projects/first-agent/.venv/lib/python3.11/site-packages/anthropic/resources/messages/messages.py", line 996, in create
+  File "/Users/andrewshipley/projects/[[first-agent]]/.venv/lib/python3.11/site-packages/anthropic/resources/messages/messages.py", line 996, in create
     return self._post(
            ^^^^^^^^^^^
-  File "/Users/andrewshipley/projects/first-agent/.venv/lib/python3.11/site-packages/anthropic/_base_client.py", line 1364, in post
+  File "/Users/andrewshipley/projects/[[first-agent]]/.venv/lib/python3.11/site-packages/anthropic/_base_client.py", line 1364, in post
     return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/andrewshipley/projects/first-agent/.venv/lib/python3.11/site-packages/anthropic/_base_client.py", line 1137, in request
+  File "/Users/andrewshipley/projects/[[first-agent]]/.venv/lib/python3.11/site-packages/anthropic/_base_client.py", line 1137, in request
     raise self._make_status_error_from_response(err.response) from None
 anthropic.BadRequestError: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CZ1hp7MGHdGDvtTAAb9sg'}
-(.venv) andrewshipley@MacBookAir first-agent % 
+(.venv) andrewshipley@MacBookAir [[first-agent]] % 
 
 looks like it's either not updating yet on the anthropic system of I need to get a fresh API Key?
 
@@ -4110,13 +4110,13 @@ Good time to think about it. Here's the honest picture.
 **What "shareable" actually means** depends on who's using it and how. There are three realistic options in order of complexity:
 
 **Option 1: Share the code directly**
-Someone else with Python installed clones your project from GitHub, sets up their own API key, and runs it themselves. This is the developer version of sharing. Not appropriate for Tre Borden unless they have someone technical.
+Someone else with Python installed clones your project from GitHub, sets up their own API key, and runs it themselves. This is the developer version of sharing. Not appropriate for [[Tre Borden]] unless they have someone technical.
 
 **Option 2: Simple web interface**
 You build a basic webpage — a dropdown for segment, a button that says "Find Leads", and a results area. It runs on your machine but is accessible from a browser. Still requires your laptop to be on and running. Good for demoing, not good for independent use.
 
 **Option 3: Deployed web app**
-The same web interface but hosted somewhere on the internet — a server that's always on. Tre Borden goes to a URL, selects a segment, clicks run, downloads a spreadsheet. Fully independent of your machine. This is the real product.
+The same web interface but hosted somewhere on the internet — a server that's always on. [[Tre Borden]] goes to a URL, selects a segment, clicks run, downloads a spreadsheet. Fully independent of your machine. This is the real product.
 
 **The path there:**
 1. Build the web interface — probably one solid session using Flask, a lightweight Python web framework
@@ -4136,7 +4136,7 @@ what are we talking in terms of cost all in to get to option 3?
 Honest breakdown:
 
 **API costs (Anthropic)**
-This is your main ongoing expense. Each run costs roughly $0.10-0.30 depending on how many search loops it takes. If Tre Borden runs it a few times a week that's a few dollars a month. Negligible. If it becomes heavily used you'd want to add a rate limiter so someone can't accidentally run it 100 times.
+This is your main ongoing expense. Each run costs roughly $0.10-0.30 depending on how many search loops it takes. If [[Tre Borden]] runs it a few times a week that's a few dollars a month. Negligible. If it becomes heavily used you'd want to add a rate limiter so someone can't accidentally run it 100 times.
 
 **Hosting**
 Railway or Render both have free tiers that would handle light usage. If it outgrows the free tier you're looking at $5-20/month. Probably free for a while.
@@ -4555,7 +4555,7 @@ Let's do a proper handoff summary before you close up today — one that actuall
 
 ---
 
-**Project: first-agent — Lead Generation Agent for Tre Borden /Co**
+**Project: [[first-agent]] — Lead Generation Agent for [[Tre Borden]] /Co**
 
 **Location:** `/Users/andrewshipley/projects/first-agent`
 
@@ -4592,7 +4592,7 @@ It will ask: `Which segment? (corporate / public_sector):`
 **Outstanding items to build next:**
 1. Flask web interface with segment dropdown and run button
 2. Docker packaging for deployment
-3. Railway or Render deployment so Tre Borden can use it independently
+3. Railway or Render deployment so [[Tre Borden]] can use it independently
 4. Spreadsheet auto-table extension on new rows
 5. Volume mode — lower quality threshold, broader geography
 
@@ -5356,7 +5356,7 @@ Fair — pick corporate since we have the most data there already, so deduplicat
 a status box opened but it reads "Connection error. Please try again."
 
 The vs code terminal reads:
-(.venv) andrewshipley@MacBookAir first-agent % python app.py
+(.venv) andrewshipley@MacBookAir [[first-agent]] % python app.py
  * Serving Flask app 'app'
  * Debug mode: on
 WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
@@ -5428,17 +5428,17 @@ k. so will the leads.xlsx we already build live on railway as well from then on 
 
 Yes exactly — and that's actually a problem worth thinking about before we deploy.
 
-Right now `leads.xlsx` is a single file that accumulates everything. If Tre Borden runs it, all your test data from today is in there too. And if multiple people ever use it, they're all writing to and reading from the same file on the server.
+Right now `leads.xlsx` is a single file that accumulates everything. If [[Tre Borden]] runs it, all your test data from today is in there too. And if multiple people ever use it, they're all writing to and reading from the same file on the server.
 
 There are a few ways to handle this:
 
-**Option A: Clean slate on deploy** — before we push to Railway, delete `leads.xlsx` so it starts fresh. Tre Borden builds their own clean dataset from day one. Your test data stays on your local machine.
+**Option A: Clean slate on deploy** — before we push to Railway, delete `leads.xlsx` so it starts fresh. [[Tre Borden]] builds their own clean dataset from day one. Your test data stays on your local machine.
 
-**Option B: Download is always the full history** — which is actually fine for a single user like Tre Borden. Every download reflects everything ever found. Cumulative lead database.
+**Option B: Download is always the full history** — which is actually fine for a single user like [[Tre Borden]]. Every download reflects everything ever found. Cumulative lead database.
 
 **Option C: Per-session files** — each time someone runs the agent it generates a fresh spreadsheet for just that run, available for download, nothing persists on the server. Simpler, but you lose the deduplication benefit across runs.
 
-For Tre Borden as a single user, **Option A plus B** is probably right — start clean on deploy, let it accumulate from there, every download is the full database.
+For [[Tre Borden]] as a single user, **Option A plus B** is probably right — start clean on deploy, let it accumulate from there, every download is the full database.
 
 The more complex question is what happens when the server restarts or Railway redeploys the app — the file could get wiped. That's the point where you'd want to store `leads.xlsx` somewhere persistent like an S3 bucket or a simple database. But that's a future problem, not a today problem.
 
@@ -5643,7 +5643,7 @@ Two quick things to do before we push. First, your `.gitignore` already protects
 leads.xlsx
 ```
 
-That way Tre Borden's lead data never ends up on GitHub accidentally.
+That way [[Tre Borden]]'s lead data never ends up on GitHub accidentally.
 
 Go do that, then go to **github.com**, create a new repository called `first-agent`, make it private, and don't initialize it with anything. Tell me when you've done both.
 
@@ -5657,11 +5657,11 @@ Not directly through an integration unfortunately. But if you share a link to a 
 
 For a private repo neither of those work unless you paste the contents manually.
 
-Why — do you have an existing repo you want to connect this to, or are you thinking about how to share it with Tre Borden later?
+Why — do you have an existing repo you want to connect this to, or are you thinking about how to share it with [[Tre Borden]] later?
 
 **human**
 
-so can you fetch this? https://github.com/agshipley/NLSAFE
+so can you fetch this? https://github.com/agshipley/[[NLSAFE]]
 
 **assistant**
 
@@ -5673,7 +5673,7 @@ Yes I can see it — verifiable build infrastructure for safety-critical AI syst
 
 So yes — I can read public GitHub repos. Good to know for future reference.
 
-For `first-agent` you'll want a separate private repo since it contains business logic specific to Tre Borden. Go to github.com, create a new private repository called `first-agent`, don't initialize it with anything, and tell me when it's created.
+For `first-agent` you'll want a separate private repo since it contains business logic specific to [[Tre Borden]]. Go to github.com, create a new private repository called `first-agent`, don't initialize it with anything, and tell me when it's created.
 
 **human**
 
@@ -5689,10 +5689,10 @@ ok done. we've got a short readme and I gave it an apache license (open source b
 
 **assistant**
 
-Ha — love the energy, but worth a quick pause. Apache license means anyone can use, modify, and distribute the code. That's fine for the general agent framework, but this repo contains Tre Borden's specific ICP criteria, scoring rubrics, and business logic. You might want to keep that private rather than open sourcing it.
+Ha — love the energy, but worth a quick pause. Apache license means anyone can use, modify, and distribute the code. That's fine for the general agent framework, but this repo contains [[Tre Borden]]'s specific ICP criteria, scoring rubrics, and business logic. You might want to keep that private rather than open sourcing it.
 
 Two options:
-1. Keep it private — just Tre Borden's team has access
+1. Keep it private — just [[Tre Borden]]'s team has access
 2. Keep it public but scrub the business-specific details from the system prompts before pushing
 
 Your call — it's your code and your friend's business. Just flagging it before we push.
@@ -5701,7 +5701,7 @@ What did GitHub give you for the repo URL? Should be something like `https://git
 
 **human**
 
-I guess this: https://github.com/agshipley/first-agent
+I guess this: https://github.com/agshipley/[[first-agent]]
 
 **assistant**
 
@@ -5770,16 +5770,16 @@ Go ahead and stop the server and run the git commands.
 **human**
 
 the final command threw an error:
-(.venv) andrewshipley@MacBookAir first-agent % git push -u origin main
-To https://github.com/agshipley/first-agent.git
+(.venv) andrewshipley@MacBookAir [[first-agent]] % git push -u origin main
+To https://github.com/agshipley/[[first-agent]].git
  ! [rejected]        main -> main (fetch first)
-error: failed to push some refs to 'https://github.com/agshipley/first-agent.git'
+error: failed to push some refs to 'https://github.com/agshipley/[[first-agent]].git'
 hint: Updates were rejected because the remote contains work that you do not
 hint: have locally. This is usually caused by another repository pushing to
 hint: the same ref. If you want to integrate the remote changes, use
 hint: 'git pull' before pushing again.
 hint: See the 'Note about fast-forwards' in 'git push --help' for details.
-(.venv) andrewshipley@MacBookAir first-agent %
+(.venv) andrewshipley@MacBookAir [[first-agent]] %
 
 **assistant**
 
@@ -5802,13 +5802,13 @@ Tell me what you see.
 **human**
 
 ok after the allow unrelated histories I got this:
-(.venv) andrewshipley@MacBookAir first-agent % git pull origin main --allow-unrelated-histories
+(.venv) andrewshipley@MacBookAir [[first-agent]] % git pull origin main --allow-unrelated-histories
 remote: Enumerating objects: 4, done.
 remote: Counting objects: 100% (4/4), done.
 remote: Compressing objects: 100% (4/4), done.
 remote: Total 4 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
 Unpacking objects: 100% (4/4), 4.78 KiB | 543.00 KiB/s, done.
-From https://github.com/agshipley/first-agent
+From https://github.com/agshipley/[[first-agent]]
  * branch            main       -> FETCH_HEAD
  * [new branch]      main       -> origin/main
 hint: You have divergent branches and need to specify how to reconcile them.
@@ -5848,13 +5848,13 @@ git push -u origin main
 **human**
 
 the terminal appeared to freeze after the second command:
-Merge branch 'main' of https://github.com/agshipley/first-agent
+Merge branch 'main' of https://github.com/agshipley/[[first-agent]]
 # Please enter a commit message to explain why this merge is necessary,
 # especially if it merges an updated upstream into a topic branch.
 #
 # Lines starting with '#' will be ignored, and an empty message aborts
 # the commit.
-"~/projects/first-agent/.git/MERGE_MSG" 6L, 290B
+"~/projects/[[first-agent]]/.git/MERGE_MSG" 6L, 290B
 
 **assistant**
 
@@ -5898,7 +5898,7 @@ yep looks like the push succeeded
 
 **assistant**
 
-Great. Go check github.com/agshipley/first-agent and confirm your files are there — you should see `agent.py`, `app.py`, `tools.py`, `templates/index.html`, `.gitignore`, and the README.
+Great. Go check github.com/agshipley/[[first-agent]] and confirm your files are there — you should see `agent.py`, `app.py`, `tools.py`, `templates/index.html`, `.gitignore`, and the README.
 
 `leads.xlsx` and `.env` should NOT be there — those are protected by your `.gitignore`.
 
@@ -5990,7 +5990,7 @@ Good. The issue might be that `leads.xlsx` still exists in an earlier commit in 
 
 Run this to check if it's still showing up in GitHub:
 
-Go to **github.com/agshipley/first-agent** and look through the files listed. Do you see `leads.xlsx` there?
+Go to **github.com/agshipley/[[first-agent]]** and look through the files listed. Do you see `leads.xlsx` there?
 
 **human**
 
@@ -6170,7 +6170,7 @@ Go ahead and generate the domain and tell me the URL it gives you.
 
 **human**
 
-ok, here we are: first-agent-production.up.railway.app
+ok, here we are: [[first-agent]]-production.up.railway.app
 
 **assistant**
 
@@ -6338,7 +6338,7 @@ Actually that looks like it's working — Gunicorn started successfully and is l
 
 **human**
 
-still not working. pull it yourself: https://first-agent-production.up.railway.app/
+still not working. pull it yourself: https://[[first-agent]]-production.up.railway.app/
 
 **assistant**
 
@@ -7707,7 +7707,7 @@ Here's the updated handoff summary for next time:
 
 ---
 
-**Project: first-agent — Lead Generation Agent for Tre Borden /Co**
+**Project: [[first-agent]] — Lead Generation Agent for [[Tre Borden]] /Co**
 
 **Local project path:** `/Users/andrewshipley/projects/first-agent`
 

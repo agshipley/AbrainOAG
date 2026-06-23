@@ -3,7 +3,7 @@ type: session
 source: claude-code
 uuid: 9db670e9-79eb-448f-86c4-452c5873735c
 title: "Move render cache from localStorage to Vercel Blob"
-project: "Dr Max's"
+project: "[[Dr Max's]]"
 cwd: "/Users/andrewshipley/projects/Dr Max's"
 created: 2026-06-11
 updated: 2026-06-12
@@ -422,7 +422,7 @@ Everything is done. Here's what changed and the current state:
 
 **user**
 
-<ide_opened_file>The user opened the file /Users/andrewshipley/projects/Dr Max's/node_modules/.bin/browserslist in the IDE. This may or may not be related to the current task.</ide_opened_file>
+<ide_opened_file>The user opened the file /Users/andrewshipley/projects/[[Dr Max's]]/node_modules/.bin/browserslist in the IDE. This may or may not be related to the current task.</ide_opened_file>
 ok. this is a config thing. I would like the root config on this project moving forward to be dangerously approve permissions or whatever that setting is so I don't have to approve anything
 
 **assistant**
@@ -481,7 +481,7 @@ The next "baby scalp gel" generation should render correctly and drop the photo 
 
 **user**
 
-<ide_opened_file>The user opened the file /Users/andrewshipley/projects/Dr Max's/node_modules/.bin/browserslist in the IDE. This may or may not be related to the current task.</ide_opened_file>
+<ide_opened_file>The user opened the file /Users/andrewshipley/projects/[[Dr Max's]]/node_modules/.bin/browserslist in the IDE. This may or may not be related to the current task.</ide_opened_file>
 ok, I'd also like to put this up on github. I've creaed the empty repo here: https://github.com/agshipley/DrM
 
 **assistant**
@@ -880,7 +880,7 @@ Changes committed and pushed to [github.com/agshipley/DrM](https://github.com/ag
 
 **user**
 
-<ide_opened_file>The user opened the file /Users/andrewshipley/projects/Dr Max's/node_modules/.bin/browserslist in the IDE. This may or may not be related to the current task.</ide_opened_file>
+<ide_opened_file>The user opened the file /Users/andrewshipley/projects/[[Dr Max's]]/node_modules/.bin/browserslist in the IDE. This may or may not be related to the current task.</ide_opened_file>
 Render pipeline overhaul — match the real brand packaging and photography. Execute fully, no check-ins until the QA step.
 1. Reference conditioning (mandatory for all renders). Switch /api/render from images.generate to gpt-image-1's images.edit, passing 2–3 real product photos from public/products/ (Salve-All, Baby Balm, Diaper Ointment) as reference images with every call. Instruction language in the prompt: "Create a new product in exactly this brand's packaging design language: illustrated paper carton with a dense hand-drawn folk-botanical border, candy-stripe side panel, hand-lettered DR·MAX'S wordmark with dot/diamond motifs, vintage seed-packet aesthetic, matte paper finish."
 2. Presentation structure. Concepts render as the illustrated carton with the container (tin/tube/bottle/jar) beside or emerging from it — the box is the visual hero, matching the real line. Extend the spec JSON schema with accentColor (Claude assigns one stripe color per concept — e.g., red, marigold, green, indigo — so the line stays varied like the real products). The renderPrompt template must include the accent stripe color.

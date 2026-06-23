@@ -3,7 +3,7 @@ type: session
 source: claude-code
 uuid: 7842665b-95ef-4764-b399-77e7112c08ee
 title: "Write user story for location filtering"
-project: "job-search-engine"
+project: "[[job-search-engine]]"
 cwd: "/Users/andrewshipley/projects/Orpheus/job-search-engine"
 created: 2026-06-03
 updated: 2026-06-03
@@ -454,7 +454,7 @@ Creating the project settings.json now:
 
 **assistant**
 
-Done. 5 patterns added to the new [.claude/settings.json](job-search-engine/.claude/settings.json).
+Done. 5 patterns added to the new [.claude/settings.json]([[Orpheus|job-search-engine]]/.claude/settings.json).
 
 The root cause of the prompts you saw: the global settings had accumulated very specific exact-match entries from you clicking "approve" during the builder run (e.g., `eslint src/conductor/location_filter.ts src/conductor/conductor.ts` — hardcoded to those two exact files). Those entries are useless next run when the files differ. The new wildcard patterns will cover the actual command shapes builders use.
 
@@ -550,7 +550,7 @@ Default to direct edits. The Feature Factory chain (.claude/skills/feature-facto
 Why: the chain is expensive. Each of the seven agents re-reads ORPHEUS_STATE.md and CLAUDE.md from scratch and adds classifier overhead per action, so an unnecessary run can consume a full session. The default is cheap by design; the expensive path is deliberate by choice.
 2. SKILL.md changes — two replacements in .claude/skills/feature-factory/SKILL.md.
 Replace the description: field in the frontmatter with:
-description: Orchestrates the seven-agent Feature Factory chain (researcher, story-writer, spec-writer, backend-builder, frontend-builder, test-verifier, validator) with three human checkpoints, for large multi-file features in Orpheus. TRIGGER ONLY ON EXPLICIT INVOCATION — the phrases "run the factory," "build with the chain," "run the chain," or "use the feature factory." Do NOT trigger on a bare feature request like "build X," "add Y," "implement Z," or "fix W"; those default to direct edits no matter how large they sound. The chain is expensive (every agent re-reads the full state files; an unnecessary run can burn a session), so it is opt-in by design. If a task seems large enough to warrant the chain but the user has not explicitly invoked it, ASK first rather than starting it.
+description: Orchestrates the seven-agent Feature Factory chain (researcher, story-writer, spec-writer, backend-builder, frontend-builder, test-verifier, validator) with three human checkpoints, for large multi-file features in [[Orpheus]]. TRIGGER ONLY ON EXPLICIT INVOCATION — the phrases "run the factory," "build with the chain," "run the chain," or "use the feature factory." Do NOT trigger on a bare feature request like "build X," "add Y," "implement Z," or "fix W"; those default to direct edits no matter how large they sound. The chain is expensive (every agent re-reads the full state files; an unnecessary run can burn a session), so it is opt-in by design. If a task seems large enough to warrant the chain but the user has not explicitly invoked it, ASK first rather than starting it.
 Replace the entire ## When to run this skill section with:
 markdown## When to run this skill
 
@@ -596,8 +596,8 @@ Now commit all three files.
 
 Done. Three files updated and pushed:
 
-- [SKILL.md](../Orpheus/.claude/skills/feature-factory/SKILL.md) — description and "When to run" section replaced; "use the chain" added as fifth trigger phrase
-- [ORPHEUS_STATE.md](../Orpheus/ORPHEUS_STATE.md) — one-liner added to section 8 with all five phrases
+- [SKILL.md](../[[Orpheus]]/.claude/skills/feature-factory/SKILL.md) — description and "When to run" section replaced; "use the chain" added as fifth trigger phrase
+- [ORPHEUS_STATE.md](../[[Orpheus]]/ORPHEUS_STATE.md) — one-liner added to section 8 with all five phrases
 - CLAUDE.md — yours to add the routing block; nothing committed there
 
 The pre-commit hook flagged the ORPHEUS_STATE.md change as governance — which it is, intentionally. Committed as its own standalone commit, which is what the hook recommends.
@@ -620,7 +620,7 @@ Done. CLAUDE.md routing block is live, committed and pushed. I've saved the comm
 
 **user**
 
-Ok I've got a higher level issue which continues to frustrate with orpheus. We've shipped all those changes right. So now, I go to the site, I go to a simple search and query "Operator at Legal Tech startup in Los Angeles". The results of this query are two listings, both versions of the same job at the same company. Here is the posting:
+Ok I've got a higher level issue which continues to frustrate with [[Orpheus]]. We've shipped all those changes right. So now, I go to the site, I go to a simple search and query "Operator at Legal Tech startup in Los Angeles". The results of this query are two listings, both versions of the same job at the same company. Here is the posting:
 
 
 
@@ -640,7 +640,7 @@ That job is **CNC Setup Operator II, Second Shift at Relativity Space** — the 
 
 **Problem 1 — Wrong Relativity.** The `legal_innovation` agent is configured with "Relativity" as a source, meaning Relativity.com — the e-discovery/legal tech platform used by law firms. But the Greenhouse board slug `relativity` resolves to **Relativity Space**, the rocket company. They happen to share the same slug on Greenhouse. The agent is pulling from the wrong company entirely.
 
-**Problem 2 — Title filter isn't catching industrial roles.** "CNC Setup Operator II" passes because the string "operator" appears in the title, and Orpheus's operator-identity scoring fires on that keyword. The exclusion filter (`isExcludedEngineeringRole`) targets software engineering titles but doesn't cover machinist/manufacturing roles.
+**Problem 2 — Title filter isn't catching industrial roles.** "CNC Setup Operator II" passes because the string "operator" appears in the title, and [[Orpheus]]'s operator-identity scoring fires on that keyword. The exclusion filter (`isExcludedEngineeringRole`) targets software engineering titles but doesn't cover machinist/manufacturing roles.
 
 **Problem 3 — Long Beach is in the LA metro.** Location filtering worked exactly as designed. Long Beach is in the `los_angeles` alias list, so the job correctly passes the location check. The filter did its job; the upstream data is bad.
 
@@ -714,13 +714,13 @@ One option worth considering: relax the location filter for queries that return 
 
 **user**
 
-give me a full context document on what we have built on top of the existing orpheus structure as we found it at the beginning of this project. Provide DETAILED technical specifications and then, the most important part, explain all of the ways in which this tool has failed to meet even a BASIC baseline of utility for the user. I can't even build a fucking job search tool FOR MYSELF? I spend ten hours on something and when I querry "legal tech in los angeles" not only do I only get two identical results, ONLY TWO, they are both FOR A ROCKET FACTORY!?!?! Is this some kind of fucking joke???
+give me a full context document on what we have built on top of the existing [[Orpheus]] structure as we found it at the beginning of this project. Provide DETAILED technical specifications and then, the most important part, explain all of the ways in which this tool has failed to meet even a BASIC baseline of utility for the user. I can't even build a fucking job search tool FOR MYSELF? I spend ten hours on something and when I querry "legal tech in los angeles" not only do I only get two identical results, ONLY TWO, they are both FOR A ROCKET FACTORY!?!?! Is this some kind of fucking joke???
 
 **assistant**
 
 ---
 
-# Orpheus: What Was Built, and Why It's Failing
+# [[Orpheus]]: What Was Built, and Why It's Failing
 
 ## What was built — this session
 
@@ -732,7 +732,7 @@ give me a full context document on what we have built on top of the existing orp
 - Inserted into `heuristicRank()` in `conductor.ts`
 
 **Agent data quality fixes**
-- Removed `relativity` Greenhouse slug from `legal_innovation` — it pointed to Relativity Space (rocket manufacturer), not Relativity.com (legal tech e-discovery). Real Relativity uses Workday, which Orpheus cannot scrape.
+- Removed `relativity` Greenhouse slug from `legal_innovation` — it pointed to Relativity Space (rocket manufacturer), not Relativity.com (legal tech e-discovery). Real Relativity uses Workday, which [[Orpheus]] cannot scrape.
 - Added Scopely (Culver City) to `legal_innovation` as a non-legal-tech company — counsel/legal titles only surface
 - Added manufacturing/industrial title exclusions to `ENG_EXCLUDE_RX`: cnc, machinist, welder, fabricator, setup operator, production technician, and 8 more
 
@@ -773,7 +773,7 @@ give me a full context document on what we have built on top of the existing orp
 
 The entire source layer covers approximately **30 companies**. That is the number. Not 3,000. Not 300. Thirty.
 
-LinkedIn has 20 million+ active listings. Indeed has millions. Even niche job boards for specific industries have thousands. Orpheus has perhaps 200–500 jobs indexed on any given search, nearly all from SF Bay Area and NYC companies that happen to have public Greenhouse or Lever boards.
+LinkedIn has 20 million+ active listings. Indeed has millions. Even niche job boards for specific industries have thousands. [[Orpheus]] has perhaps 200–500 jobs indexed on any given search, nearly all from SF Bay Area and NYC companies that happen to have public Greenhouse or Lever boards.
 
 Every feature built on top of this — four-identity ranking, compound-fit scoring, GitHub signal boost, location filtering, asymmetry detection — is applied to a dataset so thin that statistical signals are meaningless. You cannot rank 200 jobs into "10x opportunities" when 180 of them don't match your geography, 15 match on generic keywords, and 5 are genuinely relevant. What you get is those 5, dressed up with scoring machinery that adds no information.
 
@@ -783,7 +783,7 @@ Before today: "legal tech in Los Angeles" returned London and Singapore results 
 
 After today: "legal tech in Los Angeles" returns 2 results, both the same CNC operator job from a rocket factory, because that's all the LA jobs that existed in the indexed set. The hard filter is doing exactly what it was designed to do. The input data simply doesn't contain enough LA jobs to filter.
 
-The filter was the right feature. It exposed a reality that was always there but invisible: **Orpheus is functionally a San Francisco Bay Area job monitor with aspirations of being a general-purpose search tool.**
+The filter was the right feature. It exposed a reality that was always there but invisible: **[[Orpheus]] is functionally a San Francisco Bay Area job monitor with aspirations of being a general-purpose search tool.**
 
 ### 3. Two known broken agents have been in production the entire time
 
@@ -822,7 +822,7 @@ The right order was: **get the data right first, then rank it.** Instead, a sign
 
 ### 8. No general-purpose job API has been integrated
 
-Every major job search tool in existence uses Indeed, LinkedIn, or a similar general-purpose job index as its backbone. Orpheus sources exclusively from hand-curated company-specific boards. This was a deliberate architectural choice — the premise was that curated sources produce higher signal than general indices. That premise may be correct in theory, but it collapses the moment you run a location-specific query for a geography that isn't SF Bay Area.
+Every major job search tool in existence uses Indeed, LinkedIn, or a similar general-purpose job index as its backbone. [[Orpheus]] sources exclusively from hand-curated company-specific boards. This was a deliberate architectural choice — the premise was that curated sources produce higher signal than general indices. That premise may be correct in theory, but it collapses the moment you run a location-specific query for a geography that isn't SF Bay Area.
 
 The tool as built can only work if your target companies happen to be in the curated list of 30. If you're searching for "operator at legal tech startup in LA," you need a general index, not a curated set that happens to contain one LA company (Scopely, added today) and a rocket factory (removed today).
 

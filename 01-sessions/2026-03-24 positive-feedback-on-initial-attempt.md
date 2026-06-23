@@ -17,7 +17,7 @@ tags: []
 
 **Conversation Overview**
 
-This was an extremely brief exchange with very little substantive content. The person made a short comment ("haha ok that's better as a start") suggesting they were reacting positively to something, though no prior context is available. Claude's response assumed the person intended to discuss the short story collection "CivilWarLand in Bad Decline" by George Saunders, and offered to help with discussion, theme analysis, essay writing, or other tasks related to it. No actual task was completed, no goals were established, and no meaningful exchange of information occurred beyond Claude's offer to assist with the literary work.
+This was an extremely brief exchange with very little substantive content. The person made a short comment ("haha ok that's better as a start") suggesting they were reacting positively to something, though no prior context is available. Claude's response assumed the person intended to discuss the short story collection "[[civilwarland]] in Bad Decline" by George Saunders, and offered to help with discussion, theme analysis, essay writing, or other tasks related to it. No actual task was completed, no goals were established, and no meaningful exchange of information occurred beyond Claude's offer to assist with the literary work.
 
 ## Transcript
 
@@ -27,4 +27,4 @@ haha ok that's better as a start.
 
 **assistant**
 
-It sounds like you might have meant to include a question or prompt along with the story! What would you like to do with "CivilWarLand in Bad Decline"? I'm happy to discuss it, analyze themes, help with an essay, or something else entirely.
+It sounds like you might have meant to include a question or prompt along with the story! What would you like to do with "[[civilwarland]] in Bad Decline"? I'm happy to discuss it, analyze themes, help with an essay, or something else entirely.

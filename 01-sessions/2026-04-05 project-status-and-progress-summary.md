@@ -17,7 +17,7 @@ tags: []
 
 **Conversation Overview**
 
-This conversation involved a returning user checking in on an active data analytics project called Mrkt — a platform testing whether negotiated M&A deal terms predict post-transaction outcomes, framed as "Moneyball for transactional law." The project has a dual purpose: building a real analytical product and preparing for the Claude Certified Architect — Foundations exam. Claude confirmed familiarity with the full project state, summarizing Sprint 1 (completed pipeline, MAUD corpus of 152 merger agreements, batch extraction via Message Batches API, correlational analysis with findings including MAC carveout count vs. days to close at Pearson r = −0.27) and Sprint 2 (structured response to a red-team Daubert-style critique, organized into three categories of fixes across no-spend, low-spend, and disclosure-only tracks).
+This conversation involved a returning user checking in on an active data analytics project called [[mrkt]] — a platform testing whether negotiated M&A deal terms predict post-transaction outcomes, framed as "Moneyball for transactional law." The project has a dual purpose: building a real analytical product and preparing for the Claude Certified Architect — Foundations exam. Claude confirmed familiarity with the full project state, summarizing Sprint 1 (completed pipeline, MAUD corpus of 152 merger agreements, batch extraction via Message Batches API, correlational analysis with findings including MAC carveout count vs. days to close at Pearson r = −0.27) and Sprint 2 (structured response to a red-team Daubert-style critique, organized into three categories of fixes across no-spend, low-spend, and disclosure-only tracks).
 
 The user then asked Claude to generate feasible research branches that stay within the project's general methodology but are tailored to a specific job opening at Clocktower Group — an alternative asset manager in Santa Monica focused on seeding macro hedge fund managers, managing an Asian equity platform, and investing in fintech and climate ventures. Claude fetched the job posting and company website, analyzed Clocktower's business model and the Chief of Staff to Founder/Managing Partner role (heavily IR and fundraising-oriented), and generated six ranked research ideas. The top-ranked ideas were Form ADV analysis linking hedge fund structural terms to AUM growth and fund longevity (directly relevant to Clocktower's manager-seeding business, fully feasible via existing EdgarTools infrastructure), and fintech M&A deal terms linked to acquirer returns (relevant to Clocktower Ventures' exit environment). Additional ideas included VC financing terms extracted from S-1 disclosures mapped to post-IPO performance, climate disclosure specificity linked to stock performance, macro research accuracy tracking, and cross-border US-Asia M&A term analysis leveraging Clocktower's London and Shanghai presence. Claude explicitly ranked ideas 1 and 2 as strongest for the application and noted both are buildable within one to two weeks using existing infrastructure.
 
@@ -33,9 +33,9 @@ ok, are you up to date on the work we've been doing in this project? please summ
 
 **assistant**
 
-Andrew wants a summary of the current state of the Mrkt project based on my memories and the documents provided.Yes, fully up to date. Here's where things stand:
+Andrew wants a summary of the current state of the [[mrkt]] project based on my memories and the documents provided.Yes, fully up to date. Here's where things stand:
 
-**What Mrkt is.** A data analytics platform testing whether negotiated M&A deal terms predict post-transaction outcomes — "Moneyball for transactional law." The dual purpose is building a real product and preparing for the Claude Certified Architect — Foundations exam (target: 1–2 weeks, 720/1000 pass score).
+**What [[mrkt]] is.** A data analytics platform testing whether negotiated M&A deal terms predict post-transaction outcomes — "Moneyball for transactional law." The dual purpose is building a real product and preparing for the Claude Certified Architect — Foundations exam (target: 1–2 weeks, 720/1000 pass score).
 
 ---
 
@@ -85,7 +85,7 @@ Now let me also look up Clocktower Group to understand them better.
 This block is not supported on your current device yet.
 ```
 
-Now I have a good picture of Clocktower Group. Let me analyze what they do and what the role entails, then think about what research branches from Mrkt would be relevant and feasible.
+Now I have a good picture of Clocktower Group. Let me analyze what they do and what the role entails, then think about what research branches from [[mrkt]] would be relevant and feasible.
 
 Clocktower Group:
 - Alternative asset management and advisory firm based in Santa Monica
@@ -103,7 +103,7 @@ The Chief of Staff role is about:
 - Project and information management
 - Events
 
-So what research angles from Mrkt would actually resonate with them? I'm thinking about how their core activities—seeding macro managers, investing in Asian equities, backing fintech and climate ventures—could benefit from the Mrkt framework of linking deal terms to outcomes. For instance, I could explore whether the specific contractual terms in their seeding agreements with macro managers correlate with those managers' subsequent performance, or examine how their VC investment terms in fintech and climate companies predict exit outcomes.
+So what research angles from [[mrkt]] would actually resonate with them? I'm thinking about how their core activities—seeding macro managers, investing in Asian equities, backing fintech and climate ventures—could benefit from the [[mrkt]] framework of linking deal terms to outcomes. For instance, I could explore whether the specific contractual terms in their seeding agreements with macro managers correlate with those managers' subsequent performance, or examine how their VC investment terms in fintech and climate companies predict exit outcomes.
 
 I
 
@@ -125,17 +125,17 @@ Clocktower is:
 
 The CoS role is about fundraising/IR, materials, prioritization, and execution for the founder/Managing Partner.
 
-What research branches from Mrkt would (a) be feasible to execute and (b) signal value to Clocktower specifically?
+What research branches from [[mrkt]] would (a) be feasible to execute and (b) signal value to Clocktower specifically?
 
-The key insight: Mrkt's core methodology is "extract structured data from legal/financial documents at scale using LLMs, then link to outcomes." That methodology can be redirected toward Clocktower's domains.
+The key insight: [[mrkt]]'s core methodology is "extract structured data from legal/financial documents at scale using LLMs, then link to outcomes." That methodology can be redirected toward Clocktower's domains.
  
-Now I'm thinking through potential applications. The most direct angle is Clocktower's seeding business — I could extract terms from seeding agreements and correlate them with manager performance, which maps perfectly to Mrkt's methodology. The challenge is that seeding agreements are private, though Form ADV filings do contain some fee structure information. I'm also considering analyzing Form ADV and D filings more broadly to surface patterns. on fintech and climate, and while the Ewens/Gorbenko/Korteweg paper highlighted this exact research gap, NVCA model documents provide standardization but the real constraint is accessing private term sheets at scale. Some fintech exits do surface prior financing terms through S-1s and proxy statements, and platforms like Crunchbase and PitchBook have partial data, though getting structured term information remains moderately feasible but data-limited without paid sources. I could also look at Clocktower's own macro research output and test whether research quality correlates with subsequent market performance, though building a reliable dataset of predictions is challenging. Another angle would be applying the Mrkt methodology specifically to fintech M&A transactions.
+Now I'm thinking through potential applications. The most direct angle is Clocktower's seeding business — I could extract terms from seeding agreements and correlate them with manager performance, which maps perfectly to [[mrkt]]'s methodology. The challenge is that seeding agreements are private, though Form ADV filings do contain some fee structure information. I'm also considering analyzing Form ADV and D filings more broadly to surface patterns. on fintech and climate, and while the Ewens/Gorbenko/Korteweg paper highlighted this exact research gap, NVCA model documents provide standardization but the real constraint is accessing private term sheets at scale. Some fintech exits do surface prior financing terms through S-1s and proxy statements, and platforms like Crunchbase and PitchBook have partial data, though getting structured term information remains moderately feasible but data-limited without paid sources. I could also look at Clocktower's own macro research output and test whether research quality correlates with subsequent market performance, though building a reliable dataset of predictions is challenging. Another angle would be applying the [[mrkt]] methodology specifically to fintech M&A transactions.
 
 For fintech acquisitions, this is particularly relevant since Clocktower invests in fintech startups and acquisitions are a primary exit path — understanding deal terms directly informs their venture strategy. Public acquirer 8-K filings capture many of these transactions, making this highly feasible even when targets are private. I could also extract structured signals from Due Diligence Questionnaires that hedge funds submit to allocators, though public DDQ data is limited and this might work better as a product demonstration. Finally, there's potential in analyzing climate and ESG disclosures from SEC filings to see how disclosure quality maps to actual outcomes.
 
 Beyond that, I'm thinking about macro fund performance persistence using Form ADV data and whether fee structures predict it, plus extending the M&A analysis to cross-border deals where Clocktower's London and Shanghai offices give them a natural edge — looking at whether US-Asia transactions show different term patterns than domestic deals. Now I need to rank these by how directly they serve Clocktower's business, what I can actually build with existing tools, and whether the insights would be genuinely differentiated or just something they could source elsewhere.
 
-The strongest candidates are Form ADV analysis tied to hedge fund growth and longevity since it's core to their manager seeding business and fully accessible through EdgarTools, fintech M&A returns as a focused subset of the broader market analysis, climate disclosure quality linked to stock performance for their climate investing mandate, VC term extraction from S-1 filings for their venture arm, and macro regime classification to see how it drives sector and strategy performance.Good context. Let me think through this carefully — the goal is research that (a) uses the Mrkt pipeline you've already built, (b) is genuinely relevant to Clocktower's actual business, and (c) would be impressive as a demonstration of analytical capability for this specific role.
+The strongest candidates are Form ADV analysis tied to hedge fund growth and longevity since it's core to their manager seeding business and fully accessible through EdgarTools, fintech M&A returns as a focused subset of the broader market analysis, climate disclosure quality linked to stock performance for their climate investing mandate, VC term extraction from S-1 filings for their venture arm, and macro regime classification to see how it drives sector and strategy performance.Good context. Let me think through this carefully — the goal is research that (a) uses the [[mrkt]] pipeline you've already built, (b) is genuinely relevant to Clocktower's actual business, and (c) would be impressive as a demonstration of analytical capability for this specific role.
 
 First, what Clocktower actually does: seeds macro hedge fund managers, manages an Asian equity platform, invests in fintech and climate startups via their venture arm, and provides macro research and advisory. The CoS role is heavily IR and fundraising-oriented — someone who helps the Managing Partner evaluate, pitch, and track relationships across that whole ecosystem.
 
@@ -155,7 +155,7 @@ Feasibility is high — all public data, same infrastructure, genuinely novel (n
 
 **2. Fintech M&A Deal Terms → Acquirer Returns**
 
-Run the Mrkt pipeline but filter to fintech sector M&A only. Clocktower Ventures invests in fintech startups — understanding what deal terms look like at exit is directly useful to their investment decisions. The extraction pipeline is identical; you just apply an industry filter when pulling agreements via EdgarTools.
+Run the [[mrkt]] pipeline but filter to fintech sector M&A only. Clocktower Ventures invests in fintech startups — understanding what deal terms look like at exit is directly useful to their investment decisions. The extraction pipeline is identical; you just apply an industry filter when pulling agreements via EdgarTools.
 
 This also produces a concrete, sector-specific deliverable you could put in front of them: "here's what termination fee structures and regulatory efforts standards look like in fintech acquisitions specifically, and here's how they correlate with acquirer returns."
 
@@ -199,7 +199,7 @@ Feasibility is moderate — the document corpus is large and heterogeneous, and 
 
 Clocktower has offices in London and Shanghai. Using EdgarTools on EDGAR filings, extract deal terms specifically from transactions with Asian counterparties (Chinese, Japanese, Korean acquirers or targets in US public M&A). Test whether cross-border deals show systematically different term structures — particularly around MAC definitions (more protective?), regulatory efforts standards (almost certainly HOHW or hell-or-high-water given CFIUS risk), and termination fee structures.
 
-The existing Mrkt pipeline runs directly. You just need to identify the cross-border deal subset, which is derivable from acquirer/target names in the deal metadata.
+The existing [[mrkt]] pipeline runs directly. You just need to identify the cross-border deal subset, which is derivable from acquirer/target names in the deal metadata.
 
 Feasibility is high — no new infrastructure needed. The research angle is novel and directly relevant to their Asia platform.
 

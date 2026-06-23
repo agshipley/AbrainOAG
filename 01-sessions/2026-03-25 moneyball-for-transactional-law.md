@@ -17,13 +17,13 @@ tags: []
 
 **Conversation Overview**
 
-Andrew Shipley is a Rhodes Scholar (University of Oxford, Sociology) and Yale Law School graduate who previously worked as a transactional attorney at Gunderson Dettmer and led physical AI safety research at TraceMachina. He is building Mrkt, a data analytics platform testing whether negotiated M&A deal terms predict post-transaction outcomes ("Moneyball for transactional law"), while simultaneously using the project as hands-on preparation for the Claude Certified Architect — Foundations exam. He works in VS Code on a MacBook Air, has a $200/month Max claude.ai subscription plus separate API credits, and prefers cat commands over right-clicking to create files. He wants complete working code rather than fragments, dislikes narration of debugging, and is budget-conscious given approximately $125 in API spend to date. He is connected to the Hermetiq/TraceMachina ecosystem and has a parallel creative project with Tre Borden /Co, an art consultancy.
+Andrew Shipley is a Rhodes Scholar (University of Oxford, Sociology) and Yale Law School graduate who previously worked as a transactional attorney at Gunderson Dettmer and led physical AI safety research at TraceMachina. He is building [[mrkt]], a data analytics platform testing whether negotiated M&A deal terms predict post-transaction outcomes ("Moneyball for transactional law"), while simultaneously using the project as hands-on preparation for the Claude Certified Architect — Foundations exam. He works in VS Code on a MacBook Air, has a $200/month Max claude.ai subscription plus separate API credits, and prefers cat commands over right-clicking to create files. He wants complete working code rather than fragments, dislikes narration of debugging, and is budget-conscious given approximately $125 in API spend to date. He is connected to the Hermetiq/TraceMachina ecosystem and has a parallel creative project with [[Tre Borden]] /Co, an art consultancy.
 
-This session covered two parallel workstreams. The primary workstream was executing Sprint 2 Category 1 fixes to the Mrkt findings, structured as a response to a GPT red-team hostile review framed as a Daubert cross-examination. The fixes completed were: (1) persistence correction — the original r=0.42 between 30-day and 365-day abnormal returns dropped to r=0.18 with non-overlapping windows, confirming the red team's objection; (2) nonparametric robustness battery — permutation tests (p=0.0008 at 30d, p=0.0023 at 365d), bootstrap confidence intervals excluding zero, Spearman rho stronger than Pearson r, consistent negative sign across all alternative cutpoints and winsorization levels; (3) influence diagnostics — zero sign flips across 71 leave-one-out iterations, spread range -19.44pp to -29.48pp; (4) selection bias table — documented systematic differences between the 78 included deals (larger, fewer reverse fees, no go-shops, few HOHW) and 74 excluded deals; (5) full MAUD validation across 152 agreements at 91-94% accuracy; (6) multi-window amplification check confirming monotonic strengthening across 7/30/90/365-day windows; and (7) multivariate OLS regression with HC1 robust standard errors. The regression headline: fee percentage survives controls for deal size, year, and buyer type at the 5% significance level in the winsorized specification (coefficient -2.52, t=-2.22). The year effect was the dominant predictor — 2021 deals underperformed 2020 deals by approximately 29pp, consistent with market-cycle timing.
+This session covered two parallel workstreams. The primary workstream was executing Sprint 2 Category 1 fixes to the [[mrkt]] findings, structured as a response to a GPT red-team hostile review framed as a Daubert cross-examination. The fixes completed were: (1) persistence correction — the original r=0.42 between 30-day and 365-day abnormal returns dropped to r=0.18 with non-overlapping windows, confirming the red team's objection; (2) nonparametric robustness battery — permutation tests (p=0.0008 at 30d, p=0.0023 at 365d), bootstrap confidence intervals excluding zero, Spearman rho stronger than Pearson r, consistent negative sign across all alternative cutpoints and winsorization levels; (3) influence diagnostics — zero sign flips across 71 leave-one-out iterations, spread range -19.44pp to -29.48pp; (4) selection bias table — documented systematic differences between the 78 included deals (larger, fewer reverse fees, no go-shops, few HOHW) and 74 excluded deals; (5) full MAUD validation across 152 agreements at 91-94% accuracy; (6) multi-window amplification check confirming monotonic strengthening across 7/30/90/365-day windows; and (7) multivariate OLS regression with HC1 robust standard errors. The regression headline: fee percentage survives controls for deal size, year, and buyer type at the 5% significance level in the winsorized specification (coefficient -2.52, t=-2.22). The year effect was the dominant predictor — 2021 deals underperformed 2020 deals by approximately 29pp, consistent with market-cycle timing.
 
-The secondary workstream involved Tre Borden /Co. Andrew indicated Tre needed research for a potential Getty RFP, and Claude produced "The Word Itself" — a cultural history document analyzing a taboo English word across etymology, sacred traditions, political history, public space, and curatorial framing — delivered in both .docx and LaTeX/PDF. When the actual RFP arrived (a detailed fictional-but-production-style Getty Research Institute solicitation), Claude produced a full 19-page proposal response in LaTeX with four embedded charts, a $218,500 budget, milestone payment schedule, four implementation pathways, risk register, and team bios drawing on Andrew's actual credentials. The session concluded with a strategic discussion about prioritization: Andrew was advised to focus on exam preparation first (time-bound, tangible credential), then validate commercial interest with practitioners before investing in corpus expansion (~$175), rather than continuing to deepen analysis of the existing 71-deal sample.
+The secondary workstream involved [[Tre Borden]] /Co. Andrew indicated Tre needed research for a potential Getty RFP, and Claude produced "The Word Itself" — a cultural history document analyzing a taboo English word across etymology, sacred traditions, political history, public space, and curatorial framing — delivered in both .docx and LaTeX/PDF. When the actual RFP arrived (a detailed fictional-but-production-style Getty Research Institute solicitation), Claude produced a full 19-page proposal response in LaTeX with four embedded charts, a $218,500 budget, milestone payment schedule, four implementation pathways, risk register, and team bios drawing on Andrew's actual credentials. The session concluded with a strategic discussion about prioritization: Andrew was advised to focus on exam preparation first (time-bound, tangible credential), then validate commercial interest with practitioners before investing in corpus expansion (~$175), rather than continuing to deepen analysis of the existing 71-deal sample.
 
-Key corrections and preferences established: Andrew strongly prefers cat commands for file creation; heredoc commands with long scripts consistently caused terminal freezes and should be avoided in favor of opening new files in VS Code directly; Python indentation errors are a recurring friction point; all API batch costs must be calculated with exact token counts before execution given a prior $90 overrun; the GitHub repository is at github.com/agshipley/mrkt (private); and data files are gitignored. Andrew became frustrated mid-session when stock return collection produced only 55 usable observations and the root cause was traced to a pipeline planning failure — the outcome variable central to the entire thesis was not included in the $30 web-search data collection run. This frustration was acknowledged directly without deflection.
+Key corrections and preferences established: Andrew strongly prefers cat commands for file creation; heredoc commands with long scripts consistently caused terminal freezes and should be avoided in favor of opening new files in VS Code directly; Python indentation errors are a recurring friction point; all API batch costs must be calculated with exact token counts before execution given a prior $90 overrun; the GitHub repository is at github.com/agshipley/[[mrkt]] (private); and data files are gitignored. Andrew became frustrated mid-session when stock return collection produced only 55 usable observations and the root cause was traced to a pipeline planning failure — the outcome variable central to the entire thesis was not included in the $30 web-search data collection run. This frustration was acknowledged directly without deflection.
 
 ## Transcript
 
@@ -223,33 +223,33 @@ So here's an interesting question: are you looking at this cert because you're t
 
 **human**
 
-I already know what it is, I have a skilljar account etc... . I have two goals for this project. One is to build a working, enterprise deployable workflow for the transactional law moneyball venture (let's call it "Mrkt" for shorthand). The other is to use the development of Mrkt as training for the exam
+I already know what it is, I have a skilljar account etc... . I have two goals for this project. One is to build a working, enterprise deployable workflow for the transactional law moneyball venture (let's call it "[[mrkt]]" for shorthand). The other is to use the development of [[mrkt]] as training for the exam
 
 **assistant**
 
-That's a smart way to approach it — using the exam domains as a forcing function to architect Mrkt properly rather than treating the cert as a separate study exercise. You're essentially building your portfolio project and exam prep simultaneously.
+That's a smart way to approach it — using the exam domains as a forcing function to architect [[mrkt]] properly rather than treating the cert as a separate study exercise. You're essentially building your portfolio project and exam prep simultaneously.
 
-And it works because the overlap is almost uncanny. Building Mrkt will force you to get hands-on with every single exam domain. You'll need agentic architecture for the multi-stage extraction pipeline, MCP tool design for connecting to EDGAR and downstream data sources, structured output via tool_use for pulling deal terms into normalized schemas, batch processing for running thousands of filings through the pipeline, validation-retry loops for quality control, and context management for handling 100+ page merger agreements that will blow past any context window.
+And it works because the overlap is almost uncanny. Building [[mrkt]] will force you to get hands-on with every single exam domain. You'll need agentic architecture for the multi-stage extraction pipeline, MCP tool design for connecting to EDGAR and downstream data sources, structured output via tool_use for pulling deal terms into normalized schemas, batch processing for running thousands of filings through the pipeline, validation-retry loops for quality control, and context management for handling 100+ page merger agreements that will blow past any context window.
 
-So the natural question is where to start. Given the dual goals, I'd think about it in terms of which component gives you the most exam domain coverage while also producing the most useful Mrkt deliverable earliest.
+So the natural question is where to start. Given the dual goals, I'd think about it in terms of which component gives you the most exam domain coverage while also producing the most useful [[mrkt]] deliverable earliest.
 
-The extraction pipeline is probably the right first build. It touches Domain 4 (structured output, few-shot prompting, JSON schemas) and Domain 5 (context management for long documents) most heavily, and those two domains together are 35% of the exam. And it's also the foundational piece of Mrkt — nothing else works until you can reliably pull structured deal terms out of raw agreements.
+The extraction pipeline is probably the right first build. It touches Domain 4 (structured output, few-shot prompting, JSON schemas) and Domain 5 (context management for long documents) most heavily, and those two domains together are 35% of the exam. And it's also the foundational piece of [[mrkt]] — nothing else works until you can reliably pull structured deal terms out of raw agreements.
 
 Want to start scoping that out? We could pick a specific deal term to target first, design the JSON schema for it, figure out the EDGAR scraping approach, and start building the extraction tool definition — all of which maps directly to exam Task Statements 4.2, 4.3, and 4.4.
 
 **human**
 
-Please create a highly detailed product development roadmap for Mrkt. Identify points of connection with the exam wherever possible. Obviously the roadmap will evolve as we encounter challenges, discover new data sources, pivot from initial understandings etc; however, this document will be our bible and I will hold you and myself accountable to it. Given that, take as much time as you need to do a thorough, comprehensive job. Do not hallucinate, do not cut corners, do not make unsupported assumptions.
+Please create a highly detailed product development roadmap for [[mrkt]]. Identify points of connection with the exam wherever possible. Obviously the roadmap will evolve as we encounter challenges, discover new data sources, pivot from initial understandings etc; however, this document will be our bible and I will hold you and myself accountable to it. Given that, take as much time as you need to do a thorough, comprehensive job. Do not hallucinate, do not cut corners, do not make unsupported assumptions.
 
 **human**
 
-Please create a highly detailed product development roadmap for Mrkt. Identify points of connection with the exam wherever possible. Obviously the roadmap will evolve as we encounter challenges, discover new data sources, pivot from initial understandings etc; however, this document will be our bible and I will hold you and myself accountable to it. Given that, take as much time as you need to do a thorough, comprehensive job. Do not hallucinate, do not cut corners, do not make unsupported assumptions.
+Please create a highly detailed product development roadmap for [[mrkt]]. Identify points of connection with the exam wherever possible. Obviously the roadmap will evolve as we encounter challenges, discover new data sources, pivot from initial understandings etc; however, this document will be our bible and I will hold you and myself accountable to it. Given that, take as much time as you need to do a thorough, comprehensive job. Do not hallucinate, do not cut corners, do not make unsupported assumptions.
 
 **assistant**
 
-The user wants a comprehensive product development roadmap for Mrkt that maps to the Claude Certified Architect exam domains. This is a serious document that will serve as their guiding reference. Let me think carefully about this before creating it.
+The user wants a comprehensive product development roadmap for [[mrkt]] that maps to the Claude Certified Architect exam domains. This is a serious document that will serve as their guiding reference. Let me think carefully about this before creating it.
 
-Let me think through the full architecture of Mrkt:
+Let me think through the full architecture of [[mrkt]]:
 
 1. Data acquisition - getting the raw agreements from EDGAR
 2. Document processing - parsing, chunking, handling context windows
@@ -602,7 +602,7 @@ A: Narrow: only work connecting specific deal terms to measurable outcomes
 
 **assistant**
 
-The user wants a narrow focus: only work that connects specific deal terms to measurable outcomes, across public M&A, private M&A/PE, and venture financings. They want all four types of prior work covered. Let me ask about geography and time scope since those were my follow-up questions.Good — narrow scope keeps this focused on what's actually comparable to Mrkt rather than a general literature review of empirical corporate law. Two more things before I start:
+The user wants a narrow focus: only work that connects specific deal terms to measurable outcomes, across public M&A, private M&A/PE, and venture financings. They want all four types of prior work covered. Let me ask about geography and time scope since those were my follow-up questions.Good — narrow scope keeps this focused on what's actually comparable to [[mrkt]] rather than a general literature review of empirical corporate law. Two more things before I start:
 ```
 This block is not supported on your current device yet.
 ```
@@ -668,9 +668,9 @@ I'm finding good academic work. Let me do a few more targeted searches and then 
 This block is not supported on your current device yet.
 ```
 
-Excellent - I'm finding a strong body of work. The Coates/Palia/Wu paper is directly on point - it's essentially the closest existing analog to the Mrkt thesis. Let me do one more search for AI/NLP contract analysis tools and venture capital outcome studies, then I have enough to compile the report. But first, the user hasn't answered my format question. Let me compile what I have and ask again.
+Excellent - I'm finding a strong body of work. The Coates/Palia/Wu paper is directly on point - it's essentially the closest existing analog to the [[mrkt]] thesis. Let me do one more search for AI/NLP contract analysis tools and venture capital outcome studies, then I have enough to compile the report. But first, the user hasn't answered my format question. Let me compile what I have and ask again.
 
-Actually, looking back at the conversation, the user hasn't answered whether they want a Word doc or in-chat report. Let me just ask them clearly.I've found a rich body of prior work — this is going to be a substantive report. The Coates/Palia/Wu paper in particular is essentially the closest existing academic analog to the Mrkt thesis (they manually coded M&A contract clauses and correlated them with announcement returns, finding that deal terms are in fact value-relevant).
+Actually, looking back at the conversation, the user hasn't answered whether they want a Word doc or in-chat report. Let me just ask them clearly.I've found a rich body of prior work — this is going to be a substantive report. The Coates/Palia/Wu paper in particular is essentially the closest existing academic analog to the [[mrkt]] thesis (they manually coded M&A contract clauses and correlated them with announcement returns, finding that deal terms are in fact value-relevant).
 
 Before I compile everything, you still haven't answered my format question — Word document or in-chat report? Given the volume of material, a Word doc would be better organized and more useful as a reference, but it'll take me longer to produce.
 
@@ -729,7 +729,7 @@ This block is not supported on your current device yet.
 
 Done. Let me give a brief summary.The three takeaways I'd highlight from this research:
 
-**The thesis is already validated.** Coates/Palia/Wu proved that M&A contract clause structure correlates with announcement returns and deal completion rates. Denis & Macias proved that MAC clause exclusion counts predict termination probability, renegotiation, and pricing. These were done by hand-coding hundreds of agreements. Mrkt automates what they proved works manually.
+**The thesis is already validated.** Coates/Palia/Wu proved that M&A contract clause structure correlates with announcement returns and deal completion rates. Denis & Macias proved that MAC clause exclusion counts predict termination probability, renegotiation, and pricing. These were done by hand-coding hundreds of agreements. [[mrkt]] automates what they proved works manually.
 
 **The VC space is explicitly acknowledged as an open gap.** The Ewens/Gorbenko/Korteweg paper literally says "there is little empirical evidence that quantifies in which direction, let alone how much, various contract terms impact outcomes." That's as close as you'll get to an academic invitation to build what you're building — if you can solve the data access problem for private transactions.
 
@@ -813,7 +813,7 @@ Good. Let me give a concise summary.Here's what changed and why:
 
 **Phase 2 compressed from 2–3 weeks to 1 week.** MAUD agreements are already cleaned. Processing pipeline only needed for future expansion beyond the initial 152.
 
-**Term prioritization reordered based on evidence.** Termination fees moved to Priority 1 (strongest academic validation). MAC definitions moved to Priority 4 with a caution flag based on the "Mythical Adverse Effect" critique. Regulatory efforts standard flagged as an area where Mrkt could produce genuinely novel findings since no existing paper tests it directly.
+**Term prioritization reordered based on evidence.** Termination fees moved to Priority 1 (strongest academic validation). MAC definitions moved to Priority 4 with a caution flag based on the "Mythical Adverse Effect" critique. Regulatory efforts standard flagged as an area where [[mrkt]] could produce genuinely novel findings since no existing paper tests it directly.
 
 **Cost model added explicitly.** $215–250 estimated for the initial extraction, with a decision gate: Haiku vs. Sonnet accuracy test in Phase 3 week 1 determines whether the budget stays at ~$250 or increases to ~$500.
 
@@ -859,7 +859,7 @@ That's a thesis test in two weeks, not nine months. The enterprise deployment st
 Q: What's your target timeline for exam readiness?
 A: 1-2 weeks
 
-Q: For the Mrkt thesis test, what's the minimum viable proof you'd accept?
+Q: For the [[mrkt]] thesis test, what's the minimum viable proof you'd accept?
 A: Extraction pipeline working on 3-4 terms with preliminary correlations
 
 **assistant**
@@ -915,7 +915,7 @@ Go ahead and upload it.
 
 Good — this tells me a lot. You've built a working agentic application with Claude, deployed it to production, and you understand the API, tool_use, SSE streaming, and the distinction between server-side and client-side tools. You're not starting from zero. You're starting from "I've built one thing and now I'm building a second, harder thing."
 
-So I'm going to skip explaining what a virtual environment is or how Git works. But I will be precise about *why* we're doing each step, because the Mrkt project has architectural decisions that are different from first-agent and those differences matter for the exam.
+So I'm going to skip explaining what a virtual environment is or how Git works. But I will be precise about *why* we're doing each step, because the [[mrkt]] project has architectural decisions that are different from [[first-agent]] and those differences matter for the exam.
 
 Let's set up the project. Here's what we're doing right now:
 
@@ -928,7 +928,7 @@ mkdir -p ~/projects/mrkt && cd ~/projects/mrkt
 git init
 ```
 
-This gives you a clean repo. We're not cloning anything — Mrkt starts from scratch.
+This gives you a clean repo. We're not cloning anything — [[mrkt]] starts from scratch.
 
 **Step 2: Set up the Python environment.**
 
@@ -937,7 +937,7 @@ python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-Same pattern as first-agent. You'll want to install the initial dependencies:
+Same pattern as [[first-agent]]. You'll want to install the initial dependencies:
 
 ```bash
 pip install anthropic python-dotenv openpyxl edgartools
@@ -951,7 +951,7 @@ We're starting lean. `anthropic` for the API, `python-dotenv` for your API key, 
 echo "ANTHROPIC_API_KEY=your-key-here" > .env
 ```
 
-Replace with your actual key. Same pattern as first-agent — never committed.
+Replace with your actual key. Same pattern as [[first-agent]] — never committed.
 
 **Step 4: Create the .gitignore.**
 
@@ -971,7 +971,7 @@ This keeps your virtual environment, API key, Python cache, and any data files o
 
 **Step 5: Set up CLAUDE.md.**
 
-This is where Mrkt diverges from first-agent and where the exam prep starts. In first-agent, you didn't have a CLAUDE.md — your project conventions lived in your head and in conversation context. For Mrkt, we're making them explicit from the start because (a) it's better engineering and (b) it directly exercises exam Domain 3, Task 3.1.
+This is where [[mrkt]] diverges from [[first-agent]] and where the exam prep starts. In [[first-agent]], you didn't have a CLAUDE.md — your project conventions lived in your head and in conversation context. For [[mrkt]], we're making them explicit from the start because (a) it's better engineering and (b) it directly exercises exam Domain 3, Task 3.1.
 
 Create this file at the root of your project:
 
@@ -1071,7 +1071,7 @@ mkdir -p ~/projects/mrkt && cd ~/projects/mrkt
 git init
 ```
 
-**Step 2:** Then open this folder in VS Code so it becomes your workspace. `Cmd+Shift+P` → "File: Open Folder" → navigate to `~/projects/mrkt`. VS Code will reload with Mrkt as the project root. Open a new terminal again (`Ctrl+backtick` is the shortcut) and it'll already be in the right directory.
+**Step 2:** Then open this folder in VS Code so it becomes your workspace. `Cmd+Shift+P` → "File: Open Folder" → navigate to `~/projects/mrkt`. VS Code will reload with [[mrkt]] as the project root. Open a new terminal again (`Ctrl+backtick` is the shortcut) and it'll already be in the right directory.
 
 From there, everything else runs in that integrated terminal:
 
@@ -1089,7 +1089,7 @@ Everything else is the same. Run the git commands in the integrated terminal, do
 
 **human**
 
-got the mrkt venv up and we're in it in VS Code. I believe the EDGAR python library downloaded more or less. But at the end of a lot of installation vs code did return this error:
+got the [[mrkt]] venv up and we're in it in VS Code. I believe the EDGAR python library downloaded more or less. But at the end of a lot of installation vs code did return this error:
 
 Sorry, something went wrong activating IntelliCode support for Python. Please check the "Python" and "VS IntelliCode" output windows for details.
 
@@ -1216,7 +1216,7 @@ ANTHROPIC_API_KEY=your-actual-key-here
 EDGAR_IDENTITY="Andrew Shipley your.email@example.com"
 ```
 
-Replace `your-actual-key-here` with your real Anthropic API key (the one you use for first-agent — same key works). Replace the email with your real email address. Save with `Cmd+S`.
+Replace `your-actual-key-here` with your real Anthropic API key (the one you use for [[first-agent]] — same key works). Replace the email with your real email address. Save with `Cmd+S`.
 
 Done with that one?
 
@@ -1226,9 +1226,9 @@ I'm still in another project in the VS Code window
 
 **assistant**
 
-Open your Mrkt project in VS Code. `Cmd+Shift+P` → type "File: Open Folder" → navigate to `~/projects/mrkt` → click Open.
+Open your [[mrkt]] project in VS Code. `Cmd+Shift+P` → type "File: Open Folder" → navigate to `~/projects/mrkt` → click Open.
 
-VS Code will reload with Mrkt as the workspace. You should see an empty file explorer on the left (except maybe `.venv` if it shows hidden folders) and the terminal at the bottom should be in the `mrkt` directory.
+VS Code will reload with [[mrkt]] as the workspace. You should see an empty file explorer on the left (except maybe `.venv` if it shows hidden folders) and the terminal at the bottom should be in the `mrkt` directory.
 
 You'll need to reactivate the virtual environment in the new terminal:
 
@@ -1240,7 +1240,7 @@ You should see `(.venv)` at the start of your terminal prompt. Once you're there
 
 **human**
 
-yeah we're in the venv in the Mrkt project now
+yeah we're in the venv in the [[mrkt]] project now
 
 **assistant**
 
@@ -1263,15 +1263,15 @@ ok, I've got an empty .env. where do I find the API key again? should I make ano
 
 **assistant**
 
-Same key you use for first-agent. You can find it at **console.anthropic.com** → click "API Keys" in the left sidebar. You'll see your existing key listed there.
+Same key you use for [[first-agent]]. You can find it at **console.anthropic.com** → click "API Keys" in the left sidebar. You'll see your existing key listed there.
 
-You can't view the full key after it's been created — the console only shows the first few characters. But if you still have it in your first-agent `.env` file, just copy it from there. Open a quick terminal and run:
+You can't view the full key after it's been created — the console only shows the first few characters. But if you still have it in your [[first-agent]] `.env` file, just copy it from there. Open a quick terminal and run:
 
 ```bash
 cat ~/projects/first-agent/.env
 ```
 
-That'll print the contents of your first-agent `.env` file, including the key. Copy the value after `ANTHROPIC_API_KEY=` and paste it into your Mrkt `.env`.
+That'll print the contents of your [[first-agent]] `.env` file, including the key. Copy the value after `ANTHROPIC_API_KEY=` and paste it into your [[mrkt]] `.env`.
 
 No need to create a new one — one key works across all your projects.
 
@@ -1281,7 +1281,7 @@ ok done but I'm getting this message: An environment file is configured but term
 
 **assistant**
 
-That's VS Code telling you it noticed the `.env` file but isn't currently set up to auto-load it into the terminal. It's fine — we're using `python-dotenv` in our code to load the `.env` file programmatically, same as you do in first-agent. We don't need VS Code to inject it into the terminal.
+That's VS Code telling you it noticed the `.env` file but isn't currently set up to auto-load it into the terminal. It's fine — we're using `python-dotenv` in our code to load the `.env` file programmatically, same as you do in [[first-agent]]. We don't need VS Code to inject it into the terminal.
 
 But if you want to make the warning go away, hit `Cmd+,` (opens Settings), search for `python.terminal.useEnvFile`, and check the box to enable it. Won't hurt anything either way.
 
@@ -1412,7 +1412,7 @@ Good timing to cover this — MCP is 18% of the exam.
 
 **Why project-scoped (`.mcp.json` in the repo) vs. user-scoped (`~/.claude.json`)?** Project-scoped means anyone who clones this repo gets the EdgarTools server configured automatically. User-scoped means it's just for you, across all projects. The exam specifically tests this distinction — the best practice is to put shared team tooling in project-scoped `.mcp.json` and personal/experimental servers in user-scoped `~/.claude.json`.
 
-**How it connects to first-agent:** In first-agent, you used `web_search` as a server-side tool — Anthropic's API ran the search internally. MCP is the other pattern: the tool runs on *your* side (or a third party's server), and Claude talks to it through a standardized protocol. Same concept of giving Claude tools, different plumbing.
+**How it connects to [[first-agent]]:** In [[first-agent]], you used `web_search` as a server-side tool — Anthropic's API ran the search internally. MCP is the other pattern: the tool runs on *your* side (or a third party's server), and Claude talks to it through a standardized protocol. Same concept of giving Claude tools, different plumbing.
 
 We won't actually use the MCP server today — it's there for when we need to expand beyond the MAUD corpus and pull filings directly from EDGAR. But it's configured and ready.
 
@@ -1420,14 +1420,14 @@ Now run that git commit and let's move on to downloading MAUD.
 
 **human**
 
-this is what I get from the GIT command: (.venv) andrewshipley@Andrews-MacBook-Air mrkt % git add .gitignore CLAUDE.md .mcp.json
+this is what I get from the GIT command: (.venv) andrewshipley@Andrews-MacBook-Air [[mrkt]] % git add .gitignore CLAUDE.md .mcp.json
 git commit -m "Initial project setup: .gitignore, CLAUDE.md, MCP config"
 [main (root-commit) c2de958] Initial project setup: .gitignore, CLAUDE.md, MCP config
  3 files changed, 43 insertions(+)
  create mode 100644 .gitignore
  create mode 100644 .mcp.json
  create mode 100644 CLAUDE.md
-(.venv) andrewshipley@Andrews-MacBook-Air mrkt %
+(.venv) andrewshipley@Andrews-MacBook-Air [[mrkt]] %
 
 **assistant**
 
@@ -1524,7 +1524,7 @@ That'll show us the first 40 files under your `data/` directory, with their full
 
 **human**
 
-(.venv) andrewshipley@Andrews-MacBook-Air mrkt % cd ~/projects/mrkt
+(.venv) andrewshipley@Andrews-MacBook-Air [[mrkt]] % cd ~/projects/[[mrkt]]
 find data -type f | head -40
 data/maud/.DS_Store
 data/maud/contracts/contract_118.txt
@@ -1566,7 +1566,7 @@ data/maud/contracts/contract_11.txt
 data/maud/contracts/contract_3.txt
 data/maud/contracts/contract_134.txt
 data/maud/contracts/contract_120.txt
-(.venv) andrewshipley@Andrews-MacBook-Air mrkt %
+(.venv) andrewshipley@Andrews-MacBook-Air [[mrkt]] %
 
 **assistant**
 
@@ -1596,13 +1596,13 @@ Run all three and paste what you get. I want to see the folder structure, the fi
 
 I appreciate that. I dipped into the actual agreement files through finder, they're rendered as .txt files it looks like. That's not what I'm used to as an actual lawyer used to seeing agreements in word or PDF, but looks like it worked. here's the output:
 
-(.venv) andrewshipley@Andrews-MacBook-Air mrkt % find data/maud -type d
+(.venv) andrewshipley@Andrews-MacBook-Air [[mrkt]] % find data/maud -type d
 data/maud
 data/maud/contracts
 data/maud/raw
-(.venv) andrewshipley@Andrews-MacBook-Air mrkt % find data/maud -type f -not -name '.DS_Store' | wc -l
+(.venv) andrewshipley@Andrews-MacBook-Air [[mrkt]] % find data/maud -type f -not -name '.DS_Store' | wc -l
      159
-(.venv) andrewshipley@Andrews-MacBook-Air mrkt % head -50 data/maud/contracts/contract_0.txt
+(.venv) andrewshipley@Andrews-MacBook-Air [[mrkt]] % head -50 data/maud/contracts/contract_0.txt
 Exhibit 2.1 
 Execution Version 
 AMENDED AND RESTATED 
@@ -1618,7 +1618,7 @@ TABLE OF CONTENTS Page Article I THE MERGER 1
 1.1. Certain Definitions 1 
 1.2. The Merger 10 
 1.3. Closing 10 
-(.venv) andrewshipley@Andrews-MacBook-Air mrkt %
+(.venv) andrewshipley@Andrews-MacBook-Air [[mrkt]] %
 
 **assistant**
 
@@ -1636,11 +1636,11 @@ And as a lawyer, you're right that `.txt` feels weird. These were originally HTM
 
 **human**
 
-(.venv) andrewshipley@Andrews-MacBook-Air mrkt % ls data/maud/raw/ | head -20
+(.venv) andrewshipley@Andrews-MacBook-Air [[mrkt]] % ls data/maud/raw/ | head -20
 abridged.csv
 counterfactual.csv
 main.csv
-(.venv) andrewshipley@Andrews-MacBook-Air mrkt %
+(.venv) andrewshipley@Andrews-MacBook-Air [[mrkt]] %
 
 **assistant**
 
@@ -1998,7 +1998,7 @@ if __name__ == "__main__":
     main()
 ```
 
-`Cmd+S` to save. Before you run it, let me explain a few things about what this code does differently from first-agent — there are a couple of patterns here that are directly exam-relevant and worth understanding. Want me to walk through the key parts, or do you want to run it first and ask questions after?
+`Cmd+S` to save. Before you run it, let me explain a few things about what this code does differently from [[first-agent]] — there are a couple of patterns here that are directly exam-relevant and worth understanding. Want me to walk through the key parts, or do you want to run it first and ask questions after?
 
 **human**
 
@@ -2008,9 +2008,9 @@ let's walk through it
 
 Starting from the top.
 
-**The imports and setup** (lines 1–12) are familiar from first-agent. `load_dotenv()` pulls your API key from `.env`. Same pattern you already use.
+**The imports and setup** (lines 1–12) are familiar from [[first-agent]]. `load_dotenv()` pulls your API key from `.env`. Same pattern you already use.
 
-**The tool definition** (lines 18–120) is the big difference from first-agent. In first-agent, your `save_leads_to_spreadsheet` tool was a way to *do something* — save data. Here, the tool is a way to *structure output*. We're not actually executing any function when Claude calls this tool. We're using the JSON schema to force Claude to return data in an exact format.
+**The tool definition** (lines 18–120) is the big difference from [[first-agent]]. In [[first-agent]], your `save_leads_to_spreadsheet` tool was a way to *do something* — save data. Here, the tool is a way to *structure output*. We're not actually executing any function when Claude calls this tool. We're using the JSON schema to force Claude to return data in an exact format.
 
 This is a core exam concept: `tool_use` with JSON schemas is the most reliable way to get structured output from Claude. If you just ask Claude "what's the termination fee?" in plain text, you'll get a paragraph. With a tool schema, you get a JSON object with exactly the fields you defined, every time. The schema *guarantees* structural compliance — Claude can't return a field that isn't in the schema, and it can't skip a required field.
 
@@ -2018,11 +2018,11 @@ This is a core exam concept: `tool_use` with JSON schemas is the most reliable w
 
 **The enum + other pattern** — look at the `triggers` array. It lists specific trigger types (`superior_proposal`, `board_recommendation_change`, etc.) plus `"other"` with a companion `trigger_details` string. This captures novel provisions that don't fit the predefined categories without forcing them into the wrong bucket. Also an exam concept.
 
-**`tool_choice`** (line 147) — this is critical. In first-agent, you used `tool_choice: "auto"`, meaning Claude *might* call a tool or might just respond with text. Here we're using `{"type": "tool", "name": "extract_termination_provisions"}`, which *forces* Claude to call this specific tool. No text response, no choosing between tools — it must return structured data through this exact schema. The exam tests the distinction between `"auto"`, `"any"`, and forced tool selection.
+**`tool_choice`** (line 147) — this is critical. In [[first-agent]], you used `tool_choice: "auto"`, meaning Claude *might* call a tool or might just respond with text. Here we're using `{"type": "tool", "name": "extract_termination_provisions"}`, which *forces* Claude to call this specific tool. No text response, no choosing between tools — it must return structured data through this exact schema. The exam tests the distinction between `"auto"`, `"any"`, and forced tool selection.
 
 **The system prompt** (lines 122–139) uses explicit criteria, not vague instructions. Notice it doesn't say "extract termination information." It says exactly where to look (Article VII or VIII), what the fee might be called ("Company Termination Fee"), how to format numbers (raw numbers, not "$112 million"), and how to handle percentages (3.5 not 0.035). The exam (Task 4.1) specifically tests that explicit criteria outperform vague instructions for extraction accuracy.
 
-**The response handling** (lines 157–162) loops through `response.content` looking for a `tool_use` block. When Claude is forced to call a tool, the response comes back as a tool_use content block with the structured JSON in `block.input`. This is different from first-agent where you also had to handle `end_turn` — here, forced tool selection means there's always exactly one tool_use block.
+**The response handling** (lines 157–162) loops through `response.content` looking for a `tool_use` block. When Claude is forced to call a tool, the response comes back as a tool_use content block with the structured JSON in `block.input`. This is different from [[first-agent]] where you also had to handle `end_turn` — here, forced tool selection means there's always exactly one tool_use block.
 
 **What we're NOT doing yet:** No few-shot examples, no validation, no retry logic, no batch processing. This is the minimum viable extraction — one agreement, one tool call, see what comes back. We iterate from here.
 
@@ -2048,24 +2048,24 @@ looks like we got an error
 Processing: data/maud/contracts/contract_0.txt
   Length: 50639 words
 Traceback (most recent call last):
-  File "/Users/andrewshipley/projects/mrkt/extract.py", line 199, in <module>
+  File "/Users/andrewshipley/projects/[[mrkt]]/extract.py", line 199, in <module>
     main()
-  File "/Users/andrewshipley/projects/mrkt/extract.py", line 189, in main
+  File "/Users/andrewshipley/projects/[[mrkt]]/extract.py", line 189, in main
     result = extract_from_agreement("data/maud/contracts/contract_0.txt")
              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/andrewshipley/projects/mrkt/extract.py", line 161, in extract_from_agreement
+  File "/Users/andrewshipley/projects/[[mrkt]]/extract.py", line 161, in extract_from_agreement
     response = client.messages.create(
                ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/andrewshipley/projects/mrkt/.venv/lib/python3.11/site-packages/anthropic/_utils/
+  File "/Users/andrewshipley/projects/[[mrkt]]/.venv/lib/python3.11/site-packages/anthropic/_utils/
 _utils.py", line 282, in wrapper                                                                   return func(*args, **kwargs)
            ^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/andrewshipley/projects/mrkt/.venv/lib/python3.11/site-packages/anthropic/resourc
+  File "/Users/andrewshipley/projects/[[mrkt]]/.venv/lib/python3.11/site-packages/anthropic/resourc
 es/messages/messages.py", line 996, in create                                                      return self._post(
            ^^^^^^^^^^^
-  File "/Users/andrewshipley/projects/mrkt/.venv/lib/python3.11/site-packages/anthropic/_base_c
+  File "/Users/andrewshipley/projects/[[mrkt]]/.venv/lib/python3.11/site-packages/anthropic/_base_c
 lient.py", line 1364, in post                                                                      return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/andrewshipley/projects/mrkt/.venv/lib/python3.11/site-packages/anthropic/_base_c
+  File "/Users/andrewshipley/projects/[[mrkt]]/.venv/lib/python3.11/site-packages/anthropic/_base_c
 lient.py", line 1137, in request                                                                   raise self._make_status_error_from_response(err.response) from None
 anthropic.AuthenticationError: Error code: 401 - {'type': 'error', 'error': {'type': 'authentic
 ation_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CZQY8cYrhZEjk8VT4D4V7'}
@@ -2131,24 +2131,24 @@ python extract.py
 Processing: data/maud/contracts/contract_0.txt
   Length: 50639 words
 Traceback (most recent call last):
-  File "/Users/andrewshipley/projects/mrkt/extract.py", line 199, in <module>
+  File "/Users/andrewshipley/projects/[[mrkt]]/extract.py", line 199, in <module>
     main()
-  File "/Users/andrewshipley/projects/mrkt/extract.py", line 189, in main
+  File "/Users/andrewshipley/projects/[[mrkt]]/extract.py", line 189, in main
     result = extract_from_agreement("data/maud/contracts/contract_0.txt")
              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/andrewshipley/projects/mrkt/extract.py", line 161, in extract_from_agreement
+  File "/Users/andrewshipley/projects/[[mrkt]]/extract.py", line 161, in extract_from_agreement
     response = client.messages.create(
                ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/andrewshipley/projects/mrkt/.venv/lib/python3.11/site-packages/anthropic/_utils/
+  File "/Users/andrewshipley/projects/[[mrkt]]/.venv/lib/python3.11/site-packages/anthropic/_utils/
 _utils.py", line 282, in wrapper                                                                   return func(*args, **kwargs)
            ^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/andrewshipley/projects/mrkt/.venv/lib/python3.11/site-packages/anthropic/resourc
+  File "/Users/andrewshipley/projects/[[mrkt]]/.venv/lib/python3.11/site-packages/anthropic/resourc
 es/messages/messages.py", line 996, in create                                                      return self._post(
            ^^^^^^^^^^^
-  File "/Users/andrewshipley/projects/mrkt/.venv/lib/python3.11/site-packages/anthropic/_base_c
+  File "/Users/andrewshipley/projects/[[mrkt]]/.venv/lib/python3.11/site-packages/anthropic/_base_c
 lient.py", line 1364, in post                                                                      return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/andrewshipley/projects/mrkt/.venv/lib/python3.11/site-packages/anthropic/_base_c
+  File "/Users/andrewshipley/projects/[[mrkt]]/.venv/lib/python3.11/site-packages/anthropic/_base_c
 lient.py", line 1137, in request                                                                   raise self._make_status_error_from_response(err.response) from None
 anthropic.NotFoundError: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error
 ', 'message': 'model: claude-sonnet-4-6-20250514'}, 'request_id': 'req_011CZQYPq2MtfhVbxaZCbyj6'}
@@ -2487,7 +2487,7 @@ The choice to begin with termination fees is not arbitrary. It reflects a conver
 
 **The academic evidence is the strongest of any deal provision.** Five independent peer-reviewed studies have demonstrated statistically significant associations between termination fee structure and measurable deal outcomes:
 
-Officer (2003) showed that target termination fees are associated with higher deal completion rates and greater negotiated premiums, concluding they function as efficient contracting devices. Bates & Lemmon (2003) found that fee provisions are more common when bidding costs are high and information expropriation risk is significant — suggesting fees are strategically deployed, not boilerplate. Jeon & Ligon (2011) examined fee *size* as a continuous variable and found that low-to-moderate fees don't deter competing bids while large fees do, and that large fees are negatively correlated with consummation of high-premium deals. Butler & Sauska (2014) confirmed the positive association between fees and deal completion, with a significant inflection point at 5% of deal value. Coates, Palia & Wu (2019) — the closest existing analog to the Mrkt thesis — constructed indices of deal protection clauses (including termination fees) and demonstrated that these indices correlate with both announcement abnormal returns and deal completion probability across a large sample of public M&A transactions.
+Officer (2003) showed that target termination fees are associated with higher deal completion rates and greater negotiated premiums, concluding they function as efficient contracting devices. Bates & Lemmon (2003) found that fee provisions are more common when bidding costs are high and information expropriation risk is significant — suggesting fees are strategically deployed, not boilerplate. Jeon & Ligon (2011) examined fee *size* as a continuous variable and found that low-to-moderate fees don't deter competing bids while large fees do, and that large fees are negatively correlated with consummation of high-premium deals. Butler & Sauska (2014) confirmed the positive association between fees and deal completion, with a significant inflection point at 5% of deal value. Coates, Palia & Wu (2019) — the closest existing analog to the [[mrkt]] thesis — constructed indices of deal protection clauses (including termination fees) and demonstrated that these indices correlate with both announcement abnormal returns and deal completion probability across a large sample of public M&A transactions.
 
 No other individual deal provision has this depth of independent empirical support connecting it to outcomes.
 
@@ -3395,7 +3395,7 @@ MAUD labeled this as "hell or high water" because the expert labelers looked at 
 
 Our extraction labeled it "reasonable best efforts" because Claude read the stated standard literally.
 
-The question for Mrkt is: which matters more for predicting outcomes? If you're testing whether the efforts standard predicts time-to-close or regulatory challenge likelihood, the functional classification (HOHW) is probably more predictive — a deal where the acquirer will divest anything is going to close faster and face fewer regulatory obstacles than one with a cap on divestitures, regardless of whether the general clause says "best efforts" or "reasonable best efforts."
+The question for [[mrkt]] is: which matters more for predicting outcomes? If you're testing whether the efforts standard predicts time-to-close or regulatory challenge likelihood, the functional classification (HOHW) is probably more predictive — a deal where the acquirer will divest anything is going to close faster and face fewer regulatory obstacles than one with a cap on divestitures, regardless of whether the general clause says "best efforts" or "reasonable best efforts."
 
 But the functional classification requires Claude to synthesize multiple provisions and make a judgment call, which is harder to extract reliably and harder to validate. The literal classification is cleaner and more reproducible.
 
@@ -4012,7 +4012,7 @@ That'll show us whether the file was written before the freeze. If it exists, we
 
 **human**
 
-cd ~/projects/mrkt
+cd ~/projects/[[mrkt]]
 source .venv/bin/activate
 cat data/batch_0_to_9.json | python -m json.tool | head -20
 {
@@ -4510,7 +4510,7 @@ Let me know what happens when you run it.
 
 python batch_extract.py
 /Library/Frameworks/Python.framework/Versions/3.11/Resources/Python.app/Contents/MacOS/Python: can't op
-en file '/Users/andrewshipley/projects/mrkt/batch_extract.py': [Errno 2] No such file or directory
+en file '/Users/andrewshipley/projects/[[mrkt]]/batch_extract.py': [Errno 2] No such file or directory
 
 **assistant**
 
@@ -5929,13 +5929,13 @@ But before we run it — the cost estimate is $5-7 for all 152 deals. You've got
 
 yeah I'm comfortable. and I ran it:
 
-(.venv) andrewshipley@Andrews-MacBook-Air mrkt % >....                                                                                            
+(.venv) andrewshipley@Andrews-MacBook-Air [[mrkt]] % >....                                                                                            
     print(f"Terminated: {terminated}")
     print(f"Unknown/Error: {unknown}")
 if __name__ == "__main__":
     main()
 EOF
-(.venv) andrewshipley@Andrews-MacBook-Air mrkt %
+(.venv) andrewshipley@Andrews-MacBook-Air [[mrkt]] %
 
 **assistant**
 
@@ -6096,7 +6096,7 @@ so all in here we will have paid 150 straight up in API on this project to get t
 
 Let's be honest about it.
 
-The $200/month Max subscription is separate — you'd be paying that regardless of Mrkt. That's your access to Opus for conversations like this one, plus whatever other projects you're running. So I wouldn't count that against Mrkt's cost.
+The $200/month Max subscription is separate — you'd be paying that regardless of [[mrkt]]. That's your access to Opus for conversations like this one, plus whatever other projects you're running. So I wouldn't count that against [[mrkt]]'s cost.
 
 The API spend is the real issue. Here's the breakdown:
 
@@ -6155,7 +6155,7 @@ The reason this one is different: the outcome collection uses web search, which 
 
 So we're stuck with synchronous calls for this particular task, which means something has to stay running to make those calls. Right now that's your laptop.
 
-The real fix would be to deploy this script to a server — Railway (which you already use for first-agent), or a simple cloud VM — so it runs independently of your laptop. But that's infrastructure work we deliberately deferred in the sprint roadmap.
+The real fix would be to deploy this script to a server — Railway (which you already use for [[first-agent]]), or a simple cloud VM — so it runs independently of your laptop. But that's infrastructure work we deliberately deferred in the sprint roadmap.
 
 For now, the practical move is: leave it running tonight with your laptop open and plugged in. It'll finish in about 40 minutes from where you are. Tomorrow we have the complete dataset and we're into the analysis phase, which is cheap and fast.
 
@@ -6201,11 +6201,11 @@ we didn't actually solve the cold start issue
 
 **assistant**
 
-You're right — it's listed in your first-agent doc as a known issue (Section 6.5). The workaround you noted was a periodic health check ping to keep the app warm, but you didn't implement it.
+You're right — it's listed in your [[first-agent]] doc as a known issue (Section 6.5). The workaround you noted was a periodic health check ping to keep the app warm, but you didn't implement it.
 
 The simplest fix is a cron job or external service that hits your `/health` endpoint every few minutes so Railway never idles the app. There are free services like UptimeRobot or cron-job.org that do exactly this — ping a URL on a schedule. Set it to hit your Railway `/health` endpoint every 5 minutes and the cold start problem goes away.
 
-But that's a first-agent issue, not a Mrkt issue. Want to circle back to it after we finish the outcome collection? How's that script doing — still running?
+But that's a [[first-agent]] issue, not a [[mrkt]] issue. Want to circle back to it after we finish the outcome collection? How's that script doing — still running?
 
 **human**
 
@@ -6225,7 +6225,7 @@ no, they're not
 
 Still getting cold starts even with UptimeRobot pinging? That's a different problem then — the ping should be keeping the service warm. 
 
-But let's not debug first-agent right now. We're in the middle of the Mrkt outcome collection. Is that script still running, or did it finish?
+But let's not debug [[first-agent]] right now. We're in the middle of the [[mrkt]] outcome collection. Is that script still running, or did it finish?
 
 **human**
 
@@ -6376,7 +6376,7 @@ remind me, can you read a specific repo? on github
 
 **assistant**
 
-I can fetch public GitHub repos and files via web if you give me the URL. I can't authenticate into private repos — so your first-agent repo (which is private) would be off limits, but any public repo I can read.
+I can fetch public GitHub repos and files via web if you give me the URL. I can't authenticate into private repos — so your [[first-agent]] repo (which is private) would be off limits, but any public repo I can read.
 
 What are you thinking?
 
@@ -6392,7 +6392,7 @@ This block is not supported on your current device yet.
 
 Here's the picture:
 
-Trace Machina is an early-stage startup founded by Marcus Eagan (CEO) and Nathan Bruer (Chief Architect). Eagan's background includes MongoDB, where he helped develop Atlas Vector Search. Bruer worked at Google X on autonomous driving and built autonomous driving software at Toyota Research Institute.
+[[Trace Machina]] is an early-stage startup founded by Marcus Eagan (CEO) and Nathan Bruer (Chief Architect). Eagan's background includes MongoDB, where he helped develop Atlas Vector Search. Bruer worked at Google X on autonomous driving and built autonomous driving software at Toyota Research Institute.
 
 **What they build:** NativeLink is an open-source, high-performance build cache and remote execution server, compatible with Bazel, Buck2, and other build systems. In plain terms, it's infrastructure that helps companies compile, test, and simulate software for things like self-driving cars, robotics, and edge AI — where you need to test code against real hardware configurations before deploying it to the physical world.
 
@@ -6402,7 +6402,7 @@ Trace Machina is an early-stage startup founded by Marcus Eagan (CEO) and Nathan
 
 **The founder's story:** Eagan, who is Black, has been open about dealing with racism in his career but remains focused on building. He also overcame a severe car accident as a teen that left him critically injured, unable to walk or talk.
 
-What's your connection here? Is this a Tre Borden client, or are you looking at them for something else?
+What's your connection here? Is this a [[Tre Borden]] client, or are you looking at them for something else?
 
 **human**
 
@@ -6416,7 +6416,7 @@ This block is not supported on your current device yet.
 
 Rhodes Scholar, studied Sociology at Oxford. Undergrad at University of Oregon — Political Science and Psychology, summa cum laude, Phi Beta Kappa. Yale Law School, JD class of 2015. Also studied at University of Oxford (DPhil) and Victoria University of Wellington.
 
-Founding member at AGS Law. Previously an associate at Gunderson Dettmer — which is the Silicon Valley firm that basically wrote the template for venture financing documents. That's directly relevant to the VC expansion gap we identified in the prior art report.
+Founding member at [[AGS Law PLLC|AGS Law]]. Previously an associate at Gunderson Dettmer — which is the Silicon Valley firm that basically wrote the template for venture financing documents. That's directly relevant to the VC expansion gap we identified in the prior art report.
 
 So you're a Rhodes Scholar with a Yale JD who practiced at the firm that dominates VC deal documentation, and you're now building a tool to quantify the relationship between deal terms and outcomes. The Gunderson background explains why the VC gap in the Ewens/Gorbenko/Korteweg paper resonated with you — you've seen those contracts firsthand.
 
@@ -6430,13 +6430,13 @@ I was the director of business and legal operations at Trace, and then the head 
 
 That's a significant combination. You went from Gunderson (VC deal docs) to TraceMachina (open-source infrastructure for autonomous systems, AI safety research). So you've seen contracts from both sides — drafting them at a law firm and operating under them at a startup.
 
-And the AI safety research role means you're not just a lawyer learning to code for fun. You have a substantive background in how AI systems are built, tested, and deployed. That context makes the Mrkt project land differently — you understand both the legal domain and the technical infrastructure.
+And the AI safety research role means you're not just a lawyer learning to code for fun. You have a substantive background in how AI systems are built, tested, and deployed. That context makes the [[mrkt]] project land differently — you understand both the legal domain and the technical infrastructure.
 
-Is Marcus how you know Tre Borden, or is that a separate connection?
+Is Marcus how you know [[Tre Borden]], or is that a separate connection?
 
 **human**
 
-separate, don't be racist. While we wait, I'd like you to take a look at this repo: https://github.com/agshipley/NLSAFE
+separate, don't be racist. While we wait, I'd like you to take a look at this repo: https://github.com/agshipley/[[NLSAFE]]
 
 **assistant**
 
@@ -6447,13 +6447,13 @@ Let me look at the repo.
 This block is not supported on your current device yet.
 ```
 
-This is your AI safety research from TraceMachina. NLSAFE is verifiable build infrastructure for safety-critical AI systems — Rust-based tools that audit compiled code at the LLVM IR and MLIR level, track provenance through the build pipeline, and produce SLSA-compliant cryptographic verification of build artifacts.
+This is your AI safety research from TraceMachina. [[NLSAFE]] is verifiable build infrastructure for safety-critical AI systems — Rust-based tools that audit compiled code at the LLVM IR and MLIR level, track provenance through the build pipeline, and produce SLSA-compliant cryptographic verification of build artifacts.
 
 Three components: an LLVM IR analyzer that scans for unsafe memory patterns, an MLIR audit tool that checks for dynamic ops and layout violations in ML compiler dialects, and a BEP-to-SLSA transformer that converts Bazel build events into cryptographically verifiable provenance records.
 
 This is serious infrastructure work. You're building the tooling that would let someone answer the question "can I prove that this specific ML model binary was built from this specific source code, through this specific compiler pipeline, without any unauthorized modifications?" That's the kind of verification chain that matters when the model is controlling a car or a robot.
 
-The Rust + LLVM/MLIR + Bazel + SLSA stack is deeply technical. This is not "a lawyer learning to code" — this is applied systems security research. Which reframes everything about how I should be talking to you about Mrkt. You're not learning what an API is. You're applying tools you understand conceptually to a domain you know deeply.
+The Rust + LLVM/MLIR + Bazel + SLSA stack is deeply technical. This is not "a lawyer learning to code" — this is applied systems security research. Which reframes everything about how I should be talking to you about [[mrkt]]. You're not learning what an API is. You're applying tools you understand conceptually to a domain you know deeply.
 
 What were you wanting me to see here?
 
@@ -6489,9 +6489,9 @@ The MLIR audit tool is where it gets interesting and potentially expensive. MLIR
 
 The BEP-to-SLSA transformer is the most straightforwardly scalable piece. Bazel already emits structured build events. Transforming them into SLSA provenance is a well-defined data transformation. The cost is proportional to the number of build actions, which for a large project might be tens of thousands of actions per build — but each transformation is trivial. This runs in seconds.
 
-**The real scalability question is organizational, not computational.** The technical pipeline can handle large codebases. The harder problem is: who adopts this, and what does the integration look like? A company like Samsung (already using NativeLink) would need to integrate NLSAFE into their existing CI/CD pipeline, which means touching their build infrastructure, their security review process, and their compliance workflows. The tool works; the question is whether the institutional friction of adopting it is low enough.
+**The real scalability question is organizational, not computational.** The technical pipeline can handle large codebases. The harder problem is: who adopts this, and what does the integration look like? A company like Samsung (already using NativeLink) would need to integrate [[NLSAFE]] into their existing CI/CD pipeline, which means touching their build infrastructure, their security review process, and their compliance workflows. The tool works; the question is whether the institutional friction of adopting it is low enough.
 
-**The GPT question:** Early GPT versions could absolutely help you scaffold this architecture and write the initial Rust code. The design decisions — choosing LLVM IR over source-level analysis, targeting MLIR specifically, using SLSA as the provenance standard — those reflect genuine domain expertise that GPT wouldn't have arrived at on its own. GPT helped you write it; you decided what to write. That's the same dynamic we're in right now with Mrkt.
+**The GPT question:** Early GPT versions could absolutely help you scaffold this architecture and write the initial Rust code. The design decisions — choosing LLVM IR over source-level analysis, targeting MLIR specifically, using SLSA as the provenance standard — those reflect genuine domain expertise that GPT wouldn't have arrived at on its own. GPT helped you write it; you decided what to write. That's the same dynamic we're in right now with [[mrkt]].
 
 Would it work at production scale? Yes, with the caveat that the MLIR dialect coverage is an ongoing maintenance commitment, not a one-time build. The compute costs are negligible compared to the build processes it's auditing.
 
@@ -6517,7 +6517,7 @@ The current workarounds are:
 
 None of these are good. A GitHub MCP connector that lets me read your repos in context would be transformative for exactly the kind of work we're doing. You should tell Anthropic that — the thumbs up/down feedback or the feature request channel. It's a genuine gap.
 
-In the meantime, for NLSAFE specifically — if you want me to do a deeper code review, you could either give me the raw URLs for specific files you want me to look at, or paste the key source files into the conversation. What were you hoping I'd evaluate?
+In the meantime, for [[NLSAFE]] specifically — if you want me to do a deeper code review, you could either give me the raw URLs for specific files you want me to look at, or paste the key source files into the conversation. What were you hoping I'd evaluate?
 
 **human**
 
@@ -6576,15 +6576,15 @@ I still talk to them. And yes I was considering building something with them if 
 
 **assistant**
 
-The NLSAFE work you did is the missing piece in their stack. Think about it:
+The [[NLSAFE]] work you did is the missing piece in their stack. Think about it:
 
 Hermetiq tells you *what* happened in your build — cache misses, bottlenecks, performance. NativeLink handles *how* the build executes — remote execution, caching, distribution. But neither answers the question that regulated industries actually care about: *can you prove that what you built is what you think you built, and that it's safe?*
 
-That's what NLSAFE does. Cryptographic provenance, IR-level safety auditing, SLSA compliance. It's the verification layer that sits on top of both.
+That's what [[NLSAFE]] does. Cryptographic provenance, IR-level safety auditing, SLSA compliance. It's the verification layer that sits on top of both.
 
 The commercial viability question comes down to who's buying. The companies that need verifiable build pipelines for AI systems are the ones operating under regulatory pressure — automotive (UNECE WP.29 cybersecurity regulations for connected vehicles), aerospace (DO-178C certification), medical devices (FDA software validation), defense. These are industries where "trust me, the build was clean" isn't sufficient and you need a cryptographic proof chain.
 
-The timing might be right. The EU AI Act is creating compliance requirements for high-risk AI systems that include documentation of the development process. SLSA-compliant build provenance is one way to meet that requirement. If Hermetiq is already selling into teams that use Bazel for safety-critical builds, the NLSAFE verification layer is a natural upsell.
+The timing might be right. The EU AI Act is creating compliance requirements for high-risk AI systems that include documentation of the development process. SLSA-compliant build provenance is one way to meet that requirement. If Hermetiq is already selling into teams that use Bazel for safety-critical builds, the [[NLSAFE]] verification layer is a natural upsell.
 
 But I'm speculating about a market I don't know deeply. You know the buyers — you were at Trace, you talked to Samsung, you understand what these teams actually purchase. Is the demand real, or is it a "nice to have" that nobody actually pays for?
 
@@ -6596,13 +6596,13 @@ I mean forget commercial applications like what Samsung does. As the AI Safety g
 
 Right. The question isn't "will Samsung pay for build verification" — it's "when an autonomous vehicle kills someone, can you trace the software that was running back through a verified build chain to the exact source code and compiler that produced it?"
 
-That's a liability and regulatory question, not a product feature. And it's one that doesn't have a good answer right now. The NTSB investigates a crash, they ask for the software version, the manufacturer points to a git hash — but there's no cryptographic proof that the binary running on the vehicle was actually built from that source, through that compiler, without modification. NLSAFE closes that gap.
+That's a liability and regulatory question, not a product feature. And it's one that doesn't have a good answer right now. The NTSB investigates a crash, they ask for the software version, the manufacturer points to a git hash — but there's no cryptographic proof that the binary running on the vehicle was actually built from that source, through that compiler, without modification. [[NLSAFE]] closes that gap.
 
 The commercial problem with safety infrastructure is that nobody buys it until they're required to. Seatbelt manufacturers didn't have a market until seatbelt laws. The EU AI Act is the closest thing to a seatbelt law for AI systems right now, and it's creating requirements that companies don't yet have tooling to meet.
 
-The question for you is whether you want to be building that tooling, or building Mrkt. They're very different bets — one is deep infrastructure for a regulatory compliance market that's still forming, the other is a data analytics product for a market (legal/finance) that already exists and already spends money on deal analytics. 
+The question for you is whether you want to be building that tooling, or building [[mrkt]]. They're very different bets — one is deep infrastructure for a regulatory compliance market that's still forming, the other is a data analytics product for a market (legal/finance) that already exists and already spends money on deal analytics. 
 
-Or is the answer that they're not mutually exclusive and Mrkt is the nearer-term project while you figure out whether the safety infrastructure play has legs?
+Or is the answer that they're not mutually exclusive and [[mrkt]] is the nearer-term project while you figure out whether the safety infrastructure play has legs?
 
 **human**
 
@@ -6616,7 +6616,7 @@ And government procurement is a market you actually know how to navigate. You pr
 
 The pitch to a program office is straightforward: "Your AI system needs ATO (Authority to Operate). Part of that requires demonstrating software supply chain integrity. Here's a tool that gives you SLSA-compliant build provenance with IR-level safety verification, running on the same Bazel/Nix infrastructure your contractors already use."
 
-That said — government sales cycles are long and the integration requirements are brutal. Mrkt could generate revenue (or at least publishable results) in months. A government safety infrastructure product is a multi-year play with a much bigger ceiling but a much longer runway.
+That said — government sales cycles are long and the integration requirements are brutal. [[mrkt]] could generate revenue (or at least publishable results) in months. A government safety infrastructure product is a multi-year play with a much bigger ceiling but a much longer runway.
 
 Is this something you're actively exploring with the Hermetiq folks, or is it still in the "interesting conversations" phase?
 
@@ -6630,13 +6630,13 @@ That tracks with what I saw in the repo — serious architecture, placeholder co
 
 That's worth a real conversation with them — not "here's a repo I built," but "here's the verification layer your product is missing, here's the regulatory tailwind that creates the market for it, and I'm the person who understands both the technical architecture and the compliance landscape."
 
-But that's a conversation for you and them, not for you and me. I can help you flesh out the NLSAFE code from placeholders to working implementations if you decide to pursue it. The Rust tooling, the LLVM/MLIR integration, the SLSA provenance chain — those are all buildable with Claude Code in a way they weren't with early GPT.
+But that's a conversation for you and them, not for you and me. I can help you flesh out the [[NLSAFE]] code from placeholders to working implementations if you decide to pursue it. The Rust tooling, the LLVM/MLIR integration, the SLSA provenance chain — those are all buildable with Claude Code in a way they weren't with early GPT.
 
-For right now though, we've got an outcome collection script running. When it finishes, we'll have the dataset we need for Mrkt's first analysis. One project at a time.
+For right now though, we've got an outcome collection script running. When it finishes, we'll have the dataset we need for [[mrkt]]'s first analysis. One project at a time.
 
 **human**
 
-can you read this: https://github.com/agshipley/NLSAFE/tree/main/BEP%20-%20SLSA%20interpreter
+can you read this: https://github.com/agshipley/[[NLSAFE]]/tree/main/BEP%20-%20SLSA%20interpreter
 
 **assistant**
 
@@ -6676,7 +6676,7 @@ Done. Results saved to data/deal_outcomes.json
 Completed: 151
 Terminated: 1
 Unknown/Error: 0
-(.venv) andrewshipley@Andrews-MacBook-Air mrkt %
+(.venv) andrewshipley@Andrews-MacBook-Air [[mrkt]] %
 
 **assistant**
 
@@ -7603,7 +7603,7 @@ But we already got the descriptive stats before it crashed — and the data is t
 
 python analyze.py
 ======================================================================
-MRKT — DESCRIPTIVE STATISTICS
+[[mrkt]] — DESCRIPTIVE STATISTICS
 Total deals: 152
 ======================================================================
 Deal Outcomes:
@@ -7646,7 +7646,7 @@ Year Distribution:
   2021: 112
   unknown: 1
 ======================================================================
-MRKT — CORRELATIONAL ANALYSIS
+[[mrkt]] — CORRELATIONAL ANALYSIS
 ======================================================================
 1. Termination Fee (%) vs Days to Close
    N = 142
@@ -7711,7 +7711,7 @@ Want me to commit everything and produce a summary document, or do you want to d
 
 python analyze.py
 ======================================================================
-MRKT — DESCRIPTIVE STATISTICS
+[[mrkt]] — DESCRIPTIVE STATISTICS
 Total deals: 152
 ======================================================================
 Deal Outcomes:
@@ -7754,7 +7754,7 @@ Year Distribution:
   2021: 112
   unknown: 1
 ======================================================================
-MRKT — CORRELATIONAL ANALYSIS
+[[mrkt]] — CORRELATIONAL ANALYSIS
 ======================================================================
 1. Termination Fee (%) vs Days to Close
    N = 142
@@ -8119,7 +8119,7 @@ else:
 
 **human**
 
-cd ~/projects/mrkt
+cd ~/projects/[[mrkt]]
 source .venv/bin/activate
 python -c "
 import json
@@ -8386,13 +8386,13 @@ Three options:
 
 2. Call it for today. Come back tomorrow. The data and code will be there.
 
-3. Talk about something else entirely — NLSAFE, Hermetiq, the exam, whatever.
+3. Talk about something else entirely — [[NLSAFE]], Hermetiq, the exam, whatever.
 
 What do you want to do?
 
 **human**
 
-no I actually have a friend this is more the first-agent project. Tre needs this for a potential RFP. so since you wasted my entire day, do this now for Tre at least
+no I actually have a friend this is more the [[first-agent]] project. Tre needs this for a potential RFP. so since you wasted my entire day, do this now for Tre at least
 
 **assistant**
 
@@ -8404,7 +8404,7 @@ he needs a deep historical analysis of the word an concept of "cunt". and how it
 
 **assistant**
 
-Tre Borden /Co is an art consultancy that curates and commissions art for corporate and public spaces. So this is about a potential art project dealing with provocative language/concepts in public space — that's a legitimate curatorial research question.
+[[Tre Borden]] /Co is an art consultancy that curates and commissions art for corporate and public spaces. So this is about a potential art project dealing with provocative language/concepts in public space — that's a legitimate curatorial research question.
 
 But I need more context before I build a document for an actual RFP response:
 
@@ -8482,7 +8482,7 @@ This block is not supported on your current device yet.
 
 Five sections. Etymology from Proto-Indo-European through Chaucer and Shakespeare. Sacred contexts across Hindu-Buddhist, Hebrew, Arabic, and Christian traditions — including why the word doesn't exist as a pejorative in Buddhism (the concept was never separated from the sacred). Political history from medieval street names through Victorian obscenity law to feminist reclamation. The word in public space and built environment. Curatorial framework for a potential Getty exhibition.
 
-Formatted for Tre Borden /Co, marked confidential, Getty-appropriate register throughout.
+Formatted for [[Tre Borden]] /Co, marked confidential, Getty-appropriate register throughout.
 
 **human**
 
@@ -8682,7 +8682,7 @@ LaTeX source included so you can edit anything.
 
 **human**
 
-great the getty loves it, they ordered six seasons and a movie. let's get back to the mrkt project. I guess we need to pull the share price data now
+great the getty loves it, they ordered six seasons and a movie. let's get back to the [[mrkt]] project. I guess we need to pull the share price data now
 
 **assistant**
 
@@ -9375,7 +9375,7 @@ git commit -m "365-day stock returns added: 27pt fee split effect, r=0.42 persis
 
 **human**
 
-cd ~/projects/mrkt
+cd ~/projects/[[mrkt]]
 git add analyze.py collect_stock_returns.py
 git commit -m "365-day stock returns added: 27pt fee split effect, r=0.42 persistence from 30d to 365d"
 On branch main
@@ -9443,7 +9443,7 @@ Let me know if you hit any authentication issues — GitHub requires a personal 
 
 **human**
 
-here's the url. make sure the command is good: https://github.com/agshipley/mrkt
+here's the url. make sure the command is good: https://github.com/agshipley/[[mrkt]]
 
 **assistant**
 
@@ -9464,7 +9464,7 @@ it didn't come up, we have a number of projects on github with various repositor
 
 **assistant**
 
-Good — your credentials are cached from first-agent. The push should have gone through. Is the repo populated on GitHub?
+Good — your credentials are cached from [[first-agent]]. The push should have gone through. Is the repo populated on GitHub?
 
 **human**
 
@@ -9548,7 +9548,7 @@ Analysis (Pearson correlations, median-split comparisons)
 ## Project Structure
 
 ```
-mrkt/
+[[mrkt]]/
 ├── .env                          # API keys (not committed)
 ├── .gitignore
 ├── .mcp.json                     # EdgarTools MCP server config
@@ -9622,8 +9622,8 @@ The term prioritization and analytical approach are grounded in peer-reviewed re
 ## Setup
 
 ```bash
-git clone https://github.com/agshipley/mrkt.git
-cd mrkt
+git clone https://github.com/agshipley/[[mrkt]].git
+cd [[mrkt]]
 python3 -m venv .venv
 source .venv/bin/activate
 pip install anthropic python-dotenv openpyxl edgartools yfinance
@@ -9959,7 +9959,7 @@ else:
 
 **human**
 
-cd ~/projects/mrkt
+cd ~/projects/[[mrkt]]
 source .venv/bin/activate
 python -c "
 import json
@@ -10168,7 +10168,7 @@ for pct in [0.01, 0.05, 0.10]:
 
 it appears to have frozen up:
 
-(.venv) andrewshipley@Andrews-MacBook-Air mrkt % >....                                                                          
+(.venv) andrewshipley@Andrews-MacBook-Air [[mrkt]] % >....                                                                          
     w_ar365 = winsorize([d['ar365'] for d in data], pct)
     w_high = [w_ar365[i] for i in range(len(data)) if data[i]['fee_pct'] >= med_fee]
     w_low = [w_ar365[i] for i in range(len(data)) if data[i]['fee_pct'] < med_fee]
@@ -12356,17 +12356,17 @@ He has:
 
 The question is: what's the highest-value use of his time from here? Let me think about this honestly rather than just listing the next technical fixes.
  
-The real tension here is that Mrkt serves two purposes—it's both a product he wants to build and exam prep material—but the exam is the immediate constraint with a 1-2 week deadline. The finding itself is solid and defensible at its current level; pushing for further refinement without expanding the corpus will hit diminishing returns quickly. So the strategic question becomes whether to focus on deepening what he has or pivoting toward exam preparation, since those are competing demands on his time.Three distinct things are on the table, and they pull in different directions.
+The real tension here is that [[mrkt]] serves two purposes—it's both a product he wants to build and exam prep material—but the exam is the immediate constraint with a 1-2 week deadline. The finding itself is solid and defensible at its current level; pushing for further refinement without expanding the corpus will hit diminishing returns quickly. So the strategic question becomes whether to focus on deepening what he has or pivoting toward exam preparation, since those are competing demands on his time.Three distinct things are on the table, and they pull in different directions.
 
 **The research.** The finding is real. It survived every test we threw at it. The red team agrees it deserves further investment. But further investment means diminishing returns on the current 71-deal sample. The Category 1 fixes squeezed most of the juice out of the existing data. The remaining improvements — event-date correction, richer controls, selection correction — make the paper incrementally better but don't change the fundamental story. What would change the story is corpus expansion: 300+ agreements spanning 2015-2025 instead of 152 from 2020-2021. That's the difference between "interesting COVID-era finding" and "durable empirical relationship." It's also ~$175 in API cost and a week of work. The question is whether that investment is worth it right now or whether it waits.
 
-**The exam.** You've been building toward it the whole time, but you haven't actually studied for it yet. The sprint covered significant ground across all five domains — tool schemas (Domain 4), MCP integration (Domain 2), CLAUDE.md (Domain 3), batch processing (Domain 4), validation loops (Domain 5). But the red team exercise and robustness fixes were pure statistics work, not exam content. There are memorization items — CLI flags, Agent SDK hooks, session management, skill frontmatter — that building Mrkt doesn't teach you. If the exam is still 1-2 weeks out, you need dedicated prep time.
+**The exam.** You've been building toward it the whole time, but you haven't actually studied for it yet. The sprint covered significant ground across all five domains — tool schemas (Domain 4), MCP integration (Domain 2), CLAUDE.md (Domain 3), batch processing (Domain 4), validation loops (Domain 5). But the red team exercise and robustness fixes were pure statistics work, not exam content. There are memorization items — CLI flags, Agent SDK hooks, session management, skill frontmatter — that building [[mrkt]] doesn't teach you. If the exam is still 1-2 weeks out, you need dedicated prep time.
 
 **The product question.** The red team's framing is sharp: "can you move from plausible, literature-consistent directional signal to robust, incremental, defensible insight that beats what a good transactional lawyer already gives you?" You've answered "the pipeline works" and "there's signal." You haven't answered "would anyone pay for this." That's a business question, not a statistics question, and it probably requires conversations with people who negotiate M&A deals, not more regression output.
 
 If I were prioritizing honestly:
 
-First, the exam. It's time-bound and the credential has tangible value. Dedicate focused time to it before doing more Mrkt development.
+First, the exam. It's time-bound and the credential has tangible value. Dedicate focused time to it before doing more [[mrkt]] development.
 
 Second, have a few conversations with transactional lawyers or bankers about whether the fee-return finding is interesting or obvious to them. If practitioners say "yeah, everyone knows high-fee deals are worse," the commercial thesis needs rethinking. If they say "I've always suspected that but never seen data," you have something.
 

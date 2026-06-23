@@ -2,7 +2,10 @@
   "permissions": {
     "allow": [
       "Bash(node --experimental-strip-types scripts/import-claude-code.ts --one)",
-      "Bash(node --experimental-strip-types scripts/import-claude-code.ts)"
+      "Bash(node --experimental-strip-types scripts/import-claude-code.ts)",
+      "Bash(node --experimental-strip-types scripts/extract-entities.ts --dry-run '--focus=charlie,Orpheus,trip-composer,lodging-agent,Liz Varner')",
+      "Bash(node --experimental-strip-types scripts/extract-entities.ts --dry-run)",
+      "Bash(node --experimental-strip-types scripts/extract-entities.ts --apply)"
     ],
     "defaultMode": "bypassPermissions"
   }

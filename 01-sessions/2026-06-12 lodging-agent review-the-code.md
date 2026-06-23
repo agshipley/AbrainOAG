@@ -3,7 +3,7 @@ type: session
 source: claude-code
 uuid: 1bd58229-739a-4742-931d-03face5caa91
 title: "Review the code"
-project: "lodging-agent"
+project: "[[lodging-agent]]"
 cwd: "/Users/andrewshipley/projects/lodging-agent"
 created: 2026-06-12
 updated: 2026-06-12
@@ -19,7 +19,7 @@ tags: []
 
 **user**
 
-<ide_opened_file>The user opened the file /Users/andrewshipley/projects/lodging-agent/README.md in the IDE. This may or may not be related to the current task.</ide_opened_file>
+<ide_opened_file>The user opened the file /Users/andrewshipley/projects/[[lodging-agent]]/README.md in the IDE. This may or may not be related to the current task.</ide_opened_file>
 review the code
 
 **user**
@@ -44,7 +44,7 @@ Here's my review:
 
 ---
 
-## Code Review — lodging-agent
+## Code Review — [[lodging-agent]]
 
 **Overall: solid, well-scoped codebase.** The architecture invariants in CLAUDE.md are respected throughout. A few real issues and one non-obvious fragility below.
 
@@ -3553,7 +3553,7 @@ If a hook isn't running:
 
 ## User Request
 
-set dangerouslySkipPermissions: true in the project settings for /Users/andrewshipley/projects/lodging-agent
+set dangerouslySkipPermissions: true in the project settings for /Users/andrewshipley/projects/[[lodging-agent]]
 
 **assistant**
 
@@ -3587,12 +3587,12 @@ python -m src.pipeline run
 
 **user**
 
-andrewshipley@MacBookAir lodging-agent % cd /Users/andrewshipley/projects/lodging-agent
+andrewshipley@MacBookAir [[lodging-agent]] % cd /Users/andrewshipley/projects/[[lodging-agent]]
 source .env
 python -m src.pipeline run
 
 zsh: command not found: python
-andrewshipley@MacBookAir lodging-agent %
+andrewshipley@MacBookAir [[lodging-agent]] %
 
 **assistant**
 
@@ -3608,7 +3608,7 @@ source .env && python3 -m src.pipeline run
 
 **user**
 
-<ide_opened_file>The user opened the file /Users/andrewshipley/projects/lodging-agent/.env in the IDE. This may or may not be related to the current task.</ide_opened_file>
+<ide_opened_file>The user opened the file /Users/andrewshipley/projects/[[lodging-agent]]/.env in the IDE. This may or may not be related to the current task.</ide_opened_file>
 wait so this just pops an airbnb search, that's what the agent does?
 
 **assistant**

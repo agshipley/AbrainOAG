@@ -17,7 +17,7 @@ tags: []
 
 **Conversation Overview**
 
-This conversation began with Andrew requesting a memory summary of an ongoing game development project, which Claude provided in detail. The project is a park management sim based on George Saunders' "CivilWarLand in Bad Decline," built as a single vanilla HTML/CSS/JS index.html file deployed on Vercel from the GitHub repo agshipley/CW_Actual. The first 30 days of gameplay — a narrative survival sim with daily actions, branching story events, stat decay, and multiple endings — are complete and were confirmed as unchanged going forward. A sims-mode branch exists with map expansion and building placement already implemented.
+This conversation began with Andrew requesting a memory summary of an ongoing game development project, which Claude provided in detail. The project is a park management sim based on George Saunders' "[[civilwarland]] in Bad Decline," built as a single vanilla HTML/CSS/JS index.html file deployed on Vercel from the GitHub repo agshipley/CW_Actual. The first 30 days of gameplay — a narrative survival sim with daily actions, branching story events, stat decay, and multiple endings — are complete and were confirmed as unchanged going forward. A sims-mode branch exists with map expansion and building placement already implemented.
 
 The conversation then pivoted to a significant design direction change for Phase 2 (post-day 30). Andrew expressed that the current game is fun but doesn't capture the joy he associates with city-building games. Through discussion, he clarified he dislikes abstract zoning mechanics but values meaningful resource allocation decisions, specific characters making choices with visible consequences, and faux-realism — a simulation with enough moving parts that outcomes feel earned. RimWorld was identified as the closest reference point. The agreed Phase 2 design centers on four community stats (money, morale, population, productivity), buildings constructed with money, and a roster of pre-written Saunders-voiced characters assigned to buildings — where the character-plus-building combination produces specific mechanical and narrative effects. Characters have 2–3 narrative traits written in the narrator's voice rather than raw stat labels. A pool of roughly 20–30 pre-written characters arriving at milestone conditions was chosen over fully procedural generation. The Phase 1 daily actions remain available alongside the new assignment system.
 
@@ -35,7 +35,7 @@ The user wants me to summarize everything I know about this project from memory 
 
 **The Game**
 
-You built a park management sim based on George Saunders' "CivilWarLand in Bad Decline" — a single index.html file in vanilla HTML/CSS/JS, deployed on Vercel from the GitHub repo agshipley/CW_Actual. The core game loop runs 30 days of managed decline: daily actions (Patch and Repair, Increase Patrols, Manage the Staff, Cut Corners), branching story events pulled from the Saunders source material, action cooldowns, compounding stat decay, 20 minor flavor events written in the narrator's voice, six narrative endings, and four fail-state endings. Liz playtested it and helped you tune difficulty (it was too easy at first). Tim Potter got the Vercel link to review.
+You built a park management sim based on George Saunders' "[[civilwarland]] in Bad Decline" — a single index.html file in vanilla HTML/CSS/JS, deployed on Vercel from the GitHub repo agshipley/CW_Actual. The core game loop runs 30 days of managed decline: daily actions (Patch and Repair, Increase Patrols, Manage the Staff, Cut Corners), branching story events pulled from the Saunders source material, action cooldowns, compounding stat decay, 20 minor flavor events written in the narrator's voice, six narrative endings, and four fail-state endings. Liz playtested it and helped you tune difficulty (it was too easy at first). Tim Potter got the Vercel link to review.
 
 There's also a separate JSX/React version on a different Vercel deployment with different gameplay dynamics, but the vanilla version is the real one — React created too much dependency on Claude for iteration, which defeated the learning purpose.
 
@@ -90,7 +90,7 @@ Andrew is describing what he likes and doesn't like about SimCity. He wants mean
 
 This sounds like he's drawn more toward something like Tropico, Dwarf Fortress, RimWorld, or Banished — games where individual characters have agency, where your decisions as a manager have visible consequences on specific people, and where the simulation feels grounded and believable even when absurd.
 
-The CivilWarLand setting is perfect for this. The question is what direction to take the project.
+The [[civilwarland]] setting is perfect for this. The question is what direction to take the project.
 
 Let me ask him to clarify what he means rather than jumping to solutions.So meaningful decisions with visible consequences on specific people, wrapped in a world that feels like it's actually running — not abstract zones filling in, but something you can believe in even when it's ridiculous.
 

@@ -281,7 +281,7 @@ FAIL tests/integration/pipeline.test.ts
   ✗ aggregates results from multiple agents          (expected 6, got 3)
 ```
 
-**Root cause:** In [conductor.ts:227](job-search-engine/src/conductor/conductor.ts#L227), the `stats.afterDedup` field is set to `rankedJobs.length` instead of `mergedJobs.length`.
+**Root cause:** In [conductor.ts:227]([[Orpheus|job-search-engine]]/src/conductor/conductor.ts#L227), the `stats.afterDedup` field is set to `rankedJobs.length` instead of `mergedJobs.length`.
 
 ```typescript
 // BUG — current
@@ -341,7 +341,7 @@ Want me to fix the failing tests first, then move into the agent infrastructure 
 
 **user**
 
-In job-search-engine/src/conductor.ts around line 227, the afterDedup metric reads rankedJobs.length but should read mergedJobs.length. The current value reflects the post-rank IC-role filter from heuristicRank, not the actual dedup count, which misreports the stats anyone reads downstream (Observatory display, Validator agent, etc.).
+In [[Orpheus|job-search-engine]]/src/conductor.ts around line 227, the afterDedup metric reads rankedJobs.length but should read mergedJobs.length. The current value reflects the post-rank IC-role filter from heuristicRank, not the actual dedup count, which misreports the stats anyone reads downstream (Observatory display, Validator agent, etc.).
 
 Make the change, then run npm test and confirm tests/integration/pipeline.test.ts goes green (both "deduplicates jobs with the same title+company" and "aggregates results from multiple agents" should now expect 6 instead of 3, matching the fixture).
 
@@ -361,11 +361,11 @@ Summary of what happened:
 - **The "aggregates results from multiple agents" test** was previously failing on the assertion (`expected 6, got 3`). After the fix it occasionally fails on MCP process startup timing when two `npx tsx` servers spawn cold simultaneously — that's pre-existing flakiness in the test harness, separate from the metric bug. It passes on a warm run.
 - **TypeScript still compiles clean** after the change.
 
-The one-line fix in [conductor.ts:225](job-search-engine/src/conductor/conductor.ts#L225) is the only change. Ready to move into agent infrastructure whenever you want.
+The one-line fix in [conductor.ts:225]([[Orpheus|job-search-engine]]/src/conductor/conductor.ts#L225) is the only change. Ready to move into agent infrastructure whenever you want.
 
 **user**
 
-<ide_opened_file>The user opened the file /Users/andrewshipley/projects/Orpheus/job-search-engine/POSITIONING.md in the IDE. This may or may not be related to the current task.</ide_opened_file>
+<ide_opened_file>The user opened the file /Users/andrewshipley/projects/[[Orpheus]]/[[Orpheus|job-search-engine]]/POSITIONING.md in the IDE. This may or may not be related to the current task.</ide_opened_file>
 - **Profile data tracked in public repo.** `archimedes.config.yaml` is committed and contains the full personal profile. The current contents (name, contact, work history, publications) mirror what is already on LinkedIn, so this is not a sensitive exposure. The forward-looking concern is that any future field added to this file — target companies, salary expectations, identity-specific positioning meant to stay private — needs to be evaluated as public by default. If that ever becomes a problem, the mitigation is the same: move profile loading back to env-var with `profile.example.yaml` as a tracked template.
 
 **assistant**
@@ -378,8 +378,8 @@ Done. The standing risk now accurately reflects the situation: not a current pro
 
 **user**
 
-<ide_opened_file>The user opened the file /Users/andrewshipley/projects/Orpheus/job-search-engine/Dockerfile in the IDE. This may or may not be related to the current task.</ide_opened_file>
-The .claude/ directory has been extracted at the Orpheus repo root with agents/, skills/, hooks/, and README.md. Install the pre-commit hook (cp .claude/hooks/pre-commit .git/hooks/pre-commit; chmod +x .git/hooks/pre-commit). Confirm npm test and npx tsc --noEmit still pass from job-search-engine/. Stage and commit: git add .claude/; git commit -m "add feature factory agents and skills". Don't trigger any agents yet — report when done.
+<ide_opened_file>The user opened the file /Users/andrewshipley/projects/[[Orpheus]]/[[Orpheus|job-search-engine]]/Dockerfile in the IDE. This may or may not be related to the current task.</ide_opened_file>
+The .claude/ directory has been extracted at the [[Orpheus]] repo root with agents/, skills/, hooks/, and README.md. Install the pre-commit hook (cp .claude/hooks/pre-commit .git/hooks/pre-commit; chmod +x .git/hooks/pre-commit). Confirm npm test and npx tsc --noEmit still pass from [[Orpheus|job-search-engine]]/. Stage and commit: git add .claude/; git commit -m "add feature factory agents and skills". Don't trigger any agents yet — report when done.
 
 **assistant**
 
@@ -415,7 +415,7 @@ The `settings.local.json` is intentionally excluded from staging — it's alread
 
 **user**
 
-cd /Users/andrewshipley/projects/Orpheus
+cd /Users/andrewshipley/projects/[[Orpheus]]
 git add .claude/README.md .claude/agents/ .claude/skills/ .claude/hooks/
 git commit -m "add feature factory agents and skills"
 
@@ -437,7 +437,7 @@ What's now in the repo:
 | `.claude/skills/feature-factory/SKILL.md` | Orchestrator — wires the seven agents + three checkpoints |
 | `.claude/skills/build-with-tests/SKILL.md` | Shared build conventions used by both builders |
 | `.claude/hooks/pre-commit` | Installed and active — blocks secrets, PII, API keys |
-| `.claude/README.md` | How the chain runs, the three checkpoints, Orpheus-specific notes |
+| `.claude/README.md` | How the chain runs, the three checkpoints, [[Orpheus]]-specific notes |
 
 The pre-commit hook is live in `.git/hooks/`. The `tar/` directory can be deleted whenever — it's not tracked.
 
@@ -447,7 +447,7 @@ provide a technical review of what was just performed that can be given to anoth
 
 **assistant**
 
-## Orpheus Session Handoff — May 26 2026
+## [[Orpheus]] Session Handoff — May 26 2026
 
 ### What this session covered
 
@@ -515,7 +515,7 @@ Note: the multi-agent test has pre-existing flakiness — when two `npx tsx` MCP
 
 The hook's typecheck section (section 5) is commented out — it can be enabled to gate every commit on `tsc --noEmit` at the cost of latency.
 
-**Agent design notes relevant to Orpheus:**
+**Agent design notes relevant to [[Orpheus]]:**
 - All agents read `ORPHEUS_STATE.md` first. It is the source of truth for current architecture, phase, and standing risks.
 - The 8-item Infrastructure Reality Check from `CLAUDE.md` is embedded in the Spec Writer and audited by the Validator.
 - Backend Builder is tool-scoped to `job-search-engine/src/` and forbidden from touching `client/`.
@@ -580,7 +580,7 @@ They're available now. You can invoke any of them directly via `@researcher`, `@
 
 Invoke the researcher subagent with this mandate:
 
-Diagnose why Orpheus search returns irrelevant results (concrete examples: SWE roles in Singapore, generic templated listings, right companies but wrong roles). Read ORPHEUS_STATE.md and CLAUDE.md first, then trace the end-to-end search flow:
+Diagnose why [[Orpheus]] search returns irrelevant results (concrete examples: SWE roles in Singapore, generic templated listings, right companies but wrong roles). Read ORPHEUS_STATE.md and CLAUDE.md first, then trace the end-to-end search flow:
 
 1. Map the full pipeline from a user search query through to what the UI displays. Identify the transformation points: query parsing → conductor fan-out → source agent fetches → merge → dedup → rank → filter → response → UI render. Name the file and function at each step.
 

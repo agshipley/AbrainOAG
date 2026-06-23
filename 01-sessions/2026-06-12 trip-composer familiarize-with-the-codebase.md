@@ -3,7 +3,7 @@ type: session
 source: claude-code
 uuid: 7abec89d-3003-4415-bc2d-7300c9972f2c
 title: "Familiarize with the codebase"
-project: "trip-composer"
+project: "[[trip-composer]]"
 cwd: "/Users/andrewshipley/projects/trip-composer"
 created: 2026-06-12
 updated: 2026-06-13
@@ -119,7 +119,7 @@ The session token comes from `GET /session/status` (not `POST /guestSession` —
 
 **user**
 
-<ide_opened_file>The user opened the file /Users/andrewshipley/projects/trip-composer/scripts/apify_bakeoff.py in the IDE. This may or may not be related to the current task.</ide_opened_file>
+<ide_opened_file>The user opened the file /Users/andrewshipley/projects/[[trip-composer]]/scripts/apify_bakeoff.py in the IDE. This may or may not be related to the current task.</ide_opened_file>
 you're overindexing on a specific use case, convict lake
 
 **assistant**

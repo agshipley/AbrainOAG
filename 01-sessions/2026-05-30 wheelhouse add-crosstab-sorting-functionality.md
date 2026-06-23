@@ -3,7 +3,7 @@ type: session
 source: claude-code
 uuid: e94b6573-3b8f-464e-ab81-0b8cda3d5eea
 title: "Add crosstab sorting functionality"
-project: "Wheelhouse"
+project: "[[Wheelhouse]]"
 cwd: "/Users/andrewshipley/projects/Wheelhouse/Wheelhouse"
 created: 2026-05-30
 updated: 2026-05-30
@@ -68,7 +68,7 @@ Clean build. Here's what was added:
 
 **user**
 
-<ide_opened_file>The user opened the file /Users/andrewshipley/projects/Wheelhouse/Wheelhouse/src/main.jsx in the IDE. This may or may not be related to the current task.</ide_opened_file>
+<ide_opened_file>The user opened the file /Users/andrewshipley/projects/[[Wheelhouse]]/[[Wheelhouse]]/src/main.jsx in the IDE. This may or may not be related to the current task.</ide_opened_file>
 great. next claude is listed as a contributor on the public repo. this has never happened before on any other repo and needs to be removed
 
 **assistant**
@@ -196,7 +196,7 @@ The one caveat: listing sites (BizBuySell, BizQuest) have bot protection that ma
 
 **user**
 
-<ide_opened_file>The user opened the file /Users/andrewshipley/projects/Wheelhouse/Wheelhouse/bar_screener (1).jsx in the IDE. This may or may not be related to the current task.</ide_opened_file>
+<ide_opened_file>The user opened the file /Users/andrewshipley/projects/[[Wheelhouse]]/[[Wheelhouse]]/bar_screener (1).jsx in the IDE. This may or may not be related to the current task.</ide_opened_file>
 k. have we done a sweep of the existing listings?
 
 **assistant**

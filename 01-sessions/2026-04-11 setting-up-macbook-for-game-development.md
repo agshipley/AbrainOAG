@@ -17,7 +17,7 @@ tags: []
 
 **Conversation Overview**
 
-The person is setting up a development environment on an Intel MacBook (described as "one of Liz's old laptops") to work on a project called "civilwarland" (repo name: `cw_actual`, located at `~/Desktop/projects/cw_actual`). The session covered a full from-scratch setup: installing VS Code, installing Xcode Command Line Tools to get Git, cloning the repo from GitHub, and identifying the tech stack.
+The person is setting up a development environment on an Intel MacBook (described as "one of Liz's old laptops") to work on a project called "[[civilwarland]]" (repo name: `cw_actual`, located at `~/Desktop/projects/cw_actual`). The session covered a full from-scratch setup: installing VS Code, installing Xcode Command Line Tools to get Git, cloning the repo from GitHub, and identifying the tech stack.
 
 The repo turned out to contain only HTML and Markdown folders with no `package.json` or other build tooling, making it a plain HTML project. Claude recommended and the person installed the Live Server VS Code extension (by Ritwick Dey) for local development with auto-refresh. The person also installed the Claude Code VS Code extension and was troubleshooting why the chat panel wasn't visible at the end of the conversation. Claude suggested checking the activity bar for the Claude icon, using the command palette, reloading the window, or verifying the Claude CLI is installed as a prerequisite.
 
@@ -27,11 +27,11 @@ One notable correction: the person pointed out that checking the repo contents v
 
 **human**
 
-I'm setting up one of liz's old laptops to work on the civilwarland game. it doesn't have anything installed. It's an intel chip macbook. I'm currently getting VS Code
+I'm setting up one of liz's old laptops to work on the [[civilwarland]] game. it doesn't have anything installed. It's an intel chip macbook. I'm currently getting VS Code
 
 **assistant**
 
-The user is setting up a MacBook (Intel) for working on the "civilwarland game" project. Let me search for context about this project in past conversations.
+The user is setting up a MacBook (Intel) for working on the "[[civilwarland]] game" project. Let me search for context about this project in past conversations.
 ```
 This block is not supported on your current device yet.
 ```
@@ -46,7 +46,7 @@ No past conversations found about this project. Let me check what tools/tech sta
 This block is not supported on your current device yet.
 ```
 
-No context found. I should ask what tech stack the project uses so I can help them set up the right tools.Nice — VS Code is a great start. To make sure I point you to the right things, what's the tech stack for the civilwarland game? For example, is it built with something like Unity, Godot, a web framework (React, etc.), or something else? And is there a repo you'll be cloning?
+No context found. I should ask what tech stack the project uses so I can help them set up the right tools.Nice — VS Code is a great start. To make sure I point you to the right things, what's the tech stack for the [[civilwarland]] game? For example, is it built with something like Unity, Godot, a web framework (React, etc.), or something else? And is there a repo you'll be cloning?
 
 That'll help me give you a clean checklist of everything to install on the Intel Mac.
 

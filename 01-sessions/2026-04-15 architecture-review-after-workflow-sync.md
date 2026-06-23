@@ -17,21 +17,21 @@ tags: []
 
 **Conversation overview**
 
-Andrew Shipley is the architect and operator of Charlie, an entertainment industry intelligence system built for Liz Varner, a principal at Very Varner Inc with a first-look deal at Sony Pictures Television. Andrew returned to the project after a two-week absence during which Liz had been working interactively with the system but no new code had been pushed to GitHub. The conversation began with a full architecture review to re-establish the current state of the system before making new changes.
+Andrew Shipley is the architect and operator of [[charlie]], an entertainment industry intelligence system built for [[Liz Varner]], a principal at Very Varner Inc with a first-look deal at Sony Pictures Television. Andrew returned to the project after a two-week absence during which Liz had been working interactively with the system but no new code had been pushed to GitHub. The conversation began with a full architecture review to re-establish the current state of the system before making new changes.
 
-Charlie is deployed as a single Railway service at `charlie-productions.up.railway.app` with a volume mounted at `/app/data`. The system has five live pages: The Brief (`/`), Living Thesis (`/thesis`), Book Project (`/book`), Archive (`/archive`), and Run (`/run`). A scheduler triggers daily briefs at 6am Pacific and Monday thesis synthesis at 7am Pacific. All five pages were confirmed rendering correctly, meaning a previously unresolved thesis seed issue had self-resolved via an inline `_ensure_thesis_seed()` fallback in `web.py`. The conversation traced the full pipeline architecture in detail by reviewing actual code files (`web.py`, `orchestrator.py`, `agents/ingestion.py`, `agents/analysis.py`, `agents/brief.py`) pasted in by Andrew or retrieved via Claude Code prompts.
+[[charlie]] is deployed as a single Railway service at `charlie-productions.up.railway.app` with a volume mounted at `/app/data`. The system has five live pages: The Brief (`/`), Living Thesis (`/thesis`), Book Project (`/book`), Archive (`/archive`), and Run (`/run`). A scheduler triggers daily briefs at 6am Pacific and Monday thesis synthesis at 7am Pacific. All five pages were confirmed rendering correctly, meaning a previously unresolved thesis seed issue had self-resolved via an inline `_ensure_thesis_seed()` fallback in `web.py`. The conversation traced the full pipeline architecture in detail by reviewing actual code files (`web.py`, `orchestrator.py`, `agents/ingestion.py`, `agents/analysis.py`, `agents/brief.py`) pasted in by Andrew or retrieved via Claude Code prompts.
 
 The core architectural insight established was that agents are stateless Claude API calls — every morning the pipeline starts fresh and reads accumulated context from JSON files on the volume (`feedback.json`, `sessions.json`, `context/*.json`) to inject calibration blocks into system prompts. This creates the illusion of a learning system without persistent model state. The feedback loop has two confirmed working channels: quantitative signal ratings (1-10 per signal, written to `feedback.json`, injected into the ingestion agent via `get_feedback_prompt_injection()`) and static context files (`profile.json`, `slate.json`, `watching.json`) injected into agent prompts. A key discovery was that `sessions.json` — designed to capture Liz's qualitative engagement with brief questions — was never implemented: the file didn't exist, no agent code referenced it, and no endpoint received session data.
 
 The conversation resulted in four completed or specced implementations. First, the sessions integration was fully built during the session: `StateManager.load_sessions()` and `append_session()` methods in `core/state.py`, a `/companion` route and `COMPANION_TEMPLATE` page with per-tier forms (insight textarea, disposition radios, thesis force dropdown, signal category input, confidence radios), a `/api/companion/session` POST endpoint with duplicate-safe IDs, `get_session_prompt_injection()` in `agents/analysis.py` grouping sessions by disposition (reinforcing/challenging/new signal), and a `## User Engagement Signals` block injected into `agents/thesis.py` Monday synthesis. Second, a freeform "brain dump" field was added to the companion page — a large textarea submitting with `tier="freeform"` and `question=null`, routed to the analysis agent only with an instruction to abstract entity references into category-level signals to maintain the filter bubble firewall. Third, the thesis review workflow was specced as a markdown document: a `/thesis/review` page where Liz annotates each proposal item (accept/needs revision/reject plus free-text), hits Refine to trigger an Opus refinement pass, iterates up to five times, and publishes when satisfied — with the full data model, `refine_proposal()` and `publish_proposal()` functions, four API routes, and UX layout specified. Fourth, Liz's streaming landscape research (an xlsx file with 129 shows across six sheets covering audience psychographics, platform profiles, and underserved audiences) was identified as a separate research artifact input channel to be designed later.
 
-Key colleagues: Liz Varner is the end user and domain expert who reviews briefs daily, responds to → questions, rates signals, and will be the editorial authority on thesis proposals. Charlie and Liz maintain a strict filter bubble firewall — her personal interests and project slate (Audiochuck opportunity, Sony first-look, active projects including Generational Love, Unwell, Fox & Hound, American Proof, Somnia) influence Charlie's relevance scoring indirectly through demonstrated signal value, never through direct entity injection into ingestion search queries. Andrew prefers direct markdown output over docx generation for specs. When Claude Code attempted to refactor `agents/thesis.py` instead of reading it
+Key colleagues: [[Liz Varner]] is the end user and domain expert who reviews briefs daily, responds to → questions, rates signals, and will be the editorial authority on thesis proposals. [[charlie]] and Liz maintain a strict filter bubble firewall — her personal interests and project slate (Audiochuck opportunity, Sony first-look, active projects including Generational Love, Unwell, Fox & Hound, American Proof, Somnia) influence [[charlie]]'s relevance scoring indirectly through demonstrated signal value, never through direct entity injection into ingestion search queries. Andrew prefers direct markdown output over docx generation for specs. When Claude Code attempted to refactor `agents/thesis.py` instead of reading it
 
 ## Transcript
 
 **human**
 
-So question on workflow synch here. I have been away from this project for a couple of weeks. During that time Liz has been working with Charlie to refine the model through interactivity but hasn't pushed any new code. My local project files still mirror the github repo. So let's do a state of the architecture review right now
+So question on workflow synch here. I have been away from this project for a couple of weeks. During that time Liz has been working with [[charlie]] to refine the model through interactivity but hasn't pushed any new code. My local project files still mirror the github repo. So let's do a state of the architecture review right now
 
 **assistant**
 
@@ -55,7 +55,7 @@ This block is not supported on your current device yet.
 This block is not supported on your current device yet.
 ```
 
-Now let me check if Charlie is currently live and producing briefs.
+Now let me check if [[charlie]] is currently live and producing briefs.
 ```
 This block is not supported on your current device yet.
 ```
@@ -71,11 +71,11 @@ Good. I've got a comprehensive picture now. Here's the state of the architecture
 
 **What's built and running:**
 
-Charlie is deployed as a single Railway service at `charlie-productions.up.railway.app` with a volume mounted at `/app/data`. The pipeline confirmed working end-to-end as of March 29–30: ingestion (5 passes via Sonnet), analysis, brief generation, and a built-in scheduler running daily briefs at 6am Pacific and thesis synthesis Mondays at 7am. Five live pages: The Brief (`/`), Living Thesis (`/thesis`), Book Project (`/book`), Archive (`/archive`), and Run (`/run`). The codebase mirrors your GitHub repo — your local files are current since Liz hasn't pushed code.
+[[charlie]] is deployed as a single Railway service at `charlie-productions.up.railway.app` with a volume mounted at `/app/data`. The pipeline confirmed working end-to-end as of March 29–30: ingestion (5 passes via Sonnet), analysis, brief generation, and a built-in scheduler running daily briefs at 6am Pacific and thesis synthesis Mondays at 7am. Five live pages: The Brief (`/`), Living Thesis (`/thesis`), Book Project (`/book`), Archive (`/archive`), and Run (`/run`). The codebase mirrors your GitHub repo — your local files are current since Liz hasn't pushed code.
 
 **What Liz has been doing:**
 
-She built a companion tool through her own Claude instance — a conversational layer where she engages with Brief questions, flags watchlist items, and pushes session findings back into Charlie's relevance scoring. She also worked with her Claude to design the IP Development Tracker schema (`IP_Tracker_Schema_v1.docx`), including the key decision that it must be a standalone application, not a page within Charlie's web app. The filter bubble firewall was explicitly established: Liz's personal interests must never flow upstream into Charlie's ingestion or scoring agents. Her interactivity has been refining the *model* — how the system thinks — not the *code*.
+She built a companion tool through her own Claude instance — a conversational layer where she engages with Brief questions, flags watchlist items, and pushes session findings back into [[charlie]]'s relevance scoring. She also worked with her Claude to design the IP Development Tracker schema (`IP_Tracker_Schema_v1.docx`), including the key decision that it must be a standalone application, not a page within [[charlie]]'s web app. The filter bubble firewall was explicitly established: Liz's personal interests must never flow upstream into [[charlie]]'s ingestion or scoring agents. Her interactivity has been refining the *model* — how the system thinks — not the *code*.
 
 **Known outstanding issues:**
 
@@ -136,7 +136,7 @@ So the outstanding issue list just got shorter. Here's what's actually on the ta
 
 1. **IP Development Tracker** — schema designed, standalone deployment decided, zero code. This is the next buildable thing.
 2. **Executive tracking expansion** (`--track-exec`) — scoped but not implemented. Adds structured tracking of creator-native company hires to the ingestion layer.
-3. **Liz's companion tool feedback** — she's been using it for two weeks. Worth asking her if any session findings need to be formally pushed into Charlie's scoring, or if that's been happening organically through her Claude instance.
+3. **Liz's companion tool feedback** — she's been using it for two weeks. Worth asking her if any session findings need to be formally pushed into [[charlie]]'s scoring, or if that's been happening organically through her Claude instance.
 4. **Book project** — the thesis research infrastructure is live, but the book itself has advance offers pending. At some point the thesis page needs to evolve from research tool to manuscript support.
 
 What do you want to pick up first?
@@ -156,9 +156,9 @@ This block is not supported on your current device yet.
 This block is not supported on your current device yet.
 ```
 
-Everything inside the gray container is live and running on Railway. The dashed amber box is the IP Tracker — schema complete, zero code. The red bar at the bottom is the architectural constraint that governs the entire ecosystem: data flows downstream from Charlie to Liz's tools, never upstream.
+Everything inside the gray container is live and running on Railway. The dashed amber box is the IP Tracker — schema complete, zero code. The red bar at the bottom is the architectural constraint that governs the entire ecosystem: data flows downstream from [[charlie]] to Liz's tools, never upstream.
 
-The two one-way pipes are the critical design element. Liz's companion tool reads briefs and pushes scoring adjustments back (dashed line — influence only, not content). The IP Tracker will read from Charlie's signal log but never tells Charlie what Liz is tracking. That separation is what keeps the system honest.
+The two one-way pipes are the critical design element. Liz's companion tool reads briefs and pushes scoring adjustments back (dashed line — influence only, not content). The IP Tracker will read from [[charlie]]'s signal log but never tells [[charlie]] what Liz is tracking. That separation is what keeps the system honest.
 
 Want to click into any of these components, or are you ready to pick a workstream?
 
@@ -320,15 +320,15 @@ Good. So the fast loop is actively calibrating based on her ratings. The ingesti
 
 The companion tool responses are a different question though. When she responds to the → questions through her Claude instance, where does that output go? There are three possibilities:
 
-1. **It stays in her Claude conversation history** — meaning it's useful to her in the moment but doesn't touch Charlie's system at all. The insights die in her chat.
+1. **It stays in her Claude conversation history** — meaning it's useful to her in the moment but doesn't touch [[charlie]]'s system at all. The insights die in her chat.
 
 2. **Her companion tool produces structured session reports that she or you manually feed back** — meaning there's a human-mediated handoff, which is fine architecturally but depends on someone doing it.
 
-3. **There's an automated path from her companion tool back into Charlie's scoring** — which is what the original design discussed but which I don't see any mechanism for in the codebase.
+3. **There's an automated path from her companion tool back into [[charlie]]'s scoring** — which is what the original design discussed but which I don't see any mechanism for in the codebase.
 
-From what I can see in the code, Charlie has no inbound API endpoint for receiving companion tool output. The only feedback path is the rating buttons on the brief page, which write to `feedback.json`. So unless something was built outside this codebase, her companion tool responses are likely scenario 1 — valuable thinking that's trapped in her Claude sessions.
+From what I can see in the code, [[charlie]] has no inbound API endpoint for receiving companion tool output. The only feedback path is the rating buttons on the brief page, which write to `feedback.json`. So unless something was built outside this codebase, her companion tool responses are likely scenario 1 — valuable thinking that's trapped in her Claude sessions.
 
-This is actually a meaningful gap. She's been engaging with the → questions for two weeks, generating exactly the kind of signal-about-signals that the thesis synthesizer would benefit from, and none of it is reaching Charlie.
+This is actually a meaningful gap. She's been engaging with the → questions for two weeks, generating exactly the kind of signal-about-signals that the thesis synthesizer would benefit from, and none of it is reaching [[charlie]].
 
 Two questions for you: First, do you know how her companion tool is set up — is it a Claude Project with custom instructions, or something else? Second, is closing this gap something you want to prioritize, or is the current state (ratings loop working, companion insights staying with Liz) acceptable for now?
 
@@ -338,9 +338,9 @@ Ok, sounds like it's working like 1 when we want it to work lik 3
 
 **assistant**
 
-Right. And the constraint is that we need 3 without violating the filter bubble firewall. Her companion tool responses should influence Charlie's *relevance scoring* — how it weights and prioritizes signals it's already finding — but never its *ingestion aperture* — what it goes looking for in the first place.
+Right. And the constraint is that we need 3 without violating the filter bubble firewall. Her companion tool responses should influence [[charlie]]'s *relevance scoring* — how it weights and prioritizes signals it's already finding — but never its *ingestion aperture* — what it goes looking for in the first place.
 
-The cleanest path is a lightweight inbound endpoint on Charlie that accepts structured session summaries from her companion tool. Something like `/api/companion/session` that takes a POST with fields like: which brief date and tier she engaged with, what her takeaway was (categorized, not freeform), whether the → question led somewhere productive, and any thesis-relevant insight she surfaced.
+The cleanest path is a lightweight inbound endpoint on [[charlie]] that accepts structured session summaries from her companion tool. Something like `/api/companion/session` that takes a POST with fields like: which brief date and tier she engaged with, what her takeaway was (categorized, not freeform), whether the → question led somewhere productive, and any thesis-relevant insight she surfaced.
 
 That data would live in its own file on the volume — separate from `feedback.json` — and get read by the analysis agent alongside the ratings data. The analysis agent already loads thesis and context from StateManager, so adding a companion signal layer is a natural extension. The ingestion agent never touches it. The firewall holds.
 
@@ -360,7 +360,7 @@ The feedback loop as it exists now already influences ingestion indirectly. When
 
 That's the right architecture. The ingestion agent is learning *what kinds of signals Liz finds valuable* — structural moves, hiring patterns, deal flow in specific categories — not *which specific entities or projects she's tracking*. The search aperture narrows toward higher-value signal types while staying editorially independent about which companies or people show up in those signals.
 
-Her companion tool responses would work the same way. If she engages deeply with a → question about, say, why Netflix is locking up podcast exclusives, that tells Charlie "signals about platform exclusivity strategy are high-value" — it sharpens the category, not the entity. The next ingestion run might weight platform strategy signals higher, which could surface an Amazon or Spotify move she wasn't watching for. That's the telescope staying a telescope instead of becoming a mirror.
+Her companion tool responses would work the same way. If she engages deeply with a → question about, say, why Netflix is locking up podcast exclusives, that tells [[charlie]] "signals about platform exclusivity strategy are high-value" — it sharpens the category, not the entity. The next ingestion run might weight platform strategy signals higher, which could surface an Amazon or Spotify move she wasn't watching for. That's the telescope staying a telescope instead of becoming a mirror.
 
 So when I said "never its ingestion aperture" — wrong framing. What I meant is: her interests train the aperture *indirectly through demonstrated value*, never *directly through entity injection*. The firewall prevents "search for Audiochuck news" but permits "signals about creator-native company expansion score 9.2/10 on average."
 
@@ -380,7 +380,7 @@ She built it with her own Claude instance, so it's likely a Claude Project with 
 
 Ask her to check: **is she interacting with it through claude.ai (a Project with a star icon and custom instructions), or through a separate app/website?**
 
-If it's a Claude Project, there's no code to check — the "tool" is just a system prompt and project knowledge files inside claude.ai. Claude Code won't find anything because it's not in a repo. In that case, what we need from her is to copy-paste the system prompt / project instructions so we can see what it's telling her Claude to do with her responses, and then we design the structured output format that bridges into Charlie's endpoint.
+If it's a Claude Project, there's no code to check — the "tool" is just a system prompt and project knowledge files inside claude.ai. Claude Code won't find anything because it's not in a repo. In that case, what we need from her is to copy-paste the system prompt / project instructions so we can see what it's telling her Claude to do with her responses, and then we design the structured output format that bridges into [[charlie]]'s endpoint.
 
 If it *is* a deployed app somewhere, then yes, Claude Code can look at it — but given the timeline and that she built it conversationally, my bet is it's a Project.
 
@@ -390,19 +390,19 @@ She doesn't have it anywhere, it's just a running series of chats she has in her
 
 **assistant**
 
-That simplifies things. There's no tool to integrate — she's just having conversations with Claude about the briefs. Which means her insights are scattered across her chat history with no structure, no persistence, and no path back to Charlie.
+That simplifies things. There's no tool to integrate — she's just having conversations with Claude about the briefs. Which means her insights are scattered across her chat history with no structure, no persistence, and no path back to [[charlie]].
 
 So we're building this from scratch. The question is how lightweight we can make it while still closing the loop.
 
 The minimum viable version is three pieces:
 
-**Piece 1: An endpoint on Charlie** — `/api/companion/session` — that accepts structured session data and writes it to the volume. Separate file from `feedback.json`. The analysis agent reads it on the next run alongside ratings.
+**Piece 1: An endpoint on [[charlie]]** — `/api/companion/session` — that accepts structured session data and writes it to the volume. Separate file from `feedback.json`. The analysis agent reads it on the next run alongside ratings.
 
 **Piece 2: A Claude Project for Liz** that replaces her ad hoc chats. The system prompt tells her Claude to pull the daily brief (or she pastes it in), facilitates the → question dialogue, and at the end of each session produces a structured JSON summary — which tier she engaged with, what category of insight emerged, whether it reinforced or challenged the thesis, and a one-line takeaway.
 
-**Piece 3: A way to get that JSON from her Project into Charlie's endpoint.** This is the friction point. She can't POST from claude.ai. The options are: she copies the JSON and pastes it into a simple form page we build on Charlie (like `/companion`), or we build a lightweight page that lets her fill in the structured fields manually without needing the JSON at all.
+**Piece 3: A way to get that JSON from her Project into [[charlie]]'s endpoint.** This is the friction point. She can't POST from claude.ai. The options are: she copies the JSON and pastes it into a simple form page we build on [[charlie]] (like `/companion`), or we build a lightweight page that lets her fill in the structured fields manually without needing the JSON at all.
 
-My recommendation is the form page. Lowest friction for Liz, no copy-paste of JSON, and it keeps the interaction feeling like part of Charlie's ecosystem rather than a technical handoff.
+My recommendation is the form page. Lowest friction for Liz, no copy-paste of JSON, and it keeps the interaction feeling like part of [[charlie]]'s ecosystem rather than a technical handoff.
 
 Want to go this direction, or do you see a better path?
 
@@ -412,11 +412,11 @@ when you say a "form" page what do you mean exactly?
 
 **assistant**
 
-A page on Charlie's web app — like `/companion` — that shows her the current day's brief inline and gives her simple input fields underneath each tier. Something like: a text area for her response to the → question, a dropdown for "did this reinforce or challenge the thesis," a tag selector for which thesis force it relates to. She hits submit, it writes to the volume, analysis agent picks it up next run.
+A page on [[charlie]]'s web app — like `/companion` — that shows her the current day's brief inline and gives her simple input fields underneath each tier. Something like: a text area for her response to the → question, a dropdown for "did this reinforce or challenge the thesis," a tag selector for which thesis force it relates to. She hits submit, it writes to the volume, analysis agent picks it up next run.
 
 But I want to flag the tradeoff before we commit to this. A form imposes structure on a process that's currently freeform and conversational. Liz's best thinking on these → questions probably happens in dialogue — she responds, Claude pushes back, she refines, they land somewhere. A form captures the *conclusion* but loses the *reasoning*. And the reasoning is where the real thesis value lives.
 
-The alternative is to keep her interaction conversational but make the *output* structured. She keeps talking to her Claude Project about the briefs. At the end of the session, her Claude produces a structured summary. The only form-like element is a simple paste box on Charlie where she drops that summary — one field, one button.
+The alternative is to keep her interaction conversational but make the *output* structured. She keeps talking to her Claude Project about the briefs. At the end of the session, her Claude produces a structured summary. The only form-like element is a simple paste box on [[charlie]] where she drops that summary — one field, one button.
 
 Or we skip the form entirely and build the companion as a Claude Project whose system prompt formats session output as a structured block she can one-click copy into a simple `/companion` page that's just a text box and a submit button. No dropdowns, no tag selectors, no fields. Just: paste your session summary here.
 
@@ -440,27 +440,27 @@ This block is not supported on your current device yet.
 
 This is serious research. Liz built a comprehensive streaming landscape analysis — 129 shows across 6 years, segmented by audience psychographics, platform profiles, pattern analysis, and an underserved audiences map. Six sheets of structured intelligence.
 
-This isn't a companion tool output — this is independent thesis-grade research she's been doing on her own. And it maps directly onto Charlie's framework. The audience segment profiles (Prestige Completionists, Genre Superfans, Social/Water Cooler viewers, etc.) are demand migration data. The underserved audiences map is discovery bridge territory — who's being missed and why. The platform profiles show where the structural gaps are.
+This isn't a companion tool output — this is independent thesis-grade research she's been doing on her own. And it maps directly onto [[charlie]]'s framework. The audience segment profiles (Prestige Completionists, Genre Superfans, Social/Water Cooler viewers, etc.) are demand migration data. The underserved audiences map is discovery bridge territory — who's being missed and why. The platform profiles show where the structural gaps are.
 
 Two things jump out immediately:
 
-**For Charlie's thesis:** This data substantiates the demand migration force with granular evidence Charlie's web search passes wouldn't find on their own. The Hispanic/Latino finding alone — 43.6% of TV time is streaming, highest of any demographic, zero major hits identified — is exactly the kind of discrepancy between narrative and data that belongs in Tier 2 (Bullshit Flag).
+**For [[charlie]]'s thesis:** This data substantiates the demand migration force with granular evidence [[charlie]]'s web search passes wouldn't find on their own. The Hispanic/Latino finding alone — 43.6% of TV time is streaming, highest of any demographic, zero major hits identified — is exactly the kind of discrepancy between narrative and data that belongs in Tier 2 (Bullshit Flag).
 
-**For the companion tool question:** This changes the architecture conversation. Liz isn't just responding to → questions in freeform chats — she's producing structured analytical work product. The companion tool needs to handle *this* kind of output, not just session summaries. She needs a way to push research artifacts into Charlie's analysis layer so the thesis synthesizer can incorporate them.
+**For the companion tool question:** This changes the architecture conversation. Liz isn't just responding to → questions in freeform chats — she's producing structured analytical work product. The companion tool needs to handle *this* kind of output, not just session summaries. She needs a way to push research artifacts into [[charlie]]'s analysis layer so the thesis synthesizer can incorporate them.
 
-Do you want to fold this dataset into Charlie's thesis state directly, or should we first figure out the companion tool pipeline and let this be the test case for how research flows in?
+Do you want to fold this dataset into [[charlie]]'s thesis state directly, or should we first figure out the companion tool pipeline and let this be the test case for how research flows in?
 
 **human**
 
 yeah let's get to that in a second. First we're still trying to find out where all the data from those chats went. She says there's a json:
 
-It's at context/sessions.json in the Charlie repo — same folder as watching.json, slate.json, and profile.json.
+It's at context/sessions.json in the [[charlie]] repo — same folder as watching.json, slate.json, and profile.json.
 If you want to see what's currently in it, type this in your terminal and hit Enter:
-cat /Users/lizvarner/Projects/charlie/context/sessions.json
+cat /Users/lizvarner/Projects/[[charlie]]/context/sessions.json
 
 **assistant**
 
-That's not a file Liz created manually — Charlie's codebase has a `context/` directory with structured JSON files, and `sessions.json` is one of them. This means there's already a mechanism in the code for storing session data. The companion tool integration may be further along than we thought.
+That's not a file Liz created manually — [[charlie]]'s codebase has a `context/` directory with structured JSON files, and `sessions.json` is one of them. This means there's already a mechanism in the code for storing session data. The companion tool integration may be further along than we thought.
 
 I need to see what's actually in those context files and how they're being used. Give me this in Claude Code:
 
@@ -468,7 +468,7 @@ I need to see what's actually in those context files and how they're being used.
 cat context/sessions.json context/watching.json context/slate.json context/profile.json
 ```
 
-That'll show us whether session data is already accumulating, what structure it's in, and whether the analysis or thesis agents are reading from it. If `sessions.json` already has content from Liz's interactions, the pipeline from companion tool to Charlie may already exist — we just didn't know about it.
+That'll show us whether session data is already accumulating, what structure it's in, and whether the analysis or thesis agents are reading from it. If `sessions.json` already has content from Liz's interactions, the pipeline from companion tool to [[charlie]] may already exist — we just didn't know about it.
 
 **human**
 
@@ -484,7 +484,7 @@ context/slate.json
 * Active conversations: Audiochuck scripted TV role, Sony first-look development slate
 context/profile.json
 
-* User: Liz Varner, Principal at Very Varner Inc, first-look deal with Sony Pictures Television
+* User: [[Liz Varner]], Principal at Very Varner Inc, first-look deal with Sony Pictures Television
 * Previously SVP/Head of Creative at Spectrum Originals (2019–2023, 15+ originals)
 * Positioning: creator-to-scripted translation, institutions under pressure
 * Best fit: audio/podcast companies moving into TV/film, build/transition environments, founder-led media
@@ -500,9 +500,9 @@ So here's where we actually are:
 
 **What exists:** Static context files feed agent prompts. Rating-based feedback calibrates signal types quantitatively. Both loops are live and working.
 
-**What's missing:** `sessions.json` — the qualitative feedback path. Liz's companion tool interactions, her research work like that streaming landscape spreadsheet, her responses to → questions — none of it flows back into Charlie.
+**What's missing:** `sessions.json` — the qualitative feedback path. Liz's companion tool interactions, her research work like that streaming landscape spreadsheet, her responses to → questions — none of it flows back into [[charlie]].
 
-**What needs to happen:** Build `sessions.json` as a structured append log, add an inbound endpoint on Charlie to receive session entries, make the analysis and thesis agents read from it, and give Liz a way to push session summaries into it from her end.
+**What needs to happen:** Build `sessions.json` as a structured append log, add an inbound endpoint on [[charlie]] to receive session entries, make the analysis and thesis agents read from it, and give Liz a way to push session summaries into it from her end.
 
 Before I spec the schema for `sessions.json` — one more thing I need to see. Run this in Claude Code:
 
@@ -515,7 +515,7 @@ That'll tell us if any agent code already references a sessions file, which woul
 **human**
 
 grep -r "sessions" agents/ core/ --include="*.py" -l
-Grep "sessions" (in /Users/andrewshipley/Desktop/Poesis/Andrew/AI Agents/Charlie/charlie, glob: **/*.py)
+Grep "sessions" (in /Users/andrewshipley/Desktop/Poesis/Andrew/AI Agents/[[charlie]]/[[charlie]], glob: **/*.py)
 14 lines of output
 No matches in `agents/` or `core/` — only Flask and pip internals in `venv/`. `sessions.json` isn't referenced anywhere in the project code. It's either a leftover placeholder or was planned but never implemented.
 
@@ -527,9 +527,9 @@ So we're building the full loop from scratch. Here's what I'd spec:
 
 **`sessions.json` schema** — an append-only log on the volume. Each entry captures: the brief date she engaged with, which tier and → question she responded to, a categorized takeaway (reinforces thesis / challenges thesis / new signal / tangential), which thesis force it maps to, and a one-line insight summary. Not freeform text — structured enough that the analysis agent can parse it programmatically.
 
-**Charlie-side changes** — three pieces: the `/api/companion/session` endpoint that accepts POST entries and appends to `sessions.json`, a `load_sessions()` method on `StateManager` that reads recent entries, and injection into the analysis agent's prompt alongside the feedback calibration block. The thesis synthesizer also reads it on Monday runs.
+**[[charlie]]-side changes** — three pieces: the `/api/companion/session` endpoint that accepts POST entries and appends to `sessions.json`, a `load_sessions()` method on `StateManager` that reads recent entries, and injection into the analysis agent's prompt alongside the feedback calibration block. The thesis synthesizer also reads it on Monday runs.
 
-**Liz-side mechanism** — this is still the friction point. She can't POST from claude.ai. The lowest-friction option: a `/companion` page on Charlie that shows today's brief with the → questions, and underneath each one a text field and a couple of dropdowns (reinforces/challenges/new signal, which force). She fills in her thinking, hits submit, it writes to the volume. She doesn't need her separate Claude chats for this — she does the thinking on Charlie's own page.
+**Liz-side mechanism** — this is still the friction point. She can't POST from claude.ai. The lowest-friction option: a `/companion` page on [[charlie]] that shows today's brief with the → questions, and underneath each one a text field and a couple of dropdowns (reinforces/challenges/new signal, which force). She fills in her thinking, hits submit, it writes to the volume. She doesn't need her separate Claude chats for this — she does the thinking on [[charlie]]'s own page.
 
 That said — she's clearly doing deeper analytical work independently, like that streaming landscape spreadsheet. That's a different input channel than session responses. We should handle the two separately: session responses through the `/companion` page, and research artifacts through a different mechanism.
 
@@ -656,7 +656,7 @@ The data flow is now:
 
 **Qualitative path (new):** Brief → Liz engages with → questions on `/companion` → `sessions.json` → analysis agent gets session calibration block (reinforcing/challenging/new signal categories) → thesis synthesizer gets weekly engagement signals → both sharpen downstream output.
 
-Both paths respect the firewall. Neither injects entity names into ingestion. Both influence what Charlie values, not what Charlie searches for.
+Both paths respect the firewall. Neither injects entity names into ingestion. Both influence what [[charlie]] values, not what [[charlie]] searches for.
 
 Before you push to Railway — two things to verify locally:
 
@@ -668,7 +668,7 @@ That confirms the StateManager methods work. Then hit `/companion` on your local
 
 Once that's clean, push and deploy. After Railway picks it up, Liz can start using `/companion` immediately — no backfill needed. The analysis agent will start reading session data on the next daily run, and the thesis synthesizer picks it up on Monday.
 
-Now — do you want to circle back to that streaming landscape spreadsheet? That's a different class of input than session responses, and it's sitting there with 129 shows of structured thesis-grade research that Charlie doesn't know about.
+Now — do you want to circle back to that streaming landscape spreadsheet? That's a different class of input than session responses, and it's sitting there with 129 shows of structured thesis-grade research that [[charlie]] doesn't know about.
 
 **human**
 
@@ -767,7 +767,7 @@ That should be a 10-minute build. Want to run it?
 
 **human**
 
-ok, done there. So moving now to the thesis section. Can you walk me through the workflow for that component of charlie?
+ok, done there. So moving now to the thesis section. Can you walk me through the workflow for that component of [[charlie]]?
 
 **assistant**
 
@@ -880,7 +880,7 @@ So the actual workflow should probably be:
 
 **Liz reviews the thesis proposal.** She reads what Opus proposed — which extensions, which revisions, which new patterns — and decides what she agrees with, what she'd modify, and what she'd reject. She's the editorial authority on the thesis content.
 
-**You apply what she approves.** You're the operator who executes the technical step. Or better — we build a review page on Charlie where Liz can see the proposal, approve/reject individual extensions and revisions, and the system applies her decisions automatically.
+**You apply what she approves.** You're the operator who executes the technical step. Or better — we build a review page on [[charlie]] where Liz can see the proposal, approve/reject individual extensions and revisions, and the system applies her decisions automatically.
 
 That would be a `/thesis/review` page. Show the current proposal, let her check/uncheck individual items, hit approve, and `apply_proposal()` runs with only the items she selected. No JSON editing, no developer intervention.
 
@@ -903,11 +903,11 @@ This is essentially the thesis interaction model from the project bible: "All th
 The question is how to implement that interaction layer. The options are:
 
 
-- A review page on Charlie with comment/annotation fields on each proposal item, then a final approve button
+- A review page on [[charlie]] with comment/annotation fields on each proposal item, then a final approve button
 - A conversational interface where she discusses the proposal with Claude, and the output of that conversation becomes the approved version
 - Some hybrid approach
 
-Given that Liz is already comfortable having conversations with Claude about the briefs, and the real value is in the reasoning and dialogue rather than just an approve/reject decision, a conversational or hybrid approach makes more sense. But building a full conversational interface into Charlie's web app isn't practical, so the realistic solution is probably to surface the proposal on a review page where Liz can annotate and comment on individual items, then authorize the final output — with those annotations feeding back into the process.
+Given that Liz is already comfortable having conversations with Claude about the briefs, and the real value is in the reasoning and dialogue rather than just an approve/reject decision, a conversational or hybrid approach makes more sense. But building a full conversational interface into [[charlie]]'s web app isn't practical, so the realistic solution is probably to surface the proposal on a review page where Liz can annotate and comment on individual items, then authorize the final output — with those annotations feeding back into the process.
 
 Now I need to think through the architecture and present this clearly to Andrew.That's the right workflow. Let me lay out the three-stage process.
 

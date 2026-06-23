@@ -19,12 +19,12 @@ tags: []
 
 **user**
 
-<ide_opened_file>The user opened the file /Users/andrewshipley/Desktop/Poesis/Andrew/AI Agents/Charlie/charlie/README.md in the IDE. This may or may not be related to the current task.</ide_opened_file>
+<ide_opened_file>The user opened the file /Users/andrewshipley/Desktop/Poesis/Andrew/AI Agents/[[charlie]]/[[charlie]]/README.md in the IDE. This may or may not be related to the current task.</ide_opened_file>
 I'd like a system architecture diagram
 
 **assistant**
 
-Let me explore the Charlie project structure to build an accurate diagram.
+Let me explore the [[charlie]] project structure to build an accurate diagram.
 
 **user**
 
@@ -3545,4 +3545,4 @@ FEEDBACK LOOP:
   All three feed into Thesis synthesis prompt context
 ```
 
-**Summary:** Charlie is a Flask web app + CLI orchestrator that runs a daily Claude-powered intelligence pipeline (Ingestion → Analysis → Brief → Adversary) and a weekly thesis synthesis cycle (Far Mar). All state lives in JSON files on disk. The Companion and Oven are feedback/synthesis surfaces that close the loop back into the thesis.
+**Summary:** [[charlie]] is a Flask web app + CLI orchestrator that runs a daily Claude-powered intelligence pipeline (Ingestion → Analysis → Brief → Adversary) and a weekly thesis synthesis cycle (Far Mar). All state lives in JSON files on disk. The Companion and Oven are feedback/synthesis surfaces that close the loop back into the thesis.

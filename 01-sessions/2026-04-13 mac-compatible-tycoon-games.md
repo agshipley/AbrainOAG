@@ -17,7 +17,7 @@ tags: []
 
 **Conversation Overview**
 
-The person is working on a game project (referred to as CivilWarLand) and sought game recommendations for creative inspiration, with the practical constraint of running on a 2020 Intel MacBook Air. The conversation focused on identifying playable reference points across two areas: games with tonal and mechanical relevance to their project, and classic tycoon-style games they were personally curious about.
+The person is working on a game project (referred to as [[civilwarland]]) and sought game recommendations for creative inspiration, with the practical constraint of running on a 2020 Intel MacBook Air. The conversation focused on identifying playable reference points across two areas: games with tonal and mechanical relevance to their project, and classic tycoon-style games they were personally curious about.
 
 Claude recommended several games with explicit design rationale tied to the person's project: RimWorld (character trait systems, mood cascades, emergent narrative), Papers Please (moral compromise through mundane mechanics), Disco Elysium (skill systems and internal narrator voice), Dwarf Fortress (decline as the point rather than failure state), and Frostpunk (policy tracking and player complicity). The person decided to start with RimWorld on Steam, and Claude provided onboarding guidance emphasizing the Cassandra Classic storyteller, the Crashlanded scenario, and specific systems to study as a designer — particularly the mood modifier system, colonist trait and job assignment interactions, and how visual feedback loops communicate system state without stat panels.
 
@@ -31,13 +31,13 @@ I'd like to get some inspiration from playing comparable games. I'm on a 2020 ma
 
 **assistant**
 
-Andrew wants game recommendations for inspiration for CivilWarLand - a park management sim with narrative weight, dark humor, and moral compromise. He's on a 2020 Intel MacBook Air. Let me think about what would be most useful.
+Andrew wants game recommendations for inspiration for [[civilwarland]] - a park management sim with narrative weight, dark humor, and moral compromise. He's on a 2020 Intel MacBook Air. Let me think about what would be most useful.
 
 Key reference points from his project: RimWorld (closest mechanical reference), Disco Elysium (Phase 1 style), Sims-to-SimCity progression, Saunders voice, decline as default state, character-driven mechanics.
 
 Let me think about what runs on an Intel Mac and would be inspiring for this project.Good instinct on Pizza Tycoon — the tonal DNA is there (managing a business where everything's slightly wrong) but yeah, running classic DOS-era stuff on an Intel Mac is a hassle even before you get to the question of whether it'd actually teach you anything useful.
 
-Here's what I'd play, thinking specifically about what CivilWarLand is trying to do:
+Here's what I'd play, thinking specifically about what [[civilwarland]] is trying to do:
 
 **RimWorld** — you already identified this as the closest reference point, and it runs great on Intel Macs. This is the one to spend real time with. Watch how character traits create emergent narrative, how the colony mood system works, how "things sliding toward disaster" feels moment to moment. The storyteller system (Cassandra Classic vs Randy Random) is worth studying for how it paces escalation. Pay attention to how individual colonists' bad days compound into colony-wide crises — that's exactly the feeling your tally system is trying to capture from the other direction.
 
@@ -57,7 +57,7 @@ ok, I'm going to check out Rim World. I'll get it on steam, what do I need to kn
 
 **assistant**
 
-The user wants to get started with RimWorld on Steam. Let me give practical advice for a first-time player, especially framed around what's relevant to his CivilWarLand project.RimWorld's got a learning curve but it's the fun kind — you'll be losing colonies in entertaining ways within an hour. A few things going in:
+The user wants to get started with RimWorld on Steam. Let me give practical advice for a first-time player, especially framed around what's relevant to his [[civilwarland]] project.RimWorld's got a learning curve but it's the fun kind — you'll be losing colonies in entertaining ways within an hour. A few things going in:
 
 **First session setup:** Pick Cassandra Classic as your storyteller on the middle difficulty (Strive to Survive, or one below it). Cassandra paces escalation in a readable way — she teaches you the systems by gradually turning the screws. Randy Random is fun later but he'll throw a plague and a raid at you on day 2 and you won't know what happened. Start with the Crashlanded scenario (three colonists, some supplies) rather than the harder starts.
 
@@ -106,7 +106,7 @@ If it's the tycoon loop — **Two Point Hospital** (or its sequel **Two Point Ca
 
 For something smaller and meaner — **Not Tonight** is on Mac. You play a bouncer checking IDs in a post-Brexit dystopia. It's Papers, Please energy applied to a longer game with more narrative branching. The moral compromise through mundane work angle is strong.
 
-If you're only picking one and you want maximum design relevance to CivilWarLand, I'd go Tropico 6. The tone, the faction balancing, the "you're technically in charge but everything is sliding" feeling — that's your game.
+If you're only picking one and you want maximum design relevance to [[civilwarland]], I'd go Tropico 6. The tone, the faction balancing, the "you're technically in charge but everything is sliding" feeling — that's your game.
 
 **human**
 

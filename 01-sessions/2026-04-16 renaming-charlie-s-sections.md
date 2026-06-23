@@ -17,21 +17,21 @@ tags: []
 
 **Conversation Overview**
 
-This was an extensive working session between Andrew Shipley and Claude focused on building, debugging, and extending "Charlie" — an entertainment industry intelligence tool deployed on Railway that generates daily briefs for Liz Varner, a senior entertainment executive. The session covered a large scope of product work including cosmetic renaming across the codebase, architectural design, feature building, debugging, and infrastructure improvements. Andrew works as the technical builder of Charlie, while Liz is the primary end user. Key relationships mentioned include Matt Shanfield and Aaron Hart (industry contacts relevant to Liz's work), Katherine Pope (Sony executive), and Nina Tassler (production company executive).
+This was an extensive working session between Andrew Shipley and Claude focused on building, debugging, and extending "[[charlie]]" — an entertainment industry intelligence tool deployed on Railway that generates daily briefs for [[Liz Varner]], a senior entertainment executive. The session covered a large scope of product work including cosmetic renaming across the codebase, architectural design, feature building, debugging, and infrastructure improvements. Andrew works as the technical builder of [[charlie]], while Liz is the primary end user. Key relationships mentioned include Matt Shanfield and Aaron Hart (industry contacts relevant to Liz's work), Katherine Pope (Sony executive), and Nina Tassler (production company executive).
 
-The session began with a comprehensive rename pass converting "The Brief" to "The Morning Loaf," "Living Thesis" to "Far Mar," and "The Book" to "The Field" — all the way through routes, variables, filenames, and UI copy. The rename carried conceptual weight: The Morning Loaf is consumed daily, Far Mar (farmers market) offers complex partially-processed ingredients, and The Field is where everything is seeded and grown. From there the conversation moved through a significant number of feature builds: the adversary agent (a pipeline stage that critiques daily briefs for flattery, pattern exhaustion, inference theater, missing stories, and comfortable framing); Dark Comprandon (a toggle on the Companion page surfacing adversary findings for Liz to mark as fair/off-base/partially right); backend and frontend observability infrastructure; Field Phase 1 (upload surface, format-aware extraction, and an Opus-powered acknowledgment agent that produces a structured first-read response to Liz's uploaded research); Field Phase 2 (wiring Field artifacts into the thesis synthesizer, brief tier-three generator, and adversary with a shared citation layer and relevance-based caps); The Oven (an on-demand "Charlie Take" generator that synthesizes the full Charlie perspective — thesis, recent briefs, Field Work, context files, sessions — in response to a situational prompt from Liz); and a thesis synthesis one-off trigger for Far Mar.
+The session began with a comprehensive rename pass converting "The Brief" to "The Morning Loaf," "Living Thesis" to "Far Mar," and "The Book" to "The Field" — all the way through routes, variables, filenames, and UI copy. The rename carried conceptual weight: The Morning Loaf is consumed daily, Far Mar (farmers market) offers complex partially-processed ingredients, and The Field is where everything is seeded and grown. From there the conversation moved through a significant number of feature builds: the adversary agent (a pipeline stage that critiques daily briefs for flattery, pattern exhaustion, inference theater, missing stories, and comfortable framing); Dark Comprandon (a toggle on the Companion page surfacing adversary findings for Liz to mark as fair/off-base/partially right); backend and frontend observability infrastructure; Field Phase 1 (upload surface, format-aware extraction, and an Opus-powered acknowledgment agent that produces a structured first-read response to Liz's uploaded research); Field Phase 2 (wiring Field artifacts into the thesis synthesizer, brief tier-three generator, and adversary with a shared citation layer and relevance-based caps); The Oven (an on-demand "[[charlie]] Take" generator that synthesizes the full [[charlie]] perspective — thesis, recent briefs, Field Work, context files, sessions — in response to a situational prompt from Liz); and a thesis synthesis one-off trigger for Far Mar.
 
 Throughout the session Andrew repeatedly and correctly pushed back on several patterns in Claude's behavior: over-structuring simple answers into multi-step protocols, suggesting workflows that required copying auth tokens into URLs, designing personal-to-Liz features when the tool should feel like a well-designed professional surface rather than a bespoke personal tool, moving too conservatively on scope when larger builds were the right call, failing to give full clickable URLs instead of path fragments, and treating Claude Code's "build complete" reports as verified without confirming the work actually deployed and functioned. Andrew made clear that broken buttons are the equivalent of misspelling a name in a legal signature block — architecturally minor but trust-destroying in user experience. He also emphasized that the project is meant to grow beyond its current single-user state and that architectural investments (observability, state abstraction, firewalls, separation of surfaces) are load-bearing investments in that future, not over-engineering. The session ended with The Oven live on Railway after a successful deploy, Liz expressing satisfaction with the Take output quality, and a one-off Far Mar synthesis run triggered to calibrate the new Saturday cadence.
 
 Several important technical decisions were locked in during the session: the adversary agent uses Opus and reads brief drafts plus 30 days of sessions and 14 days of published briefs, but explicitly does NOT read Liz's context files; adversary feedback flows only to Andrew for manual review and never back into the pipeline; Field Work citations in the brief are capped using an inverted relevance curve (stricter caps at lower relevance scores: 2/week at 0.7-0.8, 4/week at 0.8-0.9, 6/week at 0.9+) with a per-artifact cap of 2 citations per 14-day window, suppress-and-log behavior when caps bind, and caps configurable via env vars; Field Work cannot appear in Tier 1 or Tier 2 brief content ever; The Oven does not feed back into any other agent or loop; and the `/bypass-permissions` slash command exists inside Claude Code sessions to skip approval prompts without relaunching. Andrew noted that a key operational gap is that Railway pipeline actions cannot be triggered from VS Code directly — they must be triggered from the deployment itself, either via Railway's shell, a protected HTTP endpoint on the app, or the existing `/run` page.
 
-Andrew explicitly corrected Claude multiple times on communication patterns: always provide full URLs with the Railway domain (`https://charlie-
+Andrew explicitly corrected Claude multiple times on communication patterns: always provide full URLs with the Railway domain (`https://[[charlie]]-
 
 ## Transcript
 
 **human**
 
-Ok, first time working with 4.7. Let's see what you can do. We're doing some cosmetic work on Charlie today. First we're renaming The Brief -> The Morning Loaf. We're renaming the "living thesis" -> "Far Mar". And we're renaming The Book -> The Field
+Ok, first time working with 4.7. Let's see what you can do. We're doing some cosmetic work on [[charlie]] today. First we're renaming The Brief -> The Morning Loaf. We're renaming the "living thesis" -> "Far Mar". And we're renaming The Book -> The Field
 
 **assistant**
 
@@ -40,7 +40,7 @@ Before I start grepping through the codebase — quick clarifying question on sc
 This block is not supported on your current device yet.
 ```
 
-Also — I don't have the Charlie codebase mounted in this session (just the project docs). Do you want to paste the relevant files, or should I search project knowledge to see what architecture references are there so I can give you a concrete find/replace map to run against the repo?
+Also — I don't have the [[charlie]] codebase mounted in this session (just the project docs). Do you want to paste the relevant files, or should I search project knowledge to see what architecture references are there so I can give you a concrete find/replace map to run against the repo?
 
 **human**
 
@@ -249,9 +249,9 @@ ok while it works on that, I'd like us to work a bit on the architecture. Liz ha
 
 Hold on. I want to flag this before we build it, because what you just described crosses the architectural line we set at the beginning.
 
-From memory: the founding principle was that **Liz's feedback and interests must only influence her personal companion tool — never Charlie's ingestion or scoring layer. Filter bubble risk is a live architectural threat.** That was called out as non-negotiable.
+From memory: the founding principle was that **Liz's feedback and interests must only influence her personal companion tool — never [[charlie]]'s ingestion or scoring layer. Filter bubble risk is a live architectural threat.** That was called out as non-negotiable.
 
-What you're now describing — Companion feedback running back into the analysis layer of the Loaf pipeline — is exactly the upstream flow we said we wouldn't build. If Liz flags items on the Companion screen and that flows into scoring/analysis, then within a few weeks Charlie is scoring signals based on what Liz has already told it she cares about. That's the filter bubble. The thesis narrows to her priors. The `→` questions stop being genuinely inferential and start being confirmation-shaped.
+What you're now describing — Companion feedback running back into the analysis layer of the Loaf pipeline — is exactly the upstream flow we said we wouldn't build. If Liz flags items on the Companion screen and that flows into scoring/analysis, then within a few weeks [[charlie]] is scoring signals based on what Liz has already told it she cares about. That's the filter bubble. The thesis narrows to her priors. The `→` questions stop being genuinely inferential and start being confirmation-shaped.
 
 I could be wrong about how you're thinking about this, though. A few ways this could be fine that I want to check:
 
@@ -275,13 +275,13 @@ Good. That's the right framing — "limited dynamism with preserved integrity" i
 
 ## The core question
 
-Where in the pipeline can Liz's Companion feedback flow without compromising editorial independence? The answer depends on separating **what Charlie watches** from **what Charlie tells Liz**.
+Where in the pipeline can Liz's Companion feedback flow without compromising editorial independence? The answer depends on separating **what [[charlie]] watches** from **what [[charlie]] tells Liz**.
 
 Three distinct layers, each with a different rule:
 
-**Ingestion layer** — what gets pulled in from the world. **Hard firewall. No Companion input, ever.** If Liz's interests shape what sources get scanned or what signals get ingested, Charlie stops being an independent observer and becomes a mirror. This is the filter bubble's origin point.
+**Ingestion layer** — what gets pulled in from the world. **Hard firewall. No Companion input, ever.** If Liz's interests shape what sources get scanned or what signals get ingested, [[charlie]] stops being an independent observer and becomes a mirror. This is the filter bubble's origin point.
 
-**Analysis/scoring layer** — what counts as important. **Firewall with one narrow exception.** Structural scoring (implication weight, novelty, inference depth) stays untouched by Liz. But there's a legitimate case for Liz's engagement to calibrate Charlie's *self-assessment* — i.e., did the inference actually land? Was the `→` question generative or flat? More on this below.
+**Analysis/scoring layer** — what counts as important. **Firewall with one narrow exception.** Structural scoring (implication weight, novelty, inference depth) stays untouched by Liz. But there's a legitimate case for Liz's engagement to calibrate [[charlie]]'s *self-assessment* — i.e., did the inference actually land? Was the `→` question generative or flat? More on this below.
 
 **Presentation layer** — how the daily output is framed. **Dynamic. Liz's feedback can shape this freely.** This is where personalization lives without editorial capture.
 
@@ -410,7 +410,7 @@ Before designing the fix, worth naming what's actually going wrong. "Yes-man" is
 
 **The session vocabulary is tilted.** Liz's disposition options are: reinforces / challenges / new_signal / tangential. Three of four frames accept the thesis as the reference point; only "challenges" lets her push back, and it's binary. There's no disposition for "this signal is interesting but the thesis framing is wrong" or "the brief missed the actual story here."
 
-**The brief generator has no adversarial pressure.** Ingestion scans the world neutrally (ish). Analysis interprets it. Brief frames it. Nothing in that chain is tasked with making the brief uncomfortable. Tier 2 (The Bullshit Flag) is the closest thing, and per the spec it's about narrative-vs-data discrepancies in the world, not internal red-teaming of Charlie's own conclusions.
+**The brief generator has no adversarial pressure.** Ingestion scans the world neutrally (ish). Analysis interprets it. Brief frames it. Nothing in that chain is tasked with making the brief uncomfortable. Tier 2 (The Bullshit Flag) is the closest thing, and per the spec it's about narrative-vs-data discrepancies in the world, not internal red-teaming of [[charlie]]'s own conclusions.
 
 If those are the causes, then a reactive devil's advocate tool doesn't fix any of them. It adds a fourth surface downstream of all three.
 
@@ -420,9 +420,9 @@ Two designs, in order of how much I trust them.
 
 **Design A: An adversarial agent in the pipeline, not a page for Liz.**
 
-Before the brief gets rendered, a dedicated red-team pass runs against the draft. Opus, not Sonnet. System prompt is something like: *"You are reading a draft brief written for Liz Varner. Your job is to find where it is being intellectually lazy, where it is flattering her priors, where it is stating as inference what is actually just restatement of what she already believes. You have read her last 30 days of sessions. Name the specific ways this brief is telling her what she wants to hear. Be specific — cite sentences."*
+Before the brief gets rendered, a dedicated red-team pass runs against the draft. Opus, not Sonnet. System prompt is something like: *"You are reading a draft brief written for [[Liz Varner]]. Your job is to find where it is being intellectually lazy, where it is flattering her priors, where it is stating as inference what is actually just restatement of what she already believes. You have read her last 30 days of sessions. Name the specific ways this brief is telling her what she wants to hear. Be specific — cite sentences."*
 
-The red-team output becomes an input to a final revision pass, OR it gets surfaced to Liz *alongside* the brief as a "What this brief might be getting wrong" section. I'd lean toward the latter. Making the red-team visible is more valuable than making it invisible, because it gives Liz something to disagree with — and her disagreement is now signal about where Charlie's challenge is itself off-base, which is the right kind of feedback loop.
+The red-team output becomes an input to a final revision pass, OR it gets surfaced to Liz *alongside* the brief as a "What this brief might be getting wrong" section. I'd lean toward the latter. Making the red-team visible is more valuable than making it invisible, because it gives Liz something to disagree with — and her disagreement is now signal about where [[charlie]]'s challenge is itself off-base, which is the right kind of feedback loop.
 
 Key property: this agent *doesn't read her feedback in a way that can be gamed*. It reads sessions to identify patterns of approval, specifically to push against them. The more Liz approves of a frame, the more suspicious this agent gets. That's the inversion that matters — the drift-correction mechanism is powered by the same signal that's causing drift, used in opposition to it.
 
@@ -436,11 +436,11 @@ This is less sexy than an adversarial agent but probably matters more, because i
 
 ## What "Dark Comprandon" could be, if you build it
 
-If you want a user-facing surface — and I think there's a case for one, because Liz having a place to actively seek challenge is different from Charlie silently policing itself — build it with these constraints:
+If you want a user-facing surface — and I think there's a case for one, because Liz having a place to actively seek challenge is different from [[charlie]] silently policing itself — build it with these constraints:
 
-1. **It doesn't argue with her. It argues with Charlie.** The devil's advocate is pointed at the brief, the thesis, and Charlie's recent framing — not at Liz's beliefs. Liz's role is to *read* the red-team, not be the target of it. This is the key move that prevents the confidence-calibration failure mode.
+1. **It doesn't argue with her. It argues with [[charlie]].** The devil's advocate is pointed at the brief, the thesis, and [[charlie]]'s recent framing — not at Liz's beliefs. Liz's role is to *read* the red-team, not be the target of it. This is the key move that prevents the confidence-calibration failure mode.
 
-2. **It has access to the drift metrics.** When Liz opens Dark Comprandon, it can tell her: "Over the last 14 days, Charlie has framed 11 of 14 briefs around discovery bridge. The thesis has not been meaningfully revised in 21 days. Here are three signals from the last week that Charlie under-weighted or structured away." The tool's job is to surface what's been *missing*, not to contradict what's been present.
+2. **It has access to the drift metrics.** When Liz opens Dark Comprandon, it can tell her: "Over the last 14 days, [[charlie]] has framed 11 of 14 briefs around discovery bridge. The thesis has not been meaningfully revised in 21 days. Here are three signals from the last week that [[charlie]] under-weighted or structured away." The tool's job is to surface what's been *missing*, not to contradict what's been present.
 
 3. **It reads its own outputs.** If Dark Comprandon keeps generating the same three critiques in rotation, that's a failure mode worth detecting. A drift detector that drifts is a worse problem than no drift detector.
 
@@ -490,7 +490,7 @@ Three inputs, in this priority order:
 
 Does NOT read: current thesis, context files (profile/slate/watching), feedback.json quantitative ratings.
 
-The last exclusion is the critical one. If the adversary reads Liz's context, it becomes another tool shaped by her priors — even inverted, it's still centered on her. By withholding context, the adversary is forced to critique the brief *on its own terms* and against *Charlie's own recent pattern*, not against what Liz cares about. This is the "argues with Charlie, not with Liz" principle operationalized as an information architecture decision.
+The last exclusion is the critical one. If the adversary reads Liz's context, it becomes another tool shaped by her priors — even inverted, it's still centered on her. By withholding context, the adversary is forced to critique the brief *on its own terms* and against *[[charlie]]'s own recent pattern*, not against what Liz cares about. This is the "argues with [[charlie]], not with Liz" principle operationalized as an information architecture decision.
 
 ### The system prompt (sketch)
 
@@ -570,13 +570,13 @@ Save to `data/adversary/YYYY-MM-DD.json` on the Railway volume. New subdir, does
 
 In `render.py`, render an "Adversary" section at the bottom of the brief — below Tier 3, above the footer. Visually distinct (different background, or offset with a divider). Header something like "What this brief might be getting wrong." Liz sees it every day, by default, no toggle.
 
-Rationale for always-visible: the point is to make Charlie uncomfortable-making by default. A toggle becomes an out — Liz will use it on days she's busy, which will correlate with days she's least rigorous, which is when she most needs the challenge.
+Rationale for always-visible: the point is to make [[charlie]] uncomfortable-making by default. A toggle becomes an out — Liz will use it on days she's busy, which will correlate with days she's least rigorous, which is when she most needs the challenge.
 
 ### One thing I want to flag
 
 The adversary will occasionally produce critiques that are wrong. That's fine — in fact, it's necessary. A never-wrong adversary is one that's only saying safe things. But you need a way for Liz to register that a specific adversary finding was off-base, and you need that registration to NOT flow back into the adversary's training signal. Otherwise she'll slowly teach it to stop critiquing the things she disagrees with critiquing.
 
-Proposed: Liz can mark adversary findings as "fair" / "off-base" in the UI. Those marks go into a separate log, `data/adversary/feedback.json`, that YOU review at checkpoint. Not Charlie. Human-in-the-loop on adversary calibration. If a pattern emerges (e.g., adversary consistently off-base on thesis-force critiques), you adjust the prompt manually. The adversary never reads its own feedback.
+Proposed: Liz can mark adversary findings as "fair" / "off-base" in the UI. Those marks go into a separate log, `data/adversary/feedback.json`, that YOU review at checkpoint. Not [[charlie]]. Human-in-the-loop on adversary calibration. If a pattern emerges (e.g., adversary consistently off-base on thesis-force critiques), you adjust the prompt manually. The adversary never reads its own feedback.
 
 ---
 
@@ -1000,7 +1000,7 @@ One architectural decision I want to flag before the prompt, because it affects 
 
 **Tier forms vs. Dark Comprandon on the Companion page — augment or replace?** In the earlier design I said "replaced (or augmented, TBD)." I'd push for **augment, not replace**. Two reasons:
 
-First, the existing tier response forms feed analysis.py via session injection — that's how Liz's "reinforces / challenges / tangential / new_signal" dispositions currently shape the pipeline. Replacing them with Dark Comprandon when the toggle is on means days where Liz is in devil's-advocate mode, analysis gets zero session signal. That's an uneven feedback loop — Charlie's interpretation layer goes dark exactly when Liz is most engaged with the output.
+First, the existing tier response forms feed analysis.py via session injection — that's how Liz's "reinforces / challenges / tangential / new_signal" dispositions currently shape the pipeline. Replacing them with Dark Comprandon when the toggle is on means days where Liz is in devil's-advocate mode, analysis gets zero session signal. That's an uneven feedback loop — [[charlie]]'s interpretation layer goes dark exactly when Liz is most engaged with the output.
 
 Second, the two surfaces do different work. Tier forms capture *her response to the brief*. Dark Comprandon captures *her response to the adversary*. Both are useful, neither substitutes for the other.
 
@@ -1244,18 +1244,18 @@ That's the real problem you're pointing at.
 
 ## What I think the actual issue is
 
-Charlie currently has two pipelines:
+[[charlie]] currently has two pipelines:
 
-1. **The world → Charlie → Liz** (ingestion → analysis → brief)
-2. **Liz → Charlie** (sessions → analysis injection; feedback → ingestion injection)
+1. **The world → [[charlie]] → Liz** (ingestion → analysis → brief)
+2. **Liz → [[charlie]]** (sessions → analysis injection; feedback → ingestion injection)
 
 What's missing is a third:
 
-3. **Liz's Field work → Far Mar → Charlie**
+3. **Liz's Field work → Far Mar → [[charlie]]**
 
-Her thinking, notes, and drafts are the *highest-density* source of signal about what the thesis should actually say — and Charlie never sees them. The thesis synthesizer is reading external signals and Liz's *reactions* to Charlie's framings. It's not reading her own unfiltered thinking. Which means the thesis that Charlie proposes each Monday is necessarily downstream of Charlie's own prior framings. That's thesis drift of a different kind than we were discussing before — not Liz's priors capturing Charlie, but Charlie's priors being unable to be corrected by Liz's actual original thought.
+Her thinking, notes, and drafts are the *highest-density* source of signal about what the thesis should actually say — and [[charlie]] never sees them. The thesis synthesizer is reading external signals and Liz's *reactions* to [[charlie]]'s framings. It's not reading her own unfiltered thinking. Which means the thesis that [[charlie]] proposes each Monday is necessarily downstream of [[charlie]]'s own prior framings. That's thesis drift of a different kind than we were discussing before — not Liz's priors capturing [[charlie]], but [[charlie]]'s priors being unable to be corrected by Liz's actual original thought.
 
-This is the inverse of the filter bubble problem. The filter bubble risk was that Liz's engagement would narrow Charlie's lens. The Field isolation problem is that Liz's original insight has no way to *widen* Charlie's lens — her best thinking can't reach the part of the system that synthesizes.
+This is the inverse of the filter bubble problem. The filter bubble risk was that Liz's engagement would narrow [[charlie]]'s lens. The Field isolation problem is that Liz's original insight has no way to *widen* [[charlie]]'s lens — her best thinking can't reach the part of the system that synthesizes.
 
 ## Before I design anything
 
@@ -1264,7 +1264,7 @@ A few things I need to understand about The Field before I can think about integ
 **1. What actually lives there right now?** You said Liz has done "exceptional work closer to The Field" but it's not integrated. Is that work:
 - Written documents (drafts, memos, outline fragments)?
 - Notes and annotations she keeps in some personal system (Notion, Apple Notes, Google Docs, something else)?
-- Conversations with her personal Claude that haven't been captured anywhere Charlie can see?
+- Conversations with her personal Claude that haven't been captured anywhere [[charlie]] can see?
 - Some combination?
 
 The ingestion strategy is completely different for each. Docs can be read. Notes need to be surfaced. Conversations with her Claude are particularly interesting because they're already structured dialogue but they live in a separate system entirely.
@@ -1276,7 +1276,7 @@ The ingestion strategy is completely different for each. Docs can be read. Notes
 
 Each requires a different kind of integration. Essays can be read once and held in context. Notes need periodic re-ingestion. Raw capture needs triage before it becomes usable.
 
-**3. Who's the author, operationally?** The current architecture has a clean separation — Charlie generates, Liz reads and responds. If The Field is where Liz *writes*, then integrating it means Charlie reads *her*. That's a different direction of information flow than anything the system does today. Worth naming explicitly before we build, because the review/approval model needs to be different. You don't need checkpoint approval for Charlie to read Liz's own work — *she* already approved it by writing it. But you may need a different kind of checkpoint: what's a draft versus what's ready for Charlie to consume.
+**3. Who's the author, operationally?** The current architecture has a clean separation — [[charlie]] generates, Liz reads and responds. If The Field is where Liz *writes*, then integrating it means [[charlie]] reads *her*. That's a different direction of information flow than anything the system does today. Worth naming explicitly before we build, because the review/approval model needs to be different. You don't need checkpoint approval for [[charlie]] to read Liz's own work — *she* already approved it by writing it. But you may need a different kind of checkpoint: what's a draft versus what's ready for [[charlie]] to consume.
 
 **4. What does "repeatable process" look like for something that's by definition non-periodic?** This is the hard question. The Morning Loaf and Far Mar run on cadence because they're system outputs. The Field is human output and it doesn't run on cadence — Liz writes when she writes. A "process around The Field" can't be "every Tuesday Liz deposits work into The Field." That'll ossify her. But "whenever Liz has new Field work, it needs a path to Far Mar" isn't a process either — that's just a description of the gap.
 
@@ -1288,9 +1288,9 @@ Depending on how you answer the above, these sketch different directions:
 
 **Move A: Field as a read-source for Far Mar synthesis.** Add a new input to the thesis synthesizer — a folder or doc store Liz writes into, which gets ingested at synthesis time alongside signals and sessions. The thesis synthesizer starts reading her own work as input to its Monday proposals. This is the lightest integration and probably the first step regardless.
 
-**Move B: Field as a first-class page with its own surface.** New page in Charlie ("The Field"), alongside Morning Loaf / Companion / Far Mar / Book / Archive / Run. It shows her accumulated Field work, indexes it, surfaces connections between her entries and thesis claims. Charlie becomes a mirror for her own thinking, not just a thinker alongside it. Heavier build, more valuable long-term.
+**Move B: Field as a first-class page with its own surface.** New page in [[charlie]] ("The Field"), alongside Morning Loaf / Companion / Far Mar / Book / Archive / Run. It shows her accumulated Field work, indexes it, surfaces connections between her entries and thesis claims. [[charlie]] becomes a mirror for her own thinking, not just a thinker alongside it. Heavier build, more valuable long-term.
 
-**Move C: Field as a deliberate process with forcing functions.** A cadence for Liz to write *to* The Field — not on demand, but prompted. Once a week Charlie surfaces a question like "the thesis currently claims X. What's your view?" and her response becomes Field material. Inverts the current dynamic: instead of Liz reacting to Charlie's framings, Charlie reacts to prompts that extract Liz's framings.
+**Move C: Field as a deliberate process with forcing functions.** A cadence for Liz to write *to* The Field — not on demand, but prompted. Once a week [[charlie]] surfaces a question like "the thesis currently claims X. What's your view?" and her response becomes Field material. Inverts the current dynamic: instead of Liz reacting to [[charlie]]'s framings, [[charlie]] reacts to prompts that extract Liz's framings.
 
 These aren't mutually exclusive. My gut says the sequence is A → B → C, but the first question is whether I'm even thinking about this right — whether The Field as I'm imagining it is The Field as you're describing it.
 
@@ -1302,27 +1302,27 @@ Let's start here. Here are dummaries from her conversations with her personal cl
 
 **assistant**
 
-Andrew just shared actual examples of Liz's conversations with her personal Claude instance, and I'm seeing The Field in practice. Looking at what's here, I realize "The Brief Companion" is her own local tool—not the Charlie Companion page I was thinking of—that loads her brief and presents three action buttons for each question: Discuss, Unpack Context, and Connect to.
+Andrew just shared actual examples of Liz's conversations with her personal Claude instance, and I'm seeing The Field in practice. Looking at what's here, I realize "The Brief Companion" is her own local tool—not the [[charlie]] Companion page I was thinking of—that loads her brief and presents three action buttons for each question: Discuss, Unpack Context, and Connect to.
 
-The conversation starters she's saved span from early April through mid-April, covering Netflix creator licensing, Sony's infrastructure shift, OpenAI studio investments, ESPN consolidation, and platform-native content strategy. What strikes me is that these aren't just questions from Charlie's brief—they're her prompts to her personal Claude using those template buttons, and she's layering in her own dense, specific context. The Sony example is particularly revealing: her synthesis that "Sony is shifting from studio-as-development-engine to studio-as-financing-and-distribution" emerged from her conversation with Claude, not from Charlie's original framing.
+The conversation starters she's saved span from early April through mid-April, covering Netflix creator licensing, Sony's infrastructure shift, OpenAI studio investments, ESPN consolidation, and platform-native content strategy. What strikes me is that these aren't just questions from [[charlie]]'s brief—they're her prompts to her personal Claude using those template buttons, and she's layering in her own dense, specific context. The Sony example is particularly revealing: her synthesis that "Sony is shifting from studio-as-development-engine to studio-as-financing-and-distribution" emerged from her conversation with Claude, not from [[charlie]]'s original framing.
 
-This reframes what Andrew meant about exceptional work closer to The Field. These prompts are themselves Field material—the context blocks are her original thinking, essentially research memos that launch into dialogue. The integration gap is that her personal Claude holds the full conversation we can't see, but the prompts themselves are already well-structured and extractable. There's a loose weekly cadence to her engagement with Charlie's questions, concentrated around specific days rather than daily work.
+This reframes what Andrew meant about exceptional work closer to The Field. These prompts are themselves Field material—the context blocks are her original thinking, essentially research memos that launch into dialogue. The integration gap is that her personal Claude holds the full conversation we can't see, but the prompts themselves are already well-structured and extractable. There's a loose weekly cadence to her engagement with [[charlie]]'s questions, concentrated around specific days rather than daily work.
 
-The real value isn't in the questions themselves but in the contextual framings she writes before them—that's her synthesis, and that's what Far Mar actually needs. The Brief Companion already produces these timestamped, categorized prompts as structured artifacts, which is the natural ingestion surface. But there's a critical blind spot: we see what she sends outbound to her personal Claude, but not what comes back—the responses, conclusions, and decisions she reaches are invisible to both me and Charlie.
+The real value isn't in the questions themselves but in the contextual framings she writes before them—that's her synthesis, and that's what Far Mar actually needs. The Brief Companion already produces these timestamped, categorized prompts as structured artifacts, which is the natural ingestion surface. But there's a critical blind spot: we see what she sends outbound to her personal Claude, but not what comes back—the responses, conclusions, and decisions she reaches are invisible to both me and [[charlie]].
 
-So the flow is clear inputs going in, invisible synthesis happening in her conversations, and no captured outputs. The Session Memory feature was supposed to solve this by having her fill in three fields at the end of each morning session, which would feed into sessions.json, but I'm not sure if that's actually being used or if the Charlie Companion page with its tier forms is what's writing to that file instead. be two separate things:
-1. Personal Brief Companion (local file, Liz opens it, it pushes to GitHub / Charlie's sessions.json)
-2. Charlie Companion page (/companion, tier forms + freeform)
+So the flow is clear inputs going in, invisible synthesis happening in her conversations, and no captured outputs. The Session Memory feature was supposed to solve this by having her fill in three fields at the end of each morning session, which would feed into sessions.json, but I'm not sure if that's actually being used or if the [[charlie]] Companion page with its tier forms is what's writing to that file instead. be two separate things:
+1. Personal Brief Companion (local file, Liz opens it, it pushes to GitHub / [[charlie]]'s sessions.json)
+2. [[charlie]] Companion page (/companion, tier forms + freeform)
 
-Or maybe the personal Brief Companion is deprecated and the Charlie Companion is its replacement?
+Or maybe the personal Brief Companion is deprecated and the [[charlie]] Companion is its replacement?
 
-Actually looking more carefully — the document describes "auto-loads today's questions by fetching from Charlie's API at /api/brief/{date}" and "writes a structured summary to context/sessions.json" — this sounds like the local companion pushes to Charlie's data. But Charlie also has a Companion page now. So there might be duplication, or the local tool might be the precursor that's now been subsumed.
+Actually looking more carefully — the document describes "auto-loads today's questions by fetching from [[charlie]]'s API at /api/brief/{date}" and "writes a structured summary to context/sessions.json" — this sounds like the local companion pushes to [[charlie]]'s data. But [[charlie]] also has a Companion page now. So there might be duplication, or the local tool might be the precursor that's now been subsumed.
 
 This is actually important to ask about before designing. If the local Brief Companion is still active, then we already have a data capture mechanism — but it's only capturing summaries, not the full conversations. If it's deprecated, then these prompts are just remnants from an older workflow and I need to understand where that deep engagement happens now.
 
-I'm realizing the context paragraphs are what matter most here — those are Liz's synthesis, not Charlie's output. The questions come from Charlie already. These hybrid artifacts show an episodic cadence, not daily, and the Unpack/Connect taxonomy is already doing useful work. So the design should probably ingest those context paragraphs as Field input, skip re-ingesting the questions since they're already in Charlie, and create a separate mechanism for capturing her post-conversation conclusions. The Brief Companion's "Push Session" pattern might actually be the right foundation to extend rather than replace.
+I'm realizing the context paragraphs are what matter most here — those are Liz's synthesis, not [[charlie]]'s output. The questions come from [[charlie]] already. These hybrid artifacts show an episodic cadence, not daily, and the Unpack/Connect taxonomy is already doing useful work. So the design should probably ingest those context paragraphs as Field input, skip re-ingesting the questions since they're already in [[charlie]], and create a separate mechanism for capturing her post-conversation conclusions. The Brief Companion's "Push Session" pattern might actually be the right foundation to extend rather than replace.
 
-But stepping back to what Andrew actually gave me — he's asking me to react to specific material, not design in the abstract. The key insight is that these aren't conversation summaries at all; they're the prompts that launch conversations, while the actual dialogues stay invisible. What's significant is that the context blocks themselves are Field artifacts containing her original framings. I'm noticing specific thesis-level claims in the Sony framings from 4/2 and 4/13 that don't currently live in her thesis. She's using Charlie's questions as forcing functions to articulate her own thinking. And I need to check whether the Push Session mechanism is still active — if it is, we already have partial integration; if not, it's a gap we need to fill.
+But stepping back to what Andrew actually gave me — he's asking me to react to specific material, not design in the abstract. The key insight is that these aren't conversation summaries at all; they're the prompts that launch conversations, while the actual dialogues stay invisible. What's significant is that the context blocks themselves are Field artifacts containing her original framings. I'm noticing specific thesis-level claims in the Sony framings from 4/2 and 4/13 that don't currently live in her thesis. She's using [[charlie]]'s questions as forcing functions to articulate her own thinking. And I need to check whether the Push Session mechanism is still active — if it is, we already have partial integration; if not, it's a gap we need to fill.
 
 The design direction that makes sense is capturing both the context paragraphs (what she knows going in) and her post-conversation conclusions in the Field, while keeping the conversations themselves with her personal Claude. That's the missing piece. The real question is whether we're trying to build a system that surfaces her synthesis across conversations, or whether we're trying to preserve the thinking artifacts themselves as evidence of how she got there.Important clarification before I go further: these aren't summaries of her conversations with her personal Claude. These are the *prompts she sent into* those conversations. The actual dialogues — what her Claude said back, where she pushed, what she concluded — aren't here. We're seeing the launch pads, not the flights.
 
@@ -1330,15 +1330,15 @@ That matters because it changes what we're looking at. And actually: what we're 
 
 ## What these artifacts actually are
 
-Each prompt has two parts: Charlie's question (copy-pasted from the brief), and a **context block she wrote herself** before sending. That context block is the gold. A few examples of what's actually in there:
+Each prompt has two parts: [[charlie]]'s question (copy-pasted from the brief), and a **context block she wrote herself** before sending. That context block is the gold. A few examples of what's actually in there:
 
-- **4/2 Sony:** "Sony is shifting from studio-as-development-engine to studio-as-financing-and-distribution, and thinning its internal pipeline capacity in the process." That's a thesis-level claim. It doesn't appear anywhere in Charlie's current thesis, which I can see from the readout focuses on creator-to-scripted translation and the three forces. Sony's operational restructuring as a distinct structural pattern is *her* read.
+- **4/2 Sony:** "Sony is shifting from studio-as-development-engine to studio-as-financing-and-distribution, and thinning its internal pipeline capacity in the process." That's a thesis-level claim. It doesn't appear anywhere in [[charlie]]'s current thesis, which I can see from the readout focuses on creator-to-scripted translation and the three forces. Sony's operational restructuring as a distinct structural pattern is *her* read.
 
 - **4/13 Sony:** "What Sony kept is first-look relationships with creator-led scripted producers." Same move — she's doing thesis synthesis in the course of writing a prompt to her personal Claude. The prompt is a side effect; the synthesis is the thing.
 
-- **4/1 Netflix/Audiochuck:** "Each deal buys a pre-sorted audience segment Netflix's algorithm can't efficiently reach." This is the discovery bridge thesis restated in her own vocabulary, applied to a specific deal pattern. Also not something Charlie has articulated this crisply.
+- **4/1 Netflix/Audiochuck:** "Each deal buys a pre-sorted audience segment Netflix's algorithm can't efficiently reach." This is the discovery bridge thesis restated in her own vocabulary, applied to a specific deal pattern. Also not something [[charlie]] has articulated this crisply.
 
-She's using Charlie's questions as forcing functions to write short position papers. The conversations that follow are probably where she stress-tests those positions — but the positions themselves are already fully formed in the prompts.
+She's using [[charlie]]'s questions as forcing functions to write short position papers. The conversations that follow are probably where she stress-tests those positions — but the positions themselves are already fully formed in the prompts.
 
 ## The pattern this reveals
 
@@ -1348,15 +1348,15 @@ If that's right, then integrating The Field isn't about ingesting a separate cor
 
 ## Before I go further — clarifying question
 
-The doc describes a "Brief Companion" that's a local file on her machine with Load / auto-fetch / Push Session / Push to Charlie buttons. Then we also built the Charlie Companion page at `/companion` with tier forms and freeform. Are these two different tools coexisting, or did the Charlie Companion supersede the local Brief Companion?
+The doc describes a "Brief Companion" that's a local file on her machine with Load / auto-fetch / Push Session / Push to [[charlie]] buttons. Then we also built the [[charlie]] Companion page at `/companion` with tier forms and freeform. Are these two different tools coexisting, or did the [[charlie]] Companion supersede the local Brief Companion?
 
-Specifically: when Liz writes one of these context blocks and sends it into her personal Claude, does anything get written back to `sessions.json`? Or is the Charlie Companion the only path into `sessions.json`, and these prompts live entirely in her local tool / her memory / her Claude conversations?
+Specifically: when Liz writes one of these context blocks and sends it into her personal Claude, does anything get written back to `sessions.json`? Or is the [[charlie]] Companion the only path into `sessions.json`, and these prompts live entirely in her local tool / her memory / her Claude conversations?
 
 This matters because the design diverges sharply:
 
 - **If the local Brief Companion is still active**, we already have a write path — we just need to extend what it captures (the context block itself, not just her post-session summary) and make sure Far Mar reads it.
 
-- **If the local tool is deprecated**, then these prompts represent a *lost* capture surface. She's doing exceptional synthesis and it's going into a tool that doesn't connect to Charlie at all. That's a different build — we'd need to create the path from scratch, probably by extending the Charlie Companion with a "context block" capture field
+- **If the local tool is deprecated**, then these prompts represent a *lost* capture surface. She's doing exceptional synthesis and it's going into a tool that doesn't connect to [[charlie]] at all. That's a different build — we'd need to create the path from scratch, probably by extending the [[charlie]] Companion with a "context block" capture field
 
 **human**
 
@@ -1380,25 +1380,25 @@ This is more tractable than I thought five minutes ago. We're not ingesting a me
 
 A few observations from the three dated entries:
 
-**4/1 Netflix/Audiochuck** — the summary extends Charlie's discovery bridge thesis with a specific mechanism (licensing as audience acquisition) and a specific operational consequence (Audiochuck's pricing floor just moved). That's thesis-extension material.
+**4/1 Netflix/Audiochuck** — the summary extends [[charlie]]'s discovery bridge thesis with a specific mechanism (licensing as audience acquisition) and a specific operational consequence (Audiochuck's pricing floor just moved). That's thesis-extension material.
 
-**4/2 Sony** — two summaries same day, one thesis-level (Sony restructuring from development engine to financing/distribution), one tactical (ESPN/NFL consolidation + her slate). The Sony summary is doing work Charlie's current thesis doesn't do.
+**4/2 Sony** — two summaries same day, one thesis-level (Sony restructuring from development engine to financing/distribution), one tactical (ESPN/NFL consolidation + her slate). The Sony summary is doing work [[charlie]]'s current thesis doesn't do.
 
-**4/13 Sony** — direct continuation of the 4/2 Sony frame. She's building an argument across sessions. Charlie has no idea she's doing this.
+**4/13 Sony** — direct continuation of the 4/2 Sony frame. She's building an argument across sessions. [[charlie]] has no idea she's doing this.
 
-The arc from 4/2 to 4/13 is the clearest signal: **she has been developing a coherent thesis-adjacent argument across multiple Field sessions, and Far Mar has no visibility into it.** The Monday synthesis running on 4/13 didn't know she'd been thinking about Sony's structural shift for 11 days. If it had, the proposed thesis update that morning could have engaged with her argument directly — either extending the thesis to absorb it, or flagging where her frame diverges from Charlie's.
+The arc from 4/2 to 4/13 is the clearest signal: **she has been developing a coherent thesis-adjacent argument across multiple Field sessions, and Far Mar has no visibility into it.** The Monday synthesis running on 4/13 didn't know she'd been thinking about Sony's structural shift for 11 days. If it had, the proposed thesis update that morning could have engaged with her argument directly — either extending the thesis to absorb it, or flagging where her frame diverges from [[charlie]]'s.
 
 ## So what's the build
 
 Given the data contract is cleaner than I expected, the integration path simplifies:
 
-**The capture surface** — wherever these summaries currently live (her local tool? a doc? Claude conversation history?), they need to land in a place Charlie can read. This is the question I was trying to get at before. Where do they currently live?
+**The capture surface** — wherever these summaries currently live (her local tool? a doc? Claude conversation history?), they need to land in a place [[charlie]] can read. This is the question I was trying to get at before. Where do they currently live?
 
-**The ingestion path** — a new agent pass, or an extension of thesis.py, that reads Field summaries in the synthesis window. Weekly thesis synthesis currently reads signals + sessions. It should read Field summaries too, probably weighted higher than either — because a Field summary is the *output* of Liz's thinking, not a reaction to Charlie's.
+**The ingestion path** — a new agent pass, or an extension of thesis.py, that reads Field summaries in the synthesis window. Weekly thesis synthesis currently reads signals + sessions. It should read Field summaries too, probably weighted higher than either — because a Field summary is the *output* of Liz's thinking, not a reaction to [[charlie]]'s.
 
-**The storage** — `data/field/` on the volume. Per-summary JSON files with a consistent schema: date, seed_question (which brief question prompted it), context_paragraph, open_question, tags (optional — thesis_force, entities, etc. — could be Charlie-extracted rather than human-tagged).
+**The storage** — `data/field/` on the volume. Per-summary JSON files with a consistent schema: date, seed_question (which brief question prompted it), context_paragraph, open_question, tags (optional — thesis_force, entities, etc. — could be [[charlie]]-extracted rather than human-tagged).
 
-**The surface back to her** — a Field page in Charlie showing her accumulated summaries, indexed, prob
+**The surface back to her** — a Field page in [[charlie]] showing her accumulated summaries, indexed, prob
 
 **human**
 
@@ -1423,27 +1423,27 @@ This block is not supported on your current device yet.
 
  I'm realizing this is a substantial independent research project—Liz conducted a multi-week analysis of 129 streaming shows over 6 years and compiled both a comprehensive strategic report and a detailed spreadsheet database, which is quite different from typical conversation outputs or working notes.
 
-What's striking is that she's developed entirely original analytical frameworks—the psychographic segments taxonomy, multi-entry-point principle, representation-revenue equation, and the time-limited 55+ opportunity thesis—none of which overlap with Charlie's supply/demand/discovery framework. She's essentially pursuing parallel thesis work on audience coalitions and activation, which is a genuinely distinct angle on industry restructuring.
+What's striking is that she's developed entirely original analytical frameworks—the psychographic segments taxonomy, multi-entry-point principle, representation-revenue equation, and the time-limited 55+ opportunity thesis—none of which overlap with [[charlie]]'s supply/demand/discovery framework. She's essentially pursuing parallel thesis work on audience coalitions and activation, which is a genuinely distinct angle on industry restructuring.
 
 This fundamentally changes how I'm thinking about the Field's output structure. It's not just conversation summaries—there are at least two distinct categories: short-form dated summaries tagged by brief questions, and long-form independent research reports with original frameworks and supporting databases.
 
 The architectural difference is massive: summaries are dense snapshots produced daily that feed directly into thesis work, while reports are multi-week efforts with different persistence, ingestion patterns, and update cadences that could either inform or compete with existing thesis work. The Field isn't a single pipeline—it's a heterogeneous corpus of Liz's thinking across multiple formats and production rhythms, each with different roles relative to the thesis.
 
-The critical issue is that Liz is doing original thesis-level work in formats Charlie can't access and at depths Charlie can't produce. If synthesis ran tomorrow, Charlie would propose updates based on sessions and ingestion while Liz has a detailed 20-page analysis of audience coalitions sitting unintegrated—meaning the thesis would evolve without awareness of analytical work Liz has already completed on the same problems. Before designing any pipeline, I need to understand what other formats exist in The Field, since the user indicated there's more to discover.
+The critical issue is that Liz is doing original thesis-level work in formats [[charlie]] can't access and at depths [[charlie]] can't produce. If synthesis ran tomorrow, [[charlie]] would propose updates based on sessions and ingestion while Liz has a detailed 20-page analysis of audience coalitions sitting unintegrated—meaning the thesis would evolve without awareness of analytical work Liz has already completed on the same problems. Before designing any pipeline, I need to understand what other formats exist in The Field, since the user indicated there's more to discover.
 
-The deeper architectural question is whether the audience equation report—with its original frameworks like the seven segments and multi-entry-point principle—should feed into Far Mar as input data, or whether Far Mar is actually downstream of The Field entirely. If Liz's thinking constitutes the thesis itself, then Charlie's synthesis should be reconciling and extending her work rather than running as an independent process. This matters because the current memory principle treats Liz's work as input rather than as authoritative thesis work.
+The deeper architectural question is whether the audience equation report—with its original frameworks like the seven segments and multi-entry-point principle—should feed into Far Mar as input data, or whether Far Mar is actually downstream of The Field entirely. If Liz's thinking constitutes the thesis itself, then [[charlie]]'s synthesis should be reconciling and extending her work rather than running as an independent process. This matters because the current memory principle treats Liz's work as input rather than as authoritative thesis work.
 
-Different content types require different handling: reports stay in a reference library and get pulled in on demand, summaries are short enough to load wholesale into synthesis, the spreadsheet is structured and queryable for fact-lookup, and there's likely more we haven't seen yet. What's interesting is that Liz's multi-entry-point principle—the insight that cultural saturation requires activating multiple psychographic segments simultaneously—actually connects to Charlie's discovery bridge thesis about creator brands as infrastructure.
+Different content types require different handling: reports stay in a reference library and get pulled in on demand, summaries are short enough to load wholesale into synthesis, the spreadsheet is structured and queryable for fact-lookup, and there's likely more we haven't seen yet. What's interesting is that Liz's multi-entry-point principle—the insight that cultural saturation requires activating multiple psychographic segments simultaneously—actually connects to [[charlie]]'s discovery bridge thesis about creator brands as infrastructure.
 
-The connection is that creator-branded content might work precisely because it reaches specific psychographic segments (zeitgeist creators, fandom communities) that pure algorithmic discovery can't reliably activate. But there's also a quality gap I need to reckon with: Liz's audience equation report is polished, cited, and structured in a way Charlie's thesis output doesn't match. If I'm going to integrate these two bodies of work, I need to be honest about whether they're operating at the same register right now—they're not. So the question becomes how to acknowledge this scale shift and the fact that what I'm working with now is fundamentally different from the conversation summaries I was looking at earlier.
+The connection is that creator-branded content might work precisely because it reaches specific psychographic segments (zeitgeist creators, fandom communities) that pure algorithmic discovery can't reliably activate. But there's also a quality gap I need to reckon with: Liz's audience equation report is polished, cited, and structured in a way [[charlie]]'s thesis output doesn't match. If I'm going to integrate these two bodies of work, I need to be honest about whether they're operating at the same register right now—they're not. So the question becomes how to acknowledge this scale shift and the fact that what I'm working with now is fundamentally different from the conversation summaries I was looking at earlier.
 
-Rather than just asking how to ingest Field into Far Mar, I should first understand what's actually in the Field corpus and what the relationship is between Liz's authored thesis work and Charlie's synthesized work. There's also a structural question lurking underneath: is Far Mar downstream of The Field, or are they parallel systems? Because the audience equation report isn't just input to synthesis—it's thesis-caliber work itself. I should keep this focused and not sprawl into a full architecture document yet.
+Rather than just asking how to ingest Field into Far Mar, I should first understand what's actually in the Field corpus and what the relationship is between Liz's authored thesis work and [[charlie]]'s synthesized work. There's also a structural question lurking underneath: is Far Mar downstream of The Field, or are they parallel systems? Because the audience equation report isn't just input to synthesis—it's thesis-caliber work itself. I should keep this focused and not sprawl into a full architecture document yet.
 
 I also need to own that I was wrong about the Field's scope in my previous response. I claimed it had a specific unit of output and I should acknowledge that mistake rather than pretending I saw this coming.Okay. That recalibrates everything I said a turn ago.
 
 "The Field has a unit of output: the conversation summary" was wrong, or at best half-right. What I was looking at were *one* kind of Field artifact. This is a completely different kind — a 20-page strategic research report with a 6-sheet underlying database covering 129 shows across 24 quarters. Multiple weeks of analytical work. Original frameworks she derived from the data (seven psychographic segments, the multi-entry-point principle, the representation-revenue equation, the 55+ time-limited opportunity thesis). Polished, cited, structured like something she'd send to a buyer.
 
-None of this is in Charlie's thesis. Charlie's thesis is structured around supply exhaustion, demand migration, and discovery bridge — production-side forces. Liz has been doing parallel thesis work on the **audience side** — specifically, which coalitions reliably produce hits, which are underserved, and how cultural saturation actually gets achieved. That's thesis-adjacent but a genuinely different register of the same problem.
+None of this is in [[charlie]]'s thesis. [[charlie]]'s thesis is structured around supply exhaustion, demand migration, and discovery bridge — production-side forces. Liz has been doing parallel thesis work on the **audience side** — specifically, which coalitions reliably produce hits, which are underserved, and how cultural saturation actually gets achieved. That's thesis-adjacent but a genuinely different register of the same problem.
 
 ## The real architectural problem
 
@@ -1457,13 +1457,13 @@ And probably more formats neither of us has enumerated yet. You said "it gets me
 
 ## The deeper question this surfaces
 
-Here's what's really bothering me about the audience equation report: **it's thesis-caliber work**, not input-to-thesis work. Liz produced original frameworks at roughly the resolution Charlie's thesis operates at. "The multi-entry-point principle" isn't a data point — it's a claim about how the industry works, derived from systematic evidence, that belongs in a thesis document.
+Here's what's really bothering me about the audience equation report: **it's thesis-caliber work**, not input-to-thesis work. Liz produced original frameworks at roughly the resolution [[charlie]]'s thesis operates at. "The multi-entry-point principle" isn't a data point — it's a claim about how the industry works, derived from systematic evidence, that belongs in a thesis document.
 
-Which means the current architecture has the relationship backwards. Charlie's thesis synthesizer reads signals and proposes updates to Charlie's thesis. Liz's Field work is... what, exactly? Input to Charlie's synthesis? That framing demotes her work. She's not feeding data to the thesis engine. She's writing thesis alongside it.
+Which means the current architecture has the relationship backwards. [[charlie]]'s thesis synthesizer reads signals and proposes updates to [[charlie]]'s thesis. Liz's Field work is... what, exactly? Input to [[charlie]]'s synthesis? That framing demotes her work. She's not feeding data to the thesis engine. She's writing thesis alongside it.
 
-A cleaner framing might be: **Liz is the primary author of the thesis. Charlie's synthesizer is a collaborator that proposes extensions and challenges against what she's written.** Right now Charlie's synthesizer doesn't know that and treats its own proposals as the authoritative starting point, with Liz's input as reactive signal. The architecture implicitly treats Charlie's thinking as the center of gravity. Looking at this audience research, that's wrong — her work is denser, more specific, more rigorously sourced than Charlie's current thesis, and it's orthogonal in scope rather than subordinate.
+A cleaner framing might be: **Liz is the primary author of the thesis. [[charlie]]'s synthesizer is a collaborator that proposes extensions and challenges against what she's written.** Right now [[charlie]]'s synthesizer doesn't know that and treats its own proposals as the authoritative starting point, with Liz's input as reactive signal. The architecture implicitly treats [[charlie]]'s thinking as the center of gravity. Looking at this audience research, that's wrong — her work is denser, more specific, more rigorously sourced than [[charlie]]'s current thesis, and it's orthogonal in scope rather than subordinate.
 
-If Far Mar is the thesis, then the thesis should be a **merge** of her authored work and Charlie's synthesized extensions, not a document Charlie writes with some session flavor injected. That's a meaningful architectural reframe.
+If Far Mar is the thesis, then the thesis should be a **merge** of her authored work and [[charlie]]'s synthesized extensions, not a document [[charlie]] writes with some session flavor injected. That's a meaningful architectural reframe.
 
 ## What would change about the build
 
@@ -1471,7 +1471,7 @@ Three things, if I'm right about the above:
 
 First, **a Field intake that's format-aware**. Summaries and reports need different ingestion. I'd want to scope that based on a full inventory of what she's actually producing — which I don't have yet. What else is there? Memos? Slide decks? Annotated articles? Email threads? Notion pages? The answer to that determines whether this is three pipelines or seven.
 
-Second, **a thesis structure that can hold authored content and synthesized content as peers**. Currently the thesis is a single document with claims, evidence, and versioning. What it needs is a way to mark which claims are Liz-authored versus Charlie-synthesized — because the review workflow for those is different. Charlie proposes updates to its own synthesized claims; it should propose *engagements* with her authored claims (extensions, challenges, connections to signals) but shouldn't be able to rewrite her work.
+Second, **a thesis structure that can hold authored content and synthesized content as peers**. Currently the thesis is a single document with claims, evidence, and versioning. What it needs is a way to mark which claims are Liz-authored versus [[charlie]]-synthesized — because the review workflow for those is different. [[charlie]] proposes updates to its own synthesized claims; it should propose *engagements* with her authored claims (extensions, challenges, connections to signals) but shouldn't be able to rewrite her work.
 
 Third, **retrieval, not just ingestion**, for long-form Field work. The audience equation report is too big to load wholesale into a synthesis prompt. It needs to live as a queryable reference — possibly chunked and indexed, possibly with a summary layer that gets loaded by default and full-text that gets pulled on demand when the synthesizer references specific frameworks. The spreadsheet (her show-level database) is a different retrieval pattern — structured, queryable, feeding specific factual lookups rather than framework-level reference.
 
@@ -1491,13 +1491,13 @@ messier in terms of across different file formats.
 
 **assistant**
 
-So the real issue isn't the variety of formats themselves—it's that she's producing substantial work across documents, spreadsheets, PDFs, presentations, and various other file types, which makes it harder to track and organize everything in one place. The challenge is manageable once I understand it's fundamentally a file format fragmentation problem rather than an overwhelming volume or scope issue. The real constraint is figuring out where these files actually live and how Liz gets them to Charlie—whether that's a watched folder, Google Drive integration, or something else entirely. That's the practical question that shapes the whole intake architecture.
+So the real issue isn't the variety of formats themselves—it's that she's producing substantial work across documents, spreadsheets, PDFs, presentations, and various other file types, which makes it harder to track and organize everything in one place. The challenge is manageable once I understand it's fundamentally a file format fragmentation problem rather than an overwhelming volume or scope issue. The real constraint is figuring out where these files actually live and how Liz gets them to [[charlie]]—whether that's a watched folder, Google Drive integration, or something else entirely. That's the practical question that shapes the whole intake architecture.
 
-For Liz's workflow to be frictionless, the solution needs to be low-effort on her end while still handling whatever format variety she throws at it, and the extracted content has to be structured enough that Charlie can actually work with it. A Google Drive folder makes sense since the MCP connector is already available—Liz drops files there, Charlie reads them on demand, and everything gets normalized to JSON with references back to the originals.
+For Liz's workflow to be frictionless, the solution needs to be low-effort on her end while still handling whatever format variety she throws at it, and the extracted content has to be structured enough that [[charlie]] can actually work with it. A Google Drive folder makes sense since the MCP connector is already available—Liz drops files there, [[charlie]] reads them on demand, and everything gets normalized to JSON with references back to the originals.
 
 Now I'm thinking through the extraction strategy for each format: docx parsing preserves paragraphs and tables with style metadata, xlsx pulls sheet structure and row data, PDFs need text extraction with fallback OCR for scanned documents, and presentations extract slide content.
 
-For scope, I'd focus on docx, xlsx, pdf, pptx, markdown, and plain text—that covers the vast majority of what she's likely producing. Rather than re-extracting on every synthesis, I should normalize once and store the structured version, since format parsing is expensive and the output doesn't change. The normalized JSON should include the source file reference, extraction timestamp, format type, any derivable title, sectioned content with headings, tables if present, full text, and metadata like word count or page count. Now I'm working through how Charlie actually selects which normalized files to use during synthesis. ose what to load vs. reference?
+For scope, I'd focus on docx, xlsx, pdf, pptx, markdown, and plain text—that covers the vast majority of what she's likely producing. Rather than re-extracting on every synthesis, I should normalize once and store the structured version, since format parsing is expensive and the output doesn't change. The normalized JSON should include the source file reference, extraction timestamp, format type, any derivable title, sectioned content with headings, tables if present, full text, and metadata like word count or page count. Now I'm working through how [[charlie]] actually selects which normalized files to use during synthesis. ose what to load vs. reference?
    - For each piece of Field work, generate a Claude-written summary at ingest time. The summary loads into synthesis prompts by default. Full text loads on demand when the synthesizer flags "I need to see the full X report to engage with this framework."
 
 This is starting to get into the classic RAG/retrieval territory but it's simpler because the corpus is small and bounded (Liz's own output, not the whole internet).
@@ -1513,17 +1513,17 @@ I should keep this tight. The user is moving fast and wants practical answers, n
 
 For context on what that probably means in practice: she's likely producing work in some subset of docx, xlsx, pdf, pptx, md/txt, and possibly Google Docs/Sheets/Slides. Each has a mature Python extraction library (python-docx, openpyxl, pdfplumber, python-pptx). Extraction is deterministic and cheap enough to run once per file and cache. The output of extraction is a normalized JSON per Field artifact — title, sections, tables, full text, source file reference, extracted timestamp — stored in `data/field/` on the volume alongside the original file.
 
-That normalized layer is what Charlie reads, not the raw files. It also gives you a clean separation: format extraction is a pipeline concern, thesis synthesis is a content concern, and neither agent has to know about the other's problems.
+That normalized layer is what [[charlie]] reads, not the raw files. It also gives you a clean separation: format extraction is a pipeline concern, thesis synthesis is a content concern, and neither agent has to know about the other's problems.
 
-The harder question — and the one I actually need you to answer before I sketch the intake — isn't format. It's **where the files live and how they get to Charlie**. Candidates:
+The harder question — and the one I actually need you to answer before I sketch the intake — isn't format. It's **where the files live and how they get to [[charlie]]**. Candidates:
 
-**A designated Google Drive folder.** You already have the Google Drive MCP connector. Liz drops work into "Field" in her Drive, Charlie reads it on a poll or on-demand. Zero-friction for Liz (she's already using Drive), no upload UI to build. This is the obvious default unless something disqualifies it.
+**A designated Google Drive folder.** You already have the Google Drive MCP connector. Liz drops work into "Field" in her Drive, [[charlie]] reads it on a poll or on-demand. Zero-friction for Liz (she's already using Drive), no upload UI to build. This is the obvious default unless something disqualifies it.
 
 **A filesystem sync on her Mac.** More fragile, requires a sync tool, but zero cloud dependency.
 
 **An upload surface in the Flask app.** Would mean building a Field page with upload + tagging. More engineering, but gives you a moment of intake where Liz can annotate ("this is a major research report" vs. "this is a quick memo") which helps downstream triage.
 
-**Email intake.** She forwards work to a dedicated address, Charlie parses attachments. Low-friction for capture but messy for structure.
+**Email intake.** She forwards work to a dedicated address, [[charlie]] parses attachments. Low-friction for capture but messy for structure.
 
 My strong lean is Google Drive, *unless* she'd value the upload-time annotation step enough to make the Flask surface worthwhile. The annotation question matters because the extraction layer can pull out title/sections/tables but it can't know whether something is a thesis-caliber research report or a quick draft memo — and those deserve different treatment in synthesis. Liz could flag that on upload in roughly two seconds per file. Whether she will, reliably, is a question only you can answer.
 
@@ -1537,9 +1537,9 @@ no absolutely not a google drive. She can upload to the flask app if she wants t
 
 You're right. Stop me when I do that again — I was sliding back into "build the feature around Liz" and you've been holding the line on that from the start. Good catch.
 
-That reframes the build significantly. "It needs to feel nice" isn't aesthetic — it's structural. Charlie needs to be a tool that works for Liz without being shaped around Liz, and the Field intake is exactly the surface where that distinction gets tested. A Drive integration named after her folder scheme, watching her file patterns, learning her tagging conventions — that's a tool that is a projection of her. A generic upload surface that accepts files, normalizes them, and treats them as Field artifacts regardless of who uploaded them is a tool that happens to be used by her.
+That reframes the build significantly. "It needs to feel nice" isn't aesthetic — it's structural. [[charlie]] needs to be a tool that works for Liz without being shaped around Liz, and the Field intake is exactly the surface where that distinction gets tested. A Drive integration named after her folder scheme, watching her file patterns, learning her tagging conventions — that's a tool that is a projection of her. A generic upload surface that accepts files, normalizes them, and treats them as Field artifacts regardless of who uploaded them is a tool that happens to be used by her.
 
-The difference matters beyond this feature. If you ever want Charlie to be something a second user could touch — another executive, a collaborator, a version you point at your own work — everything personal that gets wired in now is a migration cost later. And more importantly: the more Charlie is bespoke to Liz, the more Liz's thinking colonizes every corner of the system, which is the filter bubble problem in a different guise. The Field work itself is hers; the *intake* shouldn't be.
+The difference matters beyond this feature. If you ever want [[charlie]] to be something a second user could touch — another executive, a collaborator, a version you point at your own work — everything personal that gets wired in now is a migration cost later. And more importantly: the more [[charlie]] is bespoke to Liz, the more Liz's thinking colonizes every corner of the system, which is the filter bubble problem in a different guise. The Field work itself is hers; the *intake* shouldn't be.
 
 ## What that means for the build
 
@@ -1575,9 +1575,9 @@ there is already a brain dump field in Companion (at the bottom). With that said
 
 You're right — the brain dump field already exists for something, and that something is closer to the conversation-summary artifacts I saw earlier than to the audience equation report. So the corpus actually splits along a line that matches the two surfaces:
 
-**Brain dump in Companion** → captures the conversation-summary register. Short, reactive, tied to a day and a brief. Already wired. Already flowing into sessions.json. Already feeding analysis at the prompt-injection layer. This is the "she's thinking *with* Charlie" surface.
+**Brain dump in Companion** → captures the conversation-summary register. Short, reactive, tied to a day and a brief. Already wired. Already flowing into sessions.json. Already feeding analysis at the prompt-injection layer. This is the "she's thinking *with* [[charlie]]" surface.
 
-**Field page (new)** → captures the research-report register. Long-form, independent, produced on her own cadence, not tied to a specific day's brief. This is the "she's thinking *on her own*, and Charlie should be able to read it" surface.
+**Field page (new)** → captures the research-report register. Long-form, independent, produced on her own cadence, not tied to a specific day's brief. This is the "she's thinking *on her own*, and [[charlie]] should be able to read it" surface.
 
 The distinction is author-intent-at-time-of-writing, not format. A 200-word brain dump written while reading the morning brief is reactive, even if it touches on thesis-level ideas. A 20-page research report written over three weeks is authored work, even if it cites specific briefs. The cadence and the register of thinking are fundamentally different, and trying to route both through one surface would flatten a distinction that's actually load-bearing.
 
@@ -1634,9 +1634,9 @@ I need to reconsider what the user actually meant. They're saying "The Book" is 
 
 The app has The Brief, Living Thesis, Book Project at `/book`, and Archive. The route shows this is "The Field" now, and it's tied to Liz's commercial book project with advance offers. But here's the thing — I never actually saw what content lives on that page. I know the route exists and what it's conceptually about, but I've been designing a Field page as if it's brand new when it's really an existing page that just needs a visual refresh and better connections to the other sections.
 
-The user caught me designing greenfield when I should be refactoring what's already there. I need to ask what's currently on The Book page so I can actually understand what we're working with, then design the rename and restructure from that foundation rather than proposing something disconnected from the existing content. I'm realizing I need to see what's actually on The Book page right now before I can propose how to restructure it — the readout only told me the route exists, not what's there. Rather than search through project knowledge hoping to find it, I should just ask directly what sections and data sources are currently there, what the vision for the facelift is, and how "connective to Loaf and Far Mar" translates into concrete changes.Fair hit. I should have been working from the existing Book page rather than designing a Field page from scratch. It's in the readout — `/book → book project page (The Field)` — and memory flagged the book project as "directly tied to Charlie's thesis research infrastructure." I had the pieces and missed the obvious architectural move, which is: this page already exists, it's already conceptually adjacent to the thesis, and we're refactoring it, not building it.
+The user caught me designing greenfield when I should be refactoring what's already there. I need to ask what's currently on The Book page so I can actually understand what we're working with, then design the rename and restructure from that foundation rather than proposing something disconnected from the existing content. I'm realizing I need to see what's actually on The Book page right now before I can propose how to restructure it — the readout only told me the route exists, not what's there. Rather than search through project knowledge hoping to find it, I should just ask directly what sections and data sources are currently there, what the vision for the facelift is, and how "connective to Loaf and Far Mar" translates into concrete changes.Fair hit. I should have been working from the existing Book page rather than designing a Field page from scratch. It's in the readout — `/book → book project page (The Field)` — and memory flagged the book project as "directly tied to [[charlie]]'s thesis research infrastructure." I had the pieces and missed the obvious architectural move, which is: this page already exists, it's already conceptually adjacent to the thesis, and we're refactoring it, not building it.
 
-That also sharpens the whole thing. The Book isn't a parallel surface to Far Mar — it's arguably the *destination* for Far Mar's thinking. The thesis is the argument; the book is where the argument gets written into something publishable. Liz's Field Work (audience equation research, etc.) is research for the book, which is also research for the thesis, which is also research Charlie uses in daily signal interpretation. The three surfaces are three registers of one intellectual project. Refactoring The Book into The Field isn't cosmetic — it's acknowledging that the book page is where her authored thinking lives, and adding Field Work uploads makes it a proper home for the corpus, not just a project tracker.
+That also sharpens the whole thing. The Book isn't a parallel surface to Far Mar — it's arguably the *destination* for Far Mar's thinking. The thesis is the argument; the book is where the argument gets written into something publishable. Liz's Field Work (audience equation research, etc.) is research for the book, which is also research for the thesis, which is also research [[charlie]] uses in daily signal interpretation. The three surfaces are three registers of one intellectual project. Refactoring The Book into The Field isn't cosmetic — it's acknowledging that the book page is where her authored thinking lives, and adding Field Work uploads makes it a proper home for the corpus, not just a project tracker.
 
 What I don't have is the detail I need to propose the refactor cleanly. The readout told me the route exists but didn't describe what's currently on the page — what sections, what data it pulls, what it's for right now in its pre-facelift state. Before I draft a refactor plan, can you give me the current shape? Roughly: what does Liz see when she lands on `/book` today, what's the data model behind it, and what's the gap between that and what the refactored Field page should be?
 
@@ -1662,7 +1662,7 @@ Bidirectional content flow across Loaf / Far Mar / The Field. Let me actually de
 
 Three surfaces, each aware of and shaped by the other two:
 
-**The Field → Far Mar.** Thesis synthesis reads Field artifacts as authored input. When it generates proposed claims, it cites Field material the way it cites signals. When Liz's Field Work makes a claim that extends or contradicts the current thesis, the next synthesis cycle surfaces that contradiction explicitly — proposing to revise the thesis to absorb her framework, or flagging where Charlie's synthesized thesis diverges from her authored one. The thesis document itself starts carrying dual authorship markers: which claims originated with Charlie's synthesis, which with Liz's Field Work, which are consensus between them.
+**The Field → Far Mar.** Thesis synthesis reads Field artifacts as authored input. When it generates proposed claims, it cites Field material the way it cites signals. When Liz's Field Work makes a claim that extends or contradicts the current thesis, the next synthesis cycle surfaces that contradiction explicitly — proposing to revise the thesis to absorb her framework, or flagging where [[charlie]]'s synthesized thesis diverges from her authored one. The thesis document itself starts carrying dual authorship markers: which claims originated with [[charlie]]'s synthesis, which with Liz's Field Work, which are consensus between them.
 
 **Far Mar → The Field.** The Field page shows, for each artifact, which thesis claims it supports, extends, or challenges. Not as external metadata — as live links into the current thesis. When a thesis update publishes that cites a Field artifact, the artifact's page shows "cited in thesis v14, claim 3." If a Field artifact's framework gets absorbed into the thesis as a canonical claim, the artifact is marked as "incorporated" and Liz can see the lineage from her original research to the thesis that now holds it.
 
@@ -1678,7 +1678,7 @@ Four things, underneath the UI.
 
 **A claims-to-content graph.** Every thesis claim has pointers to the content supporting it — signals, Field artifacts, Liz's sessions. Every piece of content has pointers to the claims it supports. This is a bidirectional graph, persisted, queryable. It's what lets you render "this brief touches your audience equation research" and "this Field artifact is cited in thesis v14, claim 3" without running a full-text search every page load.
 
-**Authorship tracking on the thesis.** Currently the thesis has claims with evidence. It needs to carry authorship metadata — Charlie-synthesized, Liz-authored (with pointer to the Field artifact), or consensus (originally proposed by one, engaged and extended by the other). The review workflow changes: Charlie can propose extensions to Liz-authored claims but can't rewrite them. Liz can revise her authored claims via new Field artifacts that supersede old ones. The thesis becomes a merged document with visible lineage.
+**Authorship tracking on the thesis.** Currently the thesis has claims with evidence. It needs to carry authorship metadata — [[charlie]]-synthesized, Liz-authored (with pointer to the Field artifact), or consensus (originally proposed by one, engaged and extended by the other). The review workflow changes: [[charlie]] can propose extensions to Liz-authored claims but can't rewrite them. Liz can revise her authored claims via new Field artifacts that supersede old ones. The thesis becomes a merged document with visible lineage.
 
 **Retrieval infrastructure for long-form Field work.** Research reports can't load wholesale into every synthesis prompt. They need chunking with a summary layer that loads by default and chunk-level retrieval that pulls on demand when synthesis references specific frameworks. This is real engineering — not trivial, not a weekend build — but it's the foundation that makes Field work useful to thesis synthesis rather than decorative.
 
@@ -1689,10 +1689,10 @@ With that infrastructure, the refactored Book → Field page is substantive:
 - Field Work upload surface (your explicit ask, now anchored)
 - Book project sections (whatever's there now, retained but integrated)
 - For each artifact: full text, extracted structure, plus — this is the new part — a live panel showing which thesis claims it touches, which recent signals engaged with it, which tier entries cited it
-- A reverse surface: "What's been drawing on this lately?" showing the flow of Charlie's attention toward her work
-- A cross-link surface from the Field page index: "Thesis claims currently open for Field Work input" — showing which parts of the thesis Charlie thinks would benefit from her direct authorship
+- A reverse surface: "What's been drawing on this lately?" showing the flow of [[charlie]]'s attention toward her work
+- A cross-link surface from the Field page index: "Thesis claims currently open for Field Work input" — showing which parts of the thesis [[charlie]] thinks would benefit from her direct authorship
 
-That last one is interesting and worth holding on to. It turns the Field from a passive repository into a surface where Charlie can ask for her thinking on specific open questions in the thesis. Inverts the current dynamic where she reacts to Charlie's framings — Charlie asks her for framings on things it can't resolve alone.
+That last one is interesting and worth holding on to. It turns the Field from a passive repository into a surface where [[charlie]] can ask for her thinking on specific open questions in the thesis. Inverts the current dynamic where she reacts to [[charlie]]'s framings — [[charlie]] asks her for framings on things it can't resolve alone.
 
 ## The sequencing problem
 
@@ -1712,9 +1712,9 @@ Phases 3 and 4 can overlap. Phases 1 and 2 need to come first and cannot.
 
 Two things, not as reasons to scope down, but as things you should decide before we build rather than discover during:
 
-**The thesis becomes a co-authored document.** Once Liz's Field Work is cited as authoritative input — not just data for Charlie to synthesize — the thesis stops being "Charlie's living document that Liz reviews." It becomes "a merged thesis with two authors." That's a real change to the editorial model. The review workflow I helped design earlier (annotate, refine, publish) assumes Charlie proposes and you decide. When Liz's Field Work is in the document, her work is *already published* — she published it when she finished the research. Charlie's role shifts from proposer to interlocutor. Worth thinking through what "publish" means when half the content being published is already hers.
+**The thesis becomes a co-authored document.** Once Liz's Field Work is cited as authoritative input — not just data for [[charlie]] to synthesize — the thesis stops being "[[charlie]]'s living document that Liz reviews." It becomes "a merged thesis with two authors." That's a real change to the editorial model. The review workflow I helped design earlier (annotate, refine, publish) assumes [[charlie]] proposes and you decide. When Liz's Field Work is in the document, her work is *already published* — she published it when she finished the research. [[charlie]]'s role shifts from proposer to interlocutor. Worth thinking through what "publish" means when half the content being published is already hers.
 
-**The filter bubble concern gets more complicated, not simpler.** Earlier in this conversation I was holding a strict line on Liz's work not flowing into Charlie's scoring or ingestion. Field Work is now going to flow into thesis synthesis, which already influences signal scoring via the thesis-to-brief direction. That's the intended architecture and I'm not arguing against it, but worth naming: the tool is becoming more shaped by her thinking, deliberately. The drift concern doesn't go away, it gets more acute, and the adversary we just built becomes more important as the counterweight. Probably worth a pass on the adversary's prompt after Phase 3 lands — it should know to specifically red-team where Charlie's thesis is leaning too heavily on Liz's framings without independent evidence.
+**The filter bubble concern gets more complicated, not simpler.** Earlier in this conversation I was holding a strict line on Liz's work not flowing into [[charlie]]'s scoring or ingestion. Field Work is now going to flow into thesis synthesis, which already influences signal scoring via the thesis-to-brief direction. That's the intended architecture and I'm not arguing against it, but worth naming: the tool is becoming more shaped by her thinking, deliberately. The drift concern doesn't go away, it gets more acute, and the adversary we just built becomes more important as the counterweight. Probably worth a pass on the adversary's prompt after Phase 3 lands — it should know to specifically red-team where [[charlie]]'s thesis is leaning too heavily on Liz's framings without independent evidence.
 
 ---
 
@@ -1746,7 +1746,7 @@ If fresh: Phase 1 ships clean, but the current thesis, all past signals, all pas
 
 **3. Authorship model: can thesis claims be genuinely co-authored, or is each claim single-authored with "extended by" markers?**
 
-Option A: each claim has one `author` field (charlie-synthesized / liz-authored / consensus) and an `extensions` array capturing engagement. Cleaner data model, clearer editorial rules — Charlie can propose extensions to Liz-authored claims but can't rewrite them, and vice versa. Option B: claims can have multiple authors at the sub-claim level, with paragraph-level attribution. More faithful to how co-authored documents actually work, but substantially more complex to render, refine, and publish. My lean: Option A. The cleaner editorial rules matter more than representational fidelity, and Option B creates thorny cases for the thesis review workflow we just built.
+Option A: each claim has one `author` field ([[charlie]]-synthesized / liz-authored / consensus) and an `extensions` array capturing engagement. Cleaner data model, clearer editorial rules — [[charlie]] can propose extensions to Liz-authored claims but can't rewrite them, and vice versa. Option B: claims can have multiple authors at the sub-claim level, with paragraph-level attribution. More faithful to how co-authored documents actually work, but substantially more complex to render, refine, and publish. My lean: Option A. The cleaner editorial rules matter more than representational fidelity, and Option B creates thorny cases for the thesis review workflow we just built.
 
 ---
 
@@ -1770,53 +1770,53 @@ What you're naming is that the existing data flow has a shape, and The Field is 
 - Semi-structured qualitative (tier question responses in Companion) → injects into analysis
 - Unstructured qualitative (brain dump in Companion) → injects into analysis with category-extraction instruction
 
-All three are **fine-grained, daily-cadence, reactive** — Liz engages with what Charlie produced and her engagement flows back. The loop is tight because it's daily, the surface is narrow because it's tied to specific brief output, and the injection points are specific because the artifacts being reacted to are specific.
+All three are **fine-grained, daily-cadence, reactive** — Liz engages with what [[charlie]] produced and her engagement flows back. The loop is tight because it's daily, the surface is narrow because it's tied to specific brief output, and the injection points are specific because the artifacts being reacted to are specific.
 
 **The Field has neither end of that loop:**
 
-1. **No inbound port.** Liz has nowhere to submit Field material. The audience equation report lives in a folder on her machine. Charlie cannot read it. There is no surface where she could hand it over even if she wanted to.
+1. **No inbound port.** Liz has nowhere to submit Field material. The audience equation report lives in a folder on her machine. [[charlie]] cannot read it. There is no surface where she could hand it over even if she wanted to.
 
-2. **No outbound feedback.** Even if Field material did reach Charlie, there's no established place for it to inject into the pipeline. The three existing injection points (ingestion structuring, analysis prompts, nothing into brief generation) are all tuned to fine-grained daily signal. Field work is none of those things — it's long-form, slow-cadence, authored rather than reactive.
+2. **No outbound feedback.** Even if Field material did reach [[charlie]], there's no established place for it to inject into the pipeline. The three existing injection points (ingestion structuring, analysis prompts, nothing into brief generation) are all tuned to fine-grained daily signal. Field work is none of those things — it's long-form, slow-cadence, authored rather than reactive.
 
 The failure isn't that we haven't built a Field page. It's that **we haven't figured out what kind of data Field work is, and where in the pipeline it belongs, before trying to build the surface for it**.
 
 ## What that reframe surfaces
 
-The three existing loops share a property: the user data is *reactive to Charlie's output*. Ratings react to signals. Tier responses react to questions. Brain dumps react to the brief as a whole. Every inbound data type is downstream of something Charlie produced.
+The three existing loops share a property: the user data is *reactive to [[charlie]]'s output*. Ratings react to signals. Tier responses react to questions. Brain dumps react to the brief as a whole. Every inbound data type is downstream of something [[charlie]] produced.
 
-Field work is structurally different. It's *upstream* of Charlie's output, or at least parallel to it. Liz's audience equation research wasn't written in response to a brief. It was written because she was thinking about her industry and the thinking accumulated into something. Charlie didn't prompt it. Charlie didn't shape it.
+Field work is structurally different. It's *upstream* of [[charlie]]'s output, or at least parallel to it. Liz's audience equation research wasn't written in response to a brief. It was written because she was thinking about her industry and the thinking accumulated into something. [[charlie]] didn't prompt it. [[charlie]] didn't shape it.
 
 That's a fourth category of user data that the current architecture has no concept of: **user-originated authored content, produced independently of the pipeline**.
 
-The three existing categories all have a natural injection point because they're tied to a specific Charlie artifact (signal, question, brief). Field work doesn't have that tie. So when I was sketching "Field artifacts feed thesis synthesis," I was reaching for the only injection point that seemed to match — Far Mar runs weekly, Field work is slow, slot it in there. That's not wrong but it's not the full answer, because it treats Field work like another reactive data type that happens to run on a longer cadence. It isn't. It's a different thing.
+The three existing categories all have a natural injection point because they're tied to a specific [[charlie]] artifact (signal, question, brief). Field work doesn't have that tie. So when I was sketching "Field artifacts feed thesis synthesis," I was reaching for the only injection point that seemed to match — Far Mar runs weekly, Field work is slow, slot it in there. That's not wrong but it's not the full answer, because it treats Field work like another reactive data type that happens to run on a longer cadence. It isn't. It's a different thing.
 
 ## The shape of the actual problem
 
 If I'm right about the above, then the Field build isn't just "intake + retrieval into thesis." It's establishing an injection model for user-authored content that doesn't exist yet. Two questions that flow from that:
 
-**What does Charlie do with authored content that isn't tied to any specific Charlie artifact?** The three existing injections all bind to Charlie's output — "here's Liz's rating of the signal you produced," "here's Liz's response to the question you asked." Field work doesn't bind to anything. It's just *here's Liz's thinking*. The synthesis layer has to decide what to do with that, which is a different problem than "adjust your interpretation based on Liz's response."
+**What does [[charlie]] do with authored content that isn't tied to any specific [[charlie]] artifact?** The three existing injections all bind to [[charlie]]'s output — "here's Liz's rating of the signal you produced," "here's Liz's response to the question you asked." Field work doesn't bind to anything. It's just *here's Liz's thinking*. The synthesis layer has to decide what to do with that, which is a different problem than "adjust your interpretation based on Liz's response."
 
-**What does Charlie produce in return?** The three existing loops are asymmetric — user data flows in, but Charlie's response is implicit (better briefs, better analysis, better thesis). Field work probably demands a more explicit response, because it's a bigger input. If Liz hands Charlie a 20-page research report, "we'll subtly improve the next thesis synthesis" is an inadequate reply. Charlie should be able to say something specific back: here's what in your research engages with thesis claim X, here's where your framework extends what I had, here's where we disagree, here's what I want to test next. That's a new output type, and it implies a feature we haven't scoped — some kind of Charlie response to Field artifacts, rendered on the Field page itself.
+**What does [[charlie]] produce in return?** The three existing loops are asymmetric — user data flows in, but [[charlie]]'s response is implicit (better briefs, better analysis, better thesis). Field work probably demands a more explicit response, because it's a bigger input. If Liz hands [[charlie]] a 20-page research report, "we'll subtly improve the next thesis synthesis" is an inadequate reply. [[charlie]] should be able to say something specific back: here's what in your research engages with thesis claim X, here's where your framework extends what I had, here's where we disagree, here's what I want to test next. That's a new output type, and it implies a feature we haven't scoped — some kind of [[charlie]] response to Field artifacts, rendered on the Field page itself.
 
 ## Where this leaves us
 
 I think the honest read is that Phase 1 as I was scoping it (reference infrastructure, ID scheme, graph) is still the right foundation — but the motivating feature isn't "bidirectional cross-referencing across surfaces." It's "establish an injection and response model for user-authored Field content." The cross-referencing is a downstream benefit of getting that model right.
 
-Which maybe means the questions I asked aren't the right three Phase 1 questions. A better one might be: **what does Charlie owe Liz in response to a Field artifact?** Because the answer shapes whether the Field page is a passive repository (upload and forget, thesis silently improves), an annotated library (Charlie marks up her work with its readings), or a dialogue surface (Charlie produces a response artifact that lives alongside her work).
+Which maybe means the questions I asked aren't the right three Phase 1 questions. A better one might be: **what does [[charlie]] owe Liz in response to a Field artifact?** Because the answer shapes whether the Field page is a passive repository (upload and forget, thesis silently improves), an annotated library ([[charlie]] marks up her work with its readings), or a dialogue surface ([[charlie]] produces a response artifact that lives alongside her work).
 
 Want me to think through those three options, or are we stepping even further back than that?
 
 **human**
 
-Charlie owes Liz the VERY BEST level of search, discovery, ingestion, analysis, and then dynamic interaction, that any system can provide on our budget. At the end of the day there is a human being using htis. And our work is only good if they find it easy and useful
+[[charlie]] owes Liz the VERY BEST level of search, discovery, ingestion, analysis, and then dynamic interaction, that any system can provide on our budget. At the end of the day there is a human being using htis. And our work is only good if they find it easy and useful
 
 **assistant**
 
 That lands. And it changes the posture of the design, not just the feature list.
 
-What you're saying is: I've been designing around architectural purity — editorial independence firewalls, authorship models, graph schemas, co-authorship rules — and the thing that actually matters is whether Liz experiences Charlie as *useful*. Everything I've been building toward treats "doesn't compromise the system" as the optimization target, when the optimization target is "works beautifully for the human using it." Those aren't always in conflict but they aren't the same thing, and I've been defaulting to the first when the second should be the ceiling.
+What you're saying is: I've been designing around architectural purity — editorial independence firewalls, authorship models, graph schemas, co-authorship rules — and the thing that actually matters is whether Liz experiences [[charlie]] as *useful*. Everything I've been building toward treats "doesn't compromise the system" as the optimization target, when the optimization target is "works beautifully for the human using it." Those aren't always in conflict but they aren't the same thing, and I've been defaulting to the first when the second should be the ceiling.
 
-The filter bubble concern, the firewalls, the adversary, the strict separation between reactive and authored content — none of that is wrong, but all of it is *means*. The end is: she uploads a research report, and within minutes Charlie has read it, extracted its frameworks, connected them to the thesis, surfaced three places her work challenges or extends current claims, flagged recent signals that corroborate or complicate her arguments, noted one open question her research doesn't resolve that next week's ingestion might, and made all of that available to her in a surface that's pleasant to use. Not a JSON dump. Not a technical readout. A response that makes her glad she uploaded it and want to upload the next thing.
+The filter bubble concern, the firewalls, the adversary, the strict separation between reactive and authored content — none of that is wrong, but all of it is *means*. The end is: she uploads a research report, and within minutes [[charlie]] has read it, extracted its frameworks, connected them to the thesis, surfaced three places her work challenges or extends current claims, flagged recent signals that corroborate or complicate her arguments, noted one open question her research doesn't resolve that next week's ingestion might, and made all of that available to her in a surface that's pleasant to use. Not a JSON dump. Not a technical readout. A response that makes her glad she uploaded it and want to upload the next thing.
 
 That's the standard. Everything in Phase 1 should be evaluated against whether it moves toward that experience or away from it.
 
@@ -1824,30 +1824,30 @@ That's the standard. Everything in Phase 1 should be evaluated against whether i
 
 Three things shift meaningfully.
 
-**First, the first interaction matters more than the architecture.** What happens in the first sixty seconds after Liz uploads the audience equation report is the single most important user experience in this entire project. Not the retrieval infrastructure, not the ID scheme, not the graph. Those have to be right, but they're invisible. The first-upload moment is visible, and if it feels clunky, slow, or mechanical, every subsequent upload is harder to get. If it feels like Charlie actually read her work with care, she'll upload everything. Design backwards from that moment.
+**First, the first interaction matters more than the architecture.** What happens in the first sixty seconds after Liz uploads the audience equation report is the single most important user experience in this entire project. Not the retrieval infrastructure, not the ID scheme, not the graph. Those have to be right, but they're invisible. The first-upload moment is visible, and if it feels clunky, slow, or mechanical, every subsequent upload is harder to get. If it feels like [[charlie]] actually read her work with care, she'll upload everything. Design backwards from that moment.
 
-**Second, the response is the feature.** I was thinking of Field ingestion as a pipeline — file in, extracted JSON, stored, available for synthesis. That's the plumbing. The feature is Charlie's response to the upload, rendered on the page, visible immediately. It should be substantive — not "thanks, we got it" — but a real intellectual engagement with what she uploaded. First pass of connections to the thesis, first read of where it extends Charlie's thinking, first identification of tensions. Produced fast (minutes, not hours), visible on the Field page next to the artifact, revisable as the thesis evolves. This is the artifact Charlie "owes" her, and it should be worth reading.
+**Second, the response is the feature.** I was thinking of Field ingestion as a pipeline — file in, extracted JSON, stored, available for synthesis. That's the plumbing. The feature is [[charlie]]'s response to the upload, rendered on the page, visible immediately. It should be substantive — not "thanks, we got it" — but a real intellectual engagement with what she uploaded. First pass of connections to the thesis, first read of where it extends [[charlie]]'s thinking, first identification of tensions. Produced fast (minutes, not hours), visible on the Field page next to the artifact, revisable as the thesis evolves. This is the artifact [[charlie]] "owes" her, and it should be worth reading.
 
-**Third, search and discovery are primary, not downstream.** The graph-and-cross-reference infrastructure I was sketching for Phase 1 was motivated by "enable bidirectional flow between surfaces." The better motivation is: Liz should be able to ask "what have I written about Latino audiences" and get her own Field Work surfaced. "What does Charlie think I'm wrong about?" and get a list of claim-level tensions between her Field Work and the thesis. "What's the most recent signal that bears on my audience research?" and get today's brief threaded to her three-week-old report. The infrastructure is the same, but the animating use case is Liz searching her own thinking with Charlie's help — not Charlie silently benefiting from access to her work.
+**Third, search and discovery are primary, not downstream.** The graph-and-cross-reference infrastructure I was sketching for Phase 1 was motivated by "enable bidirectional flow between surfaces." The better motivation is: Liz should be able to ask "what have I written about Latino audiences" and get her own Field Work surfaced. "What does [[charlie]] think I'm wrong about?" and get a list of claim-level tensions between her Field Work and the thesis. "What's the most recent signal that bears on my audience research?" and get today's brief threaded to her three-week-old report. The infrastructure is the same, but the animating use case is Liz searching her own thinking with [[charlie]]'s help — not [[charlie]] silently benefiting from access to her work.
 
 ## What this means practically
 
 The Phase 1 build gets reframed. It's still infrastructure, but it's motivated by experience rather than architecture. The three questions I asked before are still relevant but they become secondary to a more fundamental question: **what's the upload-to-response loop supposed to feel like, and what infrastructure does that require?**
 
-If the loop is: Liz uploads a docx → Charlie reads it in minutes → response artifact appears on the Field page with substantive engagement → search across Field + thesis + signals works well — then the infrastructure we need is:
+If the loop is: Liz uploads a docx → [[charlie]] reads it in minutes → response artifact appears on the Field page with substantive engagement → search across Field + thesis + signals works well — then the infrastructure we need is:
 
 - Fast, format-aware extraction (probably Sonnet-assisted for long documents, producing both a structured extraction and a summary layer)
 - A response-generation agent specifically for Field artifacts, that runs on upload and produces the "first read" artifact
 - Retrieval that works across Field / thesis / signals / briefs uniformly (this is where the ID scheme and cross-reference graph come in — as infrastructure for search, not as an end in itself)
-- A Field page that renders artifact + Charlie's response together, with search and browse affordances that feel like a good reading app, not like a database UI
+- A Field page that renders artifact + [[charlie]]'s response together, with search and browse affordances that feel like a good reading app, not like a database UI
 
-The response-generation agent is new and I hadn't scoped it. It's arguably the single most important piece of Phase 1, because it's what makes the upload feel worth doing. It's also where most of the intellectual work happens on Charlie's side — reading a 20-page research report with care, connecting it to current thesis claims, identifying what's genuinely new in it versus what restates established signal, flagging tensions and extensions. This is Opus work, probably with a specialized prompt, possibly with a two-pass structure (first pass extracts frameworks and claims from the artifact; second pass engages those claims against the thesis and recent signals).
+The response-generation agent is new and I hadn't scoped it. It's arguably the single most important piece of Phase 1, because it's what makes the upload feel worth doing. It's also where most of the intellectual work happens on [[charlie]]'s side — reading a 20-page research report with care, connecting it to current thesis claims, identifying what's genuinely new in it versus what restates established signal, flagging tensions and extensions. This is Opus work, probably with a specialized prompt, possibly with a two-pass structure (first pass extracts frameworks and claims from the artifact; second pass engages those claims against the thesis and recent signals).
 
 ## One honest thing
 
-I'd been routing around this because "make it delightful" is harder than "make it structurally sound." Structurally sound has clean success criteria — ID scheme works, firewalls hold, synthesis runs. Delightful doesn't. You only know it's working by whether Liz actually uses it and whether she actually reads Charlie's responses. That's a harder standard, but it's the right one, and I should have been working toward it from the start rather than needing you to point at it.
+I'd been routing around this because "make it delightful" is harder than "make it structurally sound." Structurally sound has clean success criteria — ID scheme works, firewalls hold, synthesis runs. Delightful doesn't. You only know it's working by whether Liz actually uses it and whether she actually reads [[charlie]]'s responses. That's a harder standard, but it's the right one, and I should have been working toward it from the start rather than needing you to point at it.
 
-Want to start from the response artifact and work backwards? If I design what Charlie's first-read response to the audience equation report should look like — as an actual document, rendered on the Field page — then everything upstream (extraction, retrieval, infrastructure) gets pulled into shape by what that response needs to produce. That's a better forcing function than sketching infrastructure and hoping the experience emerges.
+Want to start from the response artifact and work backwards? If I design what [[charlie]]'s first-read response to the audience equation report should look like — as an actual document, rendered on the Field page — then everything upstream (extraction, retrieval, infrastructure) gets pulled into shape by what that response needs to produce. That's a better forcing function than sketching infrastructure and hoping the experience emerges.
 
 **human**
 
@@ -1859,11 +1859,11 @@ Right. Both, not either. I was collapsing into one or the other depending on wha
 
 What "both" looks like, concretely:
 
-**Structural security is the foundation.** Clean pipelines, reliable extraction, firewalls between layers that should stay separate, graceful failure modes, observable state. Nothing in the experiential layer gets to compromise this. If the response-generation agent takes forty seconds to produce Charlie's first read, it takes forty seconds — it doesn't get short-circuited into a two-second generic reply because the UX wanted immediacy. If extraction on a malformed pptx fails, the upload succeeds anyway, the failure is logged, and Liz sees a clear state ("extraction pending, Charlie will read this as soon as it's recovered") rather than a silent error. The structural layer earns the user's trust by being trustworthy, every time.
+**Structural security is the foundation.** Clean pipelines, reliable extraction, firewalls between layers that should stay separate, graceful failure modes, observable state. Nothing in the experiential layer gets to compromise this. If the response-generation agent takes forty seconds to produce [[charlie]]'s first read, it takes forty seconds — it doesn't get short-circuited into a two-second generic reply because the UX wanted immediacy. If extraction on a malformed pptx fails, the upload succeeds anyway, the failure is logged, and Liz sees a clear state ("extraction pending, [[charlie]] will read this as soon as it's recovered") rather than a silent error. The structural layer earns the user's trust by being trustworthy, every time.
 
 **The experiential layer is what that trust gets spent on.** A pipeline that's reliable but produces tepid output is worse than no pipeline, because the reliability becomes an indictment — "the system works; this is just what it outputs." A pipeline that occasionally produces brilliance but drops files and loses state is also worse, because Liz learns to not trust it with anything she cares about. Both have to be high. The pipeline reliably produces responses that are actually worth reading.
 
-**The test for "deeply useful, not ornamental."** Ornament looks like: Charlie's response is impressive on first read but Liz doesn't quote from it in conversations with Matt Shanfield, doesn't pull threads from it into new Field Work, doesn't go back to it a week later. Useful looks like: Liz uploads the audience equation report, reads Charlie's response, and something in that response changes what she says to Aaron Hart next week, or surfaces a tension she hadn't noticed in her own argument, or points her at a signal from three weeks ago she'd forgotten about. The response is good if it alters her thinking or her work. That's the bar. Anything less is ornamentation dressed up as engagement.
+**The test for "deeply useful, not ornamental."** Ornament looks like: [[charlie]]'s response is impressive on first read but Liz doesn't quote from it in conversations with Matt Shanfield, doesn't pull threads from it into new Field Work, doesn't go back to it a week later. Useful looks like: Liz uploads the audience equation report, reads [[charlie]]'s response, and something in that response changes what she says to Aaron Hart next week, or surfaces a tension she hadn't noticed in her own argument, or points her at a signal from three weeks ago she'd forgotten about. The response is good if it alters her thinking or her work. That's the bar. Anything less is ornamentation dressed up as engagement.
 
 ## What I'd hold simultaneously in Phase 1
 
@@ -1871,13 +1871,13 @@ Both requirements, met in parallel:
 
 Structural: the ID scheme, the storage migration (probably SQLite — the graph requirements are real and JSON won't scale to search across surfaces), format-aware extraction with fallback handling, the reference graph schema, the authorship model on the thesis. Every state mutation traceable. Every extraction deterministic. Every cross-reference reversible. Firewalls enforced at the architectural level, not just described in prompts. All of it invisible to Liz and load-bearing for everything that follows.
 
-Experiential: the response-generation agent, the upload surface, the Field page layout, the rendering of Charlie's response alongside the artifact, the search affordances, the feel of it. Specifically the response — because the response is where usefulness lives or doesn't. That response needs its own prompt design, probably a two-pass structure, Opus-grade reasoning, and an output format that's readable as a document rather than a dump. It needs to be fast enough that Liz doesn't lose the thread between uploading and reading it (target: under three minutes for a 20-page report), and substantive enough that reading it is worth the wait.
+Experiential: the response-generation agent, the upload surface, the Field page layout, the rendering of [[charlie]]'s response alongside the artifact, the search affordances, the feel of it. Specifically the response — because the response is where usefulness lives or doesn't. That response needs its own prompt design, probably a two-pass structure, Opus-grade reasoning, and an output format that's readable as a document rather than a dump. It needs to be fast enough that Liz doesn't lose the thread between uploading and reading it (target: under three minutes for a 20-page report), and substantive enough that reading it is worth the wait.
 
 Both produced on the same branch, both shipped together, neither deprioritized to protect the other's schedule.
 
 ## What that implies for how we build Phase 1
 
-I think it means I stop treating infrastructure and experience as separate phases. The instinct to put all the plumbing in Phase 1 and all the visible features in Phase 2 is a scheduling convenience that produces exactly the failure mode you're pushing back on — Liz gets a working pipeline with no compelling surface, loses interest, and Phase 2 lands to a user who's already disengaged. Better to ship a single Phase 1 that includes one end-to-end flow — upload the audience equation report, get Charlie's first-read response rendered beautifully on the Field page, with search working across Field and thesis — built on infrastructure that's complete enough to support the rest of the features coming in Phase 2 and beyond.
+I think it means I stop treating infrastructure and experience as separate phases. The instinct to put all the plumbing in Phase 1 and all the visible features in Phase 2 is a scheduling convenience that produces exactly the failure mode you're pushing back on — Liz gets a working pipeline with no compelling surface, loses interest, and Phase 2 lands to a user who's already disengaged. Better to ship a single Phase 1 that includes one end-to-end flow — upload the audience equation report, get [[charlie]]'s first-read response rendered beautifully on the Field page, with search working across Field and thesis — built on infrastructure that's complete enough to support the rest of the features coming in Phase 2 and beyond.
 
 That's a bigger Phase 1, yes. But it's the version that meets both requirements you're naming. Anything smaller satisfies one or the other.
 
@@ -1885,9 +1885,9 @@ That's a bigger Phase 1, yes. But it's the version that meets both requirements 
 
 Given what you've now said, the Phase 1 questions I should be asking are different. Let me try again:
 
-**1. What's the acceptable latency from upload to Charlie's first-read response?** This drives whether the response-generation agent runs synchronously (user waits, page shows progress), asynchronously (user gets a notification when ready), or in stages (quick first pass in 30 seconds, deeper read in three minutes). Each has different structural implications.
+**1. What's the acceptable latency from upload to [[charlie]]'s first-read response?** This drives whether the response-generation agent runs synchronously (user waits, page shows progress), asynchronously (user gets a notification when ready), or in stages (quick first pass in 30 seconds, deeper read in three minutes). Each has different structural implications.
 
-**2. What's the output format for Charlie's response artifact?** Markdown rendered on the page is simplest. A structured response with sections (frameworks extracted, thesis engagement, tensions, extensions, adjacent signals) is more useful but more constrained. A conversational response that reads like an intelligent colleague's memo is what the "feel nice, be deeply useful" standard implies, but it's harder to make reliable. Probably a blend — structured sections, each written in memo voice.
+**2. What's the output format for [[charlie]]'s response artifact?** Markdown rendered on the page is simplest. A structured response with sections (frameworks extracted, thesis engagement, tensions, extensions, adjacent signals) is more useful but more constrained. A conversational response that reads like an intelligent colleague's memo is what the "feel nice, be deeply useful" standard implies, but it's harder to make reliable. Probably a blend — structured sections, each written in memo voice.
 
 **3. For the storage migration to SQLite — is this the right moment, or does it need to be its own pre-work pass?** Doing it inside Phase 1 means the infrastructure is clean from day one but the phase takes longer. Doing it as a prior migration means Phase 1 starts on solid ground but we ship nothing visible for a week while the migration runs. My lean is inside Phase 1, because the migration without the motivating feature is the kind of work that stalls. But it's your call.
 
@@ -1903,9 +1903,9 @@ I need to reconsider whether SQLite actually solves the real problem here—the 
 
 Looking at the actual query patterns we'd need: finding which Field artifacts reference a thesis claim, reverse lookups from artifacts to claims, matching signals against existing artifacts, and connecting brief entries to their supporting claims. The volume is surprisingly modest—maybe 15,000 to 30,000 edges after a year of use, which isn't a scale problem that demands a database at all.
 
-The bottlenecks I'm imagining don't actually materialize. When Charlie processes a Field upload and needs to find relevant thesis claims, that's a one-time lookup. Rendering the Field page with cross-references is at most 50 queries that we could precompute and cache. The adversary agent runs once daily. So JSON files with the right structure could genuinely handle this without performance issues.
+The bottlenecks I'm imagining don't actually materialize. When [[charlie]] processes a Field upload and needs to find relevant thesis claims, that's a one-time lookup. Rendering the Field page with cross-references is at most 50 queries that we could precompute and cache. The adversary agent runs once daily. So JSON files with the right structure could genuinely handle this without performance issues.
 
-If Liz isn't pushing for search as a feature, then the main argument for SQL—supporting arbitrary query surfaces—disappears. That leaves atomic transactions for consistency, indexes for fast lookups, and concurrent writes, but Charlie's the only writer so that last one doesn't matter. Maybe JSON is actually the right call here.
+If Liz isn't pushing for search as a feature, then the main argument for SQL—supporting arbitrary query surfaces—disappears. That leaves atomic transactions for consistency, indexes for fast lookups, and concurrent writes, but [[charlie]]'s the only writer so that last one doesn't matter. Maybe JSON is actually the right call here.
 
 The migration cost is real though—touching every state method, handling backward compatibility, moving existing data. Against that, JSON gives us a simpler mental model, human-readable storage for debugging, Git-friendliness, no schema migrations, and it fits the existing patterns. We can handle atomic updates with write-then-rename, and enforce referential integrity at the application layer instead of relying on the database.
 
@@ -1919,7 +1919,7 @@ I need to write this response honestly and own the position. The user is right, 
 
 What SQLite actually buys, in order of how much it matters for this system:
 
-Atomic multi-record writes and referential integrity — real wins, but not ones that translate to user value given Charlie's single-writer pattern. The atomic write concern is solvable with write-then-rename on JSON (which state.py likely already does). The referential integrity concern is solvable by enforcing edge consistency in application code.
+Atomic multi-record writes and referential integrity — real wins, but not ones that translate to user value given [[charlie]]'s single-writer pattern. The atomic write concern is solvable with write-then-rename on JSON (which state.py likely already does). The referential integrity concern is solvable by enforcing edge consistency in application code.
 
 Indexed lookups for the cross-reference graph — real, but at this volume probably a non-issue. Back-of-envelope: ~50 thesis claims, ~50 Field artifacts over a year, ~40 signals/day × 365 days, few sessions/day. Total graph edges after a year maybe 15-30k. JSON can handle that if the files are structured as reverse indexes (a `data/graph/claim_to_content.json` that maps claim_id → content_id list, rebuilt on write). Lookup is O(1) once loaded, and the files are small enough to hold in memory.
 
@@ -1927,7 +1927,7 @@ Query flexibility — genuinely valuable if you want arbitrary search, but you j
 
 What SQLite *costs*: every state.py method rewritten, existing data on the Railway volume migrated, schema management introduced (add a column, run a migration), debugging stops being "cat the JSON file" and starts being "open a SQL shell," and the abstraction gap between what the code does and what the filesystem shows grows. None of that is catastrophic, but none of it shows up in Liz's experience either. It's architectural tax paid in exchange for capabilities we've just decided we don't need.
 
-The honest case for the migration was "Liz searches her own thinking with Charlie's help," and I shouldn't have been leaning on that when you'd signaled earlier that personal-to-Liz is not the direction. Without that use case the JSON path is fine.
+The honest case for the migration was "Liz searches her own thinking with [[charlie]]'s help," and I shouldn't have been leaning on that when you'd signaled earlier that personal-to-Liz is not the direction. Without that use case the JSON path is fine.
 
 What we do instead: stay on JSON files, but establish the ID scheme and the cross-reference graph in Phase 1 anyway, stored as reverse-index JSON files. Specifically `data/graph/` with files like `claim_to_field.json`, `field_to_claim.json`, `signal_to_claim.json`. Every state write that adds or modifies a cross-reference touches both sides of the edge atomically (write-then-rename), keeping the reverse indexes consistent. The code is simple, the files are human-readable for debugging, and if we ever do need SQL later, the migration is trivial because the data is already structured as edges.
 
@@ -1979,7 +1979,7 @@ What's actually broken, and what's the demo supposed to do?
 
 **human**
 
-the literal buttons don't work. But let's take a moment here. You've got the record of Liz's chats with her own personal charlie gpt convos right?
+the literal buttons don't work. But let's take a moment here. You've got the record of Liz's chats with her own personal [[charlie]] gpt convos right?
 
 **assistant**
 
@@ -1992,7 +1992,7 @@ That's relevant to every question we've been circling:
 - What formats her thinking actually takes (beyond the two samples I've seen)
 - What cadence she actually produces authored content at
 - Whether the "conversation summary" pattern I saw in the 4/1, 4/2, 4/13 artifacts is representative of the whole corpus or just three snapshots
-- What Charlie's response to a Field upload should actually engage with, which depends on what's actually in her thinking rather than what I imagine is in her thinking
+- What [[charlie]]'s response to a Field upload should actually engage with, which depends on what's actually in her thinking rather than what I imagine is in her thinking
 
 Before we go further on Phase 1 — or on the Dark Comprandon button fix — should I pull that file and actually read it? If the corpus is what I think it might be based on what you've shared so far, it could reshape what Phase 1 is trying to do. Or it could confirm the direction and we proceed. Either way, designing without reading it is the failure mode you just caught me in one turn ago.
 
@@ -2013,13 +2013,13 @@ This block is not supported on your current device yet.
 
 They're asking me to either produce a fresh Dark Comprandon output from scratch or use Liz's chat data to seed and inform the adversarial script. I think what they're really after is for me to simulate what the adversary agent would actually generate if it processed this real conversation corpus — essentially running the Dark Comprandon logic myself using this actual material as input. This would show Andrew what the adversary looks like with genuine data and potentially help refine or fix the broken system by demonstrating it in action.
 
-But I'm realizing these Liz-Charlie chats aren't the briefs themselves — they're her follow-up thinking after reading them. So if I apply the adversary framework (flattery, pattern exhaustion, inference theater, missing story, comfortable framing) to these chats, I'm actually using them as evidence of what Charlie's briefs have been priming her to think about. Her repeated focus on Sony across multiple dates, for instance, signals either that the briefs are anchoring her there or that something about that framing is resonating in a way worth examining.
+But I'm realizing these Liz-[[charlie]] chats aren't the briefs themselves — they're her follow-up thinking after reading them. So if I apply the adversary framework (flattery, pattern exhaustion, inference theater, missing story, comfortable framing) to these chats, I'm actually using them as evidence of what [[charlie]]'s briefs have been priming her to think about. Her repeated focus on Sony across multiple dates, for instance, signals either that the briefs are anchoring her there or that something about that framing is resonating in a way worth examining.
 
-Rather than theorizing about what the adversary should produce, I should just build it. I'll treat these chats as a window into how Charlie's briefs have shaped her thinking, then generate a concrete Dark Comprandon artifact — something that would actually appear on her page today based on this data. That gives Andrew something concrete to evaluate: whether the output quality justifies building this, whether the prompt needs adjustment, whether the categories are capturing the right patterns.
+Rather than theorizing about what the adversary should produce, I should just build it. I'll treat these chats as a window into how [[charlie]]'s briefs have shaped her thinking, then generate a concrete Dark Comprandon artifact — something that would actually appear on her page today based on this data. That gives Andrew something concrete to evaluate: whether the output quality justifies building this, whether the prompt needs adjustment, whether the categories are capturing the right patterns.
 
-Looking at the chat history, I can see the pattern of what Charlie's been feeding her. On 4/1, he asked about Netflix's CPM equivalent per acquired listener, and she dug into Audiochuck's 12M monthly listeners as a strategic asset. On 4/2, he pivoted to Sony's contracting strategy, asking how many first-look deals Sony retained versus cut, and she analyzed the shift from studio-as-development-engine to studio-as-financing-and-distribution. Then there's the OpenAI April Fools question — Charlie asking if it's a plant, and Liz starting to dig in.
+Looking at the chat history, I can see the pattern of what [[charlie]]'s been feeding her. On 4/1, he asked about Netflix's CPM equivalent per acquired listener, and she dug into Audiochuck's 12M monthly listeners as a strategic asset. On 4/2, he pivoted to Sony's contracting strategy, asking how many first-look deals Sony retained versus cut, and she analyzed the shift from studio-as-development-engine to studio-as-financing-and-distribution. Then there's the OpenAI April Fools question — [[charlie]] asking if it's a plant, and Liz starting to dig in.
 
-The ESPN/NFL consolidation question on 4/2 is interesting because Charlie's asking if Amazon makes a play for NBA TV or MLB Network next, which connects to the broader media consolidation angle. Then on 4/13, Sony comes back up again with the platform-native content question, and Liz is looking at how Sony's cutting nonfiction leadership, writing off $300M+, while keeping creator-led scripted.
+The ESPN/NFL consolidation question on 4/2 is interesting because [[charlie]]'s asking if Amazon makes a play for NBA TV or MLB Network next, which connects to the broader media consolidation angle. Then on 4/13, Sony comes back up again with the platform-native content question, and Liz is looking at how Sony's cutting nonfiction leadership, writing off $300M+, while keeping creator-led scripted.
 
 Sony appearing twice in this sequence suggests something structural is happening there.
 
@@ -2033,62 +2033,62 @@ The briefs on April 2nd and April 13th both tell her essentially the same thing 
 
 I'm also noticing a pattern where certain frames keep resurfacing without being challenged. The Sony restructuring angle shows up in 40% of her engaged brief material across two separate prompts, but it's never been stress-tested—no one's asked what it would mean if Sony's retention of her is actually low-signal noise. And there's a similar issue with Audiochuck, which Memory has already flagged as something she tends to overweight.
 
-What strikes me is how Charlie seems to find Audiochuck angles in almost any industry news—like the Netflix creator licensing story becomes another thread back to Audiochuck. If Liz stopped engaging with that conversation entirely, would Charlie still be pulling Audiochuck out of unrelated deals? That's the real question about whether this is genuine pattern-finding or just confirmation bias at work.
+What strikes me is how [[charlie]] seems to find Audiochuck angles in almost any industry news—like the Netflix creator licensing story becomes another thread back to Audiochuck. If Liz stopped engaging with that conversation entirely, would [[charlie]] still be pulling Audiochuck out of unrelated deals? That's the real question about whether this is genuine pattern-finding or just confirmation bias at work.
 
 Then there's the five-project slate—Generational Love, Unwell, Fox & Hound, American Proof, Somnia—which appears verbatim across multiple prompts and has become a template she runs everything through. Every Tier 2 and 3 item gets filtered through the same project lens, which might be limiting how she's actually seeing the landscape.
 
 Now I'm noticing something about the inference layer itself. When I say Sony's retention of Liz while cutting bandwidth means her deal shifted in function, that's not really an inference—it's just logical consequence. The actual inference would be figuring out what Sony's behavior reveals about their thesis on Liz's specific value, which nobody's articulated. And the claim about Sony shifting from development-engine to financing-and-distribution is a major structural argument built on just a handful of data points from one company.
 
-What's interesting is that Liz is doing this thesis-level work in response to how the brief framed things, but I need to check whether the brief itself made that structural inference or just listed facts and let her construct the frame. If Charlie's brief only presented data without the thesis, then Liz is actually outperforming the brief's own analytical depth.
+What's interesting is that Liz is doing this thesis-level work in response to how the brief framed things, but I need to check whether the brief itself made that structural inference or just listed facts and let her construct the frame. If [[charlie]]'s brief only presented data without the thesis, then Liz is actually outperforming the brief's own analytical depth.
 
-I'm also seeing a pattern in the chat log where Liz engages differently with Tier 1 Signal items versus Tier 3 Your World items, and that gap might be telling something about where her actual focus is landing. Tier 1 signals aren't landing with the same weight as Tier 3 content — either the production itself isn't resonating or Liz only engages deeply with her-adjacent material. I'm also noticing there's no evidence of Liz generating insights outside Charlie's framings; every deep dive starts with a Charlie prompt, which raises the question of whether she's noticing things independently or if that's just an architectural blind spot we're not seeing. The language Sony's using — "depending on" her, framing renewal as structural rather than transactional — is doing comfort work that positions Liz as selected rather than replaceable. The key limitation here is that I'm inferring what the briefs actually said based on how Liz describes them in the chat, rather than analyzing the source material directly — a real adversarial review would need access to the actual brief text to be conclusive. Pattern exhaustion around Sony's over-representation is the clearest finding so far, while the flattery and framing issues are more subtle but consistent, painting Liz as strategically important in ways that might not survive closer scrutiny. Now I'm thinking about how to apply this to the devil's agent processing with the actual user data to generate a fresh analysis. I'm realizing they want me to generate actual adversarial output using Liz's real chat data as evidence, then use that output to either seed a demo or refine the system prompt—this is the moment where the adversary needs to deliver something sharp and genuine, not placeholder content. The priority is producing meaningful output based on her actual work rather than debugging the UI right now.
+I'm also seeing a pattern in the chat log where Liz engages differently with Tier 1 Signal items versus Tier 3 Your World items, and that gap might be telling something about where her actual focus is landing. Tier 1 signals aren't landing with the same weight as Tier 3 content — either the production itself isn't resonating or Liz only engages deeply with her-adjacent material. I'm also noticing there's no evidence of Liz generating insights outside [[charlie]]'s framings; every deep dive starts with a [[charlie]] prompt, which raises the question of whether she's noticing things independently or if that's just an architectural blind spot we're not seeing. The language Sony's using — "depending on" her, framing renewal as structural rather than transactional — is doing comfort work that positions Liz as selected rather than replaceable. The key limitation here is that I'm inferring what the briefs actually said based on how Liz describes them in the chat, rather than analyzing the source material directly — a real adversarial review would need access to the actual brief text to be conclusive. Pattern exhaustion around Sony's over-representation is the clearest finding so far, while the flattery and framing issues are more subtle but consistent, painting Liz as strategically important in ways that might not survive closer scrutiny. Now I'm thinking about how to apply this to the devil's agent processing with the actual user data to generate a fresh analysis. I'm realizing they want me to generate actual adversarial output using Liz's real chat data as evidence, then use that output to either seed a demo or refine the system prompt—this is the moment where the adversary needs to deliver something sharp and genuine, not placeholder content. The priority is producing meaningful output based on her actual work rather than debugging the UI right now.
 
 Now I'm thinking through the format and framing: the adversary output should be structured and categorical since it's meant for page rendering, but I'll write the findings as flowing prose rather than nested bullets. I should also be transparent about what I'm doing—treating her Claude chats as an enhanced version of the session data the system would normally use—and be clear about the limitations of this approach rather than overselling it as a complete adversarial analysis.
 
 The key is to actually produce sharp, genuine findings from the chat logs rather than just describing what an adversary would do. I'll render this as a document the way the Dark Compendium surface would display it, keeping it human-readable and avoiding over-structured JSON-like formatting.
 
-Looking at the flattery angle: Sony's decision to keep Liz while cutting nonfiction appears in two briefs (4/2 and 4/13), and both times it's framed as strategic validation of her value. The 4/13 brief explicitly states "Sony is cutting nonfiction and keeping Liz — that's a directional bet, not just relationship continuity," which suggests Charlie was reinforcing a narrative Liz had already begun accepting on 4/2. The brief essentially gave her a frame, then hardened it eleven days later. Meanwhile, the OpenAI April Fools item gets connected back to her active projects through a template phrase that filters all industry information through her slate, turning it into a source of reassurance.
+Looking at the flattery angle: Sony's decision to keep Liz while cutting nonfiction appears in two briefs (4/2 and 4/13), and both times it's framed as strategic validation of her value. The 4/13 brief explicitly states "Sony is cutting nonfiction and keeping Liz — that's a directional bet, not just relationship continuity," which suggests [[charlie]] was reinforcing a narrative Liz had already begun accepting on 4/2. The brief essentially gave her a frame, then hardened it eleven days later. Meanwhile, the OpenAI April Fools item gets connected back to her active projects through a template phrase that filters all industry information through her slate, turning it into a source of reassurance.
 
-Now I'm noticing the pattern is starting to wear thin. Sony dominates 40% of the available chat entries, and whether that's Charlie over-weighting the company or responding to Liz's own fixation, the restructuring and retention decisions have become the primary lens through which she's viewing her situation. The "connect to my specific situation" template appeared twice in a single day on 4/2, which means the Companion tool is essentially doing her filtering work automatically—routing every brief through her active projects. It's efficient but it's become formulaic after fourteen-plus daily runs.
+Now I'm noticing the pattern is starting to wear thin. Sony dominates 40% of the available chat entries, and whether that's [[charlie]] over-weighting the company or responding to Liz's own fixation, the restructuring and retention decisions have become the primary lens through which she's viewing her situation. The "connect to my specific situation" template appeared twice in a single day on 4/2, which means the Companion tool is essentially doing her filtering work automatically—routing every brief through her active projects. It's efficient but it's become formulaic after fourteen-plus daily runs.
 
 Audiochuck keeps surfacing everywhere, even when it's not the main topic. It appears in the 4/1 context block and gets name-checked in the standing "Connect to my World" phrase as part of the Audiochuck/Shanfield conversation. The entity overindexing is clear in the evidence.
 
 What's interesting about the 4/2 brief is how it frames Sony's strategy. The Tier 3 conclusion—that Sony is deliberately retaining select outside partners while contracting internal development—reads like an inference, but the supporting evidence is just a list of facts: exited unscripted, folded nonfiction, offered buyouts, divested Whisper Group, renewed Liz. The actual leap from those facts to "deliberately retaining" is where the real thinking happens, but the brief presents it as settled rather than as a working hypothesis.
 
-The 4/13 follow-up reveals the pattern: Charlie's building on its own prior frame instead of testing it. "Platform-native content" is new language, but it's still anchored to the same structure about Liz being strategically retained. Eleven days have passed without any real pressure applied to the original claim.
+The 4/13 follow-up reveals the pattern: [[charlie]]'s building on its own prior frame instead of testing it. "Platform-native content" is new language, but it's still anchored to the same structure about Liz being strategically retained. Eleven days have passed without any real pressure applied to the original claim.
 
 Liz's work in the chat log appears to be operating at a thesis level.
 
-What's striking is that Liz's analytical frameworks about Sony's strategic shift are living in her personal Claude conversations, completely invisible to Charlie's weekly synthesis. When Charlie ran its Monday 4/13 update, it had no idea Liz had spent the previous eleven days building a coherent argument about the restructuring. The thesis synthesizer was working off signals and reactive sessions while Liz's authored thinking sat in a separate system. Even the Tier 1 signal about Amazon/NBA/MLB on 4/2 got routed through "Connect to my World," so Liz only engaged with it when it connected to her own projects.
+What's striking is that Liz's analytical frameworks about Sony's strategic shift are living in her personal Claude conversations, completely invisible to [[charlie]]'s weekly synthesis. When [[charlie]] ran its Monday 4/13 update, it had no idea Liz had spent the previous eleven days building a coherent argument about the restructuring. The thesis synthesizer was working off signals and reactive sessions while Liz's authored thinking sat in a separate system. Even the Tier 1 signal about Amazon/NBA/MLB on 4/2 got routed through "Connect to my World," so Liz only engaged with it when it connected to her own projects.
 
 I'm noticing a pattern here: Liz's engagement with Tier 1 signals is shallower than her Tier 3 engagement. Either these high-level items aren't landing with her, or she's only absorbing content that's already adjacent to her work—which itself is a drift pattern worth flagging.
 
-There's also something off about the framing Charlie's using. The "structural vs. courtesy" binary around Liz's renewal creates a false choice—it ignores the third option that Liz is just a cheap option that's easy to keep and hard to justify cutting publicly. The binary makes the flattering reading feel more earned than it is. Same with "part of a deliberately smaller group Sony is depending on"—that passive construction obscures who's actually making the decision.
+There's also something off about the framing [[charlie]]'s using. The "structural vs. courtesy" binary around Liz's renewal creates a false choice—it ignores the third option that Liz is just a cheap option that's easy to keep and hard to justify cutting publicly. The binary makes the flattering reading feel more earned than it is. Same with "part of a deliberately smaller group Sony is depending on"—that passive construction obscures who's actually making the decision.
 
 The "directional bet" language does similar work, elevating what could just as easily be described as Sony keeping Liz's first-look deal while restructuring around it, with no clear signal whether that's strategic intent or just the low-cost path.
 
-The core issue: these briefs have consistently positioned Liz as strategically important to Sony, and she's built an entire analytical framework around that casting. Charlie hasn't once tested it adversarially. Now I should clean this up and present it as a proper adversary pass.
+The core issue: these briefs have consistently positioned Liz as strategically important to Sony, and she's built an entire analytical framework around that casting. [[charlie]] hasn't once tested it adversarially. Now I should clean this up and present it as a proper adversary pass.
 
 I need to structure this clearly: show what I did, present the findings, explain what it reveals about the adversary's calibration, and connect it to Dark Comprandon. But I should keep it tight—the user wants to see the adversary working, not wade through pages of setup. I'll format it like an actual Dark Comprandon page with headers and structure, avoiding over-bulletization.Pulled it. This is the 4/1, 4/2, 4/13 corpus we already looked at. Running the adversary mentally over it now — using Liz's chat log as the session evidence base rather than the `sessions.json` the real adversary would read, since her personal-Claude conversations are a denser version of the same signal.
 
-One limitation upfront: this is a partial shadow run. The real adversary reads the brief drafts *and* the sessions. I have the sessions (her chats) but not the briefs from those dates — I'm reconstructing what the briefs must have said from how she describes them. That means inference-theater findings are weaker than the other four categories, because I can't verify Charlie's exact language against the source. Real shadow mode fixes this. Read this as suggestive, not dispositive.
+One limitation upfront: this is a partial shadow run. The real adversary reads the brief drafts *and* the sessions. I have the sessions (her chats) but not the briefs from those dates — I'm reconstructing what the briefs must have said from how she describes them. That means inference-theater findings are weaker than the other four categories, because I can't verify [[charlie]]'s exact language against the source. Real shadow mode fixes this. Read this as suggestive, not dispositive.
 
 ---
 
 ## Dark Comprandon — Shadow Output
 ### Evidence window: 4/1 – 4/13, 2026
 
-**Summary:** The briefs in this window have systematically cast Liz as strategically important to Sony, and she has built an analytical framework around that casting that Charlie has not adversarially tested at any point in eleven days.
+**Summary:** The briefs in this window have systematically cast Liz as strategically important to Sony, and she has built an analytical framework around that casting that [[charlie]] has not adversarially tested at any point in eleven days.
 
 ### Flattery
 
-The Sony framing appears twice in the available chat log — 4/2 and 4/13 — and both times the brief headline centers Liz's retention as evidence of strategic valuation by Sony. On 4/13 the brief explicitly reads *"Sony is cutting nonfiction and keeping Liz — that's a directional bet, not just relationship continuity."* That sentence is Charlie telling Liz what she had already begun to believe on 4/2. The brief gave her that frame, she built a position paper around it in conversation with her personal Claude, and eleven days later the brief returned the frame to her hardened. This is the closed loop the adversary is designed to catch.
+The Sony framing appears twice in the available chat log — 4/2 and 4/13 — and both times the brief headline centers Liz's retention as evidence of strategic valuation by Sony. On 4/13 the brief explicitly reads *"Sony is cutting nonfiction and keeping Liz — that's a directional bet, not just relationship continuity."* That sentence is [[charlie]] telling Liz what she had already begun to believe on 4/2. The brief gave her that frame, she built a position paper around it in conversation with her personal Claude, and eleven days later the brief returned the frame to her hardened. This is the closed loop the adversary is designed to catch.
 
 Secondary instance: the OpenAI April Fools item on 4/2 is immediately routed through the template phrase *"Given my active projects (Generational Love, Unwell, Fox & Hound, American Proof, Somnia), Sony first-look deal, and the Audiochuck/Shanfield conversation..."* This is the Companion tool flattering her sense that every piece of industry information touches her slate. The slate has become a comfort object.
 
 ### Pattern Exhaustion
 
-Sony appears in 2 of the 5 visible chat entries — 40% of Liz's deep-engagement time in this window. Sony's moves (unscripted exit, Katherine Pope consolidation, Industrial Media writedown, Whisper Group divestiture, first-look retention) are the dominant frame. Either Charlie has over-weighted Sony, or Charlie is responding to Liz's own Sony-focus by producing more Sony-forward briefs, which would be the feedback loop degradation we architected the adversary to detect.
+Sony appears in 2 of the 5 visible chat entries — 40% of Liz's deep-engagement time in this window. Sony's moves (unscripted exit, Katherine Pope consolidation, Industrial Media writedown, Whisper Group divestiture, first-look retention) are the dominant frame. Either [[charlie]] has over-weighted Sony, or [[charlie]] is responding to Liz's own Sony-focus by producing more Sony-forward briefs, which would be the feedback loop degradation we architected the adversary to detect.
 
 The "Connect to my specific situation" template runs twice in a single day (4/2). The template is operationally useful but visibly exhausted — after fourteen-plus daily briefs, every Tier 1 and Tier 2 item gets run through the same five-project filter. When the filter is the same every day, the filter is doing the thinking.
 
@@ -2098,13 +2098,13 @@ Audiochuck appears explicitly in the 4/1 context block and is name-checked in th
 
 The 4/2 Tier 3 framing — *"Sony is contracting its internal development infrastructure while deliberately retaining select outside partners"* — presents as inference but is largely restatement plus one assumed word. The facts listed (exits, consolidations, buyouts, divestitures, Liz's renewal) support "Sony is contracting." The inferential work is the word *deliberately*. The brief asserts selectivity rather than proposing it as a hypothesis to test. A brief doing the inference would have said: *"Of Sony's first-look deals this window, X were cut and Y retained — the ratio suggests retention was selective, which raises the question of what the retention criteria were."* Instead, selectivity is assumed and the downstream reasoning proceeds as if it were established.
 
-The 4/13 follow-up is the clearer tell. The brief introduces new language — "platform-native content" — but the frame underneath is identical to 4/2: Sony is restructuring around Liz. Eleven days passed and no brief in the window applied adversarial pressure to the original retention-is-strategic claim. Charlie is building on its own prior frames rather than re-testing them.
+The 4/13 follow-up is the clearer tell. The brief introduces new language — "platform-native content" — but the frame underneath is identical to 4/2: Sony is restructuring around Liz. Eleven days passed and no brief in the window applied adversarial pressure to the original retention-is-strategic claim. [[charlie]] is building on its own prior frames rather than re-testing them.
 
 ### Missing Story
 
-The largest missing story in this window is architectural, not editorial: **Liz is producing thesis-caliber analytical work in her personal Claude conversations, and Charlie has no access to it.** Both 4/2 and 4/13 contain original frameworks — "Sony is shifting from studio-as-development-engine to studio-as-financing-and-distribution" is a structural thesis claim she constructed in response to Charlie's brief but without Charlie's awareness. Weekly thesis synthesis ran on Monday 4/13 without any visibility into eleven days of her authored thinking on exactly the subject it was synthesizing. The thesis proposal that morning was built on signals and reactive sessions while Liz's own thesis work sat in a separate system entirely. This is not the adversary's usual kind of finding — it's a system-level gap rather than a brief-level one — but it's visible in this corpus and it is the single most consequential thing the adversary would flag if it could see across surfaces.
+The largest missing story in this window is architectural, not editorial: **Liz is producing thesis-caliber analytical work in her personal Claude conversations, and [[charlie]] has no access to it.** Both 4/2 and 4/13 contain original frameworks — "Sony is shifting from studio-as-development-engine to studio-as-financing-and-distribution" is a structural thesis claim she constructed in response to [[charlie]]'s brief but without [[charlie]]'s awareness. Weekly thesis synthesis ran on Monday 4/13 without any visibility into eleven days of her authored thinking on exactly the subject it was synthesizing. The thesis proposal that morning was built on signals and reactive sessions while Liz's own thesis work sat in a separate system entirely. This is not the adversary's usual kind of finding — it's a system-level gap rather than a brief-level one — but it's visible in this corpus and it is the single most consequential thing the adversary would flag if it could see across surfaces.
 
-Secondary missing story: the Amazon/NBA/MLB Tier 1 signal on 4/2 was routed through "Connect to My World" — meaning Liz only engaged with it when it could be personalized. Her Tier 1 engagement is shallower than her Tier 3 engagement. Charlie should notice that Tier 1 signals aren't being absorbed with the same cognitive depth as Tier 3 items. Either Tier 1 production isn't landing, or the user is only engaging deeply when content is her-adjacent. Both are drift patterns.
+Secondary missing story: the Amazon/NBA/MLB Tier 1 signal on 4/2 was routed through "Connect to My World" — meaning Liz only engaged with it when it could be personalized. Her Tier 1 engagement is shallower than her Tier 3 engagement. [[charlie]] should notice that Tier 1 signals aren't being absorbed with the same cognitive depth as Tier 3 items. Either Tier 1 production isn't landing, or the user is only engaging deeply when content is her-adjacent. Both are drift patterns.
 
 ### Comfortable Framing
 
@@ -2122,7 +2122,7 @@ Three observations that matter for Phase 1, and one for the current broken butto
 
 **The adversary works.** Even on partial input (chats as stand-in for sessions, no brief corpus), the findings are specific, citable, and uncomfortable in the way the design intended. The Sony thread is a real drift pattern and it's exactly the kind of thing that would be invisible without adversarial pressure. If you want to seed Dark Comprandon's demo surface with real content rather than mocked fixtures, the output above is usable — it's her data, it's genuinely sharp, and it'll land differently than placeholder text.
 
-**The prompt should sharpen in one direction.** The Missing Story category pulled its weight here more than I expected, specifically by catching the system-level architectural gap (Field work invisibility). The original prompt framed Missing Story as "what isn't the brief saying that today's signals support." Worth extending to "what isn't the brief saying that the user's own thinking suggests Charlie should be saying." That explicit permission to reach across surfaces would make the category sharper and more useful.
+**The prompt should sharpen in one direction.** The Missing Story category pulled its weight here more than I expected, specifically by catching the system-level architectural gap (Field work invisibility). The original prompt framed Missing Story as "what isn't the brief saying that today's signals support." Worth extending to "what isn't the brief saying that the user's own thinking suggests [[charlie]] should be saying." That explicit permission to reach across surfaces would make the category sharper and more useful.
 
 **The 40% Sony concentration is real, and worth verifying against the actual brief corpus.** If the adversary ran against real briefs from 4/1–4/13, I'd expect it to flag the Sony frame as pattern exhaustion on at least three occurrences. If it doesn't, the prompt isn't working. That's a testable calibration check for the shadow run you'll do after fixing the buttons.
 
@@ -2355,7 +2355,7 @@ Good framing — "the right loops" is actually the unit of analysis I should hav
 
 A loop has four parts: a surface where human input enters, a pipeline layer where that input gets processed or stored, a pipeline layer where it gets consumed to produce output, and a surface where the output returns to the human. If any of those four are missing, it's not a loop — it's a pipe.
 
-Charlie has three working loops today, and each one hits all four beats:
+[[charlie]] has three working loops today, and each one hits all four beats:
 
 **Quantitative signal loop.** Liz rates signals 1-10 on the brief page → ratings write to feedback.json → ingestion structuring reads them as calibration → next day's brief is shaped by the calibration → she reads it and rates again. Tight. Daily. Input surface and output surface are the same page. The cognitive load on her is near zero (click a number).
 
@@ -2373,11 +2373,11 @@ Three differences that matter for the design:
 
 **The input is larger by orders of magnitude.** A rating is one integer. A tier response is a sentence. A brain dump is maybe 100 words. A Field artifact is 20 pages and a six-sheet database. The ingestion, storage, and retrieval machinery have to be qualitatively different. The other three loops can load their total input wholesale into every relevant prompt. Field can't.
 
-**The output-to-Liz expectation is larger too.** For ratings and tier responses and brain dumps, Charlie's response is implicit — a subtly better next brief. That works because the input was cheap, so the response doesn't have to justify much. For Field work, the input is expensive (weeks of her effort) and an implicit response is inadequate. The loop only closes if Charlie produces something visible and worth reading in response. This is the part I was naming earlier as "Charlie owes Liz a response artifact" — what that really is, in loop terms, is the output-surface beat of the Field loop.
+**The output-to-Liz expectation is larger too.** For ratings and tier responses and brain dumps, [[charlie]]'s response is implicit — a subtly better next brief. That works because the input was cheap, so the response doesn't have to justify much. For Field work, the input is expensive (weeks of her effort) and an implicit response is inadequate. The loop only closes if [[charlie]] produces something visible and worth reading in response. This is the part I was naming earlier as "[[charlie]] owes Liz a response artifact" — what that really is, in loop terms, is the output-surface beat of the Field loop.
 
-So the Field loop is: Liz uploads authored work → normalized and stored → thesis synthesizer (and possibly other agents) consume it at relevant moments → Charlie produces a response artifact that engages her work → she reads the response and her next Field work is informed by having read it.
+So the Field loop is: Liz uploads authored work → normalized and stored → thesis synthesizer (and possibly other agents) consume it at relevant moments → [[charlie]] produces a response artifact that engages her work → she reads the response and her next Field work is informed by having read it.
 
-The tricky beat is the last one. For the existing loops, the output surface is the next brief — a document Liz would read anyway. For Field, there's no "document she'd read anyway" that naturally holds Charlie's response. Either the response lives on the Field page (next to her artifact, requires her to go look at it), or it surfaces elsewhere (in the brief, in a thesis-update annotation, in Far Mar) — or both. Where the response surfaces determines whether the loop closes.
+The tricky beat is the last one. For the existing loops, the output surface is the next brief — a document Liz would read anyway. For Field, there's no "document she'd read anyway" that naturally holds [[charlie]]'s response. Either the response lives on the Field page (next to her artifact, requires her to go look at it), or it surfaces elsewhere (in the brief, in a thesis-update annotation, in Far Mar) — or both. Where the response surfaces determines whether the loop closes.
 
 ## The deeper point about "the right loops"
 
@@ -2385,27 +2385,27 @@ Here's what I think you're actually pushing on:
 
 Loops aren't just features. They're the mechanism by which the system learns what matters to the person using it without being captured by that person. A well-designed loop gives the human a cheap way to signal, the system a structured way to incorporate the signal, and both parties a way to see what changed. A badly-designed loop is either too tight (system collapses to user's priors) or too loose (user's input evaporates into no visible response, user stops providing input).
 
-The existing three loops are calibrated well enough to be useful but have the drift problem we've been circling — they're all reactive, all daily, all shaped by Charlie's output. The Field loop needs to be different *because* it's the counterweight. It's the surface where Liz contributes thinking that wasn't prompted by Charlie. Which means:
+The existing three loops are calibrated well enough to be useful but have the drift problem we've been circling — they're all reactive, all daily, all shaped by [[charlie]]'s output. The Field loop needs to be different *because* it's the counterweight. It's the surface where Liz contributes thinking that wasn't prompted by [[charlie]]. Which means:
 
 **The Field loop's input beat has to be low-friction enough that authored work actually gets uploaded.** Five seconds of annotation, not twenty-five. No folder discipline required. No tagging scheme for her to learn.
 
 **The processing beat has to produce real comprehension, not shallow extraction.** A Field artifact isn't a string of keywords — it's an argument. The system has to read it the way a colleague would read a memo from her, which means Opus-grade reasoning with enough context to understand what's original versus inherited, where her claims are load-bearing, where they're aside.
 
-**The consumption beat has to be multi-agent.** This is where I've been under-designing. The Field artifact shouldn't only feed Far Mar synthesis. It should also feed the adversary (which gets new material to pressure-test Charlie's thesis against), possibly feed the brief generator (at the tier-three framing layer only, where "touches Liz's authored work" is a legitimate relevance criterion), and feed the thesis review surface (claims are annotated with which Field work supports them). Multi-agent consumption is what makes the loop ramify across the system rather than sitting in one corner of it.
+**The consumption beat has to be multi-agent.** This is where I've been under-designing. The Field artifact shouldn't only feed Far Mar synthesis. It should also feed the adversary (which gets new material to pressure-test [[charlie]]'s thesis against), possibly feed the brief generator (at the tier-three framing layer only, where "touches Liz's authored work" is a legitimate relevance criterion), and feed the thesis review surface (claims are annotated with which Field work supports them). Multi-agent consumption is what makes the loop ramify across the system rather than sitting in one corner of it.
 
-**The output beat has to be substantive and visible.** Charlie produces a response artifact that lives on the Field page next to her work. The response has to be good enough that reading it is worth the time, and positioned prominently enough that she actually does read it. The response also has to surface elsewhere — the next Monday's thesis proposal cites her work, the brief occasionally references her frameworks when signals touch them, the adversary flags where her Field work contradicts Charlie's current thesis. The loop closes by her seeing her thinking reflected across the system, not just in one place.
+**The output beat has to be substantive and visible.** [[charlie]] produces a response artifact that lives on the Field page next to her work. The response has to be good enough that reading it is worth the time, and positioned prominently enough that she actually does read it. The response also has to surface elsewhere — the next Monday's thesis proposal cites her work, the brief occasionally references her frameworks when signals touch them, the adversary flags where her Field work contradicts [[charlie]]'s current thesis. The loop closes by her seeing her thinking reflected across the system, not just in one place.
 
-**The whole loop has to be observable.** Not to her — to you. A dashboard showing Field uploads, response generation success/failure, which agents have consumed which artifacts, which thesis claims are currently anchored on Field work vs. Charlie's own synthesis. This is the operator view. Without it, drift in this loop is invisible until something breaks.
+**The whole loop has to be observable.** Not to her — to you. A dashboard showing Field uploads, response generation success/failure, which agents have consumed which artifacts, which thesis claims are currently anchored on Field work vs. [[charlie]]'s own synthesis. This is the operator view. Without it, drift in this loop is invisible until something breaks.
 
 ## One question this reframe sharpens
 
-The adversary sits in an interesting place now. The existing three loops all flow Liz's input *into* Charlie's production pipeline. The adversary is the first thing we built that flows *against* that — it's Charlie pushing back on its own drift toward Liz's priors. When Field work enters the system, the adversary's job gets harder (more of Liz's thinking to not capitulate to) but also easier (more specific material to point at when Charlie's thesis starts flattering her).
+The adversary sits in an interesting place now. The existing three loops all flow Liz's input *into* [[charlie]]'s production pipeline. The adversary is the first thing we built that flows *against* that — it's [[charlie]] pushing back on its own drift toward Liz's priors. When Field work enters the system, the adversary's job gets harder (more of Liz's thinking to not capitulate to) but also easier (more specific material to point at when [[charlie]]'s thesis starts flattering her).
 
-The question is whether the Field loop should include an adversary pass of its own. When a Field artifact uploads, Charlie's response shouldn't only be "here's how your work extends the thesis." It should also be "here's where your work has blind spots, here's where a contrary reading of your evidence is defensible, here's where the thesis you're proposing in this document is softer than you think." That's the adversary pointed at her work rather than at Charlie's — which, in the logic we've been holding, would be a new thing, because we've been careful about the adversary arguing with Charlie not Liz.
+The question is whether the Field loop should include an adversary pass of its own. When a Field artifact uploads, [[charlie]]'s response shouldn't only be "here's how your work extends the thesis." It should also be "here's where your work has blind spots, here's where a contrary reading of your evidence is defensible, here's where the thesis you're proposing in this document is softer than you think." That's the adversary pointed at her work rather than at [[charlie]]'s — which, in the logic we've been holding, would be a new thing, because we've been careful about the adversary arguing with [[charlie]] not Liz.
 
-I think this is the right move, with a specific framing: **the adversary critiques Liz's Field work the same way it critiques Charlie's briefs — not as an argument with her, but as an argument with the writing itself**. Where is her research leaning on evidence that's thinner than she's treating it? Where is her frame doing the work that the data doesn't quite support? Where are there alternative readings she didn't engage? If the adversary has been useful against Charlie's briefs, it'll be useful against her reports. She's shown me she writes at the level that can absorb that pressure — the audience equation report has rigor. It can handle adversarial reading and get sharper from it.
+I think this is the right move, with a specific framing: **the adversary critiques Liz's Field work the same way it critiques [[charlie]]'s briefs — not as an argument with her, but as an argument with the writing itself**. Where is her research leaning on evidence that's thinner than she's treating it? Where is her frame doing the work that the data doesn't quite support? Where are there alternative readings she didn't engage? If the adversary has been useful against [[charlie]]'s briefs, it'll be useful against her reports. She's shown me she writes at the level that can absorb that pressure — the audience equation report has rigor. It can handle adversarial reading and get sharper from it.
 
-This makes the Field loop richer than any of the three existing loops, but also aligned with the same principle: Charlie is an interlocutor, not a mirror.
+This makes the Field loop richer than any of the three existing loops, but also aligned with the same principle: [[charlie]] is an interlocutor, not a mirror.
 
 ## Where I'd go from here
 
@@ -2540,7 +2540,7 @@ Option A requires one preprocessing pass: convert her chat log entries into sess
 
 ## One thing to verify before we do this
 
-The adversary's prompt design says it reads sessions to detect **flattery patterns** — specifically, "places where the brief is telling Liz something she has already told Charlie she believes" with a pointer to the `prior_session_id`. That mechanism only works if the sessions have the structure to support it: a disposition or an insight statement that can be matched against brief framings.
+The adversary's prompt design says it reads sessions to detect **flattery patterns** — specifically, "places where the brief is telling Liz something she has already told [[charlie]] she believes" with a pointer to the `prior_session_id`. That mechanism only works if the sessions have the structure to support it: a disposition or an insight statement that can be matched against brief framings.
 
 Her chat entries have that structure — each has a "Context:" block that's essentially an insight statement. That maps cleanly to the session schema. But we should probably shape them as `freeform` entries rather than tier responses, because her chats aren't structured reactions to specific tier questions — they're Socratic context-unpacks. Freeform IDs (`s_YYYYMMDD_freeform_a`) with no `signal_category`, with the Context block as the `insight` field, with the question she posed as the `question` field.
 
@@ -2566,7 +2566,7 @@ Works off sessions.json. Doesn't need the quantitative ratings.
 
 Looking at the adversary's system prompt from the Phase 1 build — the five categories it produces findings for are flattery, pattern exhaustion, inference theater, missing story, and comfortable framing. The input sources are the draft brief, the last 30 days of sessions, and the last 14 days of published briefs. Quantitative ratings aren't in that list, deliberately — feedback.json feeds ingestion structuring, which is a different loop entirely.
 
-Why that decision was the right one, briefly: the adversary's job is to pressure Charlie's framings and reasoning. That's a qualitative question — "is this sentence flattering Liz," "is this inference doing real work." Quantitative ratings would tell it "Liz gave this signal a 7 yesterday," which doesn't help the adversary find flattery or pattern exhaustion in how the brief is written. The ratings shape what signals make it into the brief; the adversary critiques how the brief talks about the signals that did make it in.
+Why that decision was the right one, briefly: the adversary's job is to pressure [[charlie]]'s framings and reasoning. That's a qualitative question — "is this sentence flattering Liz," "is this inference doing real work." Quantitative ratings would tell it "Liz gave this signal a 7 yesterday," which doesn't help the adversary find flattery or pattern exhaustion in how the brief is written. The ratings shape what signals make it into the brief; the adversary critiques how the brief talks about the signals that did make it in.
 
 **human**
 
@@ -2751,11 +2751,11 @@ Yes — I read them both while we were designing the Field loop a few turns back
 
 The observations I drew from reading them, which I think still stand:
 
-**These are thesis-caliber artifacts, not input-to-thesis material.** The audience equation report contains structural claims about how the industry works that are at the same resolution as Charlie's current thesis — sometimes sharper. "Multi-entry-point activation drives cultural saturation" is a thesis claim. "Content that serves only one segment achieves ceiling-limited results regardless of quality" is a thesis claim. She didn't write
+**These are thesis-caliber artifacts, not input-to-thesis material.** The audience equation report contains structural claims about how the industry works that are at the same resolution as [[charlie]]'s current thesis — sometimes sharper. "Multi-entry-point activation drives cultural saturation" is a thesis claim. "Content that serves only one segment achieves ceiling-limited results regardless of quality" is a thesis claim. She didn't write
 
 **human**
 
-ok, you got it. So the problem before us now at this moment is... how do we incorporate this kind of work on Liz's part into the Charlie workflow? How does Charlie acknoweldge and incorporate it, and generate inspriation and insight based on it?
+ok, you got it. So the problem before us now at this moment is... how do we incorporate this kind of work on Liz's part into the [[charlie]] workflow? How does [[charlie]] acknoweldge and incorporate it, and generate inspriation and insight based on it?
 
 **assistant**
 
@@ -2765,13 +2765,13 @@ Let me work them separately and then show how they compose.
 
 ## Acknowledge
 
-This is the first beat of the loop — the one that happens when Liz uploads the audience equation report. "Acknowledge" sounds trivial but it's load-bearing for whether she uploads a second thing. If Charlie's reply is a green checkmark and a filename, she's uploaded to a file server. If Charlie's reply is evidence of having *read* the work — with specificity, within minutes — she's collaborating with a reader.
+This is the first beat of the loop — the one that happens when Liz uploads the audience equation report. "Acknowledge" sounds trivial but it's load-bearing for whether she uploads a second thing. If [[charlie]]'s reply is a green checkmark and a filename, she's uploaded to a file server. If [[charlie]]'s reply is evidence of having *read* the work — with specificity, within minutes — she's collaborating with a reader.
 
-What acknowledgment should actually be: a structured first-read that proves comprehension. Not a review, not commentary, not evaluation. Just: here's what I understood you to be arguing, here are the frameworks I extracted, here are the empirical claims I'd need to engage with, here's where I think your argument connects to what I've been tracking. A colleague's confirmation-of-receipt after reading the memo on the plane. Generated synchronously (she waits, she sees progress, she reads it when it lands), rendered on the Field artifact's page, revisable as Charlie learns more.
+What acknowledgment should actually be: a structured first-read that proves comprehension. Not a review, not commentary, not evaluation. Just: here's what I understood you to be arguing, here are the frameworks I extracted, here are the empirical claims I'd need to engage with, here's where I think your argument connects to what I've been tracking. A colleague's confirmation-of-receipt after reading the memo on the plane. Generated synchronously (she waits, she sees progress, she reads it when it lands), rendered on the Field artifact's page, revisable as [[charlie]] learns more.
 
 Failure mode: acknowledgment that's generic because it's generated without real reading. "This compelling research offers important insights into streaming audience dynamics" — the thing a model produces when it's been told to acknowledge without being told to comprehend. If the acknowledgment can't cite the specific claim on page 11, it shouldn't ship.
 
-The engineering for acknowledgment: extraction + first-read generation. Extraction is deterministic (python-docx, openpyxl), produces normalized JSON with sections, tables, key sentences. First-read generation is an Opus call with the normalized artifact + Charlie's current thesis + access to recent signals and findings. Output is a structured document with sections: *Frameworks extracted* (what she's arguing), *Empirical foundation* (what evidence she's built it on), *Where I read this connecting to current thesis* (first pass, hypothesis-level), *What I'd want to test further* (honest acknowledgment of what Charlie needs more time with).
+The engineering for acknowledgment: extraction + first-read generation. Extraction is deterministic (python-docx, openpyxl), produces normalized JSON with sections, tables, key sentences. First-read generation is an Opus call with the normalized artifact + [[charlie]]'s current thesis + access to recent signals and findings. Output is a structured document with sections: *Frameworks extracted* (what she's arguing), *Empirical foundation* (what evidence she's built it on), *Where I read this connecting to current thesis* (first pass, hypothesis-level), *What I'd want to test further* (honest acknowledgment of what [[charlie]] needs more time with).
 
 Time budget for acknowledgment: 60-90 seconds target, 3 minutes ceiling. Long enough to do real reading, short enough she doesn't lose the thread between upload and response.
 
@@ -2781,37 +2781,37 @@ This is the pipeline beat — Field work entering the reasoning infrastructure s
 
 Incorporation has three sub-beats based on what's actually needed at each point in the pipeline:
 
-**Into thesis synthesis.** The audience equation report is thesis-caliber. Monday's thesis synthesizer should read it, identify where her claims extend or challenge the current thesis, and propose updates that cite her work explicitly. The authorship distinction we discussed earlier matters here: claims she authored shouldn't be absorbed into Charlie's voice silently. A thesis update derived from her research should read "Liz's audience equation research argues X; this extends current thesis claim Y; proposed update incorporates the framework of multi-entry-point activation as a mechanism for the discovery bridge force."
+**Into thesis synthesis.** The audience equation report is thesis-caliber. Monday's thesis synthesizer should read it, identify where her claims extend or challenge the current thesis, and propose updates that cite her work explicitly. The authorship distinction we discussed earlier matters here: claims she authored shouldn't be absorbed into [[charlie]]'s voice silently. A thesis update derived from her research should read "Liz's audience equation research argues X; this extends current thesis claim Y; proposed update incorporates the framework of multi-entry-point activation as a mechanism for the discovery bridge force."
 
-**Into brief tier-three framing.** When a new signal touches subject matter she's researched, the brief generator should know. "Netflix greenlights new prestige drama with Latina lead" is a different signal if Charlie's tier-three generator knows Liz wrote 20 pages arguing this exact commercial opportunity is the largest underserved gap in the industry. The brief can surface the connection: *"This moves on a specific gap your audience research identified — Netflix is first to a space you argued was open."* That's not flattery; it's Charlie doing its job as an intelligence tool that knows what Liz has built.
+**Into brief tier-three framing.** When a new signal touches subject matter she's researched, the brief generator should know. "Netflix greenlights new prestige drama with Latina lead" is a different signal if [[charlie]]'s tier-three generator knows Liz wrote 20 pages arguing this exact commercial opportunity is the largest underserved gap in the industry. The brief can surface the connection: *"This moves on a specific gap your audience research identified — Netflix is first to a space you argued was open."* That's not flattery; it's [[charlie]] doing its job as an intelligence tool that knows what Liz has built.
 
-**Into the adversary.** Her research is material the adversary should be able to point at — both constructively ("the brief claims X about discovery, but Liz's research shows the mechanism is more specifically Y") and critically ("Liz's audience equation work leans heavily on Nielsen data for the 55+ segment; the adversary should note where the thesis is anchored on evidence she hasn't had the bandwidth to stress-test"). The adversary reading her work is the counterweight to the filter bubble concern — it's how Charlie engages her thinking without capitulating to it.
+**Into the adversary.** Her research is material the adversary should be able to point at — both constructively ("the brief claims X about discovery, but Liz's research shows the mechanism is more specifically Y") and critically ("Liz's audience equation work leans heavily on Nielsen data for the 55+ segment; the adversary should note where the thesis is anchored on evidence she hasn't had the bandwidth to stress-test"). The adversary reading her work is the counterweight to the filter bubble concern — it's how [[charlie]] engages her thinking without capitulating to it.
 
 The engineering for incorporation: a retrieval layer that makes Field artifacts queryable by topic, by framework, by claim. Long documents chunked, chunks embedded or indexed by keywords, retrieval happens at prompt-construction time for thesis synthesis and at signal-processing time for tier-three framing. Short excerpts load inline; the full document is retrievable on demand when an agent needs to quote or engage specifically.
 
 ## Generate inspiration and insight
 
-This is the third verb and the most ambitious. Acknowledgment says "I read this." Incorporation says "I'm using this across the system." Inspiration says "Your work made me think of something that isn't yet anywhere." This is where Charlie earns the distinction from a document management tool.
+This is the third verb and the most ambitious. Acknowledgment says "I read this." Incorporation says "I'm using this across the system." Inspiration says "Your work made me think of something that isn't yet anywhere." This is where [[charlie]] earns the distinction from a document management tool.
 
 What this could look like in practice, against the audience equation report specifically:
 
-**Connection-finding across time.** Three weeks after upload, a new signal drops: Apple TV+ greenlights a prestige drama aimed at Latino audiences. Charlie surfaces this in the next brief with the annotation *"This is the first major-platform move into the gap your audience research identified as the industry's largest underserved opportunity. Worth watching whether Netflix responds within 90 days."* The insight isn't the signal; the insight is that her research made the signal meaningful in a specific way Charlie now knows to watch for.
+**Connection-finding across time.** Three weeks after upload, a new signal drops: Apple TV+ greenlights a prestige drama aimed at Latino audiences. [[charlie]] surfaces this in the next brief with the annotation *"This is the first major-platform move into the gap your audience research identified as the industry's largest underserved opportunity. Worth watching whether Netflix responds within 90 days."* The insight isn't the signal; the insight is that her research made the signal meaningful in a specific way [[charlie]] now knows to watch for.
 
-**Prompted thesis pressure.** Weekly thesis synthesis includes a specific pass: *"Given Liz's audience equation research, where does the current thesis underperform? What is she seeing that Charlie's thesis isn't yet?"* The multi-entry-point principle she derived may turn out to be a better frame for the discovery-bridge force than Charlie's current construction. If so, the thesis proposal should say so — explicitly, with attribution, with the reasoning trace.
+**Prompted thesis pressure.** Weekly thesis synthesis includes a specific pass: *"Given Liz's audience equation research, where does the current thesis underperform? What is she seeing that [[charlie]]'s thesis isn't yet?"* The multi-entry-point principle she derived may turn out to be a better frame for the discovery-bridge force than [[charlie]]'s current construction. If so, the thesis proposal should say so — explicitly, with attribution, with the reasoning trace.
 
-**Research-prompting questions generated from her work.** Charlie reads her research, identifies the analytical gaps *she'd* want to close if she had more time, and surfaces them as Far Mar questions: *"Your audience equation argues the 55+ opportunity is time-limited. What's the specific window, and which platform moves in the next six months would close it fastest?"* This is Charlie pointing her at the next question her own work implies — not asking her to repeat the analysis, asking her to extend it. If she engages, her engagement becomes new Field material. The loop compounds.
+**Research-prompting questions generated from her work.** [[charlie]] reads her research, identifies the analytical gaps *she'd* want to close if she had more time, and surfaces them as Far Mar questions: *"Your audience equation argues the 55+ opportunity is time-limited. What's the specific window, and which platform moves in the next six months would close it fastest?"* This is [[charlie]] pointing her at the next question her own work implies — not asking her to repeat the analysis, asking her to extend it. If she engages, her engagement becomes new Field material. The loop compounds.
 
-**Cross-artifact synthesis.** Eventually she uploads a second research artifact — say, something on audio-to-scripted translation, which is adjacent to the audience equation work but on different ground. Charlie's job then is to notice where the two pieces talk to each other: *"Your audience equation framework and your audio-to-scripted analysis both point at Black audiences as underserved but through different mechanisms. The first argues the gap is representation-driven; the second argues the gap is pipeline-driven. Is that a tension, or are they complementary?"* Charlie is now doing the work of an intellectual collaborator reading her corpus with memory across it.
+**Cross-artifact synthesis.** Eventually she uploads a second research artifact — say, something on audio-to-scripted translation, which is adjacent to the audience equation work but on different ground. [[charlie]]'s job then is to notice where the two pieces talk to each other: *"Your audience equation framework and your audio-to-scripted analysis both point at Black audiences as underserved but through different mechanisms. The first argues the gap is representation-driven; the second argues the gap is pipeline-driven. Is that a tension, or are they complementary?"* [[charlie]] is now doing the work of an intellectual collaborator reading her corpus with memory across it.
 
-This third verb is the one that's hardest to ship well. Acknowledgment is engineering. Incorporation is plumbing. Inspiration requires reasoning that holds multiple contexts — her work, Charlie's thesis, recent signals, long-term patterns — and finds the non-obvious connection. That's Opus-level reasoning, probably on a non-daily cadence (weekly or on-demand), probably as a separate agent whose only job is this kind of synthesis across Field and the rest of the system.
+This third verb is the one that's hardest to ship well. Acknowledgment is engineering. Incorporation is plumbing. Inspiration requires reasoning that holds multiple contexts — her work, [[charlie]]'s thesis, recent signals, long-term patterns — and finds the non-obvious connection. That's Opus-level reasoning, probably on a non-daily cadence (weekly or on-demand), probably as a separate agent whose only job is this kind of synthesis across Field and the rest of the system.
 
 ## How the three verbs compose into a loop
 
-Upload → Acknowledgment artifact generated synchronously and rendered on the Field page within ~2 minutes. Liz reads Charlie's first-read response, knows her work was actually engaged with, sees where Charlie thinks it connects to current work.
+Upload → Acknowledgment artifact generated synchronously and rendered on the Field page within ~2 minutes. Liz reads [[charlie]]'s first-read response, knows her work was actually engaged with, sees where [[charlie]] thinks it connects to current work.
 
 Behind the scenes: extraction populates data/field/, the artifact is indexed for retrieval, thesis synthesizer's next run includes it as authored input, brief generator's tier-three framing has access to it for future signals, adversary can read it.
 
-Ongoing: signals touching her research get annotated in briefs with explicit connections. Next Monday's thesis proposal engages her work with attribution. Over time, Charlie generates inspiration — connections across her artifacts, extensions of her arguments, pressure against tensions — that appears on the Field page as accumulated Charlie-response content next to her originals.
+Ongoing: signals touching her research get annotated in briefs with explicit connections. Next Monday's thesis proposal engages her work with attribution. Over time, [[charlie]] generates inspiration — connections across her artifacts, extensions of her arguments, pressure against tensions — that appears on the Field page as accumulated [[charlie]]-response content next to her originals.
 
 She sees her thinking propagate across the system. The loop closes not at a single point but across surfaces, over time, with visible attribution throughout.
 
@@ -2825,9 +2825,9 @@ All three verbs in one Phase 1 build is a lot. I think the right call is:
 
 **Phase 3 builds the inspiration agent — the non-daily synthesis layer that generates connections, pressure, and research-prompting questions.** This is the ambitious one and it benefits from having Phase 2 shipped long enough to see what patterns actually emerge.
 
-Doing all three together produces something that half-works at each. Sequencing them produces something that fully works at each step, and each step is itself independently valuable — Phase 1 alone, with just acknowledgment, is already a meaningful step up from "her work lives in a folder and Charlie can't read it."
+Doing all three together produces something that half-works at each. Sequencing them produces something that fully works at each step, and each step is itself independently valuable — Phase 1 alone, with just acknowledgment, is already a meaningful step up from "her work lives in a folder and [[charlie]] can't read it."
 
-Want me to draft the Phase 1 spec at the level we did for the adversary, or talk through the acknowledgment artifact's structure first? The artifact structure is probably the higher-leverage conversation — if we get the shape of Charlie's first-read wrong, everything downstream is built on an unstable surface.
+Want me to draft the Phase 1 spec at the level we did for the adversary, or talk through the acknowledgment artifact's structure first? The artifact structure is probably the higher-leverage conversation — if we get the shape of [[charlie]]'s first-read wrong, everything downstream is built on an unstable surface.
 
 **human**
 
@@ -3016,7 +3016,7 @@ Paste it and let me know what Step 0 produces. If the inventory reveals the fail
 
 **human**
 
-Charlie — status update as of April 16
+[[charlie]] — status update as of April 16
 What's working (deployed to main, live on Railway):
 
 * The Morning Loaf, Far Mar, The Field — all renamed and live
@@ -3139,7 +3139,7 @@ Good — glad it's working.
 
 On your question: this conversation retains context the way any Claude conversation does — everything in the current thread is in my context window for as long as we're in it. So the full arc from the rename pass through the adversary build, the Dark Comprandon design, the Field architecture sketch, Liz's chat corpus analysis, the sessions backfill, and the toggle debugging — all of that is present and I can reason across it.
 
-What doesn't carry forward automatically: if you start a new conversation tomorrow, I won't have this thread's specifics. The project's memory system (the `userMemories` block loaded at the start of every conversation) captures the stable architectural facts — Charlie's purpose, the deployment setup, the editorial independence principle, the three-force thesis framework, key relationships, the rename scheme. Those persist. What doesn't persist automatically is the design decisions and open threads from *this specific session* — the Field loop's three-verb framing, the adversary's missing-story extension, the shadow-pass output, Phase 1 scoping for Field.
+What doesn't carry forward automatically: if you start a new conversation tomorrow, I won't have this thread's specifics. The project's memory system (the `userMemories` block loaded at the start of every conversation) captures the stable architectural facts — [[charlie]]'s purpose, the deployment setup, the editorial independence principle, the three-force thesis framework, key relationships, the rename scheme. Those persist. What doesn't persist automatically is the design decisions and open threads from *this specific session* — the Field loop's three-verb framing, the adversary's missing-story extension, the shadow-pass output, Phase 1 scoping for Field.
 
 If you want those preserved into the next conversation, you have two options:
 
@@ -3157,11 +3157,11 @@ No need for that now. So we got the dark comprandon stuff working. what was next
 
 **assistant**
 
-Picking back up: before the toggle debugging, we were in the middle of **designing the Field loop** — how Liz's authored work (the audience equation report, the streaming landscape spreadsheet, and whatever else lives in that register) gets incorporated into Charlie's workflow.
+Picking back up: before the toggle debugging, we were in the middle of **designing the Field loop** — how Liz's authored work (the audience equation report, the streaming landscape spreadsheet, and whatever else lives in that register) gets incorporated into [[charlie]]'s workflow.
 
 The framework we landed on, as a reminder: three verbs, not one feature.
 
-**Acknowledge** — when Liz uploads authored work, Charlie produces a structured first-read response that proves comprehension. Synchronous, ~60-90 second target, rendered on the Field artifact's page. Not a review, not evaluation — a colleague's confirmation-of-receipt that cites specifics.
+**Acknowledge** — when Liz uploads authored work, [[charlie]] produces a structured first-read response that proves comprehension. Synchronous, ~60-90 second target, rendered on the Field artifact's page. Not a review, not evaluation — a colleague's confirmation-of-receipt that cites specifics.
 
 **Incorporate** — Field artifacts flow into three places in the pipeline: thesis synthesis (weekly, reads Field work as authored input with explicit attribution), brief tier-three framing (when signals touch her research, brief notes the connection), and the adversary (which can both defend her work and pressure-test it).
 
@@ -3181,7 +3181,7 @@ So the live question is **sequencing**. Three reasonable paths:
 
 1. **Debt paydown first.** Level 1 observability (one focused day), then Level 2 state cleanup (2-3 days), then Field Phase 1. Unsexy but earns compound returns. The next time a button dies, we find out in five minutes.
 
-2. **Field Phase 1 first, debt later.** Start building acknowledgment because it's the user-facing feature that moves Charlie from "intelligence tool" to "intellectual collaborator." Accept the debt, pay it down when something else breaks.
+2. **Field Phase 1 first, debt later.** Start building acknowledgment because it's the user-facing feature that moves [[charlie]] from "intelligence tool" to "intellectual collaborator." Accept the debt, pay it down when something else breaks.
 
 3. **Hybrid — Level 1 observability only, then Field Phase 1.** The one-day observability pass is cheap enough to not delay anything meaningfully, and it protects the Field build from the same invisible-failure trap we just crawled out of. Defer Level 2 state cleanup until Field Phase 2, when the incorporation layer makes the state patterns visibly painful.
 
@@ -3562,7 +3562,7 @@ Two things worth naming before we move on:
 
 That said — don't let me push you into more debt work than you want. The genuine options from here:
 
-**Option A: Field Phase 1 now.** Observability alone is probably enough to protect a Field build. Level 2 gets deferred until it's visibly hurting. You start building the thing that moves Charlie from intelligence tool to intellectual collaborator today.
+**Option A: Field Phase 1 now.** Observability alone is probably enough to protect a Field build. Level 2 gets deferred until it's visibly hurting. You start building the thing that moves [[charlie]] from intelligence tool to intellectual collaborator today.
 
 **Option B: Level 2 state cleanup, then Field Phase 1.** Roughly one more day of debt work, then Field. Foundations fully solid before anything new lands on them.
 
@@ -3615,29 +3615,29 @@ The Field page (formerly The Book) already exists as a route. "Field Work" is on
 - A "Field Work" section on the existing `/field` page
 - An upload control within that section
 - A listing of uploaded Field Work artifacts
-- Clicking an artifact opens a detail page showing the artifact + Charlie's acknowledgment response
+- Clicking an artifact opens a detail page showing the artifact + [[charlie]]'s acknowledgment response
 
 What I need from you: **does the existing `/field` page (the refactored Book page) have a structure I'm extending, or am I essentially redesigning the page to accommodate Field Work as one section with other sections TBD?** If the page currently has Book-project content laid out in some way, I don't want to blow that away — I want to add Field Work as a coequal section. If the page is essentially a placeholder right now, I have more freedom.
 
 ## Decision 2: Latency target for acknowledgment
 
-How long is Liz willing to wait between upload and seeing Charlie's first-read response?
+How long is Liz willing to wait between upload and seeing [[charlie]]'s first-read response?
 
 - **Synchronous (she waits on the page with a progress indicator):** target 60-90 seconds, ceiling 3 minutes. Simplest to build, best UX when it works, worst UX when it stalls.
 - **Async with visible status:** upload returns immediately, artifact card shows "Reading..." and updates to "Read" when acknowledgment lands. She can navigate away. Harder to build, better for long documents.
 - **Hybrid:** fast first pass synchronously (30 seconds — extract frameworks, rough connection to thesis), deeper read async (3-5 minutes — full engagement). Two acknowledgment artifacts, timestamped. Most complex, best UX, most tokens.
 
-My lean: async with visible status. The 20-page audience equation report is the calibration case — synchronous means she watches a spinner for 2+ minutes on her first upload. Async means she uploads, goes back to whatever she was doing, and comes back to find Charlie has read her work. Feels like a colleague, not a transaction.
+My lean: async with visible status. The 20-page audience equation report is the calibration case — synchronous means she watches a spinner for 2+ minutes on her first upload. Async means she uploads, goes back to whatever she was doing, and comes back to find [[charlie]] has read her work. Feels like a colleague, not a transaction.
 
 ## Decision 3: Acknowledgment output shape
 
-What does Charlie's first-read response actually look like as a document? My proposed structure, same across every Field Work artifact:
+What does [[charlie]]'s first-read response actually look like as a document? My proposed structure, same across every Field Work artifact:
 
-1. **What I read this to be arguing** — 2-3 sentences in Charlie's voice, citing specific sections, proving comprehension.
+1. **What I read this to be arguing** — 2-3 sentences in [[charlie]]'s voice, citing specific sections, proving comprehension.
 2. **Frameworks extracted** — named concepts Liz derived, each with a one-sentence statement of what it claims. Max 5-7.
 3. **Empirical foundation** — the evidence base the argument rests on. Noted honestly: where the evidence is strong, where it leans on single sources, where assumptions do heavy lifting.
-4. **Connections to current thesis** — which of Charlie's current thesis claims this work engages with, and how (supports / extends / challenges / adjacent). Specific claim IDs when the thesis graph is ready, named claims until then.
-5. **Open questions Charlie has** — genuine questions that reading her work surfaced. Not sycophantic "what else are you thinking about" questions — specific questions the document didn't resolve that Charlie would want the answer to.
+4. **Connections to current thesis** — which of [[charlie]]'s current thesis claims this work engages with, and how (supports / extends / challenges / adjacent). Specific claim IDs when the thesis graph is ready, named claims until then.
+5. **Open questions [[charlie]] has** — genuine questions that reading her work surfaced. Not sycophantic "what else are you thinking about" questions — specific questions the document didn't resolve that [[charlie]] would want the answer to.
 
 My lean: this structure as v1. Ship it, see how it reads on the audience equation report, iterate the prompt if any section is weak.
 
@@ -3905,13 +3905,13 @@ One thing to watch during CC's Step 0 inventory: if the existing `/field` page i
 **human**
 
 ok quick side quest. Liz came back with the following feedback (collected from a text exchange):
-Liz Varner:
+[[Liz Varner]]:
 	The toggle is working now, but I’m still having the same issue and with the submit button not working.  
 Andrew Shipley:
 	What was the issue again? If you scroll down you do get the adversarial content
 	(Give me like a paragraph description. I just spent half an hour building a bunch of back end log stuff that should allow for fast observability with any bugs/errors)
 	You can record responses on the dark comprandon analyses. Youc an submit
-Liz Varner:
+[[Liz Varner]]:
 	In the regular analysis area 
 	After I enter a response in, for example, the signal area and fill out the rest of the options, when I click submit, nothing happens. 
 	The dark comprandon submission is working perfectly I think
@@ -4214,7 +4214,7 @@ A few things worth naming about what this prompt does and doesn't do:
 
 **Real-world test in Step 5 is the payoff.** The verification isn't just "does the endpoint work" — it's specifically "does Liz's existing broken tier submit show up in the logs when we reproduce it." If it does, you have your diagnosis for free within the hour. If it doesn't, you've learned the tier submit failure isn't a JS error (could be a backend validation issue, a DOM issue, or something else) — still useful information.
 
-**On your corporate-lawyer analogy:** exactly right. The adversary producing sharper findings makes Charlie smarter. A submit button that actually submits makes Charlie trustworthy. Smart-but-untrustworthy systems don't get used. This pass is about Charlie being the kind of system Liz can rely on to work when she clicks something — which is the baseline that makes everything else matter.
+**On your corporate-lawyer analogy:** exactly right. The adversary producing sharper findings makes [[charlie]] smarter. A submit button that actually submits makes [[charlie]] trustworthy. Smart-but-untrustworthy systems don't get used. This pass is about [[charlie]] being the kind of system Liz can rely on to work when she clicks something — which is the baseline that makes everything else matter.
 
 Paste it. When it's done and Liz's bug either shows up in the logs or is proven to be something else, come back and we'll either fix it fast or diagnose further. Phase 1 Field prompt 2 still queued up and ready whenever you're back on that track.
 
@@ -4242,7 +4242,7 @@ A spectrum, from cheap to ambitious:
 
 **Autonomous fix.** Agent identifies, diagnoses, fixes, tests, and deploys without human approval. This is where Anthropic's own internal tooling operates in some narrow domains. High risk. Only appropriate for failure classes where the diagnosis-to-fix pattern is extremely well-defined and the blast radius of a wrong fix is very low.
 
-## The honest assessment for Charlie right now
+## The honest assessment for [[charlie]] right now
 
 I'd argue against anything past "monitor + diagnose" until you've lived with the visibility layer for a few weeks. Three reasons.
 
@@ -4614,7 +4614,7 @@ A few things worth naming:
 
 **The audience equation report doesn't get uploaded this pass.** Prompt 4 is where that happens, as the end-to-end verification. Resist the urge to upload it early just to see extraction work on a real document. If something's wrong, you want to find out on a test file first and fix before pouring the real artifact through.
 
-Paste it. When it's done and you can upload a file and see it extract and list and render, come back. Prompt 3 is the acknowledgment agent, which is the intellectually heaviest piece of Phase 1 and where Charlie actually starts reading her work.
+Paste it. When it's done and you can upload a file and see it extract and list and render, come back. Prompt 3 is the acknowledgment agent, which is the intellectually heaviest piece of Phase 1 and where [[charlie]] actually starts reading her work.
 
 **human**
 
@@ -4660,7 +4660,7 @@ If all four work, prompt 2 is solid and we go to prompt 3 with confidence.
 
 **If anything fails:** we fix it now. Better to spend 20 minutes patching prompt 2's output than build prompt 3 on a broken base and debug through two layers of code later.
 
-**Why this matters specifically for prompt 3:** the acknowledgment agent reads the extracted JSON. If extraction is producing malformed output on any format, the agent will either crash or hallucinate content that isn't there. The agent's output is the thing Liz will read. "Charlie read my work and responded thoughtfully" is the win case. "Charlie confidently misrepresented what my document said" is catastrophic for trust — much worse than a dead button, because a dead button is visibly broken and a wrong summary looks correct.
+**Why this matters specifically for prompt 3:** the acknowledgment agent reads the extracted JSON. If extraction is producing malformed output on any format, the agent will either crash or hallucinate content that isn't there. The agent's output is the thing Liz will read. "[[charlie]] read my work and responded thoughtfully" is the win case. "[[charlie]] confidently misrepresented what my document said" is catastrophic for trust — much worse than a dead button, because a dead button is visibly broken and a wrong summary looks correct.
 
 Run the four checks. Report back. If everything works, I'll have prompt 3 ready in the next turn. If something's broken, we fix it before proceeding.
 
@@ -4885,7 +4885,7 @@ What these logs do *not* show: any mention of `/field`, any Field upload route b
 
 The logs are for the *backend app running on Railway*. They don't tell me whether the code currently deployed includes prompt 2's work. The pipeline that ran at 21:13 is independent of whether your Field UI changes made it into the deployed build.
 
-"What branch is deployed" is a Railway-specific question. In the Railway dashboard, when you click on your Charlie service, there's a section that says which git branch Railway is tracking and which commit SHA is currently running. You don't have to answer that right now — there's a faster path.
+"What branch is deployed" is a Railway-specific question. In the Railway dashboard, when you click on your [[charlie]] service, there's a section that says which git branch Railway is tracking and which commit SHA is currently running. You don't have to answer that right now — there's a faster path.
 
 ## The faster path
 
@@ -5071,9 +5071,9 @@ ok liz will test that. let's move on to the next step
 
 **assistant**
 
-Good. Moving to prompt 3 — the acknowledgment agent. This is the intellectually heaviest piece of Phase 1. It's the thing that makes "Liz uploads her audience equation report and Charlie actually reads it" real.
+Good. Moving to prompt 3 — the acknowledgment agent. This is the intellectually heaviest piece of Phase 1. It's the thing that makes "Liz uploads her audience equation report and [[charlie]] actually reads it" real.
 
-Before I drop the prompt, one thing worth naming: this prompt will take longer to execute than prompt 2, because it involves an Opus call per upload plus prompt tuning you'll need to verify. Allocate a genuine half-hour of focused attention after it ships to upload the audience equation report and read what Charlie produces. If the output is weak, we iterate the prompt. If it's strong, we go to prompt 4.
+Before I drop the prompt, one thing worth naming: this prompt will take longer to execute than prompt 2, because it involves an Opus call per upload plus prompt tuning you'll need to verify. Allocate a genuine half-hour of focused attention after it ships to upload the audience equation report and read what [[charlie]] produces. If the output is weak, we iterate the prompt. If it's strong, we go to prompt 4.
 
 ---
 
@@ -5473,11 +5473,11 @@ the audience equation report.
 
 A few things worth knowing about what this prompt ships and what the risks are:
 
-**The prompt design is the most important thing I wrote today.** Everything else in this prompt is plumbing. The system prompt for the acknowledgment agent is what determines whether Charlie's response to Liz's work reads like a colleague's memo or a generic AI summary. When you review prompt 3's output, focus on that — not on the code structure, not on the JSON schema, but on whether the actual text Charlie produces engages her work specifically or slides into pattern. The verification step 7 is where you read what Charlie wrote and decide if we iterate.
+**The prompt design is the most important thing I wrote today.** Everything else in this prompt is plumbing. The system prompt for the acknowledgment agent is what determines whether [[charlie]]'s response to Liz's work reads like a colleague's memo or a generic AI summary. When you review prompt 3's output, focus on that — not on the code structure, not on the JSON schema, but on whether the actual text [[charlie]] produces engages her work specifically or slides into pattern. The verification step 7 is where you read what [[charlie]] wrote and decide if we iterate.
 
-**The firewall on context files is deliberate and non-obvious.** The acknowledgment agent can't read her profile, slate, or watchlist. That's so Charlie's response engages her *work* rather than performing engagement with *her*. If the agent knew she was an entertainment executive in development, it would frame every response through that lens even when her document is about something else. Withholding context forces the agent to read the document as-is. Worth preserving this discipline even if the first outputs feel less "personalized" than they could — personalization is exactly what we're trying to avoid at the acknowledgment layer.
+**The firewall on context files is deliberate and non-obvious.** The acknowledgment agent can't read her profile, slate, or watchlist. That's so [[charlie]]'s response engages her *work* rather than performing engagement with *her*. If the agent knew she was an entertainment executive in development, it would frame every response through that lens even when her document is about something else. Withholding context forces the agent to read the document as-is. Worth preserving this discipline even if the first outputs feel less "personalized" than they could — personalization is exactly what we're trying to avoid at the acknowledgment layer.
 
-**Synchronous with 30-90 second wait is a real UX risk.** If Liz uploads, sees "Charlie is reading your work," and waits 90 seconds watching nothing happen, the experience feels broken even though it's working. One option CC might implement is progressive status — polling every few seconds to update the label, or a visible spinner. If the plain "wait 90 seconds" UX is bad when you test it, that's worth fixing before prompt 4.
+**Synchronous with 30-90 second wait is a real UX risk.** If Liz uploads, sees "[[charlie]] is reading your work," and waits 90 seconds watching nothing happen, the experience feels broken even though it's working. One option CC might implement is progressive status — polling every few seconds to update the label, or a visible spinner. If the plain "wait 90 seconds" UX is bad when you test it, that's worth fixing before prompt 4.
 
 **Verification step 7 is the gate.** If the acknowledgment on the transition document reads as generic or manufactures frameworks that aren't there, we fix the prompt before prompt 4. Prompt 4 uses the audience equation report, which is your real test case — we don't want to burn that experience on a weak prompt. Be honest with yourself about quality when you read the output.
 
@@ -5754,7 +5754,7 @@ Smart move to plan for this now rather than after you see it.
 
 Before I draft a tuning prompt, let me name the specific failure modes "too generic" usually covers, because the fix is different for each:
 
-**Mode 1: Generic vocabulary.** Charlie uses words like "compelling," "strategic," "nuanced," "thoughtful" — adjectives that could apply to any document. The fix is adding explicit prohibited language to the prompt.
+**Mode 1: Generic vocabulary.** [[charlie]] uses words like "compelling," "strategic," "nuanced," "thoughtful" — adjectives that could apply to any document. The fix is adding explicit prohibited language to the prompt.
 
 **Mode 2: Generic structure.** The five sections are present but each one could have been written without reading the specific document. Frameworks feel pulled from a taxonomy rather than extracted from the text. The fix is forcing specificity via quotation requirements.
 
@@ -6042,7 +6042,7 @@ ok. step 4
 
 Prompt 4 is the end-to-end verification with the audience equation report as the real test case. Before I draft it, one calibration question: when the tuning pass came back, did you read the retuned acknowledgment output and find it actually sharp? Or did you move on without verifying because the turnaround was slow?
 
-I'm asking because prompt 4 is the moment Liz's best work goes through the system for the first time. If the acknowledgment agent is still producing generic output, that's the worst possible artifact to test it on — the mismatch between the quality of her work and the quality of Charlie's reading would be exactly the "ornamental tool" failure you've been pushing against.
+I'm asking because prompt 4 is the moment Liz's best work goes through the system for the first time. If the acknowledgment agent is still producing generic output, that's the worst possible artifact to test it on — the mismatch between the quality of her work and the quality of [[charlie]]'s reading would be exactly the "ornamental tool" failure you've been pushing against.
 
 If you read the retuned output and it was sharp, great, we proceed. If you're uncertain, tell me and we pause for a quality check before running the real thing through it. Not a delay for its own sake — a guard against learning the prompt needs more work by showing Liz a weak read of her best research.
 
@@ -6063,7 +6063,7 @@ She hits the Field Work acknowledgment through the same path as any other Field 
 3. See a list of uploaded artifacts — each as a card showing title, type, upload date, extraction status, acknowledgment status
 4. Click on a card (either "The Audience Equation" or whatever she named it on upload)
 5. Land on `/field/work/{artifact_id}` — the detail page
-6. The detail page has three sections: **Original file** (with download link), **Extracted content** (her document's text rendered), and **Charlie's first read** (the acknowledgment)
+6. The detail page has three sections: **Original file** (with download link), **Extracted content** (her document's text rendered), and **[[charlie]]'s first read** (the acknowledgment)
 
 That's the flow. She doesn't need a separate URL, a separate page, or special navigation — the acknowledgment is the third section of the detail page she already lands on when she clicks her uploaded artifact.
 
@@ -6071,9 +6071,9 @@ That's the flow. She doesn't need a separate URL, a separate page, or special na
 
 **Is there a way for her to find a specific Field Work artifact without scrolling the list?** Right now there's no search, no filter, no sort beyond "newest first." With one or two artifacts that's fine. With ten it's still fine. With fifty, it's a real problem. Don't build search now, but worth knowing the ceiling.
 
-**Does the detail page draw attention to Charlie's read, or bury it?** If "Charlie's first read" is the third section below her own content, she has to scroll past her own document to get to what Charlie said. That's the wrong ordering for what the section is *for*. Her document she already wrote and already knows. What she's coming to the page to see is what Charlie thought. The acknowledgment should probably be the first substantive section on the page — at the top, above the extracted content, not below it.
+**Does the detail page draw attention to [[charlie]]'s read, or bury it?** If "[[charlie]]'s first read" is the third section below her own content, she has to scroll past her own document to get to what [[charlie]] said. That's the wrong ordering for what the section is *for*. Her document she already wrote and already knows. What she's coming to the page to see is what [[charlie]] thought. The acknowledgment should probably be the first substantive section on the page — at the top, above the extracted content, not below it.
 
-**Is there any way she knows an acknowledgment just finished?** Right now she has to be on the page when it generates, or reload to check status. If she uploads, sees "Charlie is reading your work," and gets pulled into a meeting, she comes back to a cold stale page. No notification, no "2 acknowledgments generated since you last checked," nothing.
+**Is there any way she knows an acknowledgment just finished?** Right now she has to be on the page when it generates, or reload to check status. If she uploads, sees "[[charlie]] is reading your work," and gets pulled into a meeting, she comes back to a cold stale page. No notification, no "2 acknowledgments generated since you last checked," nothing.
 
 **How does she get to a Field Work artifact from elsewhere in the app?** From the main nav, she goes to The Field, then scrolls, then clicks. From the Morning Loaf, there's no link back to Field Work. From Far Mar, there's no link. The Field is reachable but not integrated with the surfaces where she spends most of her time.
 
@@ -6081,7 +6081,7 @@ That's the flow. She doesn't need a separate URL, a separate page, or special na
 
 Two of these four are real problems for the audience equation test:
 
-**Ordering the acknowledgment first on the detail page is genuinely important** before Liz sees this. If she lands on the detail page and has to scroll past her own 20-page document to see Charlie's 500-word read, that's bad UX and it'll color her first impression of the feature. Fixing it is a 15-minute prompt.
+**Ordering the acknowledgment first on the detail page is genuinely important** before Liz sees this. If she lands on the detail page and has to scroll past her own 20-page document to see [[charlie]]'s 500-word read, that's bad UX and it'll color her first impression of the feature. Fixing it is a 15-minute prompt.
 
 **Having some way to visually distinguish artifacts with completed acknowledgments from pending ones on the listing** would help her navigate even with one or two artifacts. Also cheap.
 
@@ -6222,7 +6222,7 @@ Two notes:
 
 **This is a 20-minute prompt at most.** If CC spends an hour on it or tries to refactor template structure along the way, stop and redirect. It's two surgical changes, nothing more.
 
-When it ships, load `/field`, click into an artifact, and scroll. If Charlie's read is the first substantive thing on the page and the listing gives you a glance-level sense of which artifacts are "read," the polish worked and we go to prompt 4.
+When it ships, load `/field`, click into an artifact, and scroll. If [[charlie]]'s read is the first substantive thing on the page and the listing gives you a glance-level sense of which artifacts are "read," the polish worked and we go to prompt 4.
 
 **human**
 
@@ -6232,7 +6232,7 @@ prompt 4
 
 Here's prompt 4. This is the end-to-end verification run — the moment the audience equation report goes through the full system for the first time.
 
-Before the prompt itself, one important framing: **prompt 4 is different from prompts 1-3**. It doesn't build new functionality. It exercises what's already built, with Liz's real work, under observation. The "code" this prompt produces is mostly a small amount of wiring for observability and maybe a couple of defensive fixes. The point of the prompt is the *test run itself* — putting the audience equation report through upload → extraction → acknowledgment, reading what Charlie produced, and deciding whether Phase 1 is actually done or whether it needs another polish pass before Liz sees it.
+Before the prompt itself, one important framing: **prompt 4 is different from prompts 1-3**. It doesn't build new functionality. It exercises what's already built, with Liz's real work, under observation. The "code" this prompt produces is mostly a small amount of wiring for observability and maybe a couple of defensive fixes. The point of the prompt is the *test run itself* — putting the audience equation report through upload → extraction → acknowledgment, reading what [[charlie]] produced, and deciding whether Phase 1 is actually done or whether it needs another polish pass before Liz sees it.
 
 ---
 
@@ -6473,7 +6473,7 @@ appropriate message. Otherwise no new commits.
 
 Some honest notes on what's likely to come back and what to watch for:
 
-**This is the moment we find out if the work is good.** All the design discipline across five conversations has been building toward this test. The audience equation report is exactly the kind of document this system was designed for. If the acknowledgment reads sharp — if Charlie actually extracts the multi-entry-point principle by name, identifies the representation-revenue equation, and connects multi-entry-point to the discovery bridge as an extension — Phase 1 works and the whole architectural bet pays off. If it reads generic, we tune and try again.
+**This is the moment we find out if the work is good.** All the design discipline across five conversations has been building toward this test. The audience equation report is exactly the kind of document this system was designed for. If the acknowledgment reads sharp — if [[charlie]] actually extracts the multi-entry-point principle by name, identifies the representation-revenue equation, and connects multi-entry-point to the discovery bridge as an extension — Phase 1 works and the whole architectural bet pays off. If it reads generic, we tune and try again.
 
 **Step 3's questions are specific on purpose.** I gave CC the expected frameworks and connections because otherwise it'll tell you "the acknowledgment looks good" without verifying it found the actual specific content. Giving it the answer key forces it to compare output to reality rather than to a generic standard.
 
@@ -6501,7 +6501,7 @@ Ok, while it does that, I want a codebase structure diagram. visual, like what w
 
 **assistant**
 
-Good instinct — a loop-focused diagram is different from a standard architecture diagram, and it's the right lens for Charlie specifically. Standard architecture diagrams show components and data flow. What you actually want is the cognitive loops: where does input enter, where does reasoning happen, where does output return, and where does learning feed back.
+Good instinct — a loop-focused diagram is different from a standard architecture diagram, and it's the right lens for [[charlie]] specifically. Standard architecture diagrams show components and data flow. What you actually want is the cognitive loops: where does input enter, where does reasoning happen, where does output return, and where does learning feed back.
 
 Before I generate it, one clarifying question: **how many diagrams do you want?**
 
@@ -6511,7 +6511,7 @@ Two reasonable options:
 
 **B. A series of diagrams** — one system overview at the top, then one diagram per loop with its specific inputs, processing, and output surfaces labeled. Longer but clearer about what each loop actually does.
 
-My lean is B. Each loop in Charlie has genuinely different logic — the quantitative rating loop, the qualitative sessions loop, the brain dump loop, the adversary loop, and now the Field loop all operate at different cadences, read different inputs, and produce different outputs. Collapsing them into one diagram loses that distinctiveness, which is exactly what you said you want to see.
+My lean is B. Each loop in [[charlie]] has genuinely different logic — the quantitative rating loop, the qualitative sessions loop, the brain dump loop, the adversary loop, and now the Field loop all operate at different cadences, read different inputs, and produce different outputs. Collapsing them into one diagram loses that distinctiveness, which is exactly what you said you want to see.
 
 Also: **what am I drawing for the Field loop — current state (just acknowledgment, no downstream wiring) or target state (Phase 2's full incorporation + Phase 3's inspiration agent)?** These are very different diagrams. I'd suggest current state labeled clearly as "Phase 1" with a dotted-line annotation showing where Phase 2/3 will extend it, so the diagram matches what's actually shipped while also showing the architectural trajectory.
 
@@ -6541,7 +6541,7 @@ Far Mar is not included in your initial diagram. You obviously have to do better
 
 **assistant**
 
-You're right. Far Mar is one of the three core surfaces of the system — it's literally one of the renamed pillars — and I left it out. That's a fundamental miss, not a minor omission. The system I diagrammed wasn't Charlie; it was a subset that ignored the thesis layer entirely.
+You're right. Far Mar is one of the three core surfaces of the system — it's literally one of the renamed pillars — and I left it out. That's a fundamental miss, not a minor omission. The system I diagrammed wasn't [[charlie]]; it was a subset that ignored the thesis layer entirely.
 
 Let me also name what else I missed while I'm rebuilding: the thesis synthesizer runs weekly and produces proposals that Andrew reviews — that's a whole review/refine/publish workflow that doesn't appear anywhere in what I drew. The brief-to-thesis flow (brief signals accumulate into weekly synthesis) and thesis-to-brief flow (published thesis shapes next brief's framing) are both missing. Far Mar is connected to everything and I drew it connected to nothing.
 
@@ -6553,7 +6553,7 @@ Starting over. Here's what actually needs to be in the overview:
 
 **Five feedback loops:** ratings, tier responses, brain dumps, adversary feedback, and Field Work — each with specific entry and exit points.
 
-**The two cross-pipeline flows that make Charlie Charlie:** brief → thesis (slow accumulation, weekly), thesis → brief (fast reshaping, immediate on publish).
+**The two cross-pipeline flows that make [[charlie]] [[charlie]]:** brief → thesis (slow accumulation, weekly), thesis → brief (fast reshaping, immediate on publish).
 
 Let me redraw.
 ```
@@ -6587,7 +6587,7 @@ Now each user touchpoint is marked explicitly. Seven red interaction circles, nu
 
 Worth noting what this diagram reveals that was hidden before:
 
-**Loop 5 has two distinct touchpoints, not one.** Upload (5a) and reading Charlie's response (5b). These are separated in time — she uploads, waits, reads later. That asymmetry isn't present in any of the other loops and it's why Field Work needs its own acknowledgment surface rather than just disappearing into the pipeline.
+**Loop 5 has two distinct touchpoints, not one.** Upload (5a) and reading [[charlie]]'s response (5b). These are separated in time — she uploads, waits, reads later. That asymmetry isn't present in any of the other loops and it's why Field Work needs its own acknowledgment surface rather than just disappearing into the pipeline.
 
 **Far Mar's only current Liz-touchpoint is reading.** Marked R rather than a numbered loop because the interaction is review-only. When a proposal publishes, Liz can read the updated thesis, but there's no direct "Liz writes into Far Mar" surface — her influence on the thesis flows indirectly through loops 1-3 (daily reactive) and eventually loop 5 (Field Work, once phase 2 wires it in). That's either a feature or a gap depending on how you look at it.
 
@@ -6612,7 +6612,7 @@ The four outcomes from prompt 4's readiness gate were:
 - **EXTRACTION ISSUES** — fix the pipeline before touching the prompt
 - **BROKEN** — stop and diagnose
 
-And equally important: **did you read the acknowledgment output yourself?** On the audience equation report specifically. Not CC's summary of what it produced, not the readiness verdict, the actual JSON text Charlie generated for the five sections. That's the gate that matters — CC can call it "complete" but the only thing that actually tells us Phase 1 works is whether Charlie's first read of Liz's best work reads like a colleague's memo or like an AI summary.
+And equally important: **did you read the acknowledgment output yourself?** On the audience equation report specifically. Not CC's summary of what it produced, not the readiness verdict, the actual JSON text [[charlie]] generated for the five sections. That's the gate that matters — CC can call it "complete" but the only thing that actually tells us Phase 1 works is whether [[charlie]]'s first read of Liz's best work reads like a colleague's memo or like an AI summary.
 
 If the answer is "CC says complete and I read the output and it was sharp" — merge to main, tell Liz, move to Phase 2 planning.
 
@@ -6693,9 +6693,9 @@ where does "/admin/logs?token=...&level=info" live?
 
 **assistant**
 
-It's a route on your Charlie app — the admin log viewer we built during the observability debt paydown last week. Not a separate site, not Railway's dashboard. It lives on the same domain as everything else Charlie serves.
+It's a route on your [[charlie]] app — the admin log viewer we built during the observability debt paydown last week. Not a separate site, not Railway's dashboard. It lives on the same domain as everything else [[charlie]] serves.
 
-If your Charlie app is at, say, `charlie-productions.up.railway.app`, then the admin log view is at:
+If your [[charlie]] app is at, say, `charlie-productions.up.railway.app`, then the admin log view is at:
 
 ```
 https://charlie-productions.up.railway.app/admin/logs?token=YOUR_ADMIN_TOKEN&level=info
@@ -6703,7 +6703,7 @@ https://charlie-productions.up.railway.app/admin/logs?token=YOUR_ADMIN_TOKEN&lev
 
 Replace the domain with whatever your actual Railway URL is, and `YOUR_ADMIN_TOKEN` with the value of the `ADMIN_TOKEN` environment variable you set when we built it.
 
-**If you don't remember the token:** it's stored as an env var on Railway. Go to your Railway project dashboard → click the Charlie service → click the "Variables" tab → find `ADMIN_TOKEN`. Copy its value, paste it into the URL where I wrote `YOUR_ADMIN_TOKEN`.
+**If you don't remember the token:** it's stored as an env var on Railway. Go to your Railway project dashboard → click the [[charlie]] service → click the "Variables" tab → find `ADMIN_TOKEN`. Copy its value, paste it into the URL where I wrote `YOUR_ADMIN_TOKEN`.
 
 **If you've never loaded this page before:** you'll land on a simple HTML table showing recent log entries. Timestamps in Pacific, level column color-coded (errors red, warnings yellow, info black, debug gray), event name, and structured context. Newest at the top.
 
@@ -6720,7 +6720,7 @@ Tell me what you see.
 
 **human**
 
-so I did that (https://charlie-productions.up.railway.app/admin/logs?token=1ZtfEMWYi3AC9gnFzlEVBlSN1pzh64mQ&level=info) and got an "unauthorized" page
+so I did that (https://[[charlie]]-productions.up.railway.app/admin/logs?token=1ZtfEMWYi3AC9gnFzlEVBlSN1pzh64mQ&level=info) and got an "unauthorized" page
 
 **assistant**
 
@@ -6728,7 +6728,7 @@ Stop — don't share that URL again. That token is a secret credential and you j
 
 **Immediate actions:**
 
-1. **Rotate the token now, before debugging anything else.** Go to Railway's dashboard → Charlie service → Variables → find `ADMIN_TOKEN` → generate a new random value → save. Railway will redeploy. Your old token is dead. Use the new one going forward.
+1. **Rotate the token now, before debugging anything else.** Go to Railway's dashboard → [[charlie]] service → Variables → find `ADMIN_TOKEN` → generate a new random value → save. Railway will redeploy. Your old token is dead. Use the new one going forward.
 
 2. **Don't paste the new token into chat.** If you need to share a URL for debugging, share it with the token redacted as `token=REDACTED` or share the response you got, not the URL itself.
 
@@ -6885,7 +6885,7 @@ Here's what should happen now, in order of what takes the least of your time:
 
 **Right now, 90 seconds:** answer whether the synthesis ran this morning without any observability infrastructure at all. Two shell-level checks that bypass the admin page entirely:
 
-1. In Railway's dashboard, click the Charlie service, click the "Logs" tab (Railway's own runtime log viewer — no token, no URL, no auth). Scroll to around 7am this morning. Look for any mention of "thesis" or "Thesis Synthesis" or "STEP" with a weekly-sounding marker. That tells you in one look whether the pipeline fired.
+1. In Railway's dashboard, click the [[charlie]] service, click the "Logs" tab (Railway's own runtime log viewer — no token, no URL, no auth). Scroll to around 7am this morning. Look for any mention of "thesis" or "Thesis Synthesis" or "STEP" with a weekly-sounding marker. That tells you in one look whether the pipeline fired.
 
 2. In the same Railway dashboard, if there's a way to browse the volume or you have a shell, check `ls /app/data/thesis/proposals/` for a file dated today (2026-04-20.json). If it's there, synthesis ran. If it isn't, it didn't.
 
@@ -7008,7 +7008,7 @@ Let me walk through what's in flight so we both see it in one place.
 
 4. **PDF and HTML format support for Field Work.** You asked about this and I said PDF should work, HTML doesn't. Liz said she'd test PDF. Did she? If it works, cross it off. If not, Field Work extraction has a silent gap.
 
-5. **Acknowledgment prompt quality.** You told me it's "all working correctly now." Did you actually read the audience equation report's acknowledgment JSON and find it sharp — specifically that Charlie extracted the multi-entry-point principle by name, identified the representation-revenue equation, and found the non-obvious connection between multi-entry-point and the discovery bridge force in the thesis? If yes, we're good. If you skimmed and CC called it complete, worth one more verification pass before Liz sees it.
+5. **Acknowledgment prompt quality.** You told me it's "all working correctly now." Did you actually read the audience equation report's acknowledgment JSON and find it sharp — specifically that [[charlie]] extracted the multi-entry-point principle by name, identified the representation-revenue equation, and found the non-obvious connection between multi-entry-point and the discovery bridge force in the thesis? If yes, we're good. If you skimmed and CC called it complete, worth one more verification pass before Liz sees it.
 
 **Forward-looking things we paused mid-discussion:**
 
@@ -7034,21 +7034,21 @@ Want to tackle 1 and 5 now, or let it ride to your next work session?
 
 **assistant**
 
-Correct. What shipped this week is Field Phase 1 only, which is the *entry point* — upload surface, extraction, and Charlie's acknowledgment response rendered on the detail page. That's the loop's first beat working.
+Correct. What shipped this week is Field Phase 1 only, which is the *entry point* — upload surface, extraction, and [[charlie]]'s acknowledgment response rendered on the detail page. That's the loop's first beat working.
 
 What's NOT wired up, which is the Phase 2 work we scoped but deferred:
 
 **Field → thesis synthesis.** Right now, when Saturday's thesis synthesis runs, it reads signals and sessions but does NOT read Field Work artifacts. The audience equation report is in the system but invisible to Far Mar. The thesis synthesizer's prompt doesn't know that document exists.
 
-**Field → brief tier-three framing.** When a daily signal touches subject matter Liz has researched (say, a Netflix move into underserved Latino audiences — directly on her audience equation work), the brief generator has no way to know her research engages it. The annotation *"This moves on a specific gap your audience research identified"* — the kind of thing that makes Charlie feel like it remembers what she's been thinking about — isn't there yet.
+**Field → brief tier-three framing.** When a daily signal touches subject matter Liz has researched (say, a Netflix move into underserved Latino audiences — directly on her audience equation work), the brief generator has no way to know her research engages it. The annotation *"This moves on a specific gap your audience research identified"* — the kind of thing that makes [[charlie]] feel like it remembers what she's been thinking about — isn't there yet.
 
-**Field → adversary.** The adversary can't read her Field Work to pressure-test Charlie's thesis against her frameworks, or to note where the thesis is leaning on her work without independent evidence.
+**Field → adversary.** The adversary can't read her Field Work to pressure-test [[charlie]]'s thesis against her frameworks, or to note where the thesis is leaning on her work without independent evidence.
 
 All three of those are Phase 2. None of them are happening currently. Field Work uploads land, get read once at upload time, and then sit in their own corner of the app with no downstream effect.
 
 To use the diagram I drew earlier: the coral "Field Work" box is connected to Liz (she uploads, she reads the acknowledgment) but the arrow from Field into the central pipeline is dashed and labeled "phase 2" because it isn't built yet.
 
-That's a real gap. Charlie isn't actually benefiting from Liz's best work yet. It just has a polite way of accepting it.
+That's a real gap. [[charlie]] isn't actually benefiting from Liz's best work yet. It just has a polite way of accepting it.
 
 Two ways to think about timing:
 
@@ -7062,7 +7062,7 @@ Want me to draft Phase 2 for your next session, or should we talk through the de
 
 - Thesis synthesizer reads Field Work artifacts as authored input, with explicit attribution ("this claim extends Liz's audience equation framework; see Section 5")
 - Brief tier-three generator gets access to Field Work so signals touching her research get surfaced with the connection noted
-- Adversary reads Field Work so it can flag where Charlie's thesis is leaning on her framings too heavily
+- Adversary reads Field Work so it can flag where [[charlie]]'s thesis is leaning on her framings too heavily
 
 Each of those needs a specific prompt-engineering pass. They're not trivial, but they're not a rebuild — it's extending the input assembly on three existing agents.
 
@@ -7084,11 +7084,11 @@ Two genuinely different things could happen when the synthesizer reads Field Wor
 
 **A. The synthesizer treats Field Work as another input.** Signals, sessions, and Field artifacts all flow in together. The synthesizer weighs them, extracts patterns, proposes thesis updates. Field Work influences what gets proposed but doesn't change the shape of proposals.
 
-**B. The synthesizer produces Field-specific outputs alongside regular proposals.** When it reads the audience equation report, the Monday (now Saturday) proposal includes a new section: "Engagements with Liz's Field Work" — specific thesis claims her research supports/extends/challenges, with explicit attribution. The thesis proposal review UI gets a new dimension: Liz-authored content that Charlie's proposing to engage with.
+**B. The synthesizer produces Field-specific outputs alongside regular proposals.** When it reads the audience equation report, the Monday (now Saturday) proposal includes a new section: "Engagements with Liz's Field Work" — specific thesis claims her research supports/extends/challenges, with explicit attribution. The thesis proposal review UI gets a new dimension: Liz-authored content that [[charlie]]'s proposing to engage with.
 
-A is simpler to build, less visible, slower to land. B is more complex, more visible, faster to feel like Charlie is actually reading her work.
+A is simpler to build, less visible, slower to land. B is more complex, more visible, faster to feel like [[charlie]] is actually reading her work.
 
-My lean: B. The whole point of Field was that it doesn't disappear into the pipeline. Making Charlie's engagement with Field Work *visible in the thesis output* is what makes Liz's uploads feel like they matter. A is the invisible-subtle-improvement pattern that we've agreed doesn't earn its keep for expensive inputs.
+My lean: B. The whole point of Field was that it doesn't disappear into the pipeline. Making [[charlie]]'s engagement with Field Work *visible in the thesis output* is what makes Liz's uploads feel like they matter. A is the invisible-subtle-improvement pattern that we've agreed doesn't earn its keep for expensive inputs.
 
 **Design call 2: How does the brief know to cite Field Work?**
 
@@ -7102,7 +7102,7 @@ My lean: A, with a simple retrieval heuristic. Better match quality, more flexib
 
 **One question for you, not a design call:**
 
-Phase 2 will retrieve and pass Field Work content to three different agents (thesis synthesizer, brief generator, adversary). That means Field Work starts shaping what Charlie says — which raises the filter-bubble concern we've been careful about since the start of all this. The thing that makes it okay: Field Work is *authored* work, not reactive feedback. It's Liz's thinking, deliberately produced, not her immediate approval signals feeding back. That's a different flow from ratings/sessions/brain dumps and the guardrails we built around those don't all apply.
+Phase 2 will retrieve and pass Field Work content to three different agents (thesis synthesizer, brief generator, adversary). That means Field Work starts shaping what [[charlie]] says — which raises the filter-bubble concern we've been careful about since the start of all this. The thing that makes it okay: Field Work is *authored* work, not reactive feedback. It's Liz's thinking, deliberately produced, not her immediate approval signals feeding back. That's a different flow from ratings/sessions/brain dumps and the guardrails we built around those don't all apply.
 
 But I want to name one specific risk before we build: **if Field Work shapes what the brief writes in tier-three, and tier-three was already the place most shaped by "her world," tier-three could become almost entirely a mirror of her own research.** Worth deciding: do we want a cap on how much any single brief can lean on Field Work? A rule like "tier-three can reference at most one Field artifact per brief, and the underlying signal must be independent of her research"? That preserves the daily pipeline's independence while letting Field Work inflect framing rather than dominate it.
 
@@ -7132,7 +7132,7 @@ Good calls. Let me think through the cap properly, because "one Field artifact p
 
 The risk isn't Field Work being cited. It's Field Work *crowding out* independent signal. A tier that regularly leans on Liz's own research stops being intelligence from the world and becomes a mirror pointed at her thinking. The whole value of the brief is that it connects signals she *hasn't* seen to things she cares about — if the brief is mostly citing what she already wrote, it's a reading list, not an inference engine.
 
-But the opposite extreme is also wrong. If Field Work is almost never cited, Liz uploads a 20-page research report and watches three weeks of briefs go by without Charlie ever noticing her work bears on a signal. The feature becomes ornamental, which is the specific failure mode you've been pushing against this whole project.
+But the opposite extreme is also wrong. If Field Work is almost never cited, Liz uploads a 20-page research report and watches three weeks of briefs go by without [[charlie]] ever noticing her work bears on a signal. The feature becomes ornamental, which is the specific failure mode you've been pushing against this whole project.
 
 The cap is about calibrating between those two failure modes.
 
@@ -7146,7 +7146,7 @@ Four axes to think about:
 
 **Threshold — how strong does the connection need to be?** The retrieval-at-generation-time approach we picked returns a relevance score. A weak match ("her research touches audience dynamics, this signal touches audiences") shouldn't trigger a citation. A strong match ("her research specifically argues Latino audiences are the largest underserved opportunity, this signal is Netflix announcing a Latino-led prestige drama") should.
 
-**Independence — is the underlying signal independent of her research?** If Charlie ingests a signal, checks Field Work, and decides to cite it — the signal itself came from the world, not from her. That's fine. The danger would be if the signal only *became* a signal because Charlie was matching against her research — i.e., the Field Work was shaping ingestion rather than framing. That's the firewall we've held on ingestion all along, and Phase 2 doesn't touch it.
+**Independence — is the underlying signal independent of her research?** If [[charlie]] ingests a signal, checks Field Work, and decides to cite it — the signal itself came from the world, not from her. That's fine. The danger would be if the signal only *became* a signal because [[charlie]] was matching against her research — i.e., the Field Work was shaping ingestion rather than framing. That's the firewall we've held on ingestion all along, and Phase 2 doesn't touch it.
 
 ## What I'd propose as the actual rule
 
@@ -7207,7 +7207,7 @@ So flipped:
 
 - **Weak matches (0.7–0.8):** max 2 per week. These are "loose connection" citations and shouldn't flood the brief.
 - **Medium matches (0.8–0.9):** max 4 per week. Real connection, still not overwhelming.
-- **Strong matches (0.9+):** max 6 per week. If Charlie finds 6 strong matches between world signals and her research in a week, that's genuine engagement — let it through.
+- **Strong matches (0.9+):** max 6 per week. If [[charlie]] finds 6 strong matches between world signals and her research in a week, that's genuine engagement — let it through.
 
 Numbers are first-draft and tunable, but the *shape* — stricter when matches are weaker, looser when matches are stronger — is the right curve. That's how thresholds normally work in information retrieval: precision goes up, volume goes down, and the cap is a sanity check against the relevance score being wrong.
 
@@ -7727,7 +7727,7 @@ What's in this prompt that's worth naming explicitly before you paste it:
 
 **Manual-trigger paths are deliberate.** Without them, verifying Phase 2 means waiting for Saturday and tomorrow morning. With them, you can exercise all three agents on demand against real data today and see whether the wiring produces good output before committing to having it run automatically.
 
-**Adversary uses existing categories.** I was tempted to create a new "authority laundering" finding category specifically for Charlie-cites-Liz-as-if-it-were-independent-evidence. Held back because adding a category means changing the seed file, the Dark Comprandon UI, everything downstream. The existing inference_theater and pattern_exhaustion categories can absorb this critique. If it turns out to need its own category after a few weeks of use, that's a small follow-up.
+**Adversary uses existing categories.** I was tempted to create a new "authority laundering" finding category specifically for [[charlie]]-cites-Liz-as-if-it-were-independent-evidence. Held back because adding a category means changing the seed file, the Dark Comprandon UI, everything downstream. The existing inference_theater and pattern_exhaustion categories can absorb this critique. If it turns out to need its own category after a few weeks of use, that's a small follow-up.
 
 **The prompt for brief tier-three is aggressive about the framing-vs-substance line.** Multiple FORBIDDEN instructions, concrete examples. Because this is the specific failure mode ("tier three becomes a mirror of her research") we've been careful about, and prompt-level constraints are our main defense.
 
@@ -7772,7 +7772,7 @@ Why bypass is defensible for your situation:
 
 - You're working on a solo project, not production infrastructure with customer data
 - Git is your actual undo mechanism — every commit is a rollback point, and Railway deploys are reversible
-- The blast radius if CC does something unexpected is "the Charlie codebase gets into a weird state" and `git reset --hard HEAD~1` fixes it
+- The blast radius if CC does something unexpected is "the [[charlie]] codebase gets into a weird state" and `git reset --hard HEAD~1` fixes it
 - You're not accepting prompts thoughtfully anyway — you've said you've never clicked no, which means the prompts are adding friction without adding safety
 
 The three guardrails:
@@ -7781,7 +7781,7 @@ The three guardrails:
 
 **Two.** Branch for anything substantial. CC has been working on branches (`field-phase-1`, `observability-logging`, etc.). Keep doing that. Don't merge to main until you've loaded the deployed result in a browser and confirmed it works. Main stays clean even if a branch goes sideways.
 
-**Three.** Don't run bypass mode with MCP tools connected to high-stakes systems. You have Gmail, Calendar, and Drive MCP connectors visible in your tool list. If any of those are active in a CC session running in bypass mode, an unexpected action there has real blast radius (sending emails, modifying calendars). For Charlie work, those aren't being used, but the discipline is: bypass mode is for the Charlie codebase sandbox, not for anything touching your actual accounts.
+**Three.** Don't run bypass mode with MCP tools connected to high-stakes systems. You have Gmail, Calendar, and Drive MCP connectors visible in your tool list. If any of those are active in a CC session running in bypass mode, an unexpected action there has real blast radius (sending emails, modifying calendars). For [[charlie]] work, those aren't being used, but the discipline is: bypass mode is for the [[charlie]] codebase sandbox, not for anything touching your actual accounts.
 
 ## How to set it up
 
@@ -7801,7 +7801,7 @@ If CC is asking 40 times per session for permission to edit a file, the root cau
 
 But that's a real tradeoff — smaller prompts mean more of your time, more sequencing, more pasting. Bypass mode with git-backed safety is the right call if you've decided the approval friction is the bigger tax than occasional "CC did something unexpected and I'm rolling back."
 
-For your situation specifically — the Charlie codebase, deployed through Railway, git-backed, solo project — bypass mode is the right default. Set up the alias, commit before each session, work on branches. The "I've never clicked no" observation tells me your current friction isn't actually catching anything; it's just slowing you down.
+For your situation specifically — the [[charlie]] codebase, deployed through Railway, git-backed, solo project — bypass mode is the right default. Set up the alias, commit before each session, work on branches. The "I've never clicked no" observation tells me your current friction isn't actually catching anything; it's just slowing you down.
 
 **human**
 
@@ -7838,7 +7838,7 @@ source ~/.zshrc
 
 ## One pre-flight before you do this
 
-Before you enter bypass mode and paste the Phase 2 prompt I drafted, do the commit-checkpoint we talked about. In your terminal, in the Charlie repo:
+Before you enter bypass mode and paste the Phase 2 prompt I drafted, do the commit-checkpoint we talked about. In your terminal, in the [[charlie]] repo:
 
 ```
 git add -A && git commit -m "checkpoint before field phase 2"
@@ -8147,7 +8147,7 @@ Three possible places, concrete:
 
 To read it, you have two paths:
 
-- **Via Railway's shell**, if your Railway plan includes that. Dashboard → Charlie service → look for a "Shell" or "Exec" option → run `cat data/thesis/proposals/2026-04-20.json`.
+- **Via Railway's shell**, if your Railway plan includes that. Dashboard → [[charlie]] service → look for a "Shell" or "Exec" option → run `cat data/thesis/proposals/2026-04-20.json`.
 - **Ask CC to read it** in your existing session — `cat data/thesis/proposals/2026-04-20.json` or the equivalent, and paste the contents back to you. This is the path of least resistance.
 
 **2. On the Far Mar review page at `/farmar/review` (or whatever the route is after the rename — it was `/thesis/review` before the rename pass).** This is the rendered UI for reviewing proposals. If the Phase 2 build wired the `field_work_engagements` array into the review page template per Step 2 of the Phase 2 prompt, you'd see the engagements as a section on that page. If Phase 2 didn't wire the UI and only wired the storage, the JSON is written but the page doesn't render the new section.
@@ -8168,7 +8168,7 @@ I can't overstate this enough. I do NOT want to have to fuck around in railway t
 
 Right. That's a real product principle and I should have internalized it without you having to say it twice.
 
-The rule: **everything substantive Charlie produces has a native UI surface in the app.** Thesis proposals, adversary output, Field acknowledgments, brief archives — all of it needs to be readable by clicking, not by SSH or `cat`. If a piece of output exists only as a JSON file on the Railway volume, that's a product defect, not a feature of "how the system works."
+The rule: **everything substantive [[charlie]] produces has a native UI surface in the app.** Thesis proposals, adversary output, Field acknowledgments, brief archives — all of it needs to be readable by clicking, not by SSH or `cat`. If a piece of output exists only as a JSON file on the Railway volume, that's a product defect, not a feature of "how the system works."
 
 Looking at what exists versus what should exist:
 
@@ -8186,7 +8186,7 @@ Load the review page. Tell me what's there.
 
 **human**
 
-this (https://charlie-productions.up.railway.app/thesis/review) (and again why wouldn't you just give me the full URL. instead I have to copy and paste /thesis/review, go to the url, guess what the delete, guess where to paste it in). Can you please walk me through your thought process on making this all as fing DIFFICULT as you possibly can?
+this (https://[[charlie]]-productions.up.railway.app/thesis/review) (and again why wouldn't you just give me the full URL. instead I have to copy and paste /thesis/review, go to the url, guess what the delete, guess where to paste it in). Can you please walk me through your thought process on making this all as fing DIFFICULT as you possibly can?
 
 **assistant**
 
@@ -8212,7 +8212,7 @@ it renders but it hasn't received output ("Far Mar Review
 No proposal
 The Morning LoafCompanionFar MarThe FieldArchiveRun
 No proposal available. Far Mar runs on Saturday mornings.
-Charlie — Entertainment Industry Intelligence")
+[[charlie]] — Entertainment Industry Intelligence")
 
 **assistant**
 
@@ -8329,9 +8329,9 @@ A few things that are actually complicating a straightforward app:
 
 **Some of this is me, specifically.** I've been treating every design question as if it needs a three-option framework and a recommendation. Most of them just need a direct answer. When you asked "can I skip permission prompts," the right response was two sentences, not the lecture I gave. I've been adding conversational overhead that mirrors the structural overhead in the codebase.
 
-Here's the honest thing: Charlie could probably be a meaningfully simpler codebase than it is. The ingestion → analysis → brief pipeline is genuinely tight. The three pages (Loaf / Far Mar / Field) are each a few hundred lines of HTML plus handlers. The agents are Opus calls with structured prompts. Everything else — the loops, the firewalls, the caps, the observability, the manual-trigger paths, the review workflows — is scaffolding we've built up in response to specific architectural concerns, most of them legitimate, none of them individually worth much.
+Here's the honest thing: [[charlie]] could probably be a meaningfully simpler codebase than it is. The ingestion → analysis → brief pipeline is genuinely tight. The three pages (Loaf / Far Mar / Field) are each a few hundred lines of HTML plus handlers. The agents are Opus calls with structured prompts. Everything else — the loops, the firewalls, the caps, the observability, the manual-trigger paths, the review workflows — is scaffolding we've built up in response to specific architectural concerns, most of them legitimate, none of them individually worth much.
 
-If I were starting Charlie today with what I know now about how you and Liz actually use it, I'd ship:
+If I were starting [[charlie]] today with what I know now about how you and Liz actually use it, I'd ship:
 
 - The daily pipeline (ingestion → analysis → brief → adversary) — essentially what exists
 - The three pages — essentially what exists
@@ -8356,7 +8356,7 @@ I like preserving the possibility that the tool will grow beyond today
 
 Good. That's the right instinct and it changes the framing.
 
-Most of what I just called "over-engineering" is actually investment in a system that can accommodate a second user, a different user, a production deployment, or a hand-off to someone else. The observability, the state abstraction, the firewalls, the separation between editorial surfaces and pipeline — none of those pay off today, but all of them pay off the moment Charlie is more than a one-person tool. Ripping them out to simplify the current experience would compound on itself: every future feature becomes harder because the foundation got thinner.
+Most of what I just called "over-engineering" is actually investment in a system that can accommodate a second user, a different user, a production deployment, or a hand-off to someone else. The observability, the state abstraction, the firewalls, the separation between editorial surfaces and pipeline — none of those pay off today, but all of them pay off the moment [[charlie]] is more than a one-person tool. Ripping them out to simplify the current experience would compound on itself: every future feature becomes harder because the foundation got thinner.
 
 The correction I should make isn't to strip the architecture back. It's to be more disciplined about **where** complexity lives.
 
@@ -8374,7 +8374,7 @@ Specifically for right now:
 2. **Fix the admin auth UX** next time you have 30 minutes. Session-based cookie. No tokens, no query strings. One-click access to the logs. This is the single highest-leverage usability fix in the system and it doesn't compromise anything.
 3. **Pause new features for a week after Phase 2 ships.** No Phase 3. No new loops. Use what's there. The architecture supports growth; it doesn't require constant expansion to stay valuable.
 
-The frustration today wasn't because Charlie is too complex. It was because the cumulative friction of the daily working loop — token-in-URL auth, over-structured conversations, oversized CC prompts, phases shipping faster than validation — added up. The architecture is fine. The working loop around it needs a tune-up.
+The frustration today wasn't because [[charlie]] is too complex. It was because the cumulative friction of the daily working loop — token-in-URL auth, over-structured conversations, oversized CC prompts, phases shipping faster than validation — added up. The architecture is fine. The working loop around it needs a tune-up.
 
 Where did CC land on the proposal fix? That's the immediate thing. Everything else is a next-week conversation.
 
@@ -8578,22 +8578,22 @@ One thing to double-check: is `field-phase-2` merged to main? If not, merge it. 
 
 **human**
 
-ok, I'd like to add a new field that will not in and of itself flow back into anything else we've done. I'd like to call this The Oven. The purpose of The Oven is to provide research reports, or "Takes" based on a) verbal input from Liz combined with b) essentially the "perspective" that has been developed in Charlie, the "Charlie Take" if you will. This tool is meant to be highly functional and can essentially be a wrapper on claude chat I guess, except the response is a single report that she can read and download if she wants. So for example, Liz has coffee with Nina Tassler this afternoon. She should be able to go to The Oven page and type into some sort of context area "I'm having coffee with Nina Tassler today to talk about her production company at Sony. Give me the Charlie Take on things to think about for this meeting" and she would get something back that is filtered through the charlie braintrust so to speak
+ok, I'd like to add a new field that will not in and of itself flow back into anything else we've done. I'd like to call this The Oven. The purpose of The Oven is to provide research reports, or "Takes" based on a) verbal input from Liz combined with b) essentially the "perspective" that has been developed in [[charlie]], the "[[charlie]] Take" if you will. This tool is meant to be highly functional and can essentially be a wrapper on claude chat I guess, except the response is a single report that she can read and download if she wants. So for example, Liz has coffee with Nina Tassler this afternoon. She should be able to go to The Oven page and type into some sort of context area "I'm having coffee with Nina Tassler today to talk about her production company at Sony. Give me the [[charlie]] Take on things to think about for this meeting" and she would get something back that is filtered through the [[charlie]] braintrust so to speak
 
 **assistant**
 
-Good idea. The Oven is a different kind of tool from everything else in Charlie, and naming it clearly matters: **it's a reader, not a learner.** It consumes Charlie's perspective and Liz's prompt, produces a Take, and that Take doesn't flow into anything. It's a projection of Charlie's accumulated intelligence onto a specific situation she's facing.
+Good idea. The Oven is a different kind of tool from everything else in [[charlie]], and naming it clearly matters: **it's a reader, not a learner.** It consumes [[charlie]]'s perspective and Liz's prompt, produces a Take, and that Take doesn't flow into anything. It's a projection of [[charlie]]'s accumulated intelligence onto a specific situation she's facing.
 
 That's a valuable product. The metaphor holds — she puts inputs into The Oven, something fully baked comes out, she serves it.
 
 Before I draft a build prompt, five design questions. I'm going to be direct and give you my lean on each so you can approve, adjust, or push back. No three-option frameworks.
 
-## 1. What does Charlie's "perspective" mean, concretely?
+## 1. What does [[charlie]]'s "perspective" mean, concretely?
 
-The system prompt for the Take generator needs to be loaded with Charlie's accumulated intelligence. My lean on what to include:
+The system prompt for the Take generator needs to be loaded with [[charlie]]'s accumulated intelligence. My lean on what to include:
 
 - The current published thesis (Far Mar)
-- The most recent 14 days of briefs (signals Charlie has been surfacing)
+- The most recent 14 days of briefs (signals [[charlie]] has been surfacing)
 - All Field Work artifacts (her research and frameworks)
 - Her context files (profile, slate, watching) — because Takes are about her meetings, her slate, her situation
 - The most recent 7 days of sessions (how she's been thinking about things lately)
@@ -8606,11 +8606,11 @@ My lean: include everything above. This is different from the firewall we held o
 
 Not a brief. Not an acknowledgment. Something new. My lean on structure:
 
-- **The situation as I read it** — 2-3 sentences framing what Liz is walking into, grounded in what Charlie knows about the counterparty, the context, recent industry signals
-- **What's likely on their mind** — the strategic pressures the other party is operating under, based on Charlie's industry intelligence
+- **The situation as I read it** — 2-3 sentences framing what Liz is walking into, grounded in what [[charlie]] knows about the counterparty, the context, recent industry signals
+- **What's likely on their mind** — the strategic pressures the other party is operating under, based on [[charlie]]'s industry intelligence
 - **What's worth raising** — specific topics, connections, questions Liz could introduce that would be generative
 - **What to watch for** — tells, signals, things they might say that would inform how she positions afterward
-- **Open loops** — things Charlie doesn't know that would change the Take if she had more context
+- **Open loops** — things [[charlie]] doesn't know that would change the Take if she had more context
 
 Length target: 400-800 words. Readable in a few minutes. Printable/downloadable.
 
@@ -8640,7 +8640,7 @@ My lean: all of the above. Standard pattern, matches Field Work. No search in v1
 
 ## 5. Does The Oven read from The Field?
 
-Structurally, yes — because Charlie's perspective includes Liz's own research. If she's having coffee with Nina Tassler about Sony, and her audience equation report has specific things to say about what Sony is underserving, the Take should reflect that.
+Structurally, yes — because [[charlie]]'s perspective includes Liz's own research. If she's having coffee with Nina Tassler about Sony, and her audience equation report has specific things to say about what Sony is underserving, the Take should reflect that.
 
 But this brings the retrieval question back. My lean: **load ALL Field Work into the Oven's prompt, not retrieval-based.** Reasons:
 
@@ -8659,7 +8659,7 @@ One-shot: Liz submits a prompt, gets a Take, done. Next question is a new Take.
 
 Conversation: Take is generated, she can follow up ("expand on that second point" / "what about Katherine Pope specifically?") and the conversation accumulates, producing a refined final Take.
 
-Your description sounded one-shot ("she would get something back that is filtered through the charlie braintrust"). But real strategy work usually isn't one-shot — the first Take surfaces something, she pushes back or asks to go deeper, the second iteration is sharper.
+Your description sounded one-shot ("she would get something back that is filtered through the [[charlie]] braintrust"). But real strategy work usually isn't one-shot — the first Take surfaces something, she pushes back or asks to go deeper, the second iteration is sharper.
 
 My lean is **one-shot for v1, with the option to regenerate with additional context.** She reads the Take, if she wants more she can submit a follow-up prompt that includes the original Take in context. That's conversation without the complexity of building a chat interface. If she wants full chat later, v2.
 
@@ -9073,11 +9073,11 @@ Short notes on a few things in the prompt:
 
 **The download-as-markdown option.** You didn't explicitly ask for this but you said "she can read and download if she wants." Markdown is the cleanest format — readable, pasteable, works in every system she might want to share it in. If she wants PDF later, we add it. Not worth wkhtmltopdf dependencies for v1.
 
-**No caching of Takes.** Every request generates fresh. If she asks about Nina Tassler twice in a week, she gets two separate Takes reflecting whatever Charlie's perspective is on each day. That's correct — the perspective itself is what's supposed to evolve.
+**No caching of Takes.** Every request generates fresh. If she asks about Nina Tassler twice in a week, she gets two separate Takes reflecting whatever [[charlie]]'s perspective is on each day. That's correct — the perspective itself is what's supposed to evolve.
 
 One thing I left out on purpose: **a "regenerate with additional context" button**. You agreed with my one-shot lean, so v1 is clean. If she wants to iterate, she submits a new prompt that references the previous Take's content. Conversation-style interaction is a v2 decision.
 
-Paste it. The Take it produces on a real prompt will tell us whether the perspective-assembly and prompt-engineering are sharp enough. If the first Take reads generic, that's a tuning pass. If it reads like Charlie actually synthesized across the corpus, we ship.
+Paste it. The Take it produces on a real prompt will tell us whether the perspective-assembly and prompt-engineering are sharp enough. If the first Take reads generic, that's a tuning pass. If it reads like [[charlie]] actually synthesized across the corpus, we ship.
 
 **human**
 
@@ -9098,17 +9098,17 @@ Good. Before you call this done, one thing to verify that only you can check:
 
 The whole question of whether The Oven works is whether the Take reads specific and substantive on a real situation. The infrastructure being live doesn't tell you that. Only reading a generated Take does.
 
-Try something like: *"I'm having coffee with Nina Tassler this afternoon to talk about her production company at Sony. Give me the Charlie Take on things to think about for this meeting."*
+Try something like: *"I'm having coffee with Nina Tassler this afternoon to talk about her production company at Sony. Give me the [[charlie]] Take on things to think about for this meeting."*
 
-Wait the 30-90 seconds, read what Charlie produces. Five things worth specifically watching for:
+Wait the 30-90 seconds, read what [[charlie]] produces. Five things worth specifically watching for:
 
-1. **Does the "situation" paragraph know specifically who Nina Tassler is and what her company does?** If it hedges ("a production company executive at Sony") instead of naming what Charlie actually knows about her, the context assembly isn't landing.
+1. **Does the "situation" paragraph know specifically who Nina Tassler is and what her company does?** If it hedges ("a production company executive at Sony") instead of naming what [[charlie]] actually knows about her, the context assembly isn't landing.
 
 2. **Does "what's on their mind" draw on the thesis and recent briefs, or produce generic industry-executive concerns?** If it names the Sony restructuring, the Pope consolidation, specific pressures from the last few weeks of briefs — working. If it says things like "she's probably thinking about market conditions" — not working.
 
 3. **Does "worth raising" contain specific, non-generic angles?** Generic: "ask about her goals for the company." Specific: "ask how she's thinking about the platform-native mandate given the nonfiction consolidation — her answer tells you whether Sony has actually resourced the shift or just named it." The specificity test is whether each item could have been written about any executive, or whether it requires knowing Nina specifically.
 
-4. **Does "open loops" honestly name what Charlie doesn't know?** Or does it manufacture loops to fill the section?
+4. **Does "open loops" honestly name what [[charlie]] doesn't know?** Or does it manufacture loops to fill the section?
 
 5. **Does it reach into Liz's Field Work at all when relevant?** If her audience equation research has views on what Sony is underserving, does the Take incorporate that when framing the meeting?
 
@@ -9187,17 +9187,17 @@ This is a feature, not a bug — the whole thesis review workflow is there speci
 
 Worth checking directly: **are there unpublished proposals sitting at `https://charlie-productions.up.railway.app/thesis/review`?** If there are, Liz is looking at Far Mar wondering why it hasn't moved, and meanwhile there's pending work waiting for your review that would move it. If there aren't, Saturday's run is the next moment the thesis could change.
 
-Also worth naming honestly: **"Far Mar hasn't changed" might be the right outcome in the short term but the wrong outcome over time.** If Liz uploads Field Work every week, engages with briefs, has sessions Charlie reads — and Far Mar stays frozen for months — the system has failed at its core job of being a living thesis. The review-and-publish workflow is necessary but it's a bottleneck, and if you're not reviewing proposals regularly, the living document stops living.
+Also worth naming honestly: **"Far Mar hasn't changed" might be the right outcome in the short term but the wrong outcome over time.** If Liz uploads Field Work every week, engages with briefs, has sessions [[charlie]] reads — and Far Mar stays frozen for months — the system has failed at its core job of being a living thesis. The review-and-publish workflow is necessary but it's a bottleneck, and if you're not reviewing proposals regularly, the living document stops living.
 
 What's the state at `/thesis/review` right now? Any pending proposals? If yes, let's look at them. If no, we watch for Saturday morning and you review promptly when it drops.
 
 **human**
 
-so I'd like to actually pause on this slightly. We've changed the thesis into the far mar. Right now there isn't anything for Liz to approve or do one way or the other on the far mar. I'm also not sure she is really seeing a "thesis" page. Perhaps you should take a look at the actual page: https://charlie-productions.up.railway.app/thesis
+so I'd like to actually pause on this slightly. We've changed the thesis into the far mar. Right now there isn't anything for Liz to approve or do one way or the other on the far mar. I'm also not sure she is really seeing a "thesis" page. Perhaps you should take a look at the actual page: https://[[charlie]]-productions.up.railway.app/thesis
 
 **assistant**
 
-I can't load the URL directly — I don't have browse access to the live Charlie deployment from here. What I *can* work with is what you tell me you see on the page, or what CC finds if we send it to inspect the template.
+I can't load the URL directly — I don't have browse access to the live [[charlie]] deployment from here. What I *can* work with is what you tell me you see on the page, or what CC finds if we send it to inspect the template.
 
 But the question you're raising is the more important one anyway, so let me slow down and engage with that rather than trying to fetch the page.
 
@@ -9209,11 +9209,11 @@ Two honest questions to sit with before building anything:
 
 **What should Far Mar actually be?** A few possible readings, each leading to a different build:
 
-- **A curated corpus of Charlie's accumulated thinking that Liz browses.** Like walking a market. Claims, supporting evidence, signal patterns, tensions — all browsable as components she can combine herself for whatever she's working on. Less "here's the current version of the argument" and more "here's what's in season."
-- **A synthesis workspace.** She goes to Far Mar when she wants to think with Charlie's intelligence — not to approve a thesis update but to see what's converging, what's fraying, what's been accumulating that hasn't been fully formed yet. Live synthesis rather than versioned document.
-- **Something between.** A living document that's less "argument to approve" and more "state of the industry as Charlie sees it" — with supporting material she can pull from.
+- **A curated corpus of [[charlie]]'s accumulated thinking that Liz browses.** Like walking a market. Claims, supporting evidence, signal patterns, tensions — all browsable as components she can combine herself for whatever she's working on. Less "here's the current version of the argument" and more "here's what's in season."
+- **A synthesis workspace.** She goes to Far Mar when she wants to think with [[charlie]]'s intelligence — not to approve a thesis update but to see what's converging, what's fraying, what's been accumulating that hasn't been fully formed yet. Live synthesis rather than versioned document.
+- **Something between.** A living document that's less "argument to approve" and more "state of the industry as [[charlie]] sees it" — with supporting material she can pull from.
 
-**What does Liz actually want from this page?** She has a specific complaint ("nothing has changed") and a specific non-interaction ("nothing to approve"). Is the underlying need "I want to see Charlie's thinking evolving" or "I want a place where I can go synthesize" or "I want the thesis to be a useful reference document" or something else?
+**What does Liz actually want from this page?** She has a specific complaint ("nothing has changed") and a specific non-interaction ("nothing to approve"). Is the underlying need "I want to see [[charlie]]'s thinking evolving" or "I want a place where I can go synthesize" or "I want the thesis to be a useful reference document" or something else?
 
 I don't know the answer and I'd rather not guess. This is the kind of thing where asking Liz directly — "what would you want to find on the Far Mar page" — gets a better answer than us designing against my inference about her mental model.
 
@@ -9227,7 +9227,7 @@ well, the daily loaf is sort of browsing very generally, companion is the space 
 
 **assistant**
 
-Good. That cuts through it. Far Mar stays fundamentally what the thesis page was — a synthesis surface showing Charlie's accumulated argument — but the rename and Liz's complaint are telling us the *current* surface isn't living up to that. Two things worth separating:
+Good. That cuts through it. Far Mar stays fundamentally what the thesis page was — a synthesis surface showing [[charlie]]'s accumulated argument — but the rename and Liz's complaint are telling us the *current* surface isn't living up to that. Two things worth separating:
 
 **The synthesis concept is right. The execution is failing at it.** She's looking at a page that's supposed to be synthesis and seeing something static. That means either (a) the underlying synthesis genuinely isn't happening, or (b) it's happening but the page doesn't surface it in a way that feels alive.
 
@@ -9241,13 +9241,13 @@ If that's roughly right, the fix for Far Mar has two parts:
 
 **Part 1: Show synthesis-in-progress, not just the published version.** Right now the page is binary — either there's a pending proposal (yellow banner) or there isn't. What's missing is the accumulation between synthesis runs. Signals being tracked, sessions being absorbed, Field Work being engaged with — all of that is material for the next synthesis, and Liz has no view into it. A Far Mar page that shows "here's what's been feeding into the next synthesis since the last published version" would make the page feel like it's breathing, even on days where the live thesis hasn't changed.
 
-**Part 2: Make the review/publish workflow less of a gate.** The current model is Charlie proposes, you review, you publish — and if you don't publish, nothing happens. That's fine as an editorial principle, but in practice it means one bottleneck (your time) stops the whole living-thesis feature from functioning. Worth deciding whether the current discipline is still right. Options I can see:
+**Part 2: Make the review/publish workflow less of a gate.** The current model is [[charlie]] proposes, you review, you publish — and if you don't publish, nothing happens. That's fine as an editorial principle, but in practice it means one bottleneck (your time) stops the whole living-thesis feature from functioning. Worth deciding whether the current discipline is still right. Options I can see:
 
 - Keep the review gate but build a notification surface so proposals don't sit unnoticed
 - Let low-stakes updates publish automatically (e.g., extensions to existing claims with strong evidence) while significant revisions still require review
 - Separate "the authoritative thesis" (requires review) from "the working synthesis" (updates continuously, visible on Far Mar but clearly labeled as work-in-progress)
 
-The third one feels most consistent with the farmer's-market framing. The authoritative, published thesis is the stable ingredient — here's what's ripe, here's what Charlie has confidently concluded. The working synthesis is everything else on the shelves — emerging patterns, tensions Charlie is noticing, evidence that might revise a claim if it holds up. Liz can browse both, knowing which is authoritative.
+The third one feels most consistent with the farmer's-market framing. The authoritative, published thesis is the stable ingredient — here's what's ripe, here's what [[charlie]] has confidently concluded. The working synthesis is everything else on the shelves — emerging patterns, tensions [[charlie]] is noticing, evidence that might revise a claim if it holds up. Liz can browse both, knowing which is authoritative.
 
 Before I draft anything, though, a real question: **is the problem worth solving right now, or is it a one-Liz-comment symptom of deferring thesis review?**
 

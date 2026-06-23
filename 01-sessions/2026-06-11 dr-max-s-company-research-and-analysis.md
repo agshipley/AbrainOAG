@@ -104,7 +104,7 @@ This block is not supported on your current device yet.
 This block is not supported on your current device yet.
 ```
 
- I don't have access to previous chats since the search is scoped to this project, but I can see from the available skills that they're running a sophisticated multi-agent system called "feature-factory" for an "Orpheus" codebase with specialized agents handling research, story writing, spec writing, and backend work alongside human checkpoints.
+ I don't have access to previous chats since the search is scoped to this project, but I can see from the available skills that they're running a sophisticated multi-agent system called "feature-factory" for an "[[Orpheus]]" codebase with specialized agents handling research, story writing, spec writing, and backend work alongside human checkpoints.
 
 For the SKU visualization tool, I'm thinking through two approaches: a React artifact that generates interactive product mockups in Dr. Max's brand style (cream and botanical aesthetic) with a visual canvas showing different packaging formats like tins, jars, and tubes, or building out a component library with product card templates, a data model for SKUs with attributes like name, category, price, and hero ingredient, plus interactive features to toggle between different roadmap views and shelf layouts.
 
@@ -450,11 +450,11 @@ Kick off Phase 1 and ping me with anything CC produces that looks off — or whe
 
 **human**
 
-the folder is "Dr Max's" not whatever this drmax visualizer thing is
+the folder is "[[Dr Max's]]" not whatever this drmax visualizer thing is
 
 **assistant**
 
-Got it, the folder is already there as "Dr Max's" so I can skip the mkdir step and adjust the setup instructions accordingly.Got it — skip the mkdir then. With the folder already open in VS Code:
+Got it, the folder is already there as "[[Dr Max's]]" so I can skip the mkdir step and adjust the setup instructions accordingly.Got it — skip the mkdir then. With the folder already open in VS Code:
 
 ```bash
 cd "Dr Max's" && git init   # if it's not already a repo

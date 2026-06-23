@@ -3,7 +3,7 @@ type: session
 source: claude-code
 uuid: fd94f8c9-74d4-452f-96ab-18620f429e25
 title: "Fix glitches when entering buildings"
-project: "civilwarland"
+project: "[[civilwarland]]"
 cwd: "/Users/andrewshipley/projects/civilwarland"
 created: 2026-05-26
 updated: 2026-05-26
@@ -95,7 +95,7 @@ Now I'll apply the three fixes:
 
 **user**
 
-<ide_opened_file>The user opened the file /Users/andrewshipley/projects/civilwarland/AUTONOMOUS.md in the IDE. This may or may not be related to the current task.</ide_opened_file>
+<ide_opened_file>The user opened the file /Users/andrewshipley/projects/[[civilwarland]]/AUTONOMOUS.md in the IDE. This may or may not be related to the current task.</ide_opened_file>
 proceed in yolo mode (dangerous permissions)
 
 **assistant**
@@ -632,7 +632,7 @@ npm run lint
 
 Then: `git config core.hooksPath scripts` to activate locally, add `git config core.hooksPath scripts` to README as a one-time setup step for new clones, commit `scripts/pre-push` (and remove the note about `.git/hooks/` from any documentation), push.
 
-If you need specific details from before compaction (like exact code snippets, error messages, or content you generated), read the full transcript at: /Users/andrewshipley/.claude/projects/-Users-andrewshipley-projects-civilwarland/fd94f8c9-74d4-452f-96ab-18620f429e25.jsonl
+If you need specific details from before compaction (like exact code snippets, error messages, or content you generated), read the full transcript at: /Users/andrewshipley/.claude/projects/-Users-andrewshipley-projects-[[civilwarland]]/fd94f8c9-74d4-452f-96ab-18620f429e25.jsonl
 Continue the conversation from where it left off without asking the user any further questions. Resume directly — do not acknowledge the summary, do not recap what was happening, do not preface with "I'll continue" or similar. Pick up the last task as if the break never happened.
 
 **assistant**

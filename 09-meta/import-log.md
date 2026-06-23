@@ -15,3 +15,17 @@ One entry per extraction or enrichment pass. The `scripts/extract-entities.ts` s
 ---
 
 <!-- Extraction pass entries appended below -->
+
+## 2026-06-23 21:54 extract-entities --apply
+- Sessions scanned: 107
+- Sessions modified: 57
+- Wikilinks inserted: 3012
+- Stubs created: 5 (Wheelhouse, Dr Max's, trip-composer, civilwarland, lodging-agent)
+- Entity tiers: full=12 moderate=11 stub=0
+
+## 2026-06-23 21:56 extract-entities --apply
+- Sessions scanned: 107
+- Sessions modified: 0
+- Wikilinks inserted: 0
+- Stubs created: 0 (Wheelhouse, Dr Max's, trip-composer, civilwarland, lodging-agent)
+- Entity tiers: full=12 moderate=10 stub=1

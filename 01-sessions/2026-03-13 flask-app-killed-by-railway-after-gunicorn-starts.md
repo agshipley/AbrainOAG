@@ -17,7 +17,7 @@ tags: []
 
 **Conversation Overview**
 
-Andrew is building a lead generation agent called "first-agent" for Tre Borden /Co, a Los Angeles creative studio that curates and commissions art for corporate and public spaces. Tre is a friend, not a client, and this project is described as a training exercise. The app uses the Anthropic API with web search to find, evaluate, and score potential business development leads, saving results to an Excel spreadsheet. Two market segments are supported: Corporate (developers, architecture firms, corporate clients in LA) and Public Sector (municipal agencies, transit authorities, universities with percent-for-art requirements). The repo is at github.com/agshipley/first-agent (private), local path /Users/andrewshipley/projects/first-agent, deployed at incredible-embrace-production-ede8.up.railway.app on Railway.
+Andrew is building a lead generation agent called "[[first-agent]]" for [[Tre Borden]] /Co, a Los Angeles creative studio that curates and commissions art for corporate and public spaces. Tre is a friend, not a client, and this project is described as a training exercise. The app uses the Anthropic API with web search to find, evaluate, and score potential business development leads, saving results to an Excel spreadsheet. Two market segments are supported: Corporate (developers, architecture firms, corporate clients in LA) and Public Sector (municipal agencies, transit authorities, universities with percent-for-art requirements). The repo is at github.com/agshipley/[[first-agent]] (private), local path /Users/andrewshipley/projects/[[first-agent]], deployed at incredible-embrace-production-ede8.up.railway.app on Railway.
 
 The conversation was a multi-hour debugging session covering Railway deployment failures, API key injection issues, Gunicorn timeout configuration, SSE connection management, and persistent storage setup. Issues resolved in sequence: health check path set to /health in Railway dashboard; ANTHROPIC_API_KEY re-added at service level (not project level); Procfile updated to `web: gunicorn app:app --bind 0.0.0.0:$PORT --timeout 120`; rate limit sleep replaced with 5-second heartbeat loop; early return added after save_leads_to_spreadsheet to avoid Railway's hard connection timeout. A Railway volume was mounted at /data and DATA_DIR=/data set as an environment variable; tools.py and app.py updated to use `os.environ.get("DATA_DIR", ".")` for the leads.xlsx path to enable cumulative lead storage across deploys. A get_existing_leads_for_segment function was added to tools.py and wired into app.py to inject existing company names into the prompt, preventing duplicate research.
 
@@ -117,7 +117,7 @@ One other thing worth noting: is your `tools.py` file (which provides `save_lead
 
 **human**
 
-ok, here's the repo: https://github.com/agshipley/first-agent
+ok, here's the repo: https://github.com/agshipley/[[first-agent]]
 
 please review
 
@@ -979,7 +979,7 @@ What's done:
 The app is live at: `incredible-embrace-production-ede8.up.railway.app`
 Your local terminal version (`agent.py`) is also clean and ready to run.
 Here's the updated handoff summary for next time:
-Project: first-agent — Lead Generation Agent for Tre Borden /Co
+Project: [[first-agent]] — Lead Generation Agent for [[Tre Borden]] /Co
 Local project path: `/Users/andrewshipley/projects/first-agent`
 GitHub: `https://github.com/agshipley/first-agent` (private)
 Production URL: `incredible-embrace-production-ede8.up.railway.app`

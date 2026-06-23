@@ -17,7 +17,7 @@ tags: []
 
 **Conversation Overview**
 
-Andrew Shipley is a non-engineer learning game development by building projects. His background is Python/Flask from a prior lead generation tool built on Railway. He works on a Mac using VS Code with the Claude Code extension, and uses GitHub and Vercel for version control and deployment. This session continued development of a park management simulation game based on George Saunders' short story "CivilWarLand in Bad Decline," with the GitHub repo at agshipley/CW_Actual. Andrew's partner Liz and technical friend Tim Potter were playtesting the game; Tim's feedback prompted several improvements.
+Andrew Shipley is a non-engineer learning game development by building projects. His background is Python/Flask from a prior lead generation tool built on Railway. He works on a Mac using VS Code with the Claude Code extension, and uses GitHub and Vercel for version control and deployment. This session continued development of a park management simulation game based on George Saunders' short story "[[civilwarland]] in Bad Decline," with the GitHub repo at agshipley/CW_Actual. Andrew's partner Liz and technical friend Tim Potter were playtesting the game; Tim's feedback prompted several improvements.
 
 The session covered extensive gameplay balancing after playtesting revealed the game was too easy — compounding daily decay, action cooldowns, and harder story events were implemented. A pool of 20 minor flavor events drawn directly from Saunders story details was added to fire on non-story days, addressing the problem of 17 empty days between story beats. The game was then pushed to GitHub and Vercel. Andrew initiated a major new direction on a sims-mode branch: transforming the game from a turn-based decision tree into a real-time Sims-like simulation with click-to-move narrator, building-specific interactions, map expansion at day 30, and a building placement system. A comprehensive project roadmap was created with exact Claude Code prompts for all remaining features, covering Phase 1 (expanded park systems including building conditions, character needs, time system, autonomous staff AI) and Phase 2 (town-building systems including zoning, residents, town events, and economy scaling). The roadmap was committed to the sims-mode branch and exported as both a markdown file and a Word document. A plain text file of all prompts was created for easy copying into Claude Code.
 
@@ -31,11 +31,11 @@ Ok let's set the background on this. Please read the story with a particular att
 
 **assistant**
 
-I've read through "CivilWarLand in Bad Decline" by George Saunders carefully. Here's what I've gathered:
+I've read through "[[civilwarland]] in Bad Decline" by George Saunders carefully. Here's what I've gathered:
 
 **Characters:**
 
-The story has a rich cast. The unnamed narrator is a mid-level functionary at CivilWarLand — formerly a Verisimilitude Inspector, now Special Assistant — who's trapped between his moral instincts and his need to keep his job and family intact. He has two young sons, Marcus and Howie, and a wife, Evelyn, who openly disdains him and is having an affair with Norm Hinkle, a local greengrocer. Mr. Alsuga (Mr. A) is the park's founder and owner, a self-made man who conceptualized the whole operation and has considerable local influence through Rotary. Sylvia Loomis runs Security and has a talent for digging up information on people. Ned Quinn is an Adjunct Thespian — a failed actor, ugly, anxious, poor with six kids — who gets recruited for the Desperate Patrol and is promptly brutalized by gangs. Samuel is the story's most dangerous figure: a Vietnam veteran expelled for participating in a bloodbath, hired for his authentic Civil War look and then weaponized as the park's enforcer. Mr. Grayson is the Staff Ornithologist who gets fired. Mr. Haberstrom, founder of Burn'n'Learn, is a potential investor who walks away after seeing gang graffiti. The McKinnon family are ghosts from the 1860s — Mr. McKinnon (an Antietam veteran who murdered his family and then himself), Mrs. McKinnon, and their daughters including Maribeth. Other minor figures include Fred Moore at the General Store, the Foley family (whose baptism is disrupted), Melvin the pizza-making religious zealot, and Mrs. Schmidt the neighbor.
+The story has a rich cast. The unnamed narrator is a mid-level functionary at [[civilwarland]] — formerly a Verisimilitude Inspector, now Special Assistant — who's trapped between his moral instincts and his need to keep his job and family intact. He has two young sons, Marcus and Howie, and a wife, Evelyn, who openly disdains him and is having an affair with Norm Hinkle, a local greengrocer. Mr. Alsuga (Mr. A) is the park's founder and owner, a self-made man who conceptualized the whole operation and has considerable local influence through Rotary. Sylvia Loomis runs Security and has a talent for digging up information on people. Ned Quinn is an Adjunct Thespian — a failed actor, ugly, anxious, poor with six kids — who gets recruited for the Desperate Patrol and is promptly brutalized by gangs. Samuel is the story's most dangerous figure: a Vietnam veteran expelled for participating in a bloodbath, hired for his authentic Civil War look and then weaponized as the park's enforcer. Mr. Grayson is the Staff Ornithologist who gets fired. Mr. Haberstrom, founder of Burn'n'Learn, is a potential investor who walks away after seeing gang graffiti. The McKinnon family are ghosts from the 1860s — Mr. McKinnon (an Antietam veteran who murdered his family and then himself), Mrs. McKinnon, and their daughters including Maribeth. Other minor figures include Fred Moore at the General Store, the Foley family (whose baptism is disrupted), Melvin the pizza-making religious zealot, and Mrs. Schmidt the neighbor.
 
 **Physical features of the Park:**
 
@@ -72,7 +72,7 @@ Good question. The short answer is: there's no true open-source clone of *The Si
 
 Beyond these reverse-engineering efforts, there's no fully independent open-source life sim with its own art, objects, and simulation logic the way, say, OpenTTD is a complete standalone replacement for Transport Tycoon. The idea keeps getting floated in community discussions, but nobody has assembled the massive amount of original content (3D models, animations, UI, behavioral scripts) needed to make one work without borrowing from EA's assets.
 
-Are you thinking about building something inspired by the Saunders story — like a CivilWarLand simulation? That would be a pretty wild project.
+Are you thinking about building something inspired by the Saunders story — like a [[civilwarland]] simulation? That would be a pretty wild project.
 
 **human**
 
@@ -80,7 +80,7 @@ That is exactly what I intend to do. In fact, we are going to do it together.
 
 **assistant**
 
-The user wants to build a CivilWarLand simulation game inspired by the George Saunders story. This is a creative and ambitious project. Let me think about what this could look like and what we can realistically build together.
+The user wants to build a [[civilwarland]] simulation game inspired by the George Saunders story. This is a creative and ambitious project. Let me think about what this could look like and what we can realistically build together.
 
 Given the constraints (we're working in a browser/artifact environment), we could build something like a 2D isometric or top-down simulation game as a web-based artifact. We could use React with canvas or SVG, or even a simple HTML5 canvas game.
 
@@ -92,7 +92,7 @@ Let me think about the scope and what would be fun and feasible:
 2. Characters wandering the park grounds
 3. Story events unfolding as you manage the park's deterioration
 
-This could work really well as an interactive artifact, but I should clarify with the user what aspects they want to emphasize and how deep they want to go with the mechanics.I love this idea. A CivilWarLand park management sim drawn from the story — that's a project with real creative potential. The source material is incredibly rich for it: you've got a decaying theme park, a cast of dysfunctional characters, escalating crises, moral dilemmas, ghosts, and a darkly comic tone that could translate beautifully into game mechanics.
+This could work really well as an interactive artifact, but I should clarify with the user what aspects they want to emphasize and how deep they want to go with the mechanics.I love this idea. A [[civilwarland]] park management sim drawn from the story — that's a project with real creative potential. The source material is incredibly rich for it: you've got a decaying theme park, a cast of dysfunctional characters, escalating crises, moral dilemmas, ghosts, and a darkly comic tone that could translate beautifully into game mechanics.
 
 Before we start building, let me make sure we're aligned on a few key decisions that will shape everything else:
 ```
@@ -118,7 +118,7 @@ The user wants a top-down park management sim prototype focusing on the physical
 
 For a prototype, I think the best approach is to build a browser-based React artifact that shows:
 
-1. A top-down isometric or bird's-eye view map of CivilWarLand with the key buildings/landmarks from the story
+1. A top-down isometric or bird's-eye view map of [[civilwarland]] with the key buildings/landmarks from the story
 2. Characters that move around the park
 3. Basic management mechanics (budget, staff, visitor count)
 4. Some event system
@@ -159,7 +159,7 @@ Let me check the frontend design guidelines first to make sure I'm following bes
 This block is not supported on your current device yet.
 ```
 
-Let me design a really compelling prototype. I'll build a React artifact that serves as a top-down park management sim for CivilWarLand.
+Let me design a really compelling prototype. I'll build a React artifact that serves as a top-down park management sim for [[civilwarland]].
 
 Design direction: I want this to feel like a weathered, aged document/map — something between a historical park brochure and a surveillance dashboard. Think sepia tones, old paper textures, a slightly grim aesthetic that matches the story's tone.
 
@@ -177,7 +177,7 @@ Now I'm mapping out the park layout with its retaining wall boundary, entry area
 
 I'm going to build this as a React component with SVG for the map rendering and state management for the game logic. The layout will have the main map taking up most of the screen with buildings as positioned elements and characters as animated circles, while a stats panel on the side or bottom displays the current metrics and event log. This hybrid approach gives me the interactivity I need without sacrificing performance.
 
-Now I'm settling on a color scheme—muted earth tones with dark browns and tans for the terrain, faded greens for forests, muted reds for buildings, and a ghost-blue accent for the McKinnons. Let me start building the component.Excellent choices. Let me build a prototype that brings CivilWarLand to life as a top-down park management sim — the physical map with its buildings and landmarks, characters moving through the space, and the fundamental management loop.
+Now I'm settling on a color scheme—muted earth tones with dark browns and tans for the terrain, faded greens for forests, muted reds for buildings, and a ghost-blue accent for the McKinnons. Let me start building the component.Excellent choices. Let me build a prototype that brings [[civilwarland]] to life as a top-down park management sim — the physical map with its buildings and landmarks, characters moving through the space, and the fundamental management loop.
 
 I'm going to create something with real atmosphere: a weathered, sepia-toned aesthetic that matches the story's decaying nostalgia. The prototype will include a playable map, day-by-day progression, park stats, character movement, and events that escalate.
 ```
@@ -194,7 +194,7 @@ Let me present the file.
 This block is not supported on your current device yet.
 ```
 
-The artifact is now live. Let me describe what we've built and what the next steps could be.Here's the first playable prototype of **CivilWarLand in Bad Decline**. What you've got:
+The artifact is now live. Let me describe what we've built and what the next steps could be.Here's the first playable prototype of **[[civilwarland]] in Bad Decline**. What you've got:
 
 **The map** — a top-down view of the park with 17 buildings faithfully drawn from the story (Erie Canal Lock, City Hall, Everly Mansion, Anglican Church, Worship Center, Kriegal Place, Nate's Saloon, General Store, Blacksmith Shoppe, and more), plus the five major zones (Great Forest, Timeless Green, Feinstein Memorial Conifer Grove, Parking, Marsh). The retaining wall rings the perimeter.
 
@@ -204,7 +204,7 @@ The artifact is now live. Let me describe what we've built and what the next ste
 
 **Management stats** — budget bleeds daily against revenue from attendance. You watch the numbers deteriorate as events cascade.
 
-Click buildings and characters for descriptions ripped from the story's details. Advance day by day and watch CivilWarLand spiral.
+Click buildings and characters for descriptions ripped from the story's details. Advance day by day and watch [[civilwarland]] spiral.
 
 For the next iteration, we could add player choices that branch the narrative, building upgrades/repairs, direct character interactions, or a Desperate Patrol mini-game. What would you want to build on next?
 
@@ -220,7 +220,7 @@ The user wants to share a project doc so I can understand their background and s
 
 This is really helpful. Andrew is not a software engineer by trade - he's learning by building. He built a Python/Flask lead generation tool with Claude's help, deployed it on Railway, and wrote a thorough technical document about it. He's comfortable with VS Code, Git, Python, and API concepts, but he's not writing complex React components from scratch.
 
-Key takeaways for how I should work with him on CivilWarLand:
+Key takeaways for how I should work with him on [[civilwarland]]:
 
 1. He needs complete, working code - not fragments
 2. He values honesty about what's done and what isn't
@@ -269,7 +269,7 @@ Andrew wants to talk through the options more before committing. Let me give him
 
 **Option B (Python/Pygame)** — You'd be writing in the language you already know, running it locally with `python game.py`. Pygame gives you a window, sprites, click handling, game loops. The downside: Pygame is old, the ecosystem is thin, and the visual output tends to look rough compared to browser-based games. It's also desktop-only — you can't share a link with someone and have them play it. This path makes sense if you want the deepest understanding of game architecture and don't care about distribution yet.
 
-**Option C (Vanilla HTML/JS)** — A single `index.html` file with JavaScript and CSS inline. No build step, no framework. You open it in a browser, it runs. You could host it on Railway the same way you host first-agent. JavaScript is different from Python but not alien — the control flow, variables, and data structures will feel familiar. The learning curve is real but manageable, especially with Claude Code in your editor. This is probably the best balance of *you can own it* and *it looks and feels like a real game*.
+**Option C (Vanilla HTML/JS)** — A single `index.html` file with JavaScript and CSS inline. No build step, no framework. You open it in a browser, it runs. You could host it on Railway the same way you host [[first-agent]]. JavaScript is different from Python but not alien — the control flow, variables, and data structures will feel familiar. The learning curve is real but manageable, especially with Claude Code in your editor. This is probably the best balance of *you can own it* and *it looks and feels like a real game*.
 
 The question underneath all of this: is this project primarily about **making a game** (the artifact matters, you want people to play it) or about **learning game development** (the process matters, you want to understand what you're building)? Those lead to different answers.
 
@@ -279,7 +279,7 @@ let's start with learning game development
 
 **assistant**
 
-That changes everything. We're not trying to ship a prototype today — we're building your understanding of how games work, using CivilWarLand as the vehicle.
+That changes everything. We're not trying to ship a prototype today — we're building your understanding of how games work, using [[civilwarland]] as the vehicle.
 
 That points strongly to **Option C (vanilla HTML/JS)**. Here's why:
 
@@ -289,7 +289,7 @@ Before we write any code, I want to teach you the four concepts that every game 
 
 **The game loop** — A function that runs over and over, many times per second. Each time it runs, it does three things in order: read input, update state, draw to screen. This is the heartbeat of every game. Your Flask app has a request-response cycle; a game has this instead.
 
-**State** — All the data that describes what's happening right now. In CivilWarLand, that's the budget, the day number, which buildings exist, where characters are standing, whether Samuel has been revealed. In first-agent, your state was the spreadsheet. Same idea, different shape.
+**State** — All the data that describes what's happening right now. In [[civilwarland]], that's the budget, the day number, which buildings exist, where characters are standing, whether Samuel has been revealed. In [[first-agent]], your state was the spreadsheet. Same idea, different shape.
 
 **Events** — Things that change state. A player clicks a button, a timer fires, day 17 arrives and the church burns. Your agentic loop responded to `stop_reason` values. A game loop responds to events.
 
@@ -297,15 +297,15 @@ Before we write any code, I want to teach you the four concepts that every game 
 
 That's it. Everything else is detail.
 
-Want to start by building the simplest possible game loop in an HTML file — just a box on screen, a number that ticks up, and a button that changes something — so you can see these four concepts working together before we layer CivilWarLand on top?
+Want to start by building the simplest possible game loop in an HTML file — just a box on screen, a number that ticks up, and a button that changes something — so you can see these four concepts working together before we layer [[civilwarland]] on top?
 
 **human**
 
-Yes let's do it. Also I'm working in VS Code with the Claude Code extension installed. In the first-agent project we began by building the file structure in the IDE (first in the terminal directly then pulling into VS Code). Learned about creating a venv, we built the app locally, then we pushed it to github and put it up on railway. This really helped me understand how everything worked. I'd like something similar here, where I know where all the files live and how they interact
+Yes let's do it. Also I'm working in VS Code with the Claude Code extension installed. In the [[first-agent]] project we began by building the file structure in the IDE (first in the terminal directly then pulling into VS Code). Learned about creating a venv, we built the app locally, then we pushed it to github and put it up on railway. This really helped me understand how everything worked. I'd like something similar here, where I know where all the files live and how they interact
 
 **assistant**
 
-Let's set up the project. Since this is a static HTML/JS game (no Python, no server), the file structure is much simpler than first-agent. No venv needed — there's nothing to install. The browser is your runtime.
+Let's set up the project. Since this is a static HTML/JS game (no Python, no server), the file structure is much simpler than [[first-agent]]. No venv needed — there's nothing to install. The browser is your runtime.
 
 Here's what I want you to do in your terminal:
 
@@ -322,13 +322,13 @@ That's your entire project right now. One file. Open it in VS Code:
 code .
 ```
 
-A few things to note about how this differs from first-agent:
+A few things to note about how this differs from [[first-agent]]:
 
 **No virtual environment.** Python needs a venv because different projects need different packages. A vanilla HTML/JS project has no packages — the browser has everything built in. If we eventually add libraries, we'll load them from a CDN (a URL in a script tag), not install them locally.
 
-**No server to run.** With first-agent, you ran `python app.py` and Flask served your page on localhost. Here, you just open the HTML file directly in your browser. Later, if you want to host it online, you can put it behind a simple static file server, but for development, double-clicking the file works.
+**No server to run.** With [[first-agent]], you ran `python app.py` and Flask served your page on localhost. Here, you just open the HTML file directly in your browser. Later, if you want to host it online, you can put it behind a simple static file server, but for development, double-clicking the file works.
 
-**One file to start.** Eventually we'll split things up (separate JS files, CSS, maybe asset folders for images), but right now everything lives in `index.html`. Same reason first-agent started as one `agent.py` before you split out `tools.py` — get it working first, organize later.
+**One file to start.** Eventually we'll split things up (separate JS files, CSS, maybe asset folders for images), but right now everything lives in `index.html`. Same reason [[first-agent]] started as one `agent.py` before you split out `tools.py` — get it working first, organize later.
 
 Once you've got the folder created and `index.html` open in VS Code, tell me and I'll give you the code for your first game loop.
 
@@ -676,11 +676,11 @@ ok ugly but that worked!
 
 **assistant**
 
-Good. The developer console is going to be your best friend on this project — same way the terminal was for first-agent. Every time something doesn't work in the browser, that's the first place you check.
+Good. The developer console is going to be your best friend on this project — same way the terminal was for [[first-agent]]. Every time something doesn't work in the browser, that's the first place you check.
 
 One terminology note: what you just did — adding a property to state, modifying it in the event handler, and displaying it in render — is the core loop of game development. You touched all four concepts. Everything we build from here is just doing that same thing with more complexity.
 
-Now you're ready for the next layer. Right now you have one building as two raw numbers (`boxX`, `boxY`) in state. CivilWarLand has 17 buildings. You don't want 34 variables.
+Now you're ready for the next layer. Right now you have one building as two raw numbers (`boxX`, `boxY`) in state. [[civilwarland]] has 17 buildings. You don't want 34 variables.
 
 This is where **arrays of objects** come in — same as Python lists of dictionaries. Replace your state with this:
 
@@ -849,13 +849,13 @@ great. So as we move forward I would appreciate it if 1) you do identify the are
 
 **assistant**
 
-That works. I'll explain what's changing and why, then give you the full file at the end. Same way you worked on first-agent — understand the change, then paste the working code.
+That works. I'll explain what's changing and why, then give you the full file at the end. Same way you worked on [[first-agent]] — understand the change, then paste the working code.
 
 What do you want to tackle next? Here's where we could go from here:
 
 **Click detection** — clicking on a building on the canvas and having it respond (show its name, highlight it). This teaches you how mouse events work on a canvas, which is different from clicking HTML buttons.
 
-**More buildings** — filling out the map with the full set of CivilWarLand structures from the story. This is just data entry into the array you already have, but it'll force us to think about layout and spacing.
+**More buildings** — filling out the map with the full set of [[civilwarland]] structures from the story. This is just data entry into the array you already have, but it'll force us to think about layout and spacing.
 
 **Characters** — adding moving dots that wander the park. This introduces the idea of updating state *inside* the game loop (not just on click), which is how animation works.
 
@@ -1418,7 +1418,7 @@ When you hit the limit, you'll either get slowed down or need to wait for it to 
 
 **Start a new conversation** when you're ready to continue. Your files are all local in `~/projects/civilwarland`, so nothing is lost. Just paste in the current `index.html` at the top of the new chat so I have context, or reference this conversation.
 
-**Save a project doc** like you did for first-agent. Even a short one — where the files live, what we've built so far, what's next. That way any new conversation can pick up cleanly.
+**Save a project doc** like you did for [[first-agent]]. Even a short one — where the files live, what we've built so far, what's next. That way any new conversation can pick up cleanly.
 
 For what it's worth, the next step we were heading toward is **characters that move around the park**. That's where the game loop starts earning its keep — updating positions every frame instead of only changing state on click. When you're ready to pick back up, that's where we'll go.
 
@@ -1503,13 +1503,13 @@ When you pick back up, you've got the project doc and the game file. Have fun pl
 
 **human**
 
-yeah we're not done. So if I were to send this (file:///Users/andrewshipley/Desktop/Poesis/Andrew/civilwarland/POC/03.23.26/v2/index.html) url to a friend could they just play it?
+yeah we're not done. So if I were to send this (file:///Users/andrewshipley/Desktop/Poesis/Andrew/[[civilwarland]]/POC/03.23.26/v2/index.html) url to a friend could they just play it?
 
 **assistant**
 
 No. That's a `file://` URL — it points to a specific location on your hard drive. Your friend's computer has no idea what `/Users/andrewshipley/Desktop/...` is. It's like giving someone your house address and expecting them to find a document in your filing cabinet.
 
-To share it, you need to put the file on a server so it gets an `https://` URL that anyone's browser can reach. You've already done this with first-agent on Railway, but that was a Flask app. This is simpler — it's just a static HTML file. No Python, no server logic.
+To share it, you need to put the file on a server so it gets an `https://` URL that anyone's browser can reach. You've already done this with [[first-agent]] on Railway, but that was a Flask app. This is simpler — it's just a static HTML file. No Python, no server logic.
 
 The quickest options:
 
@@ -1565,7 +1565,7 @@ The project doc we created bridges that gap manually. It's the handoff document 
 
 The practical workflow would be:
 
-1. Start a **Claude Project** for CivilWarLand here in claude.ai
+1. Start a **Claude Project** for [[civilwarland]] here in claude.ai
 2. Upload your current files and the project doc to the Project knowledge base
 3. Use conversations in that Project for design and planning
 4. Use Claude Code locally for implementation
@@ -1927,7 +1927,7 @@ can you give specific code lines for this change?
 
 **assistant**
 
-The create_file block starts with the description "Visual overhaul of CivilWarLand - upgraded render function with better colors, roofs, paths, trees, creek, textured ground. All game logic unchanged."
+The create_file block starts with the description "Visual overhaul of [[civilwarland]] - upgraded render function with better colors, roofs, paths, trees, creek, textured ground. All game logic unchanged."
 
 It's the message right after I said "This is a big enough change that I need to give you the full file."
 
@@ -2263,7 +2263,7 @@ The file /Users/andrewshipley/projects/mrkt/index.html does not exist.
 **assistant**
 
 ```
-cd ~/projects/civilwarland && open index.html
+cd ~/projects/[[civilwarland]] && open index.html
 ```
 
 **human**
@@ -2597,7 +2597,7 @@ perfect. I'm going to test locally then let's push it
 **assistant**
 
 ```
-cd ~/projects/civilwarland && open index.html
+cd ~/projects/[[civilwarland]] && open index.html
 ```
 
 Let me know how it plays.
@@ -2611,7 +2611,7 @@ this is cool. I think we made the right choice
 Good. When you're ready to push, the steps are:
 
 ```
-cd ~/projects/civilwarland
+cd ~/projects/[[civilwarland]]
 git add index.html
 git commit -m "v2: merged daily actions, branching story, cooldowns, decay, minor events"
 git push
@@ -2620,7 +2620,7 @@ git push
 If you haven't set up the GitHub remote yet for this repo, you'll need to create the repo on GitHub first, then:
 
 ```
-git remote add origin https://github.com/agshipley/civilwarland.git
+git remote add origin https://github.com/agshipley/[[civilwarland]].git
 git push -u origin main
 ```
 
@@ -2639,10 +2639,10 @@ Then the steps are:
 2. Once it's created, GitHub will show you a URL. Then in your terminal:
 
 ```
-cd ~/projects/civilwarland
+cd ~/projects/[[civilwarland]]
 git add .
 git commit -m "v2: merged daily actions, branching story, cooldowns, decay, minor events"
-git remote add origin https://github.com/agshipley/civilwarland.git
+git remote add origin https://github.com/agshipley/[[civilwarland]].git
 git push -u origin main
 ```
 
@@ -2661,7 +2661,7 @@ That screen is showing you the exact terminal commands to run. You want the sect
 It should show something like:
 
 ```
-git remote add origin https://github.com/agshipley/civilwarland.git
+git remote add origin https://github.com/agshipley/[[civilwarland]].git
 git branch -M main
 git push -u origin main
 ```
@@ -2679,7 +2679,7 @@ ok we actually have the skeleton repo set up: URL https://github.com/agshipley/C
 Then skip creating a new repo. Just connect your local project to that existing one:
 
 ```
-cd ~/projects/civilwarland
+cd ~/projects/[[civilwarland]]
 git remote add origin https://github.com/agshipley/CW_Actual.git
 git branch -M main
 git push -u origin main
@@ -2736,7 +2736,7 @@ This block is not supported on your current device yet.
 Download that, drop it into `~/projects/civilwarland/`, then:
 
 ```
-cd ~/projects/civilwarland
+cd ~/projects/[[civilwarland]]
 git add README.md
 git commit -m "add README"
 git push
@@ -2780,7 +2780,7 @@ This block is not supported on your current device yet.
 Download that into `~/projects/civilwarland/`. If you want to push it tonight:
 
 ```
-cd ~/projects/civilwarland
+cd ~/projects/[[civilwarland]]
 git add ROADMAP.md
 git commit -m "add development roadmap"
 git push
@@ -2842,7 +2842,7 @@ In the `<body>`, add this right after the opening `<body>` tag, before the title
 
 ```html
 <div id="mobile-gate">
-  <div style="font-size:20px;margin-bottom:16px;">CIVILWARLAND</div>
+  <div style="font-size:20px;margin-bottom:16px;">[[civilwarland]]</div>
   <div style="font-size:13px;color:#8a8a7a;line-height:1.8;">This game is designed for desktop.<br>Please switch to a larger screen.</div>
 </div>
 ```
@@ -2931,7 +2931,7 @@ ok it's open in the sidebar
 The user has Claude Code open in the VS Code sidebar. Now I should tell them to give it the mobile gate task.Type this into it:
 
 ```
-Add a mobile gate to index.html. When the viewport is under 900px wide, hide the game and show a centered message that says "CIVILWARLAND" and below it "This game is designed for desktop. Please switch to a larger screen." Style it to match the existing title screen. Use a CSS media query, no JavaScript needed.
+Add a mobile gate to index.html. When the viewport is under 900px wide, hide the game and show a centered message that says "[[civilwarland]]" and below it "This game is designed for desktop. Please switch to a larger screen." Style it to match the existing title screen. Use a CSS media query, no JavaScript needed.
 ```
 
 It'll read your file, propose changes, and show you a diff. Accept or reject from there.
@@ -3047,7 +3047,7 @@ A branch is the right approach - keeps everything in one repo, the current versi
 I'd go with a new branch. The current game stays on `main` and keeps working at its current Vercel URL. The new direction lives on a branch until it's ready.
 
 ```
-cd ~/projects/civilwarland
+cd ~/projects/[[civilwarland]]
 git checkout -b sims-mode
 ```
 
@@ -3353,7 +3353,7 @@ Every prompt is self-contained — all Saunders-specific text, character names, 
 Drop it into `~/projects/civilwarland/`, commit it to the `sims-mode` branch, and start feeding prompts to Claude Code whenever you're ready. You can go in order or skip around — each prompt is designed to work independently, though some later ones reference systems built by earlier ones.
 
 ```
-cd ~/projects/civilwarland
+cd ~/projects/[[civilwarland]]
 cp ~/Downloads/ROADMAP.md .
 git add ROADMAP.md
 git commit -m "add comprehensive project roadmap with Claude Code prompts"

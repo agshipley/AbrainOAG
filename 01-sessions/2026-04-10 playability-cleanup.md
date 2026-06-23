@@ -17,7 +17,7 @@ tags: []
 
 **Conversation overview**
 
-This extended session involved two participants—Andrew (the developer) and Liz (the primary playtester)—working on CivilWarLand, a browser-based game in a single `index.html` file using vanilla JS/CSS/HTML, deployed at `https://agshipley.github.io/CW_Actual/` from the repo `agshipley/CW_Actual`. The local path is `~/Desktop/Projects/CW_Actual/` (not `~/projects/civilwarland/` as some docs incorrectly state). The game is based on George Saunders' "CivilWarLand in Bad Decline" with Phase 1 (days 1–30, Disco Elysium-inspired dialogue-driven survival) and Phase 2 (day 31+, RimWorld-inspired city-builder). The session began with Andrew reporting results from an autonomous Claude Code loop (8 cycles completed, shipping fixes including narrator energy reset bug, building synergy, and condition bar display), then pivoted to a major aesthetic strategy discussion and a multi-hour Midjourney image generation session with Liz.
+This extended session involved two participants—Andrew (the developer) and Liz (the primary playtester)—working on [[civilwarland]], a browser-based game in a single `index.html` file using vanilla JS/CSS/HTML, deployed at `https://agshipley.github.io/CW_Actual/` from the repo `agshipley/CW_Actual`. The local path is `~/Desktop/Projects/CW_Actual/` (not `~/projects/civilwarland/` as some docs incorrectly state). The game is based on George Saunders' "[[civilwarland]] in Bad Decline" with Phase 1 (days 1–30, Disco Elysium-inspired dialogue-driven survival) and Phase 2 (day 31+, RimWorld-inspired city-builder). The session began with Andrew reporting results from an autonomous Claude Code loop (8 cycles completed, shipping fixes including narrator energy reset bug, building synergy, and condition bar display), then pivoted to a major aesthetic strategy discussion and a multi-hour Midjourney image generation session with Liz.
 
 The core aesthetic decision reached was to abandon canvas-only interior rendering in favor of AI-generated painted background images with interactive hotspot overlays—the same approach Disco Elysium used. Seven interior backgrounds were generated and locked via Midjourney for the Saloon, City Hall, Worship Center, Thespian Center, General Store, Infirmary, and Erie Canal Lock. Liz made specific iterative aesthetic judgment calls throughout: choosing the more illustrated Saloon variant over a painterly one for object legibility; identifying red/brown palette lock from the style reference and pushing to drop `--sref` entirely; rejecting a cathedral-scale Worship Center for a modest lodge; fixing the "bear in a costume" misread by describing the Grizzly suit as an empty deflated object on a stand; catching Midjourney's red curtain artifact and establishing `--no` exclusions; pushing the Infirmary toward dark comedy (insufficient, not gory; two beds, not one); and rejecting over-painterly abstraction when the style prompt was moved to the front. These decisions were captured in `AESTHETIC.md`, `INTERIOR_ART_ASSETS.md`, and committed to the repo. A hotspot integration CC prompt was written to load the images via `ctx.drawImage()` and replace rectangle rendering with hover-glow outlines over transparent hotspots.
 
@@ -279,7 +279,7 @@ Before I write the prompt, one real question: what's the visual target? "Not cli
 
 **D. Cozy isometric** — think Tiny Towns, Dorfromantik. Buildings rendered at an angle so they have depth and dimension rather than being flat rectangles. Big visual upgrade, moderate complexity.
 
-My gut for CivilWarLand specifically: **B with a muted, slightly washed-out palette** is the sweet spot. It'll make the biggest visible difference for the least risk of Claude Code producing something that looks worse than what you have, and a muted palette (dusty browns, faded reds, sepia-ish greens) supports the "park in decline" feeling without you needing actual art assets.
+My gut for [[civilwarland]] specifically: **B with a muted, slightly washed-out palette** is the sweet spot. It'll make the biggest visible difference for the least risk of Claude Code producing something that looks worse than what you have, and a muted palette (dusty browns, faded reds, sepia-ish greens) supports the "park in decline" feeling without you needing actual art assets.
 
 But you're the one who has the vision in your head. Which direction feels right, or is it something else entirely? Once I know, I'll write you a prompt that's specific enough that Claude Code won't freelance into something generic.
 
@@ -520,7 +520,7 @@ First, some credit: the characters actually look great at this scale. They read 
 
 **4. The retaining wall is invisible.** Literally — I had to look twice to find it (the dashed gold line at the edge). In the story, the retaining wall is the whole metaphor. It's what separates the park from the world. It should feel present — weathered concrete, crumbling sections, graffiti (which the story specifically mentions). Right now it's a CSS border.
 
-**5. No diegetic signs of decline.** This is the Saunders-specific one. The game is called *CivilWarLand in Bad Decline*. Where's the decline? Everything looks freshly painted and well-maintained. You should see peeling paint on some buildings, a fallen fence, litter in the corners, the parking lot half-empty with a broken-down car, weeds growing through cracks. The visual state of the park should tell the player "something is wrong here" before any text does. The condition system is tracked in the data — it needs to show in the art.
+**5. No diegetic signs of decline.** This is the Saunders-specific one. The game is called *[[civilwarland]] in Bad Decline*. Where's the decline? Everything looks freshly painted and well-maintained. You should see peeling paint on some buildings, a fallen fence, litter in the corners, the parking lot half-empty with a broken-down car, weeds growing through cracks. The visual state of the park should tell the player "something is wrong here" before any text does. The condition system is tracked in the data — it needs to show in the art.
 
 ---
 
@@ -633,7 +633,7 @@ Here are four mood board directions. Each one is a coherent visual world — pic
 
 **Reference points:** *Red Dead Redemption 2*'s New Austin, *West of Loathing*, Cormac McCarthy book covers, the opening of *No Country for Old Men*, old spaghetti western lobby cards.
 
-**Why it fits Saunders:** CivilWarLand has a frontier aesthetic baked in — Erie Canal Lock, butter churns, sutlers, cavalry. A dry/dusty look leans into that and says "this place is trying to be the 1860s and mostly failing." Dirt patches where grass should be is itself a storytelling device: decline visible in the landscape.
+**Why it fits Saunders:** [[civilwarland]] has a frontier aesthetic baked in — Erie Canal Lock, butter churns, sutlers, cavalry. A dry/dusty look leans into that and says "this place is trying to be the 1860s and mostly failing." Dirt patches where grass should be is itself a storytelling device: decline visible in the landscape.
 
 **Risk:** Might fight the "upstate NY ghost story" vibe. The McKinnons are not Texans. This leans the game more toward western than toward Northeastern gothic, which is a thematic choice.
 
@@ -641,7 +641,7 @@ Here are four mood board directions. Each one is a coherent visual world — pic
 
 ## My recommendation
 
-If I had to pick one for CivilWarLand specifically, I'd go **Mood Board B (Overcast Autumn)** — it's the most tonally aligned with the source material's sadness without being too on-the-nose, it gives you room to vary with weather (you already have rain and fog implemented), and the cool gray cast will make your existing character art (which is warm-toned) pop naturally against it.
+If I had to pick one for [[civilwarland]] specifically, I'd go **Mood Board B (Overcast Autumn)** — it's the most tonally aligned with the source material's sadness without being too on-the-nose, it gives you room to vary with weather (you already have rain and fog implemented), and the cool gray cast will make your existing character art (which is warm-toned) pop naturally against it.
 
 Second choice: **A (Faded Polaroid)** if you want something warmer and more nostalgic.
 
@@ -659,7 +659,7 @@ let's go disco elysium. I do like that game a lot
 
 Good pick — and useful that you know the game well, because you'll be able to tell Claude Code "no, more like *that*" when something drifts. Let me pin down what we're actually taking from Disco Elysium before writing prompts, because "Disco Elysium" is a big reference and different parts of it point different directions.
 
-## What "Disco Elysium" means for CivilWarLand
+## What "Disco Elysium" means for [[civilwarland]]
 
 Disco Elysium's visual identity is a specific thing: **painterly, oil-on-canvas, loose brushwork, cool gray-blue atmospheric base with warm accent pools of light.** The Martinaise district looks the way it looks because Aleksander Rostov painted every environment as an actual oil painting and then the game rendered on top of it. That's the target feeling, but we obviously can't literally paint oils in canvas code. So the question is: which *properties* of that look are we translating?
 
@@ -732,7 +732,7 @@ Two things we're deliberately *not* taking:
 
 **We're not going painterly-soft.** Our sketchy linework from the character pass is the established visual style — buildings and environment will match that sketchy pen feel, not Rostov's loose oil brush. Think "Disco Elysium's palette applied to a pen-and-ink illustration" rather than "literal oil painting." This is a coherence call: we can't mix styles.
 
-**We're not going full-gloom.** Disco Elysium is bleak. CivilWarLand has comedy in it — Quinn in the Grizzly suit is funny and should look funny-sad, not tragic-sad. We'll keep some warmer moments (lit windows, character colors) as relief valves so the game doesn't become visually oppressive over a thirty-day playthrough.
+**We're not going full-gloom.** Disco Elysium is bleak. [[civilwarland]] has comedy in it — Quinn in the Grizzly suit is funny and should look funny-sad, not tragic-sad. We'll keep some warmer moments (lit windows, character colors) as relief valves so the game doesn't become visually oppressive over a thirty-day playthrough.
 
 ---
 
@@ -1100,7 +1100,7 @@ Here's what I'd add, organized into new sections that slot in after "Design Prin
 >
 > ## Saunders Voice (Non-Negotiable)
 >
-> Every piece of text the player reads must sound like the narrator of "CivilWarLand in Bad Decline": resigned, self-aware, darkly funny, wrapped in the language of corporate middle management. Even when things are going well. Especially when things are going well.
+> Every piece of text the player reads must sound like the narrator of "[[civilwarland]] in Bad Decline": resigned, self-aware, darkly funny, wrapped in the language of corporate middle management. Even when things are going well. Especially when things are going well.
 >
 > Concrete markers of the voice:
 > - Bureaucratic euphemism describing the absurd ("Revenue Impacting Event," "Verisimilitude Evaluation," "Exit Sealage")
@@ -1356,11 +1356,11 @@ Good — got what I need from the text. A few things jumped out that are going t
 
 1. **"Painterly anarchy on top of rigid and true fundamentals."** That's a direct quote from the art book. The painterly quality sits on top of precise underlying drawing. Not loose and vibey — loose looking, tightly engineered.
 
-2. **"A mix of two 70s: the 1870s and the 1970s."** Martinaise is explicitly period-collision — old wooden church next to 1970s Eastern European concrete chaos. That's *exactly* CivilWarLand: Civil War theme park (1860s) running on 1990s corporate infrastructure (fax machines, MessageMinder, K-Cars). Same fundamental move. The reference fits better than I realized.
+2. **"A mix of two 70s: the 1870s and the 1970s."** Martinaise is explicitly period-collision — old wooden church next to 1970s Eastern European concrete chaos. That's *exactly* [[civilwarland]]: Civil War theme park (1860s) running on 1990s corporate infrastructure (fax machines, MessageMinder, K-Cars). Same fundamental move. The reference fits better than I realized.
 
 3. **"Shanty town aesthetics"** — disorganized, improvised, things built next to each other without planning. Again, exactly the park: whatever Mr. A could afford, transplanted and crammed together.
 
-4. **"Ruins of a commercial complex become modern dungeons."** Decayed commercial infrastructure used for new purposes. Literally CivilWarLand — a failed theme park that's becoming a town.
+4. **"Ruins of a commercial complex become modern dungeons."** Decayed commercial infrastructure used for new purposes. Literally [[civilwarland]] — a failed theme park that's becoming a town.
 
 5. **"Lamplight holding back the inevitable dark."** Direct quote about a specific shader effect in the game. Warm points of light as islands in cooler ambient. This is the single most actionable visual rule I've seen stated — it's a lighting philosophy, not just a palette.
 
@@ -1454,7 +1454,7 @@ I'm going to write a real `AESTHETIC.md` file — the brand guide — that captu
 
 But before I write the file, one quick check with you:
 
-**Does this palette feel right to you, based on what's in your head when you think "Disco Elysium for CivilWarLand"?** Specifically the warm-dominant reading — I'm telling you the reference is warmer than I was treating it, which is the opposite of my first two attempts. If that matches what you were seeing in your head, I proceed. If you were actually thinking of the *colder* Disco Elysium moments (the coastal areas at dusk, the snow sections, the interior of the church) then I need to bias differently.
+**Does this palette feel right to you, based on what's in your head when you think "Disco Elysium for [[civilwarland]]"?** Specifically the warm-dominant reading — I'm telling you the reference is warmer than I was treating it, which is the opposite of my first two attempts. If that matches what you were seeing in your head, I proceed. If you were actually thinking of the *colder* Disco Elysium moments (the coastal areas at dusk, the snow sections, the interior of the church) then I need to bias differently.
 
 Which is it?
 
@@ -1899,7 +1899,7 @@ The things it will *not* deliver yet:
 - **Architectural variety.** Every building is still a rectangle with a triangle roof. DE has wildly varied silhouettes. Fixing this is in the deferred list (unique hero-building silhouettes).
 - **Composition.** DE's scenes are staged like paintings — things framed by other things, diagonal lines drawing the eye, negative space used deliberately. Our map is a top-down grid of boxes. No amount of palette work fixes that.
 
-**Will we ever look truly like Disco Elysium?** Honestly, no — and I want to say this clearly so we're not chasing something unreachable. Disco Elysium is an isometric 3D game with hand-painted texture maps made by a dedicated art team over years. We're making a top-down 2D vanilla-canvas game by writing prompts to another AI. These are different mediums. The best version of CivilWarLand will *evoke* Disco Elysium — same mood, same palette logic, same relationship between warmth and coolness, same "painterly anarchy on rigid fundamentals" sensibility — without being mistaken for it.
+**Will we ever look truly like Disco Elysium?** Honestly, no — and I want to say this clearly so we're not chasing something unreachable. Disco Elysium is an isometric 3D game with hand-painted texture maps made by a dedicated art team over years. We're making a top-down 2D vanilla-canvas game by writing prompts to another AI. These are different mediums. The best version of [[civilwarland]] will *evoke* Disco Elysium — same mood, same palette logic, same relationship between warmth and coolness, same "painterly anarchy on rigid fundamentals" sensibility — without being mistaken for it.
 
 **Where the 50-60% number comes from.** After the three-pass sequence we'd hit the things that are actually achievable in our medium: palette, lighting philosophy, wear philosophy, hero accents. Another three or four passes after that (unique silhouettes for 4-5 hero buildings, atmospheric layering, composition adjustments, wear detail) would get us to maybe 75-80% of "evokes Disco Elysium successfully." The last 20% is stuff that would require either an actual art asset pipeline or changing the game's fundamental rendering approach, neither of which is worth it.
 
@@ -2286,7 +2286,7 @@ The target is Disco Elysium's Martinaise outdoor environments, translated into o
 
 Core principle from you: *decline requires a height to fall from*. Base colors are opening-day-1975 intentional. Wear is applied locally on top as damage, never baked into the base globally. The player should see both states at once — the sincere attempt and the twenty-year failure.
 
-Inspiration shorthand: "painterly anarchy on rigid and true fundamentals" (from the DE art book). "Lamplight holding back the dark" (DE technical artist quote). Period-collision — DE mixes 1870s and 1970s, CivilWarLand mixes 1860s and 1990s. Same fundamental move.
+Inspiration shorthand: "painterly anarchy on rigid and true fundamentals" (from the DE art book). "Lamplight holding back the dark" (DE technical artist quote). Period-collision — DE mixes 1870s and 1970s, [[civilwarland]] mixes 1860s and 1990s. Same fundamental move.
 
 **Palette — locked in `AESTHETIC.md`**
 
@@ -2592,7 +2592,7 @@ Copy-paste, one at a time.
 
 **1.**
 ```
-cd ~/projects/civilwarland
+cd ~/projects/[[civilwarland]]
 ```
 
 **2.**
@@ -2993,7 +2993,7 @@ This block is not supported on your current device yet.
 
 Yes. 1994 MicroProse business sim. You manage a pizza restaurant — hire staff, design the menu, furnish the interior, deal with the mafia, sabotage competitors. Top-down management with a cartoonish sense of humor layered over genuinely complex systems. The key structural thing is it had multiple distinct "screens" or modes — the city map, the restaurant interior, the kitchen/recipe builder, the furniture shop, the mafia interactions — each doing different things but all feeding the same economy.
 
-What's the connection you're seeing to CivilWarLand? Are you thinking about the multi-screen architecture — clicking into a building and getting an interior view with its own management layer? Or something else specific?
+What's the connection you're seeing to [[civilwarland]]? Are you thinking about the multi-screen architecture — clicking into a building and getting an interior view with its own management layer? Or something else specific?
 
 **human**
 
@@ -3023,7 +3023,7 @@ Before I write this up, I need to figure out what questions would actually shape
 
 **1. What does the player DO inside?**
 
-In Pizza Tycoon, interiors had furniture placement, staff management, customer flow. For CivilWarLand, what's the equivalent? Some options:
+In Pizza Tycoon, interiors had furniture placement, staff management, customer flow. For [[civilwarland]], what's the equivalent? Some options:
 
 - **Observe and interact** — you see the interior, characters inside, objects, and can click things for Saunders-voiced descriptions and stat effects. More atmospheric than mechanical.
 - **Manage** — assign staff to positions within the building, rearrange things, make upgrade decisions. More mechanical.
@@ -3984,7 +3984,7 @@ Upgrade: "New Cash Register — $600" → one-time effect: `{budget: 200}`, dail
 
 **The Shelves** — `x:0.10, y:0.20, w:0.10, h:0.35, color:"#8C6238"`
 Description: "The shelves. Stocked with period-appropriate goods and period-inappropriate goods that have been relabeled. A bottle of Windex is now Frontier Glass Tonic. A bag of Doritos is Pioneer Corn Crisps. Nobody has complained. The Doritos sell well."
-Upgrade: "Restock Premium Items — $1,000" → one-time effect: `{attendance: 2}`, dailyEffect: `{budget: 25, attendance: 1}`. Upgraded description: "Premium items on the top shelf. Replica musket balls, commemorative plates, a coffee mug that says 'I Survived CivilWarLand' which is technically aspirational rather than factual for most visitors."
+Upgrade: "Restock Premium Items — $1,000" → one-time effect: `{attendance: 2}`, dailyEffect: `{budget: 25, attendance: 1}`. Upgraded description: "Premium items on the top shelf. Replica musket balls, commemorative plates, a coffee mug that says 'I Survived [[civilwarland]]' which is technically aspirational rather than factual for most visitors."
 
 **The Butter Knife Rack** — `x:0.78, y:0.35, w:0.08, h:0.12, color:"#7A7A6A"`
 Description: "The butter knife display. After the incident, Mr. A considered removing them. Then he considered the precedent. Then he considered the markup. The butter knives stayed."
@@ -4084,7 +4084,7 @@ ok. all very cool. I'd like to circle back to a broader structural question. In 
 
 **assistant**
 
-The user wants me to do research on both Disco Elysium and city-building sims (Pizza Tycoon style) to create brand/style guidelines and feature roadmaps for each phase of CivilWarLand. Let me search for both games to ground this properly.Let me research both games properly before writing anything.
+The user wants me to do research on both Disco Elysium and city-building sims (Pizza Tycoon style) to create brand/style guidelines and feature roadmaps for each phase of [[civilwarland]]. Let me search for both games to ground this properly.Let me research both games properly before writing anything.
 ```
 This block is not supported on your current device yet.
 ```
@@ -4139,7 +4139,7 @@ This block is not supported on your current device yet.
 
 Done. Let me summarize what I created.Four documents, all designed to live at the repo root alongside `AESTHETIC.md` and `CLAUDE.md`:
 
-**PHASE1_STYLE.md** — The Disco Elysium design bible. Establishes that Phase 1's primary verb is "talk," not "build." Dialogue replaces menus. Characters ARE the system. Time is the only resource. Failure is narrative. Includes the Saunders voice principles, the passive check system (stat thresholds gate dialogue options without visible dice rolls), and the thought system (internalized phrases that provide ongoing modifiers — CivilWarLand's simplified version of the Thought Cabinet).
+**PHASE1_STYLE.md** — The Disco Elysium design bible. Establishes that Phase 1's primary verb is "talk," not "build." Dialogue replaces menus. Characters ARE the system. Time is the only resource. Failure is narrative. Includes the Saunders voice principles, the passive check system (stat thresholds gate dialogue options without visible dice rolls), and the thought system (internalized phrases that provide ongoing modifiers — [[civilwarland]]'s simplified version of the Thought Cabinet).
 
 **PHASE2_STYLE.md** — The management sim design bible. Establishes the genre flip: conversations become assignments, colleagues become resources, the narrator becomes an administrator. The emotional engine is that the player now has authority over people they knew as equals. References RimWorld's trait-to-building system and AI storyteller pacing, Frostpunk's moral weight, and SimCity's zoning. Explicitly names what Phase 2 is NOT (not dialogue-driven, not Disco Elysium anymore — and that loss is the point).
 
@@ -4212,7 +4212,7 @@ ok, done. So I'd like to pause here and potentially build out some additional in
 
 **assistant**
 
-The user wants to set up autonomous coding agents that can work on the CivilWarLand project independently. This is essentially about Claude Code's agentic capabilities, possibly with GitHub Actions or some other CI/CD pipeline, or maybe using Claude Code in headless/autonomous mode.
+The user wants to set up autonomous coding agents that can work on the [[civilwarland]] project independently. This is essentially about Claude Code's agentic capabilities, possibly with GitHub Actions or some other CI/CD pipeline, or maybe using Claude Code in headless/autonomous mode.
 
 Let me think about what's available and what would work for this use case. The user should look into:
 
@@ -4250,7 +4250,7 @@ Here's the practical setup:
 4. GitHub Pages deploys the PR preview (or you merge to main and test the live URL)
 5. If something's wrong, you comment on the PR — Claude Code reads the comment and pushes a fix
 
-**The one constraint for CivilWarLand**: Claude Code can't read the Saunders source text, so any work requiring new Saunders-voiced content (dialogue, descriptions, event text) still needs to be authored here and included in the Issue as raw data. Implementation-only tasks (the gameplay fixes, the time system, the UI changes) can run fully autonomous.
+**The one constraint for [[civilwarland]]**: Claude Code can't read the Saunders source text, so any work requiring new Saunders-voiced content (dialogue, descriptions, event text) still needs to be authored here and included in the Issue as raw data. Implementation-only tasks (the gameplay fixes, the time system, the UI changes) can run fully autonomous.
 
 Want me to walk you through the setup step by step? The whole thing takes about 10 minutes. You'll need your terminal open with Claude Code available.
 
@@ -4531,7 +4531,7 @@ I need to be straight with them: their current workflow is actually pretty effic
 
 The honest answer: **for this project, autonomous agents don't save you much.** Here's why.
 
-The bottleneck in CivilWarLand isn't implementation speed. Claude Code already implements things fast when you paste a prompt. The bottleneck is **design and content authoring** — the work we do here. Every piece of text needs the Saunders voice. Every game design decision requires judgment about feel, tone, and balance. That's not automatable. That's the actual creative work.
+The bottleneck in [[civilwarland]] isn't implementation speed. Claude Code already implements things fast when you paste a prompt. The bottleneck is **design and content authoring** — the work we do here. Every piece of text needs the Saunders voice. Every game design decision requires judgment about feel, tone, and balance. That's not automatable. That's the actual creative work.
 
 The GitHub Actions flow I described would add steps (write issue → agent picks up → opens PR → you review → merge) compared to what you're already doing (paste prompt → CC implements → push). Your current workflow is already pretty lean.
 
@@ -5040,7 +5040,7 @@ The move that would actually transform the interiors: **generate painted backgro
 
 That's how Disco Elysium actually works. The "room" is a painting. The "objects" are invisible clickable regions on top of the painting. The highlight/glow appears when you hover, telling you something is interactive. The painting does all the visual work.
 
-For CivilWarLand, that means:
+For [[civilwarland]], that means:
 
 **Seven paintings.** One per interior. Generated in a painterly style — warm, textured, slightly decayed, Disco Elysium's palette. Each painting includes the objects already drawn into the scene (the desk IS in the painting, the Grizzly suit IS in the painting). You don't draw objects separately — they're part of the image.
 
@@ -5056,7 +5056,7 @@ yeah so here's what disco elysium did: they paid a dude to paint a bunch of the 
 
 **assistant**
 
-The user wants to find public domain images that match the CivilWarLand aesthetic - Civil War era, 1860s, frontier buildings, painted/illustrated style. This is a brilliant practical solution. We need paintings/illustrations of:
+The user wants to find public domain images that match the [[civilwarland]] aesthetic - Civil War era, 1860s, frontier buildings, painted/illustrated style. This is a brilliant practical solution. We need paintings/illustrations of:
 
 1. City Hall / office interior - something like a 19th century government office
 2. Worship Center - a church/chapel interior with a dome
@@ -5238,7 +5238,7 @@ Image 1: More graphic/illustrative style, almost comic-book linework over the pa
 
 Image 2: More traditionally painterly - thicker brushstrokes, more like an actual oil painting. The bar curves around the left side, red curtain/stage in the back center, jukebox glowing in front of the stage, stools along the bar, stairs on the left. 
 
-Image 2 has that darker, moodier quality with gorgeous brushwork. So I'm weighing which approach works better for the game - Image 1's clearer object definitions make hotspot mapping straightforward, while Image 2's more painterly approach is stunning but less defined. I need to consider which style will hold up across all seven rooms and feel more aligned with CivilWarLand's aesthetic.These are both incredible. Either one is a complete transformation from colored rectangles.
+Image 2 has that darker, moodier quality with gorgeous brushwork. So I'm weighing which approach works better for the game - Image 1's clearer object definitions make hotspot mapping straightforward, while Image 2's more painterly approach is stunning but less defined. I need to consider which style will hold up across all seven rooms and feel more aligned with [[civilwarland]]'s aesthetic.These are both incredible. Either one is a complete transformation from colored rectangles.
 
 **Image 1** is more illustrated — it has that Disco Elysium line-over-paint quality. Clearer object silhouettes. You can immediately identify: bar with bottles (left), red curtain stage (center-back), jukebox (right), stools, worn floor. Every clickable object is visually distinct and mappable.
 
@@ -5868,13 +5868,13 @@ talk to me about phase two since i don't have that context
 
 Sure. Quick orientation, since you've only seen Phase 1.
 
-**Phase 1** is what you've been playing. Days 1-30. Survival sim. You're the Special Assistant trying to keep CivilWarLand from collapsing. Daily decisions, story events, branching choices, stat decay, multiple endings. It's intentionally tight and dialogue-heavy — Disco Elysium-inspired. The whole arc is "managed decline."
+**Phase 1** is what you've been playing. Days 1-30. Survival sim. You're the Special Assistant trying to keep [[civilwarland]] from collapsing. Daily decisions, story events, branching choices, stat decay, multiple endings. It's intentionally tight and dialogue-heavy — Disco Elysium-inspired. The whole arc is "managed decline."
 
 **Phase 2** is what unlocks if you survive day 30. The investors, against all evidence, renew funding. The retaining wall expands. You go from survivor to civic leader — and the game shifts from a Disco Elysium-style narrative experience to a RimWorld-style management sim. Same tone, different scale.
 
 The core Phase 2 ideas:
 
-**The park becomes a town.** Once you place enough buildings, residential zoning unlocks. People start *living* at CivilWarLand. They have houses. Property values. Complaints about the ghosts. School board meetings. You're no longer running a theme park, you're running a small town built on a murder site that no one quite remembers.
+**The park becomes a town.** Once you place enough buildings, residential zoning unlocks. People start *living* at [[civilwarland]]. They have houses. Property values. Complaints about the ghosts. School board meetings. You're no longer running a theme park, you're running a small town built on a murder site that no one quite remembers.
 
 **Characters arrive at milestones.** A roster of ~20-30 pre-written, Saunders-voiced characters show up as the town grows. Each has 2-3 narrative traits. You assign them to buildings. The character + building combination produces specific effects — Quinn assigned to the Thespian Center is one game; Quinn assigned to the new School is a very different game.
 
@@ -6773,7 +6773,7 @@ no. Liz made specific aesthetic judgements. you seem to be ignoring that chat hi
 
 You're right and I owe you a correction. I defaulted to the original Disco Elysium references instead of using the actual brand we built this session.
 
-The brand guidelines are not "Disco Elysium." The brand is **the seven images Liz selected.** Those seven Midjourney outputs ARE the visual style of CivilWarLand. Liz made specific judgment calls along the way that defined what's in and what's out:
+The brand guidelines are not "Disco Elysium." The brand is **the seven images Liz selected.** Those seven Midjourney outputs ARE the visual style of [[civilwarland]]. Liz made specific judgment calls along the way that defined what's in and what's out:
 
 - **Out:** the more painterly, abstract second Saloon variant — too much like a gallery painting, not enough object legibility
 - **Out:** the cathedral-style Worship Center — wrong scale, wrong mood
@@ -7006,7 +7006,7 @@ So either: (a) the files exist locally but haven't been committed/pushed, or (b)
 **CC prompt to check local state:**
 
 ```
-I need a status report on the CivilWarLand repo's documentation and asset files. Run these checks and report results clearly. Do NOT modify or create any files — read-only inspection.
+I need a status report on the [[civilwarland]] repo's documentation and asset files. Run these checks and report results clearly. Do NOT modify or create any files — read-only inspection.
 
 1. From the repo root, list all .md files: ls -la *.md
 2. Check if assets/interiors/ exists and what's in it: ls -la assets/interiors/ 2>/dev/null || echo "assets/interiors/ does not exist"

@@ -93,13 +93,19 @@ Body convention:
 - **Every factual claim cites its source** inline: `... 10×'d ARR to $1M+ [from: [[2026-04-11 Orpheus diagnostic]]]`.
 - **Wikilinks everywhere** a known entity is named — this is what builds the graph.
 
-### Tiered enrichment (people & companies)
+### Tiered enrichment
 
-- **Stub** — 1 mention: name, one-line context, source. That's it.
-- **Moderate** — 3+ mentions: snapshot, working style, strengths, active threads.
-- **Full** — 8+ mentions or a direct working session: complete profile, all sections, history.
+Tier is set by **evidence weight** in the corpus. The extraction pass assigns `status` on the first scan; there is no climb-from-stub gate. Status reflects evidence held — it is a conclusion, not a starting default.
 
-An enrichment pass auto-escalates an entity when its inbound link count crosses a threshold. Do not pre-fill a full profile from thin evidence — that manufactures false confidence, the exact failure pattern Andrew distrusts.
+- **Full** — any of: a dedicated session about this entity (its name in the session title), OR artifact-dense evidence across sessions (code, deploy, architecture signals), OR high reach (3+ sessions) combined with high depth (5 000+ chars of context).
+- **Moderate** — named across 2+ sessions, OR one substantive session (high depth even if only one).
+- **Stub** — a lone incidental mention with nothing behind it. Rare in practice; earned, not assigned by default.
+
+Projects have no stub floor in practice: architecture, deploy history, and build sessions score them up on their own evidence. They almost never stub.
+
+Sessions carry their own tier from their own content (message_count + artifact density), independent of the entity tiers present in that session.
+
+Do not pre-fill a full profile from thin evidence; that manufactures false confidence, the exact failure pattern Andrew distrusts.
 
 ---
 

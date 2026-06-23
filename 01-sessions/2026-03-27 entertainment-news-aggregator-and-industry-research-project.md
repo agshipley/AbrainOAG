@@ -17,9 +17,9 @@ tags: []
 
 **Conversation Overview**
 
-This was an extended technical build session for "Charlie," an autonomous multi-agent entertainment industry intelligence system built for Liz Varner (senior creative-development executive with a Sony first-look deal via Very Varner Inc.) and operated by Andrew Shipley (Yale JD, Rhodes Scholar, Head of Physical AI Safety at Trace Machina). Andrew served as the primary technical operator throughout, with Liz participating in a key session to refine the thesis research parameters. The session covered architecture refinement, agent tuning, Railway deployment, web UI development with a feedback loop, thesis framework development, and book project integration.
+This was an extended technical build session for "[[charlie]]," an autonomous multi-agent entertainment industry intelligence system built for [[Liz Varner]] (senior creative-development executive with a Sony first-look deal via Very Varner Inc.) and operated by Andrew Shipley (Yale JD, Rhodes Scholar, Head of Physical AI Safety at [[Trace Machina]]). Andrew served as the primary technical operator throughout, with Liz participating in a key session to refine the thesis research parameters. The session covered architecture refinement, agent tuning, Railway deployment, web UI development with a feedback loop, thesis framework development, and book project integration.
 
-The session began with producing a comprehensive literature review on creator ecosystem democratization and entertainment industry restructuring, delivered as both a markdown file and Word document. A significant portion of the session involved a detailed conversation with Liz that substantially expanded the thesis framework: the IP landscape was broadened to include traditional categories (books, comics, video games, songs/jukebox model, theater, journalism, life rights, board games/toys) evaluated for saturation, and creator-driven categories (podcasts, YouTube, TikTok, newsletters, livestreaming) evaluated for growth. The thesis framework was refined around three forces — supply exhaustion, demand migration, and discovery bridge — with the discovery bridge reframed as a discovery infrastructure problem rather than a content preference problem. The session also established that Liz has advance offers for a book deal, making Charlie's research infrastructure directly tied to a commercial publishing project.
+The session began with producing a comprehensive literature review on creator ecosystem democratization and entertainment industry restructuring, delivered as both a markdown file and Word document. A significant portion of the session involved a detailed conversation with Liz that substantially expanded the thesis framework: the IP landscape was broadened to include traditional categories (books, comics, video games, songs/jukebox model, theater, journalism, life rights, board games/toys) evaluated for saturation, and creator-driven categories (podcasts, YouTube, TikTok, newsletters, livestreaming) evaluated for growth. The thesis framework was refined around three forces — supply exhaustion, demand migration, and discovery bridge — with the discovery bridge reframed as a discovery infrastructure problem rather than a content preference problem. The session also established that Liz has advance offers for a book deal, making [[charlie]]'s research infrastructure directly tied to a commercial publishing project.
 
 The research agent was built and refined with iterative multi-cycle investigation, gap analysis, and synthesis capabilities. It incorporates the full thesis framework, a prioritized source hierarchy (Matthew Ball, Richard Rushfield/The Ankler, Matthew Belloni/Puck as Tier 1; Parrot Analytics, Nielsen, Edison Research as Tier 2), and an executive tracking module (`--track-exec` flag) that builds a dataset of development executives hired at creator-native companies. All agents (ingestion, analysis, brief, thesis) were updated to incorporate the three-force framework, IP landscape tracking, audience migration analysis, and the source hierarchy. Agent tuning addressed three specific calibration issues: recency filtering (48-hour window enforced, `event_date` and `is_new` fields added), entity diversity (Audiochuck overindex corrected, multiple inference pattern templates added), and depth requirements (specific numbers verified, strategic claims unpacked). The pipeline was confirmed working end-to-end producing 19 signals, 16 findings, and a three-tier brief.
 
@@ -270,14 +270,14 @@ A: Explicitly dual-purpose: intelligence + positioning asset
 Q: Is the thesis purely an analytical tool for Liz's industry intelligence, or does it also serve her professional positioning — e.g., something she could eventually use in conversations, pitches, or thought leadership?
 A: Explicitly dual-purpose: intelligence + positioning asset
 
-And to answer your questions. 1) This is a lit review working document that we can interact with over time and which also forms the ground source of truth for the thesis layer of Charlie (which is the overall project name for the full ecosystem). Neither she nor I have the time to conduct this reserach ourselves, but I am comfortable managing a multi-agentic research team that develops this perspective. 2) Her particular interest currently is rooted in the expansion of video podcasting by major players like Netflix as well as her Audiochuck experience, however a comprehensive thesis is required and we would not want to ignore emerging trends in other forms. 3) That would depend on the nature of the change. If X is correct, X should be extended. If X needs to be revised, X should be revised. 4) I think we need to find the balance over time, but we do not want to miss ANYTHING at the beginning so let's start wide within reason.
+And to answer your questions. 1) This is a lit review working document that we can interact with over time and which also forms the ground source of truth for the thesis layer of [[charlie]] (which is the overall project name for the full ecosystem). Neither she nor I have the time to conduct this reserach ourselves, but I am comfortable managing a multi-agentic research team that develops this perspective. 2) Her particular interest currently is rooted in the expansion of video podcasting by major players like Netflix as well as her Audiochuck experience, however a comprehensive thesis is required and we would not want to ignore emerging trends in other forms. 3) That would depend on the nature of the change. If X is correct, X should be extended. If X needs to be revised, X should be revised. 4) I think we need to find the balance over time, but we do not want to miss ANYTHING at the beginning so let's start wide within reason.
 
 **assistant**
 
 This is a really rich conversation. Let me synthesize everything I've learned and think about what to do next.
 
 Key takeaways:
-1. The project is called "Charlie"
+1. The project is called "[[charlie]]"
 2. It's dual-purpose: intelligence tool + positioning asset for Liz
 3. The thesis is about entertainment industry restructuring driven by creator ecosystem democratization
 4. The lit review should be produced by a multi-agentic research process that Andrew manages
@@ -292,7 +292,7 @@ I'm noticing a few gaps we should clarify before building: the actual operationa
 
 I should also understand what the multi-agentic research team looks like in practice and what "day-one value" means given their timeline of needing something useful within days. I think the best next step is to reflect back the full architecture as I understand it, flag that we need to nail down the operational loop specifically, and ask these remaining critical questions before we start building.Okay — this is getting very clear. Let me name the full system as I now understand it, and then ask the remaining questions that will let us actually build.
 
-**Charlie is three things:**
+**[[charlie]] is three things:**
 
 The first is **The Brief** — a daily inferential intelligence tool. Not a news aggregator. Its job is to take publicly available information and reason forward to implications nobody has articulated yet. The Audiochuck example is the template: investment → expansion → team buildout → hiring. The alpha is in the implication chain, and the system should start wide, flagging anything where the forward logic holds, then calibrate confidence thresholds over time based on what's useful to Liz.
 
@@ -304,7 +304,7 @@ Now, a few things I still need to understand:
 
 On the research layer — you said you're comfortable managing a multi-agentic research team. Within the current Claude Project constraints, the most practical version of this is using deep research and extended conversation sessions where you direct the investigation across multiple searches and sources. But the way you phrased it suggests you may have something more specific in mind, perhaps involving Claude Code, multiple parallel sessions, or a more structured pipeline. What does "multi-agentic research team" look like to you concretely? Are we talking about orchestrating that within Claude's existing tools, or are you building something more custom?
 
-On the operational loop — you selected "something else" when I offered feedback loop architectures but then described the conceptual loop rather than the operational workflow. I want to get specific: when you sit down to do a loop iteration, what does that session actually look like? Are you opening a conversation in Charlie's project, asking Claude to synthesize recent signals against the current thesis, reviewing the proposed updates, and then manually editing the knowledge base files? Or do you envision something different?
+On the operational loop — you selected "something else" when I offered feedback loop architectures but then described the conceptual loop rather than the operational workflow. I want to get specific: when you sit down to do a loop iteration, what does that session actually look like? Are you opening a conversation in [[charlie]]'s project, asking Claude to synthesize recent signals against the current thesis, reviewing the proposed updates, and then manually editing the knowledge base files? Or do you envision something different?
 
 And a few more targeted questions:
 ```
@@ -343,14 +343,14 @@ That's not a Claude Project. That's an engineering system built on the Claude AP
 
 Let me make sure I understand the vision correctly: you want agents that run on some cadence — say daily for The Brief's ingestion and analysis, weekly for thesis synthesis — that process information, update shared state, and produce outputs without anyone pressing go. A human (you) reviews and approves at predetermined intervals, but the agents are doing the ongoing work of monitoring, detecting, synthesizing, and proposing.
 
-That's entirely buildable, but it means the core of Charlie is a backend system — scheduled scripts calling the Claude API, a persistent data store for the thesis and watchlists and accumulated signals, and then a frontend layer (which could still be a Claude Project) where Liz interacts with the outputs conversationally.
+That's entirely buildable, but it means the core of [[charlie]] is a backend system — scheduled scripts calling the Claude API, a persistent data store for the thesis and watchlists and accumulated signals, and then a frontend layer (which could still be a Claude Project) where Liz interacts with the outputs conversationally.
 
 Before I can design this properly, I need to understand what you're working with.
 ```
 This block is not supported on your current device yet.
 ```
 
-Good - I need to wait for Andrew's answers before proceeding further. The answers to these questions will determine whether we're building a full API-based pipeline, working within Claude's ecosystem with some creative workarounds, or something in between.These answers will tell me whether Charlie is a weekend build or a multi-week engineering project — and more importantly, what the realistic MVP looks like given your actual capabilities and infrastructure.
+Good - I need to wait for Andrew's answers before proceeding further. The answers to these questions will determine whether we're building a full API-based pipeline, working within Claude's ecosystem with some creative workarounds, or something in between.These answers will tell me whether [[charlie]] is a weekend build or a multi-week engineering project — and more importantly, what the realistic MVP looks like given your actual capabilities and infrastructure.
 
 **human**
 
@@ -367,7 +367,7 @@ A: I can follow detailed instructions but I'm not a developer
 
 The user has clarified a lot. Let me synthesize what I now understand:
 
-1. Charlie is a multi-agent system, not just a Claude Project
+1. [[charlie]] is a multi-agent system, not just a Claude Project
 2. It needs to run autonomously on a schedule
 3. Andrew can deploy to cloud services and has an API key
 4. He's not a developer but can follow detailed instructions
@@ -394,7 +394,7 @@ So here's what I'd propose as the honest path forward:
 
 **Track A is the immediate value track.** This is a Claude Project that Liz can use starting this week. It won't be autonomous — she'll initiate conversations — but it will be loaded with everything it needs to be genuinely useful from the first interaction: her context, her positioning, The Brief's logic, the thesis seed, and well-designed conversation modes. This is the thing that gets her value in days. It's also not throwaway work — everything we build here (the context files, the thesis document, the prompt architecture) becomes the knowledge layer that the autonomous system eventually draws from.
 
-**Track B is the engineering track.** This is Charlie as you've actually described it: agents running on schedule, ingesting sources, producing briefs, synthesizing against the thesis, and surfacing to you at checkpoints. We'd architect this carefully, then use Claude Code to build it piece by piece. Given that you're not a developer, the realistic timeline for a working autonomous MVP is probably 3–4 weeks, with you and Claude Code working through it methodically.
+**Track B is the engineering track.** This is [[charlie]] as you've actually described it: agents running on schedule, ingesting sources, producing briefs, synthesizing against the thesis, and surfacing to you at checkpoints. We'd architect this carefully, then use Claude Code to build it piece by piece. Given that you're not a developer, the realistic timeline for a working autonomous MVP is probably 3–4 weeks, with you and Claude Code working through it methodically.
 
 The important thing is that Track A isn't a compromise or a lesser version. It's the same system with a human trigger instead of a cron job. Liz's experience of interacting with it — the quality of the intelligence, the thesis layer, the inferential reasoning — would be identical. The automation just removes her needing to initiate it.
 
@@ -477,7 +477,7 @@ A: Yes, that's the right sequence
 Q: For the lit review: should it be a document I produce and hand to you, or a collaborative process where you and Liz shape the direction as I research?
 A: Collaborative — check in with me at key decision points
 
-Q: One more: does Liz know about Charlie as a system, or does she just know about The Brief concept?
+Q: One more: does Liz know about [[charlie]] as a system, or does she just know about The Brief concept?
 A: She knows the full vision
 
 **assistant**
@@ -543,7 +543,7 @@ I'd like you to review some of my repos to make sure we're on the same page. I w
 
 The user wants me to review their GitHub repos so I can understand their technical capabilities and existing infrastructure. I need their GitHub username or repo URLs to do this.That's helpful context — VS Code as your IDE, GitHub for version control, Railway and Vercel for deployment. That tells me you have a real working setup even if you don't identify as a developer.
 
-Share your GitHub username or the specific repo URLs you want me to look at, and I'll review them. I'm particularly interested in understanding your comfort level with code complexity, what frameworks and languages you're working in, and how your deployed projects are structured — all of which will directly inform how we architect Charlie's autonomous pipeline.
+Share your GitHub username or the specific repo URLs you want me to look at, and I'll review them. I'm particularly interested in understanding your comfort level with code complexity, what frameworks and languages you're working in, and how your deployed projects are structured — all of which will directly inform how we architect [[charlie]]'s autonomous pipeline.
 
 **human**
 
@@ -586,13 +586,13 @@ This block is not supported on your current device yet.
 
 GitHub is blocking my fetch of the repositories tab due to robots.txt. The search results are pulling up "gshipley" (Grant Shipley) and "ashipley" but not "agshipley". The profile might be private or have no public repos. Let me try fetching the main profile URL directly since the user provided it.GitHub is blocking me from fetching your profile directly — their robots.txt prevents scraping the repositories tab, and the search results aren't surfacing "agshipley" at all. That likely means either your repos are all private, or the profile has limited public visibility.
 
-Could you share direct links to a couple of your public repos? Alternatively, if they're all private, you could paste the names and brief descriptions of a few — or even just tell me what languages and frameworks you're working in across your Railway and Vercel deployments. That'll give me the same picture I'm looking for: what kind of code you're comfortable managing, what your stack looks like, and how much of the Charlie pipeline we can build with tools you already know versus what's new territory.
+Could you share direct links to a couple of your public repos? Alternatively, if they're all private, you could paste the names and brief descriptions of a few — or even just tell me what languages and frameworks you're working in across your Railway and Vercel deployments. That'll give me the same picture I'm looking for: what kind of code you're comfortable managing, what your stack looks like, and how much of the [[charlie]] pipeline we can build with tools you already know versus what's new territory.
 
 **human**
 
-https://github.com/agshipley/first-agent
+https://github.com/agshipley/[[first-agent]]
 
-https://github.com/agshipley/NLSAFE
+https://github.com/agshipley/[[NLSAFE]]
 
 https://github.com/agshipley/CW_Actual
 
@@ -620,25 +620,25 @@ This block is not supported on your current device yet.
 
 Now I have a good picture of Andrew's technical profile across three repos. Let me synthesize what I see.
 
-1. **first-agent**: A Python agent using the Anthropic API with tool use (web search + custom spreadsheet tool), deployed via Procfile (Railway). This is a proper agentic loop with message history management, tool result handling, retry logic for rate limits, and segment-specific system prompts. Built for Borden/Co lead generation.
+1. **[[first-agent]]**: A Python agent using the Anthropic API with tool use (web search + custom spreadsheet tool), deployed via Procfile (Railway). This is a proper agentic loop with message history management, tool result handling, retry logic for rate limits, and segment-specific system prompts. Built for Borden/Co lead generation.
 
-2. **NLSAFE**: A Rust-based project for verifiable build infrastructure for AI safety. LLVM IR analyzer, MLIR audit tool, BEP-to-SLSA provenance converter. 
+2. **[[NLSAFE]]**: A Rust-based project for verifiable build infrastructure for AI safety. LLVM IR analyzer, MLIR audit tool, BEP-to-SLSA provenance converter. 
 
 3. **CW_Actual**: A single-file vanilla HTML/CSS/JS browser game based on a George Saunders story, deployed on Vercel. Creative project, no frameworks.
 
 The pattern emerging is that Andrew works with Claude Code as his development partner—he understands system architecture and can direct sophisticated builds, but isn't writing code from scratch himself. He's comfortable with Python for API integration, has deployed across multiple platforms (Railway, Vercel), and understands infrastructure concepts like environment variables and Procfiles.
 
-For Charlie's needs, the first-agent repo is the most directly applicable—it implements an agentic loop using the Anthropic API with tool use, which is the exact pattern Charlie needs to build on. The key difference is Charlie requires scheduled execution, persistent state management, and multiple agents working in coordination rather than a single interactive agent.This is very informative. Here's what I see across the three repos:
+For [[charlie]]'s needs, the [[first-agent]] repo is the most directly applicable—it implements an agentic loop using the Anthropic API with tool use, which is the exact pattern [[charlie]] needs to build on. The key difference is [[charlie]] requires scheduled execution, persistent state management, and multiple agents working in coordination rather than a single interactive agent.This is very informative. Here's what I see across the three repos:
 
-**first-agent** is the most relevant to Charlie. It's a Python agentic loop built directly on the Anthropic API — you've got a `while True` loop that sends messages to Claude, handles tool use responses (web search plus a custom spreadsheet-saving tool), manages conversation history, and includes rate limit retry logic. The system prompts are well-structured with detailed scoring rubrics and ICP definitions. Deployed to Railway via Procfile. This is essentially a single-agent version of what Charlie needs to be.
+**[[first-agent]]** is the most relevant to [[charlie]]. It's a Python agentic loop built directly on the Anthropic API — you've got a `while True` loop that sends messages to Claude, handles tool use responses (web search plus a custom spreadsheet-saving tool), manages conversation history, and includes rate limit retry logic. The system prompts are well-structured with detailed scoring rubrics and ICP definitions. Deployed to Railway via Procfile. This is essentially a single-agent version of what [[charlie]] needs to be.
 
-**NLSAFE** is architecturally ambitious — Rust-based tooling for LLVM IR and MLIR auditing, SLSA provenance, cryptographic verification. The project structure is clean (separate directories per tool, diagrams, proper README). 69% Rust. I'd guess this was built primarily with Claude Code, given the domain sophistication combined with your self-description as "not a developer."
+**[[NLSAFE]]** is architecturally ambitious — Rust-based tooling for LLVM IR and MLIR auditing, SLSA provenance, cryptographic verification. The project structure is clean (separate directories per tool, diagrams, proper README). 69% Rust. I'd guess this was built primarily with Claude Code, given the domain sophistication combined with your self-description as "not a developer."
 
 **CW_Actual** is a single-file vanilla HTML/JS game deployed on Vercel. The George Saunders adaptation is a nice touch. This tells me you're comfortable with simple Vercel deployments.
 
-**What this means for Charlie:**
+**What this means for [[charlie]]:**
 
-The good news is that `first-agent` already demonstrates the core pattern Charlie needs — an API-driven agent loop with tool use and structured system prompts. You've done this before. The gap between where you are and what Charlie requires is essentially three things: scheduled execution (cron triggering the agent instead of you running it manually), persistent state (the thesis document and accumulated signals need to live somewhere between runs — a database or file store rather than just in-memory conversation history), and multi-agent coordination (multiple specialized agents handing off to each other rather than one agent doing everything).
+The good news is that `first-agent` already demonstrates the core pattern [[charlie]] needs — an API-driven agent loop with tool use and structured system prompts. You've done this before. The gap between where you are and what [[charlie]] requires is essentially three things: scheduled execution (cron triggering the agent instead of you running it manually), persistent state (the thesis document and accumulated signals need to live somewhere between runs — a database or file store rather than just in-memory conversation history), and multi-agent coordination (multiple specialized agents handing off to each other rather than one agent doing everything).
 
 All three of those gaps are solvable with Claude Code guiding you through the build, and Railway can handle the deployment and scheduling. This is a realistic project for you — not trivial, but not a stretch beyond what you've already demonstrated.
 
@@ -654,9 +654,9 @@ The user wants me to create a comprehensive project bible document that captures
 
 Key decisions and information from this conversation:
 
-1. Project name: Charlie
+1. Project name: [[charlie]]
 2. Three components: The Brief (inferential intelligence), The Thesis (living research document), The Loop (feedback mechanism)
-3. Liz Varner - senior creative-development and strategy executive
+3. [[Liz Varner]] - senior creative-development and strategy executive
 4. The Brief is NOT a news aggregator - it's inferential (the Audiochuck example)
 5. The Thesis is dual-purpose: intelligence + positioning asset
 6. The thesis is about entertainment industry restructuring driven by creator ecosystem democratization
@@ -664,7 +664,7 @@ Key decisions and information from this conversation:
 
 7. We're starting with a literature review as the immediate deliverable, then moving into architecture design in parallel while building the autonomous system directly
 8. Andrew will manage the loop with full editorial control, and we're using Python with the Anthropic API, deploying through Railway or Vercel, with GitHub for version control
-9. There's an existing agent pattern in the first-agent repo we can reference, and we're phasing this as lit review first, then architecture, then build
+9. There's an existing agent pattern in the [[first-agent]] repo we can reference, and we're phasing this as lit review first, then architecture, then build
 10. The lit review will be collaborative with checkpoints built in
 
 Now I'm considering whether custom skills would be useful for this project, given that we'll need regular research synthesis, document creation and updating, and multi-agent architecture design.
@@ -682,13 +682,13 @@ This block is not supported on your current device yet.
 Now I have a good understanding of both the skill creation process and the docx creation process. Let me think about what to create:
 
 1. A comprehensive project bible document (docx) that captures all decisions and architecture
-2. Potentially a custom skill for the Charlie project
+2. Potentially a custom skill for the [[charlie]] project
 
 Actually, the user said "project files" which in a Claude Project context means knowledge base files. These are typically uploaded as documents. A .docx would work well here.
 
 Let me think about what custom skills might be valuable. For this project specifically:
-- A "charlie-research" skill that knows how to conduct entertainment industry research with the right lens
-- A "charlie-brief" skill that knows how to generate The Brief format
+- A "[[charlie]]-research" skill that knows how to conduct entertainment industry research with the right lens
+- A "[[charlie]]-brief" skill that knows how to generate The Brief format
 
 
 - But wait, skills are really for Claude in computer-use mode. For a Claude Project, the system prompt and knowledge files are what matter. So the project bible document itself becomes the primary knowledge file that shapes how Claude behaves within the project.
@@ -733,7 +733,7 @@ This block is not supported on your current device yet.
 
 Good, the file is presented. Let me now discuss the skills question and what else might be needed.Here's the project bible — 10 sections covering everything from the architecture session: executive summary, the three systems (Brief, Thesis, Loop), all key decisions in a table, technical stack and engineering gaps, Liz's persistent context, phasing, operational procedures, reference links, and open questions.
 
-On the skills question: I thought about this carefully and my recommendation is that custom skills aren't the right tool for Charlie at this stage. Skills are designed for Claude's computer-use environment — they teach Claude how to produce specific types of file outputs. Charlie's value isn't in file production; it's in research, inference, and synthesis. What Charlie actually needs are well-designed system prompts for each agent (which get built during Phase 2) and the knowledge base documents that ground the agents' reasoning.
+On the skills question: I thought about this carefully and my recommendation is that custom skills aren't the right tool for [[charlie]] at this stage. Skills are designed for Claude's computer-use environment — they teach Claude how to produce specific types of file outputs. [[charlie]]'s value isn't in file production; it's in research, inference, and synthesis. What [[charlie]] actually needs are well-designed system prompts for each agent (which get built during Phase 2) and the knowledge base documents that ground the agents' reasoning.
 
 That said, there are two additional documents I'd recommend creating alongside the bible that would be immediately useful:
 
@@ -759,12 +759,12 @@ None of these seem to be the right Andrew Shipley. Let me search more specifical
 This block is not supported on your current device yet.
 ```
 
-The search isn't finding the right Andrew Shipley. Let me try with more specific terms based on what I know - he has a repo called "first-agent" that mentions "Borden/Co" which is a creative studio for corporate art. Let me also look at the NLSAFE repo which is about AI safety infrastructure. And he's in LA and partners with Liz Varner.
+The search isn't finding the right Andrew Shipley. Let me try with more specific terms based on what I know - he has a repo called "[[first-agent]]" that mentions "Borden/Co" which is a creative studio for corporate art. Let me also look at the [[NLSAFE]] repo which is about AI safety infrastructure. And he's in LA and partners with [[Liz Varner]].
 ```
 This block is not supported on your current device yet.
 ```
 
-I found it - the ZoomInfo result mentions "Andrew Shipley" as "Physical AI Safety Head at Trace Machina" and previously at "EeroQ" and "AGS Law" and "Gunderson Dettmer". The first-agent repo mentions "Borden/Co" - let me search more specifically.
+I found it - the ZoomInfo result mentions "Andrew Shipley" as "Physical AI Safety Head at [[Trace Machina]]" and previously at "[[EeroQ]]" and "[[AGS Law PLLC|AGS Law]]" and "Gunderson Dettmer". The [[first-agent]] repo mentions "Borden/Co" - let me search more specifically.
 ```
 This block is not supported on your current device yet.
 ```
@@ -772,25 +772,25 @@ This block is not supported on your current device yet.
 Now I have a much clearer picture. Andrew Shipley is:
 - Yale Law School (JD), Rhodes Scholar (DPhil in Sociology at Oxford), University of Oregon (Phi Beta Kappa)
 - Former associate/law clerk at Gunderson Dettmer (Silicon Valley startup law)
-- Founded AGS Law
-- Co-founded Mrkt Analytics (NLP and predictive statistical modeling for legal/financial services, 2017-2023)
-- Chief of Staff and Director of Legal Operations at EeroQ Quantum Hardware (2023-2024)
-- Director of Business and Legal Affairs / Head of Physical AI Safety at Trace Machina (2024-present)
+- Founded [[AGS Law PLLC|AGS Law]]
+- Co-founded [[mrkt]] Analytics (NLP and predictive statistical modeling for legal/financial services, 2017-2023)
+- Chief of Staff and Director of Legal Operations at [[EeroQ]] Quantum Hardware (2023-2024)
+- Director of Business and Legal Affairs / Head of Physical AI Safety at [[Trace Machina]] (2024-present)
 
 
 - Based in Brooklyn, New York
 
-So he's not a developer in the traditional sense, but he's deeply technical—a Yale-trained lawyer with a Rhodes Scholarship in Sociology who built an NLP analytics company, worked in quantum computing, and now focuses on physical AI safety. His work with the Rust-based auditing tools and first-agent repo makes much more sense in this context, operating at the intersection of law, AI safety, and technology infrastructure.
+So he's not a developer in the traditional sense, but he's deeply technical—a Yale-trained lawyer with a Rhodes Scholarship in Sociology who built an NLP analytics company, worked in quantum computing, and now focuses on physical AI safety. His work with the Rust-based auditing tools and [[first-agent]] repo makes much more sense in this context, operating at the intersection of law, AI safety, and technology infrastructure.
 
-This reframes the Charlie project significantly. His technical depth runs much deeper than I initially assessed, even without daily coding work. The NLSAFE repo likely ties directly to his Trace Machina role, and the first-agent repo appears to be generating leads for Tre Borden's creative studio. Given his experience building AI systems and thinking rigorously about safety and verification, he'll move through Claude Code much faster than my conservative 3-4 week timeline suggested.
+This reframes the [[charlie]] project significantly. His technical depth runs much deeper than I initially assessed, even without daily coding work. The [[NLSAFE]] repo likely ties directly to his [[Trace Machina]] role, and the [[first-agent]] repo appears to be generating leads for [[Tre Borden]]'s creative studio. Given his experience building AI systems and thinking rigorously about safety and verification, he'll move through Claude Code much faster than my conservative 3-4 week timeline suggested.
 
-Also worth noting: he's remote from Brooklyn, not LA, so the Liz connection is purely professional. His co-founding work on Mrkt Analytics—NLP and predictive modeling for legal and financial services—directly parallels what Charlie does with NLP-based signal detection in entertainment news.That changes the picture significantly. You're a Yale Law JD, Rhodes Scholar in Sociology at Oxford, who co-founded an NLP and predictive modeling company (Mrkt Analytics), worked as Chief of Staff at a quantum computing startup (EeroQ), and now work in physical AI safety and business/legal affairs at Trace Machina — a simulation infrastructure company whose team comes from Apple, Google, MongoDB, and Toyota Research Institute.
+Also worth noting: he's remote from Brooklyn, not LA, so the Liz connection is purely professional. His co-founding work on [[mrkt]] Analytics—NLP and predictive modeling for legal and financial services—directly parallels what [[charlie]] does with NLP-based signal detection in entertainment news.That changes the picture significantly. You're a Yale Law JD, Rhodes Scholar in Sociology at Oxford, who co-founded an NLP and predictive modeling company ([[mrkt]] Analytics), worked as Chief of Staff at a quantum computing startup ([[EeroQ]]), and now work in physical AI safety and business/legal affairs at [[Trace Machina]] — a simulation infrastructure company whose team comes from Apple, Google, MongoDB, and Toyota Research Institute.
 
-So when you say "not a developer," what you mean is that you don't write code as your primary daily function — but you have deep technical fluency, you've co-founded a company built on NLP and statistical modeling, and you're currently embedded in an engineering-heavy AI safety organization. The NLSAFE repo makes complete sense now — that's connected to your Trace Machina work on verifiable build infrastructure.
+So when you say "not a developer," what you mean is that you don't write code as your primary daily function — but you have deep technical fluency, you've co-founded a company built on NLP and statistical modeling, and you're currently embedded in an engineering-heavy AI safety organization. The [[NLSAFE]] repo makes complete sense now — that's connected to your [[Trace Machina]] work on verifiable build infrastructure.
 
-A few things this changes about how I should be thinking about Charlie:
+A few things this changes about how I should be thinking about [[charlie]]:
 
-Your Mrkt Analytics background is directly relevant. You've already built a system that uses NLP to extract signals from unstructured text for a specific professional audience (legal/financial). Charlie is essentially the same pattern applied to entertainment industry intelligence. You know what this kind of system looks like from the inside.
+Your [[mrkt]] Analytics background is directly relevant. You've already built a system that uses NLP to extract signals from unstructured text for a specific professional audience (legal/financial). [[charlie]] is essentially the same pattern applied to entertainment industry intelligence. You know what this kind of system looks like from the inside.
 
 My 3–4 week timeline estimate was conservative for someone with your profile. You're right that you'll move faster than that, especially with Claude Code. The architecture isn't novel to you conceptually — it's the specific implementation that's new.
 
@@ -806,10 +806,10 @@ Yes. By the end of this session I would like the project file architecture set u
 
 The user wants to start building the actual project architecture and pushing code. Let me think about what needs to happen:
 
-1. Set up the project file structure for Charlie
+1. Set up the project file structure for [[charlie]]
 2. Start writing actual code that Andrew can push to GitHub via VS Code
 
-Let me think about the architecture. Charlie needs:
+Let me think about the architecture. [[charlie]] needs:
 - An orchestrator that runs on a schedule
 - An ingestion agent (monitors sources)
 - An analysis agent (runs inference chains)
@@ -1045,7 +1045,7 @@ python orchestrator.py --test
 
 **human**
 
-we're in the vs code terminal in the charlie project. take me through it step by step
+we're in the vs code terminal in the [[charlie]] project. take me through it step by step
 
 **assistant**
 
@@ -1059,8 +1059,8 @@ This creates the virtual environment. Run that and tell me what you get.
 
 **human**
 
-andrewshipley@Andrews-MacBook-Air charlie % python3 -m venv venv
-andrewshipley@Andrews-MacBook-Air charlie %
+andrewshipley@Andrews-MacBook-Air [[charlie]] % python3 -m venv venv
+andrewshipley@Andrews-MacBook-Air [[charlie]] %
 
 **assistant**
 
@@ -1156,7 +1156,7 @@ This will take a couple minutes. The ingestion agent will search entertainment i
 
 python orchestrator.py
 ============================================================
-  CHARLIE — Daily Pipeline
+  [[charlie]] — Daily Pipeline
   Friday, March 27, 2026
   Started: 15:28:29
 ============================================================
@@ -1166,32 +1166,32 @@ STEP 1: INGESTION
 [Ingestion] Starting run for 2026-03-27
 [Ingestion] Running search agent...
 Traceback (most recent call last):
-  File "/Users/andrewshipley/Desktop/Poesis/Andrew/AI Agents/Charlie/charlie/orchestrator.py", line 127
+  File "/Users/andrewshipley/Desktop/Poesis/Andrew/AI Agents/[[charlie]]/[[charlie]]/orchestrator.py", line 127
 , in <module>                                                                                              main()
-  File "/Users/andrewshipley/Desktop/Poesis/Andrew/AI Agents/Charlie/charlie/orchestrator.py", line 123
+  File "/Users/andrewshipley/Desktop/Poesis/Andrew/AI Agents/[[charlie]]/[[charlie]]/orchestrator.py", line 123
 , in main                                                                                                  run_daily_pipeline(run_date)
-  File "/Users/andrewshipley/Desktop/Poesis/Andrew/AI Agents/Charlie/charlie/orchestrator.py", line 41,
+  File "/Users/andrewshipley/Desktop/Poesis/Andrew/AI Agents/[[charlie]]/[[charlie]]/orchestrator.py", line 41,
  in run_daily_pipeline                                                                                     signals = run_ingestion(run_date)
               ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/andrewshipley/Desktop/Poesis/Andrew/AI Agents/Charlie/charlie/agents/ingestion.py", line
+  File "/Users/andrewshipley/Desktop/Poesis/Andrew/AI Agents/[[charlie]]/[[charlie]]/agents/ingestion.py", line
  66, in run_ingestion                                                                                      result = call_agent(
              ^^^^^^^^^^^
-  File "/Users/andrewshipley/Desktop/Poesis/Andrew/AI Agents/Charlie/charlie/core/client.py", line 50, 
+  File "/Users/andrewshipley/Desktop/Poesis/Andrew/AI Agents/[[charlie]]/[[charlie]]/core/client.py", line 50, 
 in call_agent                                                                                              response = _call_with_retry(
                ^^^^^^^^^^^^^^^^^
-  File "/Users/andrewshipley/Desktop/Poesis/Andrew/AI Agents/Charlie/charlie/core/client.py", line 124,
+  File "/Users/andrewshipley/Desktop/Poesis/Andrew/AI Agents/[[charlie]]/[[charlie]]/core/client.py", line 124,
  in _call_with_retry                                                                                       return client.messages.create(**kwargs)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/andrewshipley/Desktop/Poesis/Andrew/AI Agents/Charlie/charlie/venv/lib/python3.11/site-p
+  File "/Users/andrewshipley/Desktop/Poesis/Andrew/AI Agents/[[charlie]]/[[charlie]]/venv/lib/python3.11/site-p
 ackages/anthropic/_utils/_utils.py", line 282, in wrapper                                                  return func(*args, **kwargs)
            ^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/andrewshipley/Desktop/Poesis/Andrew/AI Agents/Charlie/charlie/venv/lib/python3.11/site-p
+  File "/Users/andrewshipley/Desktop/Poesis/Andrew/AI Agents/[[charlie]]/[[charlie]]/venv/lib/python3.11/site-p
 ackages/anthropic/resources/messages/messages.py", line 996, in create                                     return self._post(
            ^^^^^^^^^^^
-  File "/Users/andrewshipley/Desktop/Poesis/Andrew/AI Agents/Charlie/charlie/venv/lib/python3.11/site-p
+  File "/Users/andrewshipley/Desktop/Poesis/Andrew/AI Agents/[[charlie]]/[[charlie]]/venv/lib/python3.11/site-p
 ackages/anthropic/_base_client.py", line 1364, in post                                                     return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/andrewshipley/Desktop/Poesis/Andrew/AI Agents/Charlie/charlie/venv/lib/python3.11/site-p
+  File "/Users/andrewshipley/Desktop/Poesis/Andrew/AI Agents/[[charlie]]/[[charlie]]/venv/lib/python3.11/site-p
 ackages/anthropic/_base_client.py", line 1137, in request                                                  raise self._make_status_error_from_response(err.response) from None
 anthropic.AuthenticationError: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_er
 ror', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CZUNeCbPfG6gj2sSBvEy8'}
@@ -1213,8 +1213,8 @@ ok think I fixed the API key but it didn't run for like an extended time: python
   API Key: set
   Daily model: claude-sonnet-4-6
   Deep model: claude-opus-4-6
-  Data dir: /Users/andrewshipley/Desktop/Poesis/Andrew/AI Agents/Charlie/charlie/data
-  Context dir: /Users/andrewshipley/Desktop/Poesis/Andrew/AI Agents/Charlie/charlie/context
+  Data dir: /Users/andrewshipley/Desktop/Poesis/Andrew/AI Agents/[[charlie]]/[[charlie]]/data
+  Context dir: /Users/andrewshipley/Desktop/Poesis/Andrew/AI Agents/[[charlie]]/[[charlie]]/context
 
 **assistant**
 
@@ -1567,7 +1567,7 @@ You should see the timestamped progress logs now. Expect 5–10 minutes for the 
 
 **human**
 
-If the token limit on the Claude API is the issue, we need a retry after timeout function (similar to first-agent) I believe?
+If the token limit on the Claude API is the issue, we need a retry after timeout function (similar to [[first-agent]]) I believe?
 
 **assistant**
 
@@ -1732,9 +1732,9 @@ If that prints the config output cleanly, the imports are fine and Pylance is ju
 
 **human**
 
-andrewshipley@Andrews-MacBook-Air charlie %  source "/Users/andrewshipley/Desktop/Poesis/Andrew/AI Agents/Charlie/charlie/venv/bi
+andrewshipley@Andrews-MacBook-Air [[charlie]] %  source "/Users/andrewshipley/Desktop/Poesis/Andrew/AI Agents/[[charlie]]/[[charlie]]/venv/bi
 n/activate"
-(venv) andrewshipley@Andrews-MacBook-Air charlie %
+(venv) andrewshipley@Andrews-MacBook-Air [[charlie]] %
 
 **assistant**
 
@@ -1747,7 +1747,7 @@ python orchestrator.py --test
 **human**
 
 this is what we're showing in the first terminal ============================================================
-  CHARLIE — Daily Pipeline
+  [[charlie]] — Daily Pipeline
   Friday, March 27, 2026
   Started: 16:43:48
 ============================================================
@@ -2361,7 +2361,7 @@ cp: /Users/andrewshipley/Downloads/Charlie_Lit_Review_v1.md: No such file or dir
 Check what name it actually downloaded as:
 
 ```bash
-ls ~/Downloads/Charlie*
+ls ~/Downloads/[[charlie]]*
 ```
 
 **human**
@@ -2374,7 +2374,7 @@ zsh: no matches found: /Users/andrewshipley/Downloads/Charlie*
 Your browser might be saving to a different directory. Try:
 
 ```bash
-find ~ -name "Charlie*" -maxdepth 5 2>/dev/null
+find ~ -name "[[charlie]]*" -maxdepth 5 2>/dev/null
 ```
 
 **human**
@@ -2412,8 +2412,8 @@ before doing that, a reminder. we haven't pushed ANYTHING to github yet. the rep
 ```bash
 git init
 git add .
-git commit -m "Charlie v0.1: full pipeline, lit review, render system"
-git remote add origin git@github.com:agshipley/charlie.git
+git commit -m "[[charlie]] v0.1: full pipeline, lit review, render system"
+git remote add origin git@github.com:agshipley/[[charlie]].git
 git branch -M main
 git push -u origin main
 ```
@@ -3811,7 +3811,7 @@ Create it directly:
 ```bash
 cat > web.py << 'ENDOFFILE'
 """
-Charlie Web — serves briefs and collects feedback.
+[[charlie]] Web — serves briefs and collects feedback.
 """
 
 import json
@@ -3874,7 +3874,7 @@ TEMPLATE = """<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Charlie — The Brief</title>
+<title>[[charlie]] — The Brief</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:Georgia,serif;background:#fafafa;color:#1a1a1a;line-height:1.6}
@@ -3907,8 +3907,8 @@ find ~ -name "web.py" -maxdepth 5 2>/dev/null
 
 **human**
 
-(venv) andrewshipley@Andrews-MacBook-Air charlie % find ~ -name "web.py" -maxdepth 5 2>/dev/null
-(venv) andrewshipley@Andrews-MacBook-Air charlie %
+(venv) andrewshipley@Andrews-MacBook-Air [[charlie]] % find ~ -name "web.py" -maxdepth 5 2>/dev/null
+(venv) andrewshipley@Andrews-MacBook-Air [[charlie]] %
 
 **assistant**
 
@@ -3922,7 +3922,7 @@ python web.py
 
 **human**
 
-I want to understand how to move it, looks like it's sitting in agent. /Users/andrewshipley/Desktop/Poesis/Andrew/AI Agents/Charlie/charlie/agents/web.py
+I want to understand how to move it, looks like it's sitting in agent. /Users/andrewshipley/Desktop/Poesis/Andrew/AI Agents/[[charlie]]/[[charlie]]/agents/web.py
 
 **assistant**
 
@@ -3957,7 +3957,7 @@ python web.py
 
 **human**
 
-/Users/andrewshipley/Desktop/Poesis/Andrew/AI Agents/Charlie/charlie/render.py
+/Users/andrewshipley/Desktop/Poesis/Andrew/AI Agents/[[charlie]]/[[charlie]]/render.py
 
 **assistant**
 
@@ -4018,7 +4018,7 @@ do I need to open a separate terminal, my current terminal is still running web.
 
 **assistant**
 
-Yes — open a new terminal in VS Code (`Cmd+Shift+``), make sure you're in the charlie directory and activate the venv:
+Yes — open a new terminal in VS Code (`Cmd+Shift+``), make sure you're in the [[charlie]] directory and activate the venv:
 
 ```bash
 cd ~/Desktop/Poesis/Andrew/AI\ Agents/Charlie/charlie
@@ -4191,7 +4191,7 @@ where do I add the API key?
 
 In the Railway dashboard:
 
-1. Click on your Charlie service
+1. Click on your [[charlie]] service
 2. Click the **Variables** tab (should be near the top, alongside Settings, Deployments, etc.)
 3. Click **New Variable**
 4. Key: `ANTHROPIC_API_KEY`
@@ -4315,7 +4315,7 @@ is the volume set up?
 
 No. Let's do that now in the Railway dashboard:
 
-1. Click on your Charlie service
+1. Click on your [[charlie]] service
 2. Go to **Settings** or look for **Volumes** in the service panel
 3. Click **Add Volume** (or **New Volume**)
 4. Mount path: `/app/data`
@@ -4359,7 +4359,7 @@ you have to right click on the project itself. ok done
 Good. Now attach it to your service:
 
 1. Click on the volume you just created
-2. It should ask which service to mount it to — select your Charlie service
+2. It should ask which service to mount it to — select your [[charlie]] service
 3. Set the mount path to `/app/data`
 4. Save
 
@@ -4590,7 +4590,7 @@ k done
 
 **assistant**
 
-The user has completed the deployment. Let me give a status summary of where things stand.Good. Charlie is live. One service, one volume, automated scheduling, web interface with feedback loop.
+The user has completed the deployment. Let me give a status summary of where things stand.Good. [[charlie]] is live. One service, one volume, automated scheduling, web interface with feedback loop.
 
 Let's take stock of what exists right now:
 
@@ -4650,7 +4650,7 @@ Actually, looking more carefully - when you click a brief from the archive, it g
 
 But actually the user said "there doesn't seem to be a button to navigate to the main page once you're in the archive page" - but there IS one: "Latest Brief" links to `/`. So maybe the issue is the label isn't clear, or it's not styled prominently enough, or the user missed it. Let me re-read... actually maybe the user hasn't deployed the latest version with the archive nav. Or maybe the issue is different.
 
-Let me look at what actually needs fixing. The brief template is missing a home link, which is a real gap - you can't get back to the latest brief from an individual brief view. I should add consistent navigation across all pages with Latest, Archive, and Run options. I also notice the brief page doesn't show the date clearly when coming from the archive, there's no way to browse between dates without going back, and the run pages have inconsistent styling. The rating confirmation lacks visual feedback, the signal log could be collapsible to save space, and there's no consistent Charlie branding throughout.
+Let me look at what actually needs fixing. The brief template is missing a home link, which is a real gap - you can't get back to the latest brief from an individual brief view. I should add consistent navigation across all pages with Latest, Archive, and Run options. I also notice the brief page doesn't show the date clearly when coming from the archive, there's no way to browse between dates without going back, and the run pages have inconsistent styling. The rating confirmation lacks visual feedback, the signal log could be collapsible to save space, and there's no consistent [[charlie]] branding throughout.
 
 For the signal log specifically, the three tiers are the main content and the signal log is just reference material - it should be collapsible to keep the focus on what matters.Here's what I found:
 
@@ -4762,7 +4762,7 @@ Done.Done. Those questions are locked in. What's next?
 
 **human**
 
-so now, the railway app is doing one half of the Charlie project; namely, it's doing The Brief. It is not doing the thesis part of this. I'd like to have a conversation about what we actually want the thesis to be, and then implement a beta of it on railway
+so now, the railway app is doing one half of the [[charlie]] project; namely, it's doing The Brief. It is not doing the thesis part of this. I'd like to have a conversation about what we actually want the thesis to be, and then implement a beta of it on railway
 
 **assistant**
 
@@ -4808,15 +4808,15 @@ Repeate that back to me and ask any questions you need to firm up your understan
 
 Andrew is describing two distinct thesis products:
 
-1. A dynamic, living document visible on the Charlie web app - this is the observable, evolving thesis that updates with incoming signals and research. It should be front-and-center when someone opens the app.
+1. A dynamic, living document visible on the [[charlie]] web app - this is the observable, evolving thesis that updates with incoming signals and research. It should be front-and-center when someone opens the app.
 
 2. A deeper, more academic/structural document that is essentially the foundation for a book Liz would write about entertainment industry restructuring. This is more rigorous, more permanent, and oriented toward publication.
 
 Let me think about what questions I need to ask to firm this up.Two thesis products, two different registers.
 
-**Product 1: The Living Thesis.** This is a dynamic document visible on the Charlie web app — prominently linked, not buried. It represents the current state of the argument: what the three forces look like right now, what evidence has accumulated, what's changed recently. It updates as The Brief surfaces new signals and the thesis synthesizer proposes extensions or revisions. It's a working intelligence document — current, opinionated, evolving. When Liz walks into a meeting, this is what she's read that morning alongside The Brief. When she's talking to someone about where the industry is heading, this is what she's drawing from. It's meant to be read, shared, referenced in conversation.
+**Product 1: The Living Thesis.** This is a dynamic document visible on the [[charlie]] web app — prominently linked, not buried. It represents the current state of the argument: what the three forces look like right now, what evidence has accumulated, what's changed recently. It updates as The Brief surfaces new signals and the thesis synthesizer proposes extensions or revisions. It's a working intelligence document — current, opinionated, evolving. When Liz walks into a meeting, this is what she's read that morning alongside The Brief. When she's talking to someone about where the industry is heading, this is what she's drawing from. It's meant to be read, shared, referenced in conversation.
 
-**Product 2: The Book Foundation.** This is a deeper, more structured document oriented toward eventual publication. It has the rigor of the lit review — cited sources, structured arguments, historical context, data. It's organized not as a living feed but as chapters or sections that build a sustained argument. The three forces are the structural skeleton, but the treatment is comprehensive: the full IP landscape, the audience migration analysis, the institutional gap in development functions, the case studies (Audiochuck, Wondery, Netflix's podcast strategy). This doesn't update daily — it updates when the research agent produces something substantive enough to warrant a revision. You and Liz are the editors. Charlie is the research team.
+**Product 2: The Book Foundation.** This is a deeper, more structured document oriented toward eventual publication. It has the rigor of the lit review — cited sources, structured arguments, historical context, data. It's organized not as a living feed but as chapters or sections that build a sustained argument. The three forces are the structural skeleton, but the treatment is comprehensive: the full IP landscape, the audience migration analysis, the institutional gap in development functions, the case studies (Audiochuck, Wondery, Netflix's podcast strategy). This doesn't update daily — it updates when the research agent produces something substantive enough to warrant a revision. You and Liz are the editors. [[charlie]] is the research team.
 
 The two products have different cadences, different audiences, and different editorial standards. But they share the same underlying thesis and draw from the same signal pipeline and research corpus. The living thesis is the real-time expression; the book is the durable artifact.
 
@@ -4836,7 +4836,7 @@ let's make it all visible for now. but segregated in a way that makes sense. and
 
 **assistant**
 
-Liz has advance offers for the book project. That changes the stakes — this isn't speculative, it's a real commercial commitment. The Charlie system is now serving three purposes: daily intelligence (The Brief), a living strategic document (The Living Thesis), and the research infrastructure for a book with a publisher behind it.
+Liz has advance offers for the book project. That changes the stakes — this isn't speculative, it's a real commercial commitment. The [[charlie]] system is now serving three purposes: daily intelligence (The Brief), a living strategic document (The Living Thesis), and the research infrastructure for a book with a publisher behind it.
 
 Let me think about what needs to happen:
 
@@ -4845,7 +4845,7 @@ Let me think about what needs to happen:
 3. Connect the thesis synthesizer to actually produce and update the living thesis
 4. Structure the book foundation
 
-Let me ask about the book structure and then build.That changes everything about the stakes. This isn't a side project — there's a publisher and money on the table. Charlie is now the research infrastructure for a book deal.
+Let me ask about the book structure and then build.That changes everything about the stakes. This isn't a side project — there's a publisher and money on the table. [[charlie]] is now the research infrastructure for a book deal.
 
 Let me build this. First I need to seed the actual thesis document so there's something to display, then add the thesis pages to the web app.
 ```
@@ -5075,12 +5075,12 @@ And context files for Liz's profile, slate, watching.
 This block is not supported on your current device yet.
 ```
 
-Context files are in /home/claude/charlie/context/ but the state manager loads from config.context_dir which is likely data/context/. Let me check config.
+Context files are in /home/claude/[[charlie]]/context/ but the state manager loads from config.context_dir which is likely data/context/. Let me check config.
 ```
 This block is not supported on your current device yet.
 ```
 
-Context dir is at project root level (charlie/context/), not inside data/. So it won't be overlaid by the volume. Good, no seeding needed for context.
+Context dir is at project root level ([[charlie]]/context/), not inside data/. So it won't be overlaid by the volume. Good, no seeding needed for context.
 
 The key seed files are thesis/current.json and watchlists/default.json. Let me copy the final files for download.Context files are outside `data/` so they're fine — the volume doesn't touch them. The seed directory only needs the thesis and watchlist.
 ```
@@ -5261,7 +5261,7 @@ But rather than debugging further, the user wants to move fast. Let me ask them 
 
 **human**
 
-this is what you get when you go to the railway, https://charlie-productions.up.railway.app/brief/2026-03-29
+this is what you get when you go to the railway, https://[[charlie]]-productions.up.railway.app/brief/2026-03-29
 
 **assistant**
 
@@ -5407,14 +5407,14 @@ Backups
 Variables
 Metrics
 Settings
-charlie-productions.up.railway.app
+[[charlie]]-productions.up.railway.app
 us-west2
 1 Replica
 History
 web/457a5412
 Active
 Mar 29, 2026, 5:36 PM PDT
-charlie-productions.up.railway.app
+[[charlie]]-productions.up.railway.app
 DetailsBuild LogsDeploy Logs
 HTTP LogsNetwork Flow Logs
 Filter and search logs
@@ -5436,7 +5436,7 @@ WARNING: This is a development server. Do not use it in a production deployment.
  * Serving Flask app 'web'
 [Seed] Looking for seed dir at: /app/seed (exists: True)
  * Running on http://127.0.0.1:8080
-  CHARLIE — Daily Pipeline
+  [[charlie]] — Daily Pipeline
   utc_now = _dt.utcnow()
   Monday, March 30, 2026
 ============================================================
