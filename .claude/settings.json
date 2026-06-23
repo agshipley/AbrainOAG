@@ -1,5 +1,9 @@
 {
   "permissions": {
+    "allow": [
+      "Bash(node --experimental-strip-types scripts/import-claude-code.ts --one)",
+      "Bash(node --experimental-strip-types scripts/import-claude-code.ts)"
+    ],
     "defaultMode": "bypassPermissions"
   }
 }
