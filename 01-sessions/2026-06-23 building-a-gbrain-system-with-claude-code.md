@@ -13,6 +13,10 @@ tags: []
 
 # Building a gbrain system with Claude Code
 
+## Decisions
+
+- [[2026-06-23 gbrain pure-markdown-v1-defer-postgres-mcp]]
+
 ## Summary
 
 **Conversation Overview**

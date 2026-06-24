@@ -19,3 +19,8 @@ Maps to [[Predictive contracting]] — the product thesis developed with [[Spenc
 ## Status
 
 Active. Collaboration thread with [[Spencer Williams]] open.
+
+## Decisions
+
+- [[2026-05-07 mrkt study2-three-regime-cross-era-structure]] — Study 2 structured as pre/COVID/post-COVID aligned to ABA Study windows
+- [[2026-05-07 mrkt study2-preregistration-before-outcome-data]] — pre-register on AsPredicted/OSF before pulling WRDS outcome data

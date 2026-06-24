@@ -13,6 +13,10 @@ tags: []
 
 # Architecture review after workflow sync
 
+## Decisions
+
+- [[2026-04-15 charlie filter-bubble-firewall-indirect-influence-only]]
+
 ## Summary
 
 **Conversation overview**

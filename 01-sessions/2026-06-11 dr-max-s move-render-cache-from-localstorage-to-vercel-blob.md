@@ -16,6 +16,10 @@ enriched: 2026-06-23
 
 # Move render cache from localStorage to Vercel Blob (Dr Max's)
 
+## Decisions
+
+- [[2026-06-11 dr-maxs blob-over-localstorage-for-shared-render-cache]]
+
 ## Summary
 
 Migrated Dr Max's concept shelf persistence from `localStorage` (per-browser, not shared) to Vercel Blob for cross-browser shared state. Installed `@vercel/blob`, created a shared `concepts.json` manifest in Blob, and built `/api/concepts` with `upsert` and `delete` actions that rewrite the manifest on each mutation. On app load, any `localStorage` concepts are migrated up and the local copy is cleared. Fixed a `@vercel/blob` API change requiring `allowOverwrite: true` when rewriting an existing blob (`addRandomSuffix: false` alone was no longer sufficient). Verified cross-context persistence via curl and manual testing: add in one context → visible in another → delete from second → gone from first on reload. The session also confirmed the "Add to shelf" flow uses optimistic local updates followed by a background POST. The concept shelf was clean (0 test concepts) at session end.

@@ -13,6 +13,10 @@ tags: []
 
 # Build project planning
 
+## Decisions
+
+- [[2026-05-27 orpheus feature-factory-chain-opt-in-only]]
+
 ## Summary
 
 **Conversation Overview**

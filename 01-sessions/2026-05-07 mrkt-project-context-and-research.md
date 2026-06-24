@@ -13,6 +13,11 @@ tags: []
 
 # Mrkt project context and research
 
+## Decisions
+
+- [[2026-05-07 mrkt study2-three-regime-cross-era-structure]]
+- [[2026-05-07 mrkt study2-preregistration-before-outcome-data]]
+
 ## Summary
 
 **Conversation Overview**

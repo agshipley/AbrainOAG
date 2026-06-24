@@ -16,6 +16,10 @@ tags: []
 
 # Review codebase for seven-agent factory architecture ([[Orpheus]])
 
+## Decisions
+
+- [[2026-05-27 orpheus archimedes-config-yaml-exposure-accepted-as-benign]]
+
 ## Summary
 
 Reviewed the Orpheus codebase before installing a seven-agent feature factory. The user pasted a blog article describing the factory pattern; the session then executed three discrete tasks. First: fixed `afterDedup` in `conductor.ts` (line 225) from `rankedJobs.length` to `mergedJobs.length`, correcting a stat that was reporting the post-IC-filter count instead of the actual dedup count — 121/121 tests green. Second: clarified the `archimedes.config.yaml` risk (current data is LinkedIn-public; the real risk is future sensitive fields getting committed). Third: extracted eleven `.claude/` files from a local tar archive (seven agent definitions, two skills, one pre-commit hook, one README), installed the hook at `.git/hooks/pre-commit`, and committed as `c028e84`. Fourth: ran the Researcher subagent to diagnose search relevance failures, which identified three root causes: no location filter anywhere in the pipeline, no minimum score threshold on `/api/search`, and broad OR keyword matching at the agent level admitting any job where one keyword appears anywhere in a 500-word description.

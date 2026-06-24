@@ -13,6 +13,10 @@ tags: []
 
 # Redirecting project strategy after permitting dead-end
 
+## Decisions
+
+- [[2026-05-11 first-agent pivot-from-permit-prospecting-to-relationship-graph]]
+
 ## Summary
 
 **Conversation overview**

@@ -15,3 +15,7 @@ Multi-agent intelligence and decision-support system for [[Liz Varner]], featuri
 ## Status
 
 Active.
+
+## Decisions
+
+- [[2026-04-15 charlie filter-bubble-firewall-indirect-influence-only]] — Liz's interests influence scoring signals only, never ingestion aperture

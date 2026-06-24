@@ -15,3 +15,7 @@ Production lead-generation and multi-city art-commissioning intelligence system 
 ## Status
 
 Active. 275-test suite [from: [[GBRAIN_PROJECT]]].
+
+## Decisions
+
+- [[2026-05-11 first-agent pivot-from-permit-prospecting-to-relationship-graph]] — pivoted from permit-data lead prospecting to relationship intelligence graph

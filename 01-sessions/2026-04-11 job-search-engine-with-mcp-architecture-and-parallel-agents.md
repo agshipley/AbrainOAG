@@ -13,6 +13,10 @@ tags: []
 
 # Job search engine with MCP architecture and parallel agents
 
+## Decisions
+
+- [[2026-04-11 orpheus orpheus-state-md-as-canonical-context-file]]
+
 ## Summary
 
 **Conversation Overview**

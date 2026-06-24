@@ -23,3 +23,9 @@ MCP architecture; Railway deploy; SQLite at `/data` [from: [[GBRAIN_PROJECT]]].
 ## Status
 
 Active. Relevance failure diagnosed 2026-04-11 — see [[2026-04-11 Orpheus relevance failure and corrective actions]].
+
+## Decisions
+
+- [[2026-04-11 orpheus orpheus-state-md-as-canonical-context-file]] — ORPHEUS_STATE.md committed as canonical context across all sessions
+- [[2026-05-27 orpheus archimedes-config-yaml-exposure-accepted-as-benign]] — config file exposure accepted as benign; forward risk documented
+- [[2026-05-27 orpheus feature-factory-chain-opt-in-only]] — Feature Factory requires explicit invocation phrase; never auto-triggers
