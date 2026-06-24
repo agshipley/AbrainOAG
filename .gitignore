@@ -1,3 +1,7 @@
 .env
 node_modules/
 *.zip
+.obsidian/
+.claudian/
+.claude/
+.DS_Store
