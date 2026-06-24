@@ -10,10 +10,15 @@ updated: 2026-05-30
 message_count: 37
 status: stub
 confidence: high
+enriched: 2026-06-23
 tags: []
 ---
 
 # Add crosstab sorting functionality (Wheelhouse)
+
+## Summary
+
+Added two-level crosstab sorting to the Wheelhouse bar acquisition pipeline table. Primary sort is set by clicking any column header; shift-clicking while a primary is active sets a secondary sort. A sort strip appears above the table showing active sort axes as clickable pill chips (click to toggle direction, × to remove); a "then by" dropdown adds the secondary when only one is active. Column headers show teal "1" and gray "2" badges when both levels are active. The session also rewrote all 18 git commits to strip `Co-Authored-By: Claude` trailers, then force-pushed to the public GitHub repository to remove Claude from the contributors list. Added a "Check Links" button backed by a Supabase Edge Function that runs parallel HEAD requests against all listing URLs, surfacing dead links and timeout warnings inline. A sweep of the 34 live listings found that 8 shared generic search-results-page URLs (not direct listing permalinks), flagged for manual correction.
 
 ## Transcript
 

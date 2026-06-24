@@ -10,10 +10,15 @@ updated: 2026-06-03
 message_count: 74
 status: stub
 confidence: high
+enriched: 2026-06-23
 tags: []
 ---
 
-# Write user story for location filtering (job-search-engine)
+# Write user story for location filtering ([[Orpheus]])
+
+## Summary
+
+This session began with drafting a location-filter user story for the [[Orpheus]] search pipeline, then proceeded through implementation, a live deploy failure, a multi-system diagnostic, and a complete rebuild of the agent data layer. Location filter policy was settled across five decision points: query-named locations enforce a hard geographic exclusion; profile locations apply as a soft scoring multiplier when no location is named; null job location is treated as a mismatch in both modes; remote and hybrid designations do not bypass the geographic filter. The filter shipped as `src/conductor/location_filter.ts` (219 lines, 12 passing tests), inserted into `heuristicRank()` in `conductor.ts`. A post-deploy search for "legal tech in Los Angeles" returned two results — both versions of the same CNC Operator role from Relativity Space (rocket manufacturer) — tracing to a `legal_innovation` agent Greenhouse slug that had resolved to the rocket company and been pulling manufacturing roles since the agent was built. Broader diagnosis confirmed two of six agents (vc_portfolio, operator_communities) had returned zero jobs since launch due to dead Getro and Pallet URL endpoints, and eight of ten ai_first companies were also unreachable. The agent layer was rebuilt: vc_portfolio replaced with 13 live Greenhouse boards (Stripe, Databricks, Figma, Brex, and nine others), operator_communities rebuilt with six live sources, ai_first pruned to three working companies, expanding the total job pool from ~400–500 to ~3,000+. The session also made the Feature Factory chain explicitly opt-in (requiring one of five named trigger phrases) and pushed an accurate README replacing documentation that described agents and interfaces that had never been deployed.
 
 ## Transcript
 

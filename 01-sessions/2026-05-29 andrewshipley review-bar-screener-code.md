@@ -10,10 +10,15 @@ updated: 2026-05-29
 message_count: 28
 status: stub
 confidence: high
+enriched: 2026-06-23
 tags: []
 ---
 
 # Review bar screener code (andrewshipley)
+
+## Summary
+
+Reviewed `bar_screener.jsx`, a bar acquisition pipeline screener originally built as a Claude.ai artifact. Found four bugs (hardcoded $150k in the Stack display, dead AI-parse call with no API key header, 5 of 8 broker questions silently truncated, `sellerFinancing` type coercion inconsistency causing bonus miscalculation on persisted data) plus dead code (`tone` function). The user applied fixes independently, then the session scaffolded a full Vite project in `code/`, replaced `window.storage` with a `localStorage` shim for Railway persistence, wired `VITE_ANTHROPIC_API_KEY` from a Vite env var with `dangerouslyAllowBrowser: true`, deployed the Vite build to Railway, pushed everything to GitHub at `agshipley/Wheelhouse`, and secured the API key with `.env.local` plus a `.gitignore` update covering `.env` and `*.local`. The session ended with the app live on Railway and the key correctly excluded from the bundle.
 
 ## Transcript
 

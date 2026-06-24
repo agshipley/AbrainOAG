@@ -11,9 +11,14 @@ message_count: 140
 status: stub
 confidence: high
 tags: []
+enriched: 2026-06-23
 ---
 
 # Sync virtual and local GitHub repositories (Wheelhouse)
+
+## Summary
+
+Verified local repo was already in sync with `origin/main` at `github.com/agshipley/Wheelhouse`. Fixed a Railway production vhost error by adding `wheelhouse-production-f59a.up.railway.app` to `preview.allowedHosts` in `vite.config.js`. Performed a major UI overhaul after the user described the production site as too ugly and non-functional. Migrated the `findListings` agent loop from the browser to a Supabase Edge Function with SSE streaming, moving the Anthropic API key to a Supabase server secret. Fixed a React blank-page crash: the `setOpps` state updater didn't support functional updates, causing the SSE listener's `setOpps(prev => [listing, ...prev])` to store the callback itself as the opps array, crashing `.map()` on next render. Added a 100-second self-imposed Edge Function deadline with four distinct outcome messages (found, timed-out with results, zero results, timed-out empty). Added an "Added" date column (reads `created_at`, sortable ascending/descending). The session ended with the mobile responsiveness question open — rebuilding the 9-column grid table as cards below a breakpoint is estimated at 4-6 hours.
 
 ## Transcript
 

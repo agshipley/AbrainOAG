@@ -11,9 +11,14 @@ message_count: 47
 status: stub
 confidence: high
 tags: []
+enriched: 2026-06-23
 ---
 
 # can you review the gmrain project md file? (AbrainOAG)
+
+## Summary
+
+Reviewed GBRAIN_PROJECT.md and built Phase 1 of the gbrain personal knowledge vault. The session established the vault skeleton (11 directories, 09-meta convention files, 22 seed entity stubs), imported 92 Claude.ai conversations (Source A) and 15 Claude Code sessions (Source B) into `01-sessions/`, and ran an evidence-gated entity extraction pass that inserted 3,012 wikilinks across 57 session files and created 5 new project stubs (Wheelhouse, Dr Max's, trip-composer, civilwarland, lodging-agent). Tier model: FULL requires attributed artifact evidence (ATTRIB_SPAN=120) in at least FULL_REACH sessions; ALLOW_PROSE_FULL=false caps prose-only entities at MODERATE. Phase 2 Pass 1 (Source B summary blocks) was in progress at session end; 14 claude-code session summaries written.
 
 ## Transcript
 

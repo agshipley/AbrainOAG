@@ -10,10 +10,15 @@ updated: 2026-05-29
 message_count: 6
 status: stub
 confidence: high
+enriched: 2026-06-23
 tags: []
 ---
 
 # Add error message for token limit exceeded ([[first-agent]])
+
+## Summary
+
+Added a `TOKEN_EXHAUSTED_MSG` constant and `_is_credit_error()` helper to the first-agent Flask application. The helper checks error text for keywords (`credit`, `billing`, `balance`, `quota`, `insufficient`) that Anthropic includes on credit exhaustion, distinguishing it from per-minute rate limiting. Both the `/run` route (via `_collect_leads`) and the `/deep-dive` route now check for credit exhaustion before attempting a retry; on match, they surface the user-facing message and stop. Normal per-minute rate limit hits continue to retry as before.
 
 ## Transcript
 

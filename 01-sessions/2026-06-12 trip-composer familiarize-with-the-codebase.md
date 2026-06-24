@@ -10,10 +10,15 @@ updated: 2026-06-13
 message_count: 26
 status: stub
 confidence: high
+enriched: 2026-06-23
 tags: []
 ---
 
 # Familiarize with the codebase (trip-composer)
+
+## Summary
+
+Familiarized with trip-composer, a FastAPI + SQLite trip planning agent with a six-stage pipeline (parse → discover → inventory → judge → verify → compose) and Apify/Airbnb scraping. The user then revealed the InnRoad booking-engine adapter had been built but was broken: `POST /guestSession` does not exist — the correct call is `GET /session/status`, which returns the session token as a response header. Additionally, the `Origin` header must be the property-specific subdomain (e.g. `https://virginiacreek.client.innroad.com`) — a generic origin returns 404. The adapter was updated to use the correct endpoint, `origin` was added as a required field in engine config, and Cloudflare Turnstile detection was implemented (raises `RuntimeError` → `direct.py` catches it, sets `call_to_confirm=True`). DEFAULT_PROFILE and the live SQLite DB were updated with the Virginia Creek Settlement InnRoad entry. The session ended confirming Turnstile-enabled properties fall back to the call list cleanly, with the engine pattern ready for non-Turnstile InnRoad properties to return real availability data.
 
 ## Transcript
 

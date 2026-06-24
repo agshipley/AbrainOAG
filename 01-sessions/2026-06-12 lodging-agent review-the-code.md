@@ -10,10 +10,15 @@ updated: 2026-06-12
 message_count: 28
 status: stub
 confidence: high
+enriched: 2026-06-23
 tags: []
 ---
 
 # Review the code (lodging-agent)
+
+## Summary
+
+Manually reviewed the lodging-agent codebase (FastAPI trip-planning pipeline with Playwright scraping, Airbnb inventory, and direct-property availability checking) after the `/code-review` skill failed with a stream error. Found five bugs: a greedy regex fallback (`\{.*\}` with `re.S`) in `discover.py:77` and `checkers.py:69` that swallows multiple JSON blocks; `StopIteration` uncaught in `score_all` when the API returns no `tool_use` block; a fragile walrus-operator dedup side effect in `pipeline.py:44`; and a `KeyError` on `pet_verdict: "fail"` in `report.py:20`. All five were fixed: the fallback regex replaced with `.*?`, `score_all` wrapped with an exception handler, the dedup rewritten as a plain loop, and the KeyError guarded with `.get()`. The session also set `bypassPermissions` mode on the project. An Anthropic API key was requested but not yet provided at session end.
 
 ## Transcript
 

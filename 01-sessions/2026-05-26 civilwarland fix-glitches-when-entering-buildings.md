@@ -11,9 +11,14 @@ message_count: 81
 status: stub
 confidence: high
 tags: []
+enriched: 2026-06-23
 ---
 
 # Fix glitches when entering buildings (civilwarland)
+
+## Summary
+
+Fixed building entry glitches in CivilWarLand, a browser-based historical park simulation game. Root causes: `applyMidnight()` triggering event overlays and game-over states while the interior was still active (causing freezes), and canvas context state (`globalAlpha`, `shadowBlur`, `lineDash`) leaking between renders from mid-interior rendering (causing persistent visual glitches). Fixes applied: exit the building before applying midnight, reset canvas state at the top of `renderInterior`, remove a dead vignette-rebuild block. Additional Phase 2 bugs then identified and fixed: no gate preventing building entry during Phase 2 (2-line fix to `enterBuilding` and `updateInteractPrompt`), Phase 2 management actions not persisting across sessions (four `saveGame()` calls added to building placement, zone placement, character assignment, and unassignment), and interact prompt showing Phase 1 action buttons in Phase 2 (now hidden; Repair and Rest remain). Fixed `build-menu-overlay` sitting at `position:absolute; left:0; width:210px; height:100%` over the canvas at `mapScale=0.5` in Phase 2, which was intercepting all canvas clicks and breaking both building placement and staff assignment. Updated build hint text and Phase 2 prompt logic to suppress the interact prompt when no Repair or Rest is applicable.
 
 ## Transcript
 

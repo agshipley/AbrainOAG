@@ -10,10 +10,15 @@ updated: 2026-06-12
 message_count: 42
 status: stub
 confidence: high
+enriched: 2026-06-23
 tags: []
 ---
 
 # Review code (trip-composer)
+
+## Summary
+
+Triggered the `/code-review` skill on the trip-composer codebase, which initiated 7 parallel subagent finder passes; the user interrupted this as excessive for a 400-line codebase. Review findings were delivered directly: seven issues including a read-modify-write race condition in `db.py emit()` (two concurrent stages can silently drop events in WAL mode), direct properties always excluded from the verify-stage area research (they never appear in `judged`), a `get_run()` null deref when `rid` is invalid, the Apify API token exposed in URL query parameters (should use the `Authorization` header), `_first()` treating `0` as missing via falsy check, `_fetch()` silently returning `None` on network failure with no log distinction from bot-blocking, and `PUT /api/profile` accepting arbitrary dicts with no validation. Session also set `bypassPermissions` mode. No code changes were made this session — findings only.
 
 ## Transcript
 

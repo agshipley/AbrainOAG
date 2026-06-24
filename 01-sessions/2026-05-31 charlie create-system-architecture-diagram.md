@@ -10,10 +10,15 @@ updated: 2026-05-31
 message_count: 8
 status: stub
 confidence: high
+enriched: 2026-06-23
 tags: []
 ---
 
 # Create system architecture diagram ([[charlie]])
+
+## Summary
+
+Produced a full ASCII architecture diagram of the charlie entertainment intelligence system after setting up bypass permissions and reading the project structure. The bulk of the session transcript is a pasted Update Config Skill document. The diagram maps charlie's two entry points (Flask web app and CLI orchestrator), three pipeline types (daily Ingestion→Analysis→Brief→Adversary chain, weekly Thesis synthesis, and three on-demand modes: Oven take, Field Work upload, and ad-hoc research), seven specialized agents with their tools and data contracts, a core library layer (client, config, state, prompts, render, logging, field_access, field_extract), a JSON-file data layer organized by date-stamped outputs, and all web routes (GET and POST) with their data flow.
 
 ## Transcript
 

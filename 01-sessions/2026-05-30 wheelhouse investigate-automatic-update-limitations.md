@@ -11,9 +11,14 @@ message_count: 132
 status: stub
 confidence: high
 tags: []
+enriched: 2026-06-23
 ---
 
 # Investigate automatic update limitations (Wheelhouse)
+
+## Summary
+
+Resumed a prior context about Wheelhouse listing data quality; re-explained why Santa Monica listing URLs were incorrect (the `find-listings` Edge Function extracted search-results-page URLs instead of direct listing permalinks) and why manual correction was the only path (no edit UI existed). Added an inline edit feature: Edit button on each expanded row opens a pre-populated `AddForm`, an `updateOpp` function does a Supabase `UPDATE` by id and patches local state. Fixed a Railway vhost error from a URL change (`preview.allowedHosts` in `vite.config.js`). Investigated CORS for multi-user support. Fixed a React blank-page crash where `setOpps` (a custom Supabase-writing wrapper) didn't support functional updates — calling `setOpps(prev => [...])` stored the callback function as the opps array, crashing `.map()` on next render. Migrated `findListings` to a Supabase Edge Function with SSE streaming and a 115-second self-imposed deadline. Added zero-results messaging. The session concluded with a diagnosis that the Find Listings feature is structurally limited by Google search index staleness and cannot return live listing data — and proposed replacing the feature with a direct BizBen/BizBuySell search URL generator.
 
 ## Transcript
 
