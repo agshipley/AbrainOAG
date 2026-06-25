@@ -3,7 +3,7 @@ type: session
 source: claude-code
 uuid: 7842665b-95ef-4764-b399-77e7112c08ee
 title: "Write user story for location filtering"
-project: "[[job-search-engine]]"
+project: "[[Orpheus]]"
 cwd: "/Users/andrewshipley/projects/Orpheus/job-search-engine"
 created: 2026-06-03
 updated: 2026-06-03
