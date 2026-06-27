@@ -1,1 +1,1 @@
-Before working in this repo, read GBRAIN_PROJECT.md and the conventions in 09-meta/ (taxonomy, edge-vocab, enrichment-rules).
+Before working in this repo, read GBRAIN_PROJECT.md (mission, vault structure, conventions — governs Phases 1–2) and KNOWLEDGE_SERVER_SPEC.md (hosted client-agnostic knowledge-server build — governs Phase 3 onward). Conventions live in 09-meta/.
