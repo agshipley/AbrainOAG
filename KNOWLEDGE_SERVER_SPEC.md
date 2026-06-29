@@ -113,11 +113,17 @@ After legal excision, the data living on this host is ordinary business and proj
 - Excised corpus — PDS and RevGenius already gone before the first deploy.  
 - The honest residual: when any client reads a vault file into a conversation, that text becomes context sent to that client's model. For your own use that is the intended behavior; it is worth holding consciously per client (Claude, ChatGPT, and Gemini each receive whatever you pull into their chats).
 
-**Destination (multi-user) — designed-for, built on the owned server, not on gbrain:**
+**Destination (multi-user) — auth model sketch, built on the owned server (Phase 5), not on gbrain.**
 
-- **RBAC** (role-based access control — permissions tied to a person's role, so a CEO, an ops lead, and a contractor see different slices). This lands on the owned server. gbrain's company mode is examined only as a *reference design*, never as the production foundation.  
-- **Audit** — a record of who read and changed what, the trust layer a business memory needs. The vault's existing evidence-to-source discipline is an asset here.  
-- **Concurrent write-back** — many people's conversations writing into one memory at once needs the database to arbitrate conflicts, which the single-writer personal build never had to.
+The model, confirmed compatible with the pilot's boundary:
+
+- *Identity.* Every user authenticates through the same OAuth 2.1 + PKCE front door the pilot already uses. The server maps each authenticated user to an identity record — who they are, what role they hold.
+- *Scoping.* Each identity carries a scope (the set of records it may read and write). Following Claude Tag's channel-scoped-identity pattern, a scope is defined by role and by area (a project, a team, a "channel"), so a CEO, an ops lead, and a contractor each resolve to a different slice of the same brain.
+- *Enforcement at read time.* Every read path — search, list, lookup, multi-source synthesis — filters to the caller's scope before returning anything, so a user never sees another user's slice even by indirect query. Enforced in the server, against the database, on every call. (gbrain's company mode claims zero-leak fuzz-testing of these paths; it is examined as a reference design only, never the production enforcer.)
+- *Storage.* Per-record ownership and visibility tags in Postgres, enforced with row-level security (a Postgres feature that filters which rows a user can see at the database layer, so the filter holds even if application code has a bug).
+- *Audit.* Every read and write logged with the acting identity — the who-saw-what, who-changed-what record a business memory needs.
+
+*Why the pilot does not foreclose this:* adding per-user scoping changes what sits behind the boundary (the server's enforcement and the database schema), never the boundary itself (MCP + OAuth at a stable URL). The pilot stands up single-user auth at that boundary; the owned server later adds scoping behind it with no client reconfigured. Multi-user is a Phase 5 addition to the owned server, never a retrofit to gbrain.
 
 ---
 
