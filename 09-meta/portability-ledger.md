@@ -3,7 +3,7 @@ type: note
 subtype: infrastructure
 status: active
 created: 2026-06-29
-updated: 2026-06-30
+updated: 2026-07-01
 tags: [phase3, gbrain, portability]
 ---
 
@@ -199,3 +199,54 @@ POST https://gbrain-production-8e15.up.railway.app/admin/api/register-client
 - **DB-plane config table.** `search.mode`, `link_resolution.global_basename`, and other settings live in a `brain_config` (or equivalent) table in Postgres, not in a file. Owned server must own these parameters directly rather than reading from a config table.
 - **Pooler-specific behaviour.** Prepared statements disabled on port 6543 (`prepare: false`). gbrain auto-detects port and sets this. Owned server must set `prepare: false` explicitly when targeting Supabase Transaction pooler.
 - **Supabase DDL via direct connection.** gbrain auto-derives a direct connection (port 5432) from the pooler URL for DDL and bulk operations (longer statement timeout). Owned server must handle DDL similarly or accept the pooler's 2-minute statement timeout cap.
+
+---
+
+## Phase 4 — Railway Cron enrichment service (nightly gbrain dream)
+
+**gbrain version:** 0.42.53.0  
+**Service:** `valiant-spirit` in Railway project `extraordinary-unity`  
+**Schedule:** `0 10 * * *` (10:00 UTC = 02:00 PDT / 03:00 PST)  
+**Source:** `agshipley/AbrainOAG` GitHub repo (public), connected via Railway GitHub App
+
+### What the service does
+
+Runs `gbrain dream --repo /app` on each cron trigger. The dream cycle includes:
+
+1. `sync` — diffs the vault against the Supabase brain state; imports new/changed pages
+2. `embed` — embeds only stale chunks via OpenAI API; skips entirely if nothing changed (cost guard)
+3. `extract` — rebuilds wikilink graph edges from updated pages (incremental)
+4. Plus DB-only maintenance: backlinks, emotional weight, consolidation, orphan scan, purge
+
+Verified clean run: `+3 synced, 44 embedded, 0 extracted (incremental), exit 0` in 181 seconds.
+
+### Dockerfile (tracked at vault root)
+
+Railway strips `.git` from the Docker build context for GitHub-sourced deployments (security isolation). `COPY . /app` copies vault files but not git metadata, which causes `gbrain sync` to fail with "Not a git repository." Fix: install git + ca-certificates at build time and clone the vault fresh at container start.
+
+```
+FROM oven/bun:1.3
+RUN apt-get install -y git ca-certificates  # ca-certificates required for HTTPS clone
+RUN bun install -g github:garrytan/gbrain   # HEAD = v0.42.53.0 at time of writing
+CMD git clone --depth 1 https://github.com/agshipley/AbrainOAG . && gbrain dream --repo /app
+```
+
+**Hardening step (not yet done):** Pin gbrain to a specific commit SHA — `github:garrytan/gbrain#<sha>`. Currently pulls HEAD, so a breaking upstream change would silently break the enrichment worker on next Railway deploy.
+
+### Environment variables (same set as the HTTP server service)
+
+`GBRAIN_DATABASE_URL`, `OPENAI_API_KEY`, `GBRAIN_ADMIN_BOOTSTRAP_TOKEN`, `GBRAIN_HTTP_CORS_ORIGIN`, `GBRAIN_EMBEDDING_MODEL`, `GBRAIN_EMBEDDING_DIMENSIONS`, `GBRAIN_EXPANSION_MODEL`, `GBRAIN_CHAT_MODEL`
+
+### gbrain_cycle_locks (operational note)
+
+gbrain uses a `gbrain_cycle_locks` table in Postgres to prevent concurrent dream runs. If the Railway container crashes mid-cycle (e.g., during Dockerfile iteration), the lock row survives and blocks subsequent runs with "another cycle is already running (locked)". Clear manually: `DELETE FROM gbrain_cycle_locks`. Locks have a TTL (`ttl_expires_at`), but the auto-expire window is ~5 minutes and Railway may restart the container faster than that.
+
+### Mac-dependency gap resolved
+
+Phase 3.2/3.3 enrichment ran locally because the vault lived only on-machine. Phase 4 resolves this: vault is on GitHub, Railway clones it at container start, and all enrichment runs off-machine against Supabase. Enrichment now survives the local machine being off.
+
+### Phase 4 portability debt
+
+- **`gbrain dream` is the enrichment orchestrator.** The owned server must reimplement the cycle phases (sync, embed, extract, backlinks, purge) as its own scheduled job. `dream` is gbrain-specific.
+- **`gbrain_cycle_locks` table.** gbrain's idempotency lock is in Postgres. Owned server needs its own concurrency guard for enrichment jobs.
+- **SHA pinning.** The Dockerfile currently pulls `github:garrytan/gbrain` at HEAD. Before the owned server swap, the gbrain version should be pinned to a specific commit for stability.
