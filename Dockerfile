@@ -7,6 +7,7 @@ RUN bun install -g github:garrytan/gbrain
 
 # Vault content is mounted/cloned at /app by Railway
 WORKDIR /app
+COPY . /app
 
 # Default: nightly dream cycle. Override start command in Railway for other services.
 CMD ["gbrain", "dream", "--repo", "/app"]
