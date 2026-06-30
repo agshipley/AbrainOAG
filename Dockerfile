@@ -3,7 +3,7 @@ FROM oven/bun:1.3
 # git: needed at runtime so gbrain sync can find the repo history.
 # Railway strips .git from the Docker build context (security isolation),
 # so we clone fresh at container start instead of relying on COPY.
-RUN apt-get update && apt-get install -y git --no-install-recommends \
+RUN apt-get update && apt-get install -y git ca-certificates --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Install gbrain from Garry Tan's public GitHub repo
