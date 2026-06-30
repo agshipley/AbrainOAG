@@ -173,7 +173,8 @@ A running list of every place the Phase 3 build depends on something gbrain-spec
 
 | Artifact | What it is | Replacement must... |
 |---|---|---|
-| `railway.json` (local, untracked) | `build.buildCommand: "true"` (skips unnecessary `bun run build` that compiles a standalone binary); `deploy.startCommand: "bun src/cli.ts serve --http --port $PORT --bind 0.0.0.0 --public-url https://$RAILWAY_PUBLIC_DOMAIN"` | Owned server has its own Dockerfile/Nixpacks config and start command |
+| `railway.json` (local, untracked in gbrain repo) | `build.buildCommand: "true"` (skips unnecessary `bun run build` that compiles a standalone binary); `deploy.startCommand: "bun src/cli.ts serve --http --port $PORT --bind 0.0.0.0 --public-url https://$RAILWAY_PUBLIC_DOMAIN"` | Owned server has its own Dockerfile/Nixpacks config and start command |
+| `Dockerfile` (tracked in vault repo) | Phase 4 enrichment worker image: `FROM oven/bun:1.3`, `RUN bun install -g github:garrytan/gbrain`, `CMD ["gbrain","dream","--repo","/app"]`. Currently pins to HEAD (`github:garrytan/gbrain`). **Hardening step**: pin to specific commit SHA (`github:garrytan/gbrain#<sha>`) so a breaking gbrain upstream change doesn't silently break the nightly enrichment worker on next Railway deploy. | Owned server's enrichment worker is built from its own source; no gbrain install needed |
 | `NIXPACKS_NODE_VERSION=22` | Railway env var | Overrides Nixpacks auto-detected Node 18 (EOL, removed from nixpkgs). Not needed once gbrain ships a `nixpacks.toml` or when Nixpacks updates its default. | Owned server controls its own build toolchain |
 | `bun.lock` | gbrain repo root | Tells Nixpacks to use Bun as the package manager and runtime. | Owned server may use a different runtime |
 
