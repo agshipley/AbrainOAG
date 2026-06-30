@@ -140,7 +140,7 @@ A running list of every place the Phase 3 build depends on something gbrain-spec
 **Server:** Railway service `gbrain` in project `abrainoag-gbrain`  
 **Public URL:** `https://gbrain-production-8e15.up.railway.app`  
 **Brain:** Supabase Postgres via Transaction pooler (port 6543)  
-**Brain data at:** Supabase project `iysltxhaxeoqtaujnttn`, region `ca-central-1` (AWS)
+**Brain data at:** Supabase project `<project-ref>`, region `ca-central-1` (AWS)
 
 ### Commands used (gbrain-specific)
 
